@@ -7,6 +7,7 @@ vim.cmd([[
     filetype off
     filetype plugin indent off
     set noshowmode
+    let g:nvim_tree_icons = {'git': {'unstaged': "!", 'untracked': "*"}}
 ]])
 
 -- netrw settings
