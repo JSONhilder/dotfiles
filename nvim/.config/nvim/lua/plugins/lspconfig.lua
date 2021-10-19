@@ -4,7 +4,7 @@
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
-      prefix = "",
+      prefix = "✗",
       spacing = 0,
     },
     signs = true,
@@ -100,6 +100,7 @@ local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
+    -- print("setting up server: ", server)
     require'lspconfig'[server].setup{
         on_attach = function(client, bufnr)
             require'lsp_signature'.on_attach(cfg)
