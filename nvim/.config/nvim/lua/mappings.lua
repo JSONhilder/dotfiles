@@ -24,6 +24,10 @@ map("n", "<Leader>j", ":m .+1<CR>==")
 map("i", "<C-J> <esc>", ":m .+1<CR>==")
 map("i", "<C-K <esc>", ":m .-2<CR>==")
 
+-- better window management (vim control, tmux  alt)
+map("n", "<C-[>", "<C-W><C-h>")
+map("n", "<C-]>", "<C-W><C-l>")
+
 -- commentor maps (vim registers _ as /)
 map("n", "<C-_>", ":CommentToggle<CR>", opt)
 map("v", "<C-_>", ":CommentToggle<CR>", opt)
@@ -54,6 +58,7 @@ map("n", "<Leader>gc", [[<Cmd> Telescope git_commits <CR>]], opt)
 map("n", "<Leader>fh", [[<Cmd> Telescope help_tags <CR>]], opt)
 -- Kill Current buffer
 map("n", "<Leader>bd", ":bd!<CR>", opt)
+map("n", "<C-w>", ":bd!<CR>", opt)
 -- Disable highlighting
 map("n", "<Leader>h", ":noh<CR>", opt)
 
@@ -79,4 +84,6 @@ map("n", "[d", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], opts)
 map("n", "]d", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], opts)
 map("n", "<space>q", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
 
-map("n", "<leader>g", "[[<cmd> lua _lazygit_toggle()<CR>]]", opts)
+-- lazygit
+-- map("n", "<leader>g", "[[<cmd> lua _lazygit_toggle()<CR>]]", opts)
+map("n", "<leader>g", ":TermExec cmd=lazygit direction=float<CR>", opts)
