@@ -35,7 +35,8 @@ vim.opt.shadafile = "NONE"
 vim.o.termguicolors = true
 
 --fish slows things down
--- vim.opt.shell = "/bin/bash"
+vim.opt.shell = "zsh"
+
 g.seoul256_background = 234
 
 opt.mouse = "a"
