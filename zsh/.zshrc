@@ -119,3 +119,11 @@ source $ZSH/oh-my-zsh.sh
 alias vscode="code . && exit"
 alias strongbox="~/.strongbox/strongbox"
 alias zola="~/.zola"
+alias lazygit="~/.lazygit"
+alias work="cd ~/work/"
+
+# Function to copy alias's to zshenv file (for nvim/vim cmd to use)
+function zshalias()
+{
+  grep "^alias" ~/.zshrc > ~/.zshenv
+}
