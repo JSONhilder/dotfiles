@@ -19,11 +19,11 @@ return packer.startup(
         -- color/ui related stuff
 
         use {
-            "hoob3rt/lualine.nvim",
+            "nvim-lualine/lualine.nvim",
             config = function()
                 require("lualine").setup {
                 options = {
-                    theme = "seoul256",
+                    theme = "gruvbox-material",
                     section_separators = {''},
                     component_separators = {''}
                     -- ... your lualine config
@@ -33,7 +33,7 @@ return packer.startup(
         }
 
         use {
-            "junegunn/seoul256.vim",
+            "savq/melange",
             after = "lualine.nvim",
             config = function()
                 require "theme"
@@ -50,7 +50,7 @@ return packer.startup(
 
         use {
             "kyazdani42/nvim-web-devicons",
-            after = "seoul256.vim",
+            after = "melange",
         }
 
         -- Treesitter
@@ -275,6 +275,9 @@ return packer.startup(
                 }
             end
         }
+
+        --lazygit nvim
+        use { 'kdheepak/lazygit.nvim' }
 
         -- Twig
         -- use { 'nelsyeung/twig.vim' }
