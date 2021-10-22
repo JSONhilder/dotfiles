@@ -24,10 +24,6 @@ map("n", "<Leader>j", ":m .+1<CR>==")
 map("i", "<C-J> <esc>", ":m .+1<CR>==")
 map("i", "<C-K <esc>", ":m .-2<CR>==")
 
--- better window management (vim control, tmux  alt)
-map("n", "<C-[>", "<C-W><C-h>")
-map("n", "<C-]>", "<C-W><C-l>")
-
 -- commentor maps (vim registers _ as /)
 map("n", "<C-_>", ":CommentToggle<CR>", opt)
 map("v", "<C-_>", ":CommentToggle<CR>", opt)
@@ -58,7 +54,6 @@ map("n", "<Leader>gc", [[<Cmd> Telescope git_commits <CR>]], opt)
 map("n", "<Leader>fh", [[<Cmd> Telescope help_tags <CR>]], opt)
 -- Kill Current buffer
 map("n", "<Leader>bd", ":bd!<CR>", opt)
-map("n", "<C-w>", ":bd!<CR>", opt)
 -- Disable highlighting
 map("n", "<Leader>h", ":noh<CR>", opt)
 
