@@ -1,6 +1,6 @@
 vim.o.background = "dark"
 vim.cmd([[
-    colorscheme melange
+    colorscheme one-nvim
     syntax on
     filetype on
     filetype plugin indent on
