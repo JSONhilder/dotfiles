@@ -15,6 +15,9 @@ vim.g.mapleader = " "
 cmd([[autocmd BufWritePre * %s/\s\+$//e]])
 cmd([[autocmd BufWritePre * %s/\n\+\%$//e]])
 
+-- for the corne keyboard
+map("i", "jk", "<Esc>")
+
 -- Quality of life stuff
 map("n", "Y", "y$")
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -81,3 +84,6 @@ map("n", "<space>q", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
 
 -- lazygit
 map("n", "<leader>gg", ":LazyGit<CR>", opts)
+
+-- toggleterm
+map("n", "<C-j>", ":ToggleTerm<CR>", opt)
