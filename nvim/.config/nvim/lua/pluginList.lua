@@ -269,7 +269,8 @@ return packer.startup(
             config = function()
                 require("bufferline").setup{
                     options = {
-                        modified_icon = '•'
+                        modified_icon = '•',
+                        close_icon = ''
                     }
                 }
             end
@@ -279,7 +280,7 @@ return packer.startup(
         use { 'kdheepak/lazygit.nvim' }
 
         -- Twig
-        -- use { 'nelsyeung/twig.vim' }
+        use { 'nelsyeung/twig.vim' }
 
         -- Golang
         -- use { 'fatih/vim-go' }
