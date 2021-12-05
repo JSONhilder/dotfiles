@@ -28,7 +28,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 
 #terminal background
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -119,6 +119,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias nvim="~/.nvim-app/nvim.appimage"
 alias vscode="code . && exit"
 alias strongbox="~/.strongbox/strongbox"
 alias zola="~/.zola"

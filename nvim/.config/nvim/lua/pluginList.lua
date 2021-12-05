@@ -18,7 +18,7 @@ return packer.startup(
 
         -- color/ui related stuff
         use {
-            "eddyekofo94/gruvbox-flat.nvim",
+            "Mofiqul/vscode.nvim",
             config = function()
                 require "theme"
             end
@@ -26,17 +26,25 @@ return packer.startup(
 
         use {
             "nvim-lualine/lualine.nvim",
-            after = "gruvbox-flat.nvim",
+            after = "vscode.nvim",
             config = function()
                 require("lualine").setup {
-                options = {
-                    theme = "gruvbox-flat",
-                    section_separators = {''},
-                    component_separators = {''}
-                    -- ... your lualine config
+                    options = {
+                        theme = "vscode",
+                        section_separators = {''},
+                        component_separators = {''}
+                        -- ... your lualine config
+                    },
+                    sections = {
+                        lualine_c = {
+                            {
+                              'filename',
+                              path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+                            }
+                        }
+                    }
                 }
-            }
-          end
+            end
         }
 
         use {
@@ -49,7 +57,7 @@ return packer.startup(
 
         use {
             "kyazdani42/nvim-web-devicons",
-            after = "gruvbox-flat.nvim",
+            after = "vscode.nvim",
         }
 
         -- Treesitter
@@ -68,13 +76,13 @@ return packer.startup(
 
         -- LSP
         use {
-            "kabouzeid/nvim-lspinstall",
+            "williamboman/nvim-lsp-installer",
             event = "BufRead"
         }
 
         use {
             "neovim/nvim-lspconfig",
-            after = "nvim-lspinstall",
+            after = "nvim-lsp-installer",
             config = function()
                 require "plugins.lspconfig"
             end
