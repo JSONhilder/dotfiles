@@ -23,65 +23,40 @@ font:
 cursor:
   style: Beam
 
-# gruvbox Alacritty Colors
-schemes:
-  codelight: &light
-    primary:
-      background: '#ffffff'
-      foreground: '#1e1e1e'
+# Catppuccin!
+colors:
+  # Default colors
+  primary:
+    background: '0x1E1E28'
+    foreground: '0xD7DAE0'
 
-    cursor:
-      text: '#d4d4d4'
-      cursor: '#d4d4d4'
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x1E1E28'
+    cursor: '0xB3E1A3'
 
-    normal:
-      black:   '#1e1e1e'
-      red:     '#c72e0f'
-      green:   '#009000'
-      yellow:  '#795e25'
-      blue:    '#007acc'
-      magenta: '#af00db'
-      cyan:    '#56b6c2'
-      white:   '#d4d4d4'
+  # Normal colors
+  normal:
+    black:   '0x6E6C7C'
+    red:     '0xE28C8C'
+    green:   '0xB3E1A3'
+    yellow:  '0xEADDA0'
+    blue:    '0xA4B9EF'
+    magenta: '0xC6AAE8'
+    cyan:    '0xF0AFE1'
+    white:   '0xD7DAE0'
 
-    bright:
-      black:   '#1e1e1e'
-      red:     '#c72e0f'
-      green:   '#009000'
-      yellow:  '#795e25'
-      blue:    '#007acc'
-      magenta: '#af00db'
-      cyan:    '#56b6c2'
-      white:   '#d4d4d4'
+  # Bright colors
+  bright:
+    black:   '0x6E6C7C'
+    red:     '0xE28C8C'
+    green:   '0xB3E1A3'
+    yellow:  '0xEADDA0'
+    blue:    '0xA4B9EF'
+    magenta: '0xC6AAE8'
+    cyan:    '0xF0AFE1'
+    white:   '0xD7DAE0'
 
-  codedark: &dark
-
-    primary:
-      background: '#1e1e1e'
-      foreground: '#d4d4d4'
-
-    cursor:
-      text: '#1e1e1e'
-      cursor: '#d4d4d4'
-
-    normal:
-      black:   '#1e1e1e'
-      red:     '#f44747'
-      green:   '#608b4e'
-      yellow:  '#dcdcaa'
-      blue:    '#569cd6'
-      magenta: '#c678dd'
-      cyan:    '#56b6c2'
-      white:   '#d4d4d4'
-
-    bright:
-      black:   '#545454'
-      red:     '#f44747'
-      green:   '#608b4e'
-      yellow:  '#dcdcaa'
-      blue:    '#569cd6'
-      magenta: '#c678dd'
-      cyan:    '#56b6c2'
-      white:   '#d4d4d4'
-
-colors: *dark
+  indexed_colors:
+    - { index: 16, color: '0xECBFBD' }
+    - { index: 17, color: '0x3E4058' }

@@ -3,7 +3,9 @@ local M = {}
 M.colorizer = function()
     local present, colorizer = pcall(require, "colorizer")
     if present then
-        colorizer.setup()
+        colorizer.setup({
+            md = { names = false; }
+        })
         vim.cmd("ColorizerReloadAllBuffers")
     end
 end
@@ -51,7 +53,7 @@ M.lualine = function ()
     if present then
         lualine.setup {
             options = {
-                theme = "vscode",
+                theme = "catppuccin",
                 section_separators = {''},
                 component_separators = {''}
                 -- ... your lualine config
