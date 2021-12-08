@@ -40,9 +40,9 @@ map("n", ";", [[<Cmd> Telescope buffers <CR>]], opt)
 -- Find in current buffer
 map("n", "<Leader>/", [[<Cmd> Telescope current_buffer_fuzzy_find <CR>]], opt)
 -- git files
-map("n", "<Leader>gf", [[<Cmd> Telescope git_files <CR>]], opt)
+map("n", "<Leader>f", [[<Cmd> Telescope git_files <CR>]], opt)
 -- Folders files
-map("n", "<Leader>ff", [[ <Cmd> Telescope file_browser <CR>]], opt)
+map("n", "<Leader>fb", [[ <Cmd> Telescope file_browser <CR>]], opt)
 -- All Files
 map("n", "<Leader>bfs", [[<Cmd> Telescope find_files <CR>]], opt)
 -- ripgrep like grep through directory
@@ -56,7 +56,7 @@ map("n", "<Leader>gc", [[<Cmd> Telescope git_commits <CR>]], opt)
 -- Help Tags
 map("n", "<Leader>fh", [[<Cmd> Telescope help_tags <CR>]], opt)
 -- Kill Current buffer
-map("n", "<Leader>bd", ":bd!<CR>", opt)
+map("n", "<Leader>kk", ":bd!<CR>", opt)
 -- Disable highlighting
 map("n", "<Leader>h", ":noh<CR>", opt)
 
