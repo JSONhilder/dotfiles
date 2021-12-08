@@ -17,19 +17,34 @@ return packer.startup(
         }
 
         -- color/ui related stuff
-        use {
-            "Mofiqul/vscode.nvim",
+        use({
+            "catppuccin/nvim",
+            as = "catppuccin",
             config = function()
                 require "theme"
+                require('catppuccin').setup({
+                   integrations = {
+                         nivmtree = {
+                            enabled = true,
+                            show_root = true
+                        },
+                        lsp_saga = true
+                   }
+                })
+            end
+        })
+
+        use {
+            "nvim-lualine/lualine.nvim",
+            after = "catppuccin",
+            config = function()
+                require("plugins.others").lualine()
             end
         }
 
         use {
-            "nvim-lualine/lualine.nvim",
-            after = "vscode.nvim",
-            config = function()
-                require("plugins.others").lualine()
-            end
+            "kyazdani42/nvim-web-devicons",
+            after = "catppuccin",
         }
 
         use {
@@ -38,11 +53,6 @@ return packer.startup(
             config = function()
                 require("plugins.others").colorizer()
             end
-        }
-
-        use {
-            "kyazdani42/nvim-web-devicons",
-            after = "vscode.nvim",
         }
 
         -- Treesitter
@@ -116,41 +126,15 @@ return packer.startup(
             cmd = "Telescope"
         }
 
-        -- Compe completion
-        -- load compe in insert mode only
-        -- use {
-        --     "hrsh7th/nvim-compe",
-        --     event = "InsertEnter",
-        --     config = function()
-        --         require "plugins.compe"
-        --     end,
-        --     wants = "LuaSnip",
-        --     requires = {
-        --         {
-        --             "L3MON4D3/LuaSnip",
-        --             wants = "friendly-snippets",
-        --             event = "InsertCharPre",
-        --             config = function()
-        --                 require "plugins.luasnip"
-        --             end
-        --         },
-        --         {
-        --             "rafamadriz/friendly-snippets",
-        --             event = "InsertCharPre"
-        --         }
-        --     },
-        -- }
-
-
+        -- Cmp completion dependencies
         use 'hrsh7th/cmp-nvim-lsp'
         use 'hrsh7th/cmp-buffer'
         use 'hrsh7th/cmp-path'
         use 'hrsh7th/cmp-cmdline'
-
         -- For luasnip users.
-        -- use 'L3MON4D3/LuaSnip'
         use 'saadparwaiz1/cmp_luasnip'
 
+        -- cmp for compeletion
         use {
             'hrsh7th/nvim-cmp',
             config = function()
@@ -243,11 +227,22 @@ return packer.startup(
             end
         }
 
-        --lazygit nvim
-        use { 'kdheepak/lazygit.nvim' }
+        -- Vim-wiki
+        use {
+            'vimwiki/vimwiki',
+            config = function()
+                vim.g.vimwiki_list = {
+                    {
+                        path = '~/Mega/docs',
+                        syntax = 'markdown',
+                        ext = '.md',
+                    }
+                }
+            end
+        }
 
         -- Twig
-        use { 'nelsyeung/twig.vim' }
+        -- use { 'nelsyeung/twig.vim' }
 
         -- Golang
         -- use { 'fatih/vim-go' }
