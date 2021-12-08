@@ -104,8 +104,6 @@ local function setup_servers()
     local rust_server, requested_server = lsp_installer_servers.get_server("rust_analyzer")
     if rust_server then
         requested_server:on_ready(function ()
-            print("setting up rust server...")
-
             local opts = {}
             requested_server:setup(opts)
         end)
@@ -118,8 +116,20 @@ local function setup_servers()
     local ts_server, requested_server = lsp_installer_servers.get_server("tsserver")
     if ts_server then
         requested_server:on_ready(function ()
-            print("setting up ts server...")
+            local opts = {
+                use_lspsaga = true,
+            }
+            requested_server:setup(opts)
+        end)
+        if not requested_server:is_installed() then
+            -- Queue the server to be installed
+            requested_server:install()
+        end
+    end
 
+    local html_server, requested_server = lsp_installer_servers.get_server("html")
+    if html_server then
+        requested_server:on_ready(function ()
             local opts = {
                 use_lspsaga = true,
             }
