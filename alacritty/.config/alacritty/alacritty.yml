@@ -9,14 +9,12 @@ window:
     title: Alacritty
     startup_mode: Maximized
     decorations: none
-    padding:
-      x: 5
 
 font:
     normal:
-        # family: Hack Nerd Font
-        #family: BlexMono Nerd Font
-        family: SpaceMono Nerd Font
+      # family: Hack Nerd Font
+      # family: SpaceMono Nerd Font
+      family: BlexMono Nerd Font
 
     size: 11
 
