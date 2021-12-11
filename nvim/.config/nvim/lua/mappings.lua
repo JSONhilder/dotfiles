@@ -82,7 +82,8 @@ map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]], opts)
 map("n", "<space>e", [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]], opts)
 map("n", "[d", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], opts)
 map("n", "]d", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], opts)
-map("n", "<space>q", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
+map("n", "<space>l", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
+map("n", "<space>ll", ":lclose<CR>", opt)
 
 -- lazygit
 map("n", "<leader>gg", [[<cmd>lua _lazygit_toggle()<CR>]], opts)
