@@ -57,6 +57,8 @@ map("n", "<Leader>gc", [[<Cmd> Telescope git_commits <CR>]], opt)
 map("n", "<Leader>fh", [[<Cmd> Telescope help_tags <CR>]], opt)
 -- Kill Current buffer
 map("n", "<Leader>kk", ":bd!<CR>", opt)
+-- Kill all buffers
+map("n", "<Leader>K", ":%bd!<CR>", opt)
 -- Disable highlighting
 map("n", "<Leader>h", ":noh<CR>", opt)
 
