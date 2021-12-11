@@ -49,15 +49,11 @@ local lazygit = Terminal:new({
     shade_terminals = true,
     shading_factor = '1',
     close_on_exit = true,
-      -- function to run on opening the terminal
+    -- function to run on opening the terminal
     on_open = function(term)
         vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-    end,
-    -- function to run on closing the terminal
-    on_close = function(term)
-        vim.cmd("Closing terminal")
-    end,
+        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<Cmd>close<CR>", {noremap = true, silent = true})
+    end
 })
 
 function _lazygit_toggle()
