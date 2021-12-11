@@ -36,15 +36,19 @@ toggleterm.setup{
 -- Lazygit + toggleterm
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({
-    cmd = "lazygit",
+    cmd = "lg",
     dir = "git_dir",
     hidden = true,
-    -- direction = "float",
+    direction = "float",
     float_opts = {
-        border = "single",
+        border = "curved",
         width = 200,
         height = 50,
+        winblend = 1
     },
+    shade_terminals = true,
+    shading_factor = '1',
+    close_on_exit = true,
       -- function to run on opening the terminal
     on_open = function(term)
         vim.cmd("startinsert!")

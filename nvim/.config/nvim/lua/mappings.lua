@@ -83,7 +83,7 @@ map("n", "]d", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], opts)
 map("n", "<space>q", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
 
 -- lazygit
-map("n", "<leader>gg", ":LazyGit<CR>", opts)
+map("n", "<leader>gg", [[<cmd>lua _lazygit_toggle()<CR>]], opts)
 
 -- toggleterm
 map("n", "<C-j>", ":ToggleTerm<CR>", opt)
