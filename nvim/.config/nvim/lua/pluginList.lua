@@ -242,7 +242,7 @@ return packer.startup(
         }
 
         -- Twig
-        -- use { 'nelsyeung/twig.vim' }
+        use { 'nelsyeung/twig.vim' }
 
         -- Golang
         -- use { 'fatih/vim-go' }
