@@ -126,6 +126,8 @@ alias strongbox="~/.strongbox/strongbox"
 alias zola="~/.zola"
 alias lazygit="~/.lazygit"
 alias lg="~/.lazygit"
+alias lazydocker="~/.lazydocker"
+alias ld="~/.lazydocker"
 alias work="cd ~/work/"
 
 # Function to copy alias's to zshenv file (for nvim/vim cmd to use)

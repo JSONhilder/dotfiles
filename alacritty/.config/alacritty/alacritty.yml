@@ -12,9 +12,7 @@ window:
 
 font:
     normal:
-      # family: Hack Nerd Font
-      # family: SpaceMono Nerd Font
-      family: BlexMono Nerd Font
+      family: JetBrainsMono Nerd Font
 
     size: 11
 

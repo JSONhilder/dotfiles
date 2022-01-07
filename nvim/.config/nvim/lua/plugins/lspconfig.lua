@@ -59,10 +59,10 @@ buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float(nil, { source = 'always' })<CR>", opts)
+buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.set_loclist()<CR>", opts)
 
 local function documentHighlight(client, bufnr)
     -- Set autocommands conditional on server_capabilities
@@ -86,10 +86,6 @@ end
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")
 
-local cfg = {
-    use_lspsaga = true,
-}
-
 function lspconfig.common_on_attach(client, bufnr)
     documentHighlight(client, bufnr)
 end
@@ -104,7 +100,15 @@ local function setup_servers()
     local rust_server, requested_server = lsp_installer_servers.get_server("rust_analyzer")
     if rust_server then
         requested_server:on_ready(function ()
-            local opts = {}
+            local opts = {
+                on_attach = function(client, bufnr)
+                    require "lsp_signature".on_attach({
+                        use_lspsaga = true,
+                        hint_enable = true,
+                        floating_window = false,
+                    }, bufnr)
+                end,
+            }
             requested_server:setup(opts)
         end)
         if not requested_server:is_installed() then
@@ -117,7 +121,11 @@ local function setup_servers()
     if ts_server then
         requested_server:on_ready(function ()
             local opts = {
-                use_lspsaga = true,
+                on_attach = function(client, bufnr)
+                    require "lsp_signature".on_attach({
+                        use_lspsaga = false,
+                    }, bufnr)
+                end,
             }
             requested_server:setup(opts)
         end)
@@ -131,7 +139,11 @@ local function setup_servers()
     if html_server then
         requested_server:on_ready(function ()
             local opts = {
-                use_lspsaga = true,
+                on_attach = function(client, bufnr)
+                    require "lsp_signature".on_attach({
+                        use_lspsaga = false,
+                    }, bufnr)
+                end,
             }
             requested_server:setup(opts)
         end)

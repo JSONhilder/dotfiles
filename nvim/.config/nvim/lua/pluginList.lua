@@ -145,14 +145,14 @@ return packer.startup(
                 {
                     "L3MON4D3/LuaSnip",
                     wants = "friendly-snippets",
-                    event = "InsertCharPre",
+                    event = "BufRead",
                     config = function()
                         require "plugins.luasnip"
                     end
                 },
                 {
                     "rafamadriz/friendly-snippets",
-                    event = "InsertCharPre"
+                    event = "BufRead"
                 }
             },
         }
