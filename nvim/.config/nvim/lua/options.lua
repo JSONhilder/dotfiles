@@ -75,7 +75,6 @@ opt.shortmess:append("asI") --disable intro
 -- disable tilde on end of buffer:
 vim.cmd("let &fcs='eob: '")
 
-
 local disabled_built_ins = {
     "gzip",
     "zip",
