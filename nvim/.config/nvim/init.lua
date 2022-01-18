@@ -2,7 +2,8 @@ local my_modules = {
     "options",
     "pluginList",
     "mappings",
-    "utils"
+    "utils",
+    "theme"
 }
 
 for i = 1, #my_modules, 1 do
