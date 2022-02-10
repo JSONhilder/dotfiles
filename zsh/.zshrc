@@ -9,6 +9,7 @@ export ZSH="/home/jason/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
 #NODE JS
 export PATH=/home/jason/.nodejs/bin:$PATH
@@ -25,10 +26,6 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-
-#terminal background
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -120,6 +117,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias wiki="cd ~ && nvim -c 'VimwikiIndex'"
 alias nvim="~/.nvim-app/nvim.appimage"
 alias vscode="code . && exit"
 alias strongbox="~/.strongbox/strongbox"
@@ -129,6 +127,12 @@ alias lg="~/.lazygit"
 alias lazydocker="~/.lazydocker"
 alias ld="~/.lazydocker"
 alias work="cd ~/work/"
+#Emacs
+alias emacs="emacsclient 'main' -e '(dashboard-refresh-buffer)' -c -a 'emacs'"
+alias doomsync="~/.emacs.d/bin/doom sync"
+alias doomdoctor="~/.emacs.d/bin/doom doctor"
+alias doomupgrade="~/.emacs.d/bin/doom upgrade"
+alias doompurge="~/.emacs.d/bin/doom purge"
 
 # Function to copy alias's to zshenv file (for nvim/vim cmd to use)
 function zshalias()
