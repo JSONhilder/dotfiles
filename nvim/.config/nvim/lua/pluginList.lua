@@ -162,6 +162,8 @@ return packer.startup(
         }
 
         -- misc plugins
+        use "glepnir/dashboard-nvim"
+
         use {
             "terrortylor/nvim-comment",
             cmd = "CommentToggle",

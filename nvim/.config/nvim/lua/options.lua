@@ -28,6 +28,26 @@ g.go_highlight_types = 1
 g.go_auto_type_info = 1
 g.go_addtags_transform = "snakecase"
 
+-- dashboard
+vim.g.dashboard_default_executive = 'telescope'
+vim.g.dashboard_custom_section = {
+  a = {description = {'  Find File:         SPC f  '}, command = 'Telescope git_files'},
+  b = {description = {'  Search Text:       SPC r g'}, command = 'Telescope live_grep'},
+  c = {description = {'  Recent Files:      SPC m  '}, command = 'Telescope oldfiles'},
+  d = {description = {'  Open File Tree:    CTL n  '}, command = 'NvimTreeOpen'}
+}
+g.dashboard_custom_footer = {
+   "When you don't create things, you become defined by your tastes rather than ability. Your tastes only narrow & exclude people. So create. -  why the lucy stiff"
+}
+
+g.dashboard_custom_header = {
+[[  ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
+[[  ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
+[[  ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
+[[  ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
+[[  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
+[[  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]],
+}
 --don't write to the ShaDa file on startup
 vim.opt.shadafile = "NONE"
 
