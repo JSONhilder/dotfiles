@@ -7,19 +7,20 @@ shell:
 
 window:
     startup_mode: Maximized
-    decorations: Full
+    decorations: None
     title: ""
 
 background_opacity: 0.96
 
 font:
     normal:
-      family: SpaceMono Nerd Font
+      family: JetBrainsMono Nerd Font
 
-    size: 10.5
+    size: 10
 
 cursor:
   style: Beam
+
 
 # gruvbox Alacritty Colors
 colors:
