@@ -11,8 +11,9 @@ export ZSH="/home/jason/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
-#NODE JS
-export PATH=/home/jason/.nodejs/bin:$PATH
+#NODE JS VOLTA
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 #GOLANG
 export PATH=$PATH:/usr/local/go/bin
@@ -128,7 +129,7 @@ alias lazydocker="~/.lazydocker"
 alias ld="~/.lazydocker"
 alias work="cd ~/work/"
 #Emacs
-alias emacs="emacsclient 'main' -e '(dashboard-refresh-buffer)' -c -a 'emacs'"
+alias emacs="emacsclient -e '(dashboard-refresh-buffer)' -c -a 'emacs'"
 alias doomsync="~/.emacs.d/bin/doom sync"
 alias doomdoctor="~/.emacs.d/bin/doom doctor"
 alias doomupgrade="~/.emacs.d/bin/doom upgrade"
