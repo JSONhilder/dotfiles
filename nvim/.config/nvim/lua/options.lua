@@ -37,7 +37,7 @@ vim.g.dashboard_custom_section = {
   d = {description = {'  Open File Tree:    CTL n  '}, command = 'NvimTreeOpen'}
 }
 g.dashboard_custom_footer = {
-   "When you don't create things, you become defined by your tastes rather than ability. Your tastes only narrow & exclude people. So create. -  why the lucy stiff"
+   "Welcome to the church of neovim."
 }
 
 g.dashboard_custom_header = {
