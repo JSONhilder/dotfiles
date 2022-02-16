@@ -15,9 +15,6 @@ vim.g.mapleader = " "
 cmd([[autocmd BufWritePre * %s/\s\+$//e]])
 cmd([[autocmd BufWritePre * %s/\n\+\%$//e]])
 
--- for the corne keyboard
-map("i", "jk", "<Esc>")
-
 -- Quality of life stuff
 map("n", "Y", "y$")
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -35,12 +32,10 @@ map("v", "<C-c>", ":CommentToggle<CR>", opt)
 map("n", "<Leader>pp", [[<Cmd> Telescope builtin <CR>]], opt)
 -- Recently used files
 map("n", "<Leader>m", [[<Cmd> Telescope oldfiles <CR>]], opt)
--- Show open buffers
-map("n", ";", [[<Cmd> Telescope buffers <CR>]], opt)
 -- Find in current buffer
 map("n", "<Leader>/", [[<Cmd> Telescope current_buffer_fuzzy_find <CR>]], opt)
 -- git files
-map("n", "<Leader>f", [[<Cmd> Telescope git_files <CR>]], opt)
+map("n", "<Leader><leader>", [[<Cmd> Telescope git_files <CR>]], opt)
 -- Folders files
 map("n", "<Leader>fb", [[ <Cmd> Telescope file_browser <CR>]], opt)
 -- All Files
@@ -55,6 +50,8 @@ map("n", "<Leader>gs", [[<Cmd> Telescope git_status <CR>]], opt)
 map("n", "<Leader>gc", [[<Cmd> Telescope git_commits <CR>]], opt)
 -- Help Tags
 map("n", "<Leader>fh", [[<Cmd> Telescope help_tags <CR>]], opt)
+-- Show open buffers
+map("n", "<leader>;", [[<Cmd> Telescope buffers <CR>]], opt)
 -- Kill Current buffer
 map("n", "<Leader>bk", ":bd!<CR>", opt)
 -- Kill all buffers
@@ -85,6 +82,9 @@ map("n", "[d", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], opts)
 map("n", "]d", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], opts)
 map("n", "<space>l", [[<cmd>lua vim.diagnostic.setloclist()<CR>]], opts)
 map("n", "<space>ll", ":lclose<CR>", opt)
+
+-- test
+map("n", "<leader>oo", [[<cmd>lua current_signature(1000)<CR>]], opts)
 
 -- lazygit
 map("n", "<leader>gg", [[<cmd>lua _lazygit_toggle()<CR>]], opts)
