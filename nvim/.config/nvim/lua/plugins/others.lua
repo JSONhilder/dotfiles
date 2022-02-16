@@ -50,6 +50,16 @@ end
 
 M.lualine = function ()
     local present, lualine = pcall(require, "lualine")
+
+    function current_signature()
+        if not packer_plugins["lsp_signature.nvim"] or packer_plugins["lsp_signature.nvim"].loaded == false then
+            return ""
+        end
+        local sig = require("lsp_signature").status_line(700)
+        -- return sig.label .. " >> " .. sig.hint
+        return sig.label
+    end
+
     if present then
         lualine.setup {
             options = {
@@ -63,8 +73,12 @@ M.lualine = function ()
                     {
                       'filename',
                       path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+                    },
+                    {
+                        current_signature
                     }
-                }
+                },
+
             }
         }
     end
