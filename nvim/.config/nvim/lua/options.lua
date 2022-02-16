@@ -10,6 +10,26 @@ vim.cmd([[
     let g:nvim_tree_icons = {'git': {'unstaged': "!", 'untracked': "*"}}
 ]])
 
+-- dashboard
+g.dashboard_custom_header = {
+[[  ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
+[[  ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
+[[  ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
+[[  ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
+[[  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
+[[  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]],
+}
+vim.g.dashboard_default_executive = 'telescope'
+vim.g.dashboard_custom_section = {
+  a = {description = {'  Find File:         SPC f  '}, command = 'Telescope git_files'},
+  b = {description = {'  Search Text:       SPC r g'}, command = 'Telescope live_grep'},
+  c = {description = {'  Recent Files:      SPC m  '}, command = 'Telescope oldfiles'},
+  d = {description = {'  Open File Tree:    CTL n  '}, command = 'NvimTreeOpen'}
+}
+g.dashboard_custom_footer = {
+   "Welcome to the church of neovim."
+}
+
 -- netrw settings
 g.netrw_browse_split = 0
 g.netrw_banner = 0
@@ -28,26 +48,6 @@ g.go_highlight_types = 1
 g.go_auto_type_info = 1
 g.go_addtags_transform = "snakecase"
 
--- dashboard
-vim.g.dashboard_default_executive = 'telescope'
-vim.g.dashboard_custom_section = {
-  a = {description = {'  Find File:         SPC f  '}, command = 'Telescope git_files'},
-  b = {description = {'  Search Text:       SPC r g'}, command = 'Telescope live_grep'},
-  c = {description = {'  Recent Files:      SPC m  '}, command = 'Telescope oldfiles'},
-  d = {description = {'  Open File Tree:    CTL n  '}, command = 'NvimTreeOpen'}
-}
-g.dashboard_custom_footer = {
-   "Welcome to the church of neovim."
-}
-
-g.dashboard_custom_header = {
-[[  ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
-[[  ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
-[[  ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
-[[  ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
-[[  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
-[[  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]],
-}
 --don't write to the ShaDa file on startup
 vim.opt.shadafile = "NONE"
 
