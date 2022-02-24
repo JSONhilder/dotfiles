@@ -8,6 +8,8 @@ vim.cmd([[
     filetype plugin indent off
     set noshowmode
     let g:nvim_tree_icons = {'git': {'unstaged': "!", 'untracked': "*"}}
+    set clipboard+=unnamedplus
+    set nowrap
 ]])
 
 -- dashboard
@@ -27,7 +29,7 @@ vim.g.dashboard_custom_section = {
   d = {description = {'  Open File Tree:    CTL n  '}, command = 'NvimTreeOpen'}
 }
 g.dashboard_custom_footer = {
-   "Welcome to the church of neovim."
+   "How do I exit??"
 }
 
 -- netrw settings

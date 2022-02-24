@@ -142,7 +142,6 @@ return packer.startup(
             },
         }
 
-
         -- file tree
         use {
             'kyazdani42/nvim-tree.lua',
@@ -204,16 +203,6 @@ return packer.startup(
             end
         }
 
-        -- Bufferline
-        use {
-            'akinsho/bufferline.nvim',
-            requires = 'kyazdani42/nvim-web-devicons',
-            event = "VimEnter",
-            config = function()
-                require("plugins.others").bufferline()
-            end
-        }
-
         -- Vim-wiki
         use {
             'vimwiki/vimwiki',
@@ -241,6 +230,16 @@ return packer.startup(
         --         require("rust-tools").setup({
         --             server = {settings = {["rust-analyzer"] = {checkOnSave = { enable = true }}}}
         --         })
+        --     end
+        -- }
+
+        -- Bufferline
+        -- use {
+        --     'akinsho/bufferline.nvim',
+        --     requires = 'kyazdani42/nvim-web-devicons',
+        --     event = "VimEnter",
+        --     config = function()
+        --         require("plugins.others").bufferline()
         --     end
         -- }
     end
