@@ -7,16 +7,15 @@ shell:
 
 window:
     startup_mode: Maximized
-    decorations: None
+    # decorations: None
     title: ""
-
-background_opacity: 0.96
+    opacity: 0.96
 
 font:
     normal:
       family: JetBrainsMono Nerd Font
 
-    size: 10
+    size: 11
 
 cursor:
   style: Beam
