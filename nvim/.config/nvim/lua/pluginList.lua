@@ -163,6 +163,16 @@ return packer.startup(
         -- misc plugins
         use "glepnir/dashboard-nvim"
 
+        -- Bufferline
+        use {
+            'akinsho/bufferline.nvim',
+            requires = 'kyazdani42/nvim-web-devicons',
+            event = "VimEnter",
+            config = function()
+                require("plugins.others").bufferline()
+            end
+        }
+
         use {
             "terrortylor/nvim-comment",
             cmd = "CommentToggle",
@@ -230,16 +240,6 @@ return packer.startup(
         --         require("rust-tools").setup({
         --             server = {settings = {["rust-analyzer"] = {checkOnSave = { enable = true }}}}
         --         })
-        --     end
-        -- }
-
-        -- Bufferline
-        -- use {
-        --     'akinsho/bufferline.nvim',
-        --     requires = 'kyazdani42/nvim-web-devicons',
-        --     event = "VimEnter",
-        --     config = function()
-        --         require("plugins.others").bufferline()
         --     end
         -- }
     end
