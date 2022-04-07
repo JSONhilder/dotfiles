@@ -17,11 +17,12 @@ return packer.startup(
         }
 
         -- color/ui related stuff
-        use 'eddyekofo94/gruvbox-flat.nvim'
+        -- use 'eddyekofo94/gruvbox-flat.nvim'
+        use "rebelot/kanagawa.nvim"
 
         use {
             "nvim-lualine/lualine.nvim",
-            after = "gruvbox-flat.nvim",
+            after = "kanagawa.nvim",
             config = function()
                 require("plugins.others").lualine()
             end
@@ -29,7 +30,7 @@ return packer.startup(
 
         use {
             "kyazdani42/nvim-web-devicons",
-            after = "gruvbox-flat.nvim",
+            after = "kanagawa.nvim",
         }
 
         use {

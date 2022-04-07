@@ -1,6 +1,5 @@
-vim.g.gruvbox_flat_style = "hard"
 vim.cmd([[
-    colorscheme gruvbox-flat
+    colorscheme kanagawa
     syntax on
     filetype on
     filetype plugin indent on
