@@ -63,7 +63,7 @@ M.lualine = function ()
     if present then
         lualine.setup {
             options = {
-                theme = "gruvbox-flat",
+                theme = "kanagawa",
                 section_separators = {''},
                 component_separators = {''}
                 -- ... your lualine config

@@ -11,9 +11,6 @@ export ZSH="/home/jason/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
-#NODE JS VOLTA
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
 #GOLANG
 export PATH=$PATH:/usr/local/go/bin
@@ -140,3 +137,5 @@ function zshalias()
 {
   grep "^alias" ~/.zshrc > ~/.zshenv
 }
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
