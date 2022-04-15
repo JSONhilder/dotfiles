@@ -11,7 +11,6 @@ export ZSH="/home/jason/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
-
 #GOLANG
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
@@ -19,11 +18,16 @@ export PATH=$PATH:~/go/bin
 #Flutter
 export PATH="$PATH:`pwd`/flutter/bin"
 
+#Android Studio
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+#Volta (node)
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -115,6 +119,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias v="nvim"
 alias wiki="cd ~ && nvim -c 'VimwikiIndex'"
 alias nvim="~/.nvim-app/nvim.appimage"
 alias vscode="code . && exit"
@@ -125,17 +130,9 @@ alias lg="~/.lazygit"
 alias lazydocker="~/.lazydocker"
 alias ld="~/.lazydocker"
 alias work="cd ~/work/"
-#Emacs
-alias emacs="emacsclient -e '(dashboard-refresh-buffer)' -c -a 'emacs'"
-alias doomsync="~/.emacs.d/bin/doom sync"
-alias doomdoctor="~/.emacs.d/bin/doom doctor"
-alias doomupgrade="~/.emacs.d/bin/doom upgrade"
-alias doompurge="~/.emacs.d/bin/doom purge"
 
 # Function to copy alias's to zshenv file (for nvim/vim cmd to use)
 function zshalias()
 {
   grep "^alias" ~/.zshrc > ~/.zshenv
 }
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
