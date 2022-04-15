@@ -13,9 +13,11 @@ window:
 
 font:
     normal:
-      family: Hack Nerd Font
+      family: SpaceMono Nerd Font
 
     size: 11
+    offset:
+      y: -1
 
 cursor:
   style: Beam
@@ -24,7 +26,8 @@ cursor:
 # Kanagawa Alacritty Colors
 colors:
   primary:
-    background: '0x1f1f28'
+    #background: '0x1f1f28'
+    background: '0x1E1E2E' #to match catppuccin gtk theme
     foreground: '0xdcd7ba'
 
   normal:
