@@ -232,7 +232,7 @@ return packer.startup(
         use { 'nelsyeung/twig.vim' }
 
         -- Golang
-        -- use { 'fatih/vim-go' }
+        use { 'fatih/vim-go' }
 
         -- Rust
         -- use {
