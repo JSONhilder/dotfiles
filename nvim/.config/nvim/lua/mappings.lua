@@ -23,6 +23,10 @@ map("n", "<leader>k", ":m .-2<CR>==")
 map("n", "<Leader>j", ":m .+1<CR>==")
 map("i", "<C-J> <esc>", ":m .+1<CR>==")
 map("i", "<C-K <esc>", ":m .-2<CR>==")
+map("v", ">", ">gv")
+map("v", "<", "<gv")
+map("v", "<Tab>", ">gv")
+map("v", "<S-Tab>", "<gv")
 
 -- commentor maps (vim registers _ as /)
 map("n", "<C-c>", ":CommentToggle<CR>", opt)
@@ -83,11 +87,11 @@ map("n", "]d", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], opts)
 map("n", "<space>l", [[<cmd>lua vim.diagnostic.setloclist()<CR>]], opts)
 map("n", "<space>ll", ":lclose<CR>", opt)
 
--- test
-map("n", "<leader>oo", [[<cmd>lua current_signature(1000)<CR>]], opts)
-
 -- lazygit
 map("n", "<leader>gg", [[<cmd>lua _lazygit_toggle()<CR>]], opts)
 
 -- toggleterm
 map("n", "<C-j>", ":ToggleTerm<CR>", opt)
+
+-- toggle word wrap
+map("n", "<leader>wp", ":set wrap!<CR>", opt)
