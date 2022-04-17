@@ -29,6 +29,9 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# Lua
+export PATH=$HOME/lua/src:$PATH
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
