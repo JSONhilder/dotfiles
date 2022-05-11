@@ -32,7 +32,7 @@ gitsigns.setup {
     ['o ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
     ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
   },
-  watch_index = {
+  watch_gitdir = {
     interval = 1000
   },
   current_line_blame = false,

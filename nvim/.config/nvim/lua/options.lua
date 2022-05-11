@@ -12,60 +12,6 @@ vim.cmd([[
     set nowrap
 ]])
 
--- dashboard
-g.dashboard_custom_header = {
-       "            :h-                                  Nhy`               ",
-       "           -mh.                           h.    `Ndho               ",
-       "           hmh+                          oNm.   oNdhh               ",
-       "          `Nmhd`                        /NNmd  /NNhhd               ",
-       "          -NNhhy                      `hMNmmm`+NNdhhh               ",
-       "          .NNmhhs              ```....`..-:/./mNdhhh+               ",
-       "           mNNdhhh-     `.-::///+++////++//:--.`-/sd`               ",
-       "           oNNNdhhdo..://++//++++++/+++//++///++/-.`                ",
-       "      y.   `mNNNmhhhdy+/++++//+/////++//+++///++////-` `/oos:       ",
-       " .    Nmy:  :NNNNmhhhhdy+/++/+++///:.....--:////+++///:.`:s+        ",
-       " h-   dNmNmy oNNNNNdhhhhy:/+/+++/-         ---:/+++//++//.`         ",
-       " hd+` -NNNy`./dNNNNNhhhh+-://///    -+oo:`  ::-:+////++///:`        ",
-       " /Nmhs+oss-:++/dNNNmhho:--::///    /mmmmmo  ../-///++///////.       ",
-       "  oNNdhhhhhhhs//osso/:---:::///    /yyyyso  ..o+-//////////:/.      ",
-       "   /mNNNmdhhhh/://+///::://////     -:::- ..+sy+:////////::/:/.     ",
-       "     /hNNNdhhs--:/+++////++/////.      ..-/yhhs-/////////::/::/`    ",
-       "       .ooo+/-::::/+///////++++//-/ossyyhhhhs/:///////:::/::::/:    ",
-       "       -///:::::::////++///+++/////:/+ooo+/::///////.::://::---+`   ",
-       "       /////+//++++/////+////-..//////////::-:::--`.:///:---:::/:   ",
-       "       //+++//++++++////+++///::--                 .::::-------::   ",
-       "       :/++++///////////++++//////.                -:/:----::../-   ",
-       "       -/++++//++///+//////////////               .::::---:::-.+`   ",
-       "       `////////////////////////////:.            --::-----...-/    ",
-       "        -///://////////////////////::::-..      :-:-:-..-::.`.+`    ",
-       "         :/://///:///::://::://::::::/:::::::-:---::-.-....``/- -   ",
-       "           ::::://::://::::::::::::::----------..-:....`.../- -+oo/ ",
-       "            -/:::-:::::---://:-::-::::----::---.-.......`-/.      ``",
-       "           s-`::--:::------:////----:---.-:::...-.....`./:          ",
-       "          yMNy.`::-.--::..-dmmhhhs-..-.-.......`.....-/:`           ",
-       "         oMNNNh. `-::--...:NNNdhhh/.--.`..``.......:/-              ",
-       "        :dy+:`      .-::-..NNNhhd+``..`...````.-::-`                ",
-       "                        .-:mNdhh:.......--::::-`                    ",
-       "                           yNh/..------..`                          ",
-       "                                                                    ",
-       "                              N E O V I M                           ",
-       }
-
-vim.g.dashboard_default_executive = 'telescope'
-vim.g.dashboard_custom_section = {
-  a = {description = {'  Find File:         SPC f  '}, command = 'Telescope git_files'},
-  b = {description = {'  Search Text:       SPC r g'}, command = 'Telescope live_grep'},
-  c = {description = {'  Recent Files:      SPC m  '}, command = 'Telescope oldfiles'},
-  d = {description = {'  Open File Tree:    CTL n  '}, command = 'NvimTreeOpen'}
-}
-vim.g.dashboard_custom_footer = {'type  :help<Enter>  or  <F1>  for on-line help'}
-
--- netrw settings
-g.netrw_browse_split = 0
-g.netrw_banner = 0
-g.netrw_winsize = 25
-g.netrw_localrmdir = 'rm -r'
-
 -- Golang specific
 g.go_highlight_build_constraints = 1
 g.go_highlight_extra_types = 1
@@ -84,9 +30,7 @@ vim.opt.shadafile = "NONE"
 --set termguicolors
 vim.o.termguicolors = true
 
---fish slows things down
 vim.opt.shell = "zsh"
-
 opt.mouse = "a"
 opt.ruler = false
 opt.hidden = true
@@ -118,9 +62,6 @@ g.indentLine_setConseal = 0
 opt.number = true
 opt.relativenumber = true
 opt.numberwidth = 2
-
--- shortmess options
-opt.shortmess:append("asI") --disable intro
 
 -- disable tilde on end of buffer:
 vim.cmd("let &fcs='eob: '")

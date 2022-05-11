@@ -42,12 +42,11 @@ vim.lsp.protocol.CompletionItemKind = {
     "   (TypeParameter)"
 }
 
-vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
 local opts = {noremap = true, silent = true}
+local _buffer = vim.api.nvim_get_current_buf()
 
 local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
+    vim.api.nvim_buf_set_keymap(_buffer, ...)
 end
 
 -- Mappings.
@@ -64,7 +63,9 @@ buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.set_loclist()<CR>", opts)
 
-local function documentHighlight(client, bufnr)
+vim.api.nvim_buf_set_option(_buffer, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+local function documentHighlight(client, _buffer)
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(
@@ -83,95 +84,28 @@ local function documentHighlight(client, bufnr)
     end
 end
 
+require("nvim-lsp-installer").setup {}
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")
 
-function lspconfig.common_on_attach(client, bufnr)
-    documentHighlight(client, bufnr)
+function lspconfig.common_on_attach(client, _buffer)
+    documentHighlight(client, _buffer)
+    require "lsp_signature".on_attach({
+        use_lspsaga = true,
+        hint_enable = true,
+        floating_window = false,
+    }, _buffer)
 end
-function lspconfig.tsserver_on_attach(client, bufnr)
-    lsp_config.common_on_attach(client, bufnr)
+function lspconfig.tsserver_on_attach(client, _buffer)
+    lsp_config.common_on_attach(client, _buffer)
     client.resolved_capabilities.document_formatting = false
 end
 
 local function setup_servers()
-    local lsp_installer_servers = require'nvim-lsp-installer.servers'
-
-    local rust_server, requested_server = lsp_installer_servers.get_server("rust_analyzer")
-    if rust_server then
-        requested_server:on_ready(function ()
-            local opts = {
-                on_attach = function(client, bufnr)
-                    require "lsp_signature".on_attach({
-                        use_lspsaga = true,
-                        hint_enable = true,
-                        floating_window = false,
-                    }, bufnr)
-                end,
-            }
-            requested_server:setup(opts)
-        end)
-        if not requested_server:is_installed() then
-            -- Queue the server to be installed
-            requested_server:install()
-        end
-    end
-
-    local go_server, requested_server = lsp_installer_servers.get_server("gopls")
-    if go_server then
-        requested_server:on_ready(function ()
-            local opts = {
-                on_attach = function(client, bufnr)
-                    require "lsp_signature".on_attach({
-                        use_lspsaga = true,
-                        hint_enable = true,
-                        floating_window = false,
-                    }, bufnr)
-                end,
-            }
-            requested_server:setup(opts)
-        end)
-        if not requested_server:is_installed() then
-            -- Queue the server to be installed
-            requested_server:install()
-        end
-    end
-
-    local ts_server, requested_server = lsp_installer_servers.get_server("tsserver")
-    if ts_server then
-        requested_server:on_ready(function ()
-            local opts = {
-                on_attach = function(client, bufnr)
-                    require "lsp_signature".on_attach({
-                        use_lspsaga = false,
-                    }, bufnr)
-                end,
-            }
-            requested_server:setup(opts)
-        end)
-        if not requested_server:is_installed() then
-            -- Queue the server to be installed
-            requested_server:install()
-        end
-    end
-
-    local html_server, requested_server = lsp_installer_servers.get_server("html")
-    if html_server then
-        requested_server:on_ready(function ()
-            local opts = {
-                on_attach = function(client, bufnr)
-                    require "lsp_signature".on_attach({
-                        use_lspsaga = false,
-                    }, bufnr)
-                end,
-            }
-            requested_server:setup(opts)
-        end)
-        if not requested_server:is_installed() then
-            -- Queue the server to be installed
-            requested_server:install()
-        end
-    end
+    lspconfig.rust_analyzer.setup {}
+    lspconfig.gopls.setup {}
+    lspconfig.tsserver.setup {}
+    lspconfig.html.setup {}
 end
 
 setup_servers()
