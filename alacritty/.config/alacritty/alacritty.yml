@@ -5,9 +5,9 @@ shell:
     - "tmux new -A -s main"
 
 window:
-    title: ""
+    # title: ""
     startup_mode: Maximized
-    # decorations: None
+    # decorations: Full
     # opacity: 0.96
 
 font:
