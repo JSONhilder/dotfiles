@@ -33,7 +33,7 @@ mkdir -p ~/work ~/github ~/tests
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, ripgrep, fzf, gnu stow, xclip )"
+    echo "( git, make, gcc, ripgrep, fzf, gnu stow, xclip )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -44,7 +44,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y ripgrep xclip fzf stow
+    sudo apt install -y make gcc ripgrep xclip fzf stow
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
     echo
 fi
 #####################################################
@@ -65,6 +69,10 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
     sudo apt install -y tree neofetch htop
     echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # ZSH (Z-SHELL)
@@ -82,6 +90,10 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-----------------"
     echo
     sudo apt install -y zsh
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
     echo
 fi
 #####################################################
@@ -103,6 +115,10 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     sudo apt update
     sudo apt install -y alacritty
     echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # TMUX
@@ -119,6 +135,10 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------"
     echo
     sudo apt install -y tmux
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
     echo
 fi
 #####################################################
@@ -138,7 +158,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     sudo apt-get remove docker docker.io containerd runc
 
-    sudo apt-get install \
+    sudo apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -153,6 +173,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     sudo apt update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io
     sudo usermod -aG docker $USER
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # DOCKER COMPOSE
@@ -171,6 +197,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod a+x /usr/local/bin/docker-compose
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # DDEV
@@ -194,6 +225,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     sudo chmod a+x /usr/local/bin/mkcert
     mkcert -install
     rm install_ddev.sh
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # VOLTA(nodejs)
@@ -211,6 +248,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-------------------"
     echo
     curl https://get.volta.sh | bash
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # RUST LANG
@@ -229,6 +271,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # FLUTTER
@@ -247,7 +294,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     cd ~ && git clone https://github.com/flutter/flutter.git -b stable
-
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # @TODO LUA
@@ -276,6 +327,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     download="https://github.com/getzola/zola/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # LAZYGIT
@@ -306,6 +363,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     tar xvf $FILE lazygit
     mv lazygit ~/.lazygit
     rm $FILE
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # LAZYDOCKER
@@ -336,6 +399,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     tar xvf $FILE lazydocker
     mv lazydocker ~/.lazydocker
     rm $FILE
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # NEOVIM
@@ -367,11 +436,17 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
 
     # Dependencies
-    sudo apt install build-essential
+    sudo apt y install build-essential
 
     # Setup Packer Quick start here for firs start
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # i3
@@ -389,6 +464,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "----------------"
     echo
     sudo apt install -y i3 picom feh nautilus lxappearance
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
     echo
 fi
 #####################################################
@@ -415,6 +495,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
         echo "installing zsh syntax highlighting plugin..."
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     fi
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # APPLICATIONS
@@ -436,7 +522,14 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     download="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-    cd ~ && wget -O $FILE $download
+    cd ~ && wget -O $download
+
+    echo "File Downloaded! Unpredictable file name, install it manually."
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # MEGA SYNC
@@ -464,6 +557,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     sudo apt install "./"$FILE
     rm $FILE
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # CHROMIUM
@@ -482,6 +581,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     sudo apt install -y chromium-browser
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # TRANSMISSION
@@ -500,6 +605,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     sudo apt install -y transmission
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # VLC
@@ -518,6 +629,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     sudo apt install -y vlc
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
 fi
 #####################################################
 # THEMES
@@ -554,7 +671,13 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
         echo "Cleaning up download..."
         rm -rf "./SpaceMono.zip"
+
+        echo
+        echo "===== COMPLETE ====="
+        echo
     fi
+else
+    echo
 fi
 #####################################################
 # GRUVBOX GTK THEMES
@@ -575,9 +698,15 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
         cd ~/$FILE && cp -r icons/* ~/.icons
 
         cd ~ && rm -rf $FILE
+
+        echo
+        echo "===== COMPLETE ====="
+        echo
     else
         echo "Theme already installed..."
     fi
+else
+    echo
 fi
 #####################################################
 # STOW DOTFILES
@@ -598,3 +727,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     sudo chsh -s /bin/zsh $USER
 fi
+
+echo
+echo "===== SYSTEM INSTALL COMPLETE ====="
+echo
