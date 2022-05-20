@@ -462,7 +462,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     # dependencies
     sudo apt install libc-ares2 libmediainfo0v5 libmms0 libtinyxml2-9 libzen0v5
 
-    sudo apt install $FILE
+    sudo apt install "./"$FILE
     rm $FILE
 fi
 #####################################################
