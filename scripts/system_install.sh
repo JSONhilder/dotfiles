@@ -517,6 +517,59 @@ fi
 # THEMES
 #####################################################
 #####################################################
+# FONTS
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Space Mono Font? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    #SPACE MONO FONT
+    font="Space Mono Nerd Font"
+    fc-list -q "$font"
+    if [ $? -eq 0 ]
+    then
+        echo "Space Mono Nerd Font found on system moving on..."
+    else
+        echo "Adding font to system..."
+
+        echo "Downloading Space Mono Nerd Font..."
+        wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SpaceMono.zip" -q --show-progress
+
+        if [ -d $HOME"/.fonts/" ]; then
+            unzip -q "./SpaceMono.zip" -d $HOME"/.fonts/"
+        else
+           mkdir -p $HOME"/.fonts/"
+           unzip -q "./SpaceMono.zip" -d $HOME"/.fonts/"
+        fi
+
+        echo "Cleaning up download..."
+        rm -rf "./SpaceMono.zip"
+    fi
+fi
+#####################################################
+# GRUVBOX GTK THEMES
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Gruvbox gtk theme? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    if [[ ! -d "${HOME}/.themes/Gruvbox-Material-Dark" ]]; then
+        cd ~ && git clone "git@github.com:TheGreatMcPain/gruvbox-material-gtk.git"
+
+        FILE="gruvbox-material-gtk."
+    else
+        echo "Theme already installed..."
+    fi
+fi
+#####################################################
 # STOW DOTFILES
 #####################################################
 if [[ $_override = "n" ]]; then
