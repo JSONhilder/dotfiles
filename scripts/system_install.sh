@@ -246,7 +246,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-------------------------"
     echo
 
-    git clone https://github.com/flutter/flutter.git -b stable
+    cd ~ && git clone https://github.com/flutter/flutter.git -b stable
 
 fi
 #####################################################
@@ -505,5 +505,22 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     sudo apt install -y vlc
 fi
 #####################################################
+# THEMES
+#####################################################
+#####################################################
 # STOW DOTFILES
 #####################################################
+if [[ $_override = "n" ]]; then
+    echo "Link dot files with stow? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    cd ~ && rm -rf .config/i3 .config/i3status .config/nvim ~/.tmux.conf .config/picom .config/dunst .config/alacritty .zshrc
+
+    cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/
+
+    cd ~ && source ~/.zshrc && zshalias
+fi

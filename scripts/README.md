@@ -70,11 +70,14 @@ cd ~ && source ~/.zshrc && zshalias
 - Flutter
 - Lua
 - Transmission
+- chromium
+- vlc
 - Lazy Git
 - Lazy Docker
 - Zola
+- Mega
+- Vscode (Deb needs to be installed manually)
 
 ## Software to be installed manually
 - Android Studio
 - React Native Sdk
-- Mega
