@@ -403,6 +403,17 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
     sudo chsh -s /bin/zsh
+
+    #OH MY ZSH PLUGINS
+    if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
+        echo "installing zsh auto suggestion plugin..."
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    fi
+
+    if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
+        echo "installing zsh syntax highlighting plugin..."
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    fi
 fi
 #####################################################
 # APPLICATIONS
@@ -522,5 +533,5 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/
 
-    cd ~ && source ~/.zshrc && zshalias
+    cd ~ && zsh && source ~/.zshrc && zshalias
 fi
