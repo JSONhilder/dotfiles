@@ -402,8 +402,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo installing oh my zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-    sudo chsh -s /bin/zsh
-
     #OH MY ZSH PLUGINS
     if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
         echo "installing zsh auto suggestion plugin..."
@@ -533,5 +531,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/
 
-    cd ~ && zsh && source ~/.zshrc && zshalias
+    cd ~ && /bin/zsh -c 'source ~/.zshrc && zshalias'
+
+    sudo chsh -s /bin/zsh $USER
 fi
