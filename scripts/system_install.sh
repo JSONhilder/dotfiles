@@ -48,11 +48,29 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 fi
 #####################################################
+# SYSTEM NICETIES
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install zsh (z-shell) ? [y/n]"
+    echo "( tree, neofetch, htop )"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing system niceties..."
+    echo "-----------------"
+    echo
+    sudo apt install -y tree neofetch htop
+    echo
+fi
+#####################################################
 # ZSH (Z-SHELL)
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install zsh (z-shell) ? [y/n]"
-    echo "( git, ripgrep, fzf, gnu stow, xclip )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -413,7 +431,7 @@ fi
 # MEGA SYNC
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install chromium? [y/n]"
+    echo "Install Mega Sync? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
