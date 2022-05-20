@@ -3,19 +3,20 @@
 
 Initial steps for system install script
 
-* update the system
+### update the system
 ```
 sudo apt update
 
 sudo apt upgrade -y
 ```
+Reboot
 
-* Install git (only needed if selected minimal install)
+### Install git (only needed if selected minimal install)
 ```
 sudo apt install git
 ```
 
-* Generate ssh key and copy cat output
+### Generate ssh key and copy cat output
 ```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
@@ -25,24 +26,23 @@ ssh-add ~/.ssh/id_rsa
 
 cat ~/.ssh/id_rsa.pub
 ```
+### log into github and add ssh key
 
-* log into github and add ssh key
-
-* clone this repository
+### clone this repository
 ```
-git clone git@github.com:jasonhilder/dotfiles.git
+git clone git@github.com:jasonhilder/dotfiles.git && mv dotfiles ~/.dotfiles
 ```
 
-* run the install.sh script (note: dont use sudo for this.)
+### run the install.sh script (note: dont use sudo for this.)
 ```
 ./path/to/system_install.sh
 ```
 
-* relog
+### relog
 
-* run the theme.sh script
+### run the theme.sh script
 
-* restart terminal and run
+### restart terminal and run
 ```
 cd ~ && source ~/.zshrc && zshalias
 ```

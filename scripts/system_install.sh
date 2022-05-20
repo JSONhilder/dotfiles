@@ -22,6 +22,8 @@ else
     fi
 fi
 #####################################################
+# SYSTEM SOFTWARE
+#####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
 mkdir -p ~/.dotfiles ~/.themes ~/.fonts ~/.icons
@@ -46,21 +48,385 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 fi
 #####################################################
-# SYNC DOTFILES
+# ZSH (Z-SHELL)
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Syn dotfiles from github? [y/n]"
+    echo "Install zsh (z-shell) ? [y/n]"
+    echo "( git, ripgrep, fzf, gnu stow, xclip )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
 fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    if [ ! -d ~/.dotfiles/ ]; then
-       eval "$(ssh-agent -s)"
-       ssh-add /home/$LOCALUSR/.ssh/id_rsa
-       cd /home/$LOCALUSR && git clone git@github.com:jasonhilder/dotfiles.git
-       mv /home/$LOCALUSR/dotfiles /home/$LOCALUSR/.dotfiles
-       cd /home/$LOCALUSR/.dotfiles && stow zsh/ tmux/ alacritty/ nvim/
-       cd /home/$LOCALUSR
-    fi
+    echo ""
+    echo "installing zsh..."
+    echo "-----------------"
+    echo
+    sudo apt install -y zsh
+    echo
+fi
+#####################################################
+# Alacritty
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install system essentials? [y/n]"
+    echo "( git, ripgrep, fzf, gnu stow, xclip )"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing alacritty..."
+    echo "-----------------------"
+    echo
+    sudo add-apt-repository ppa:aslatter/ppa
+    sudo apt update
+    sudo apt install -y alacritty
+    echo
+fi
+#####################################################
+# TMUX
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install tmux? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing tmux..."
+    echo "------------------"
+    echo
+    sudo apt install -y tmux
+    echo
+fi
+#####################################################
+# DOCKER ENGINE
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install docker? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing docker..."
+    echo "--------------------"
+    echo
+
+    sudo apt-get remove docker docker.io containerd runc
+
+    sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+    echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    sudo apt update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    sudo usermod -aG docker $USER
+fi
+#####################################################
+# DOCKER COMPOSE
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install docker compose? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing docker-compose..."
+    echo "----------------------------"
+    echo
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod a+x /usr/local/bin/docker-compose
+fi
+#####################################################
+# DDEV
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install ddev? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing ddev deps..."
+    echo "-----------------------"
+    echo
+
+    cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
+    sudo apt install libnss3-tools -y
+    sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
+    sudo chmod a+x /usr/local/bin/mkcert
+    mkcert -install
+    rm install_ddev.sh
+fi
+#####################################################
+# VOLTA(nodejs)
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install volta (node) ? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing volta..."
+    echo "-------------------"
+    echo
+    curl https://get.volta.sh | bash
+fi
+#####################################################
+# RUST LANG
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Rust? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing rust..."
+    echo "------------------"
+    echo
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+#####################################################
+# @TODO FLUTTER
+#####################################################
+#####################################################
+# @TODO LUA
+#####################################################
+#####################################################
+# ZOLA STATIC SITE GENERATOR
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install ZOLA static site generator? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing zola..."
+    echo "------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/getzola/zola/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+
+    echo $tag
+
+    FILE="zola_"$tag"-x86_64-unknown-linux-gnu.tar.gz"
+
+    download="https://github.com/getzola/zola/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+fi
+#####################################################
+# LAZYGIT
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Lazy Git? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing lazygit..."
+    echo "---------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+
+    echo $tag
+
+    VERSION=$(echo $tag|cut -c 2-6)
+    FILE="lazygit_"$VERSION"_Linux_x86_64.tar.gz"
+
+    download="https://github.com/jesseduffield/lazygit/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    tar xvf $FILE lazygit
+    mv lazygit ~/.lazygit
+    rm $FILE
+fi
+#####################################################
+# LAZYDOCKER
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Lazy Docker? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing lazydocker..."
+    echo "------------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/jesseduffield/lazydocker/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+
+    echo $tag
+
+    VERSION=$(echo $tag|cut -c 2-7)
+    FILE="lazydocker_"$VERSION"_Linux_x86_64.tar.gz"
+
+    download="https://github.com/jesseduffield/lazydocker/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    tar xvf $FILE lazydocker
+    mv lazydocker ~/.lazydocker
+    rm $FILE
+fi
+#####################################################
+# NEOVIM
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Neovim? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing neovim..."
+    echo "--------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/neovim/neovim/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+    echo $tag
+
+    VERSION=$(echo $tag|cut -c 2-6)
+    FILE="nvim.appimage"
+
+    download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    mkdir /home/$USER/.nvim-app
+    mv nvim.appimage /home/$USER/.nvim-app/nvim.appimage
+    cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
+
+    # Setup Packer Quick start here for firs start
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+#####################################################
+# i3
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install i3 window manager? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing i3..."
+    echo "----------------"
+    echo
+    sudo apt install -y i3 picom feh nautilus lxappearance
+    echo
+fi
+#####################################################
+# OH MY ZSH
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install oh my zsh? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo installing oh my zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+    sudo chsh -s /bin/zsh
+fi
+#####################################################
+# APPLICATIONS
+#####################################################
+# CHROMIUM
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install chromium? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing chromium browser..."
+    echo "------------------------------"
+    echo
+
+    sudo apt install -y chromium-browser
+fi
+#####################################################
+# TRANSMISSION
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install transmission? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing transmission..."
+    echo "--------------------------"
+    echo
+
+    sudo apt install -y transmission
+fi
+#####################################################
+# VLC
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install vlc media player? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing vlc media player..."
+    echo "------------------------------"
+    echo
+
+    sudo apt install -y vlc
+fi
+#####################################################
+# STOW DOTFILES
+#####################################################
