@@ -205,10 +205,9 @@ client.background       #2B2C2B
 
 # run screen setup script
 exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gruv.jpg
-exec_always --no-startup-id "~/.dotfiles/scripts/screen-manager.sh"
-exec_always --no-startup-id "~/.dotfiles/scripts/i3-tray.sh"
-exec_always --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
-exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
+# exec_always --no-startup-id "~/.dotfiles/scripts/screen-manager.sh"
+# exec_always --no-startup-id "~/.dotfiles/scripts/i3-tray.sh"
+# exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
 
 ########################################################
 # Open specific applications in floating mode

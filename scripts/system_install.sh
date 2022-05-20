@@ -456,6 +456,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     download="https://mega.nz/linux/repo/xUbuntu_22.04/amd64/"$FILE
     cd ~ && wget -O $FILE $download
 
+    # dependencies
+    sudo apt install libc-ares2 libmediainfo0v5 libmms0 libtinyxml2-9 libzen0v5
+
     sudo apt install $FILE
     rm $FILE
 fi
@@ -564,7 +567,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     if [[ ! -d "${HOME}/.themes/Gruvbox-Material-Dark" ]]; then
         cd ~ && git clone "git@github.com:TheGreatMcPain/gruvbox-material-gtk.git"
 
-        FILE="gruvbox-material-gtk."
+        FILE="gruvbox-material-gtk"
+        cd ~/$FILE && cp -r themes/* ~/.themes
+        cd ~/$FILE && cp -r icons/* ~/.icons
+
+        cd ~ && rm -rf $FILE
     else
         echo "Theme already installed..."
     fi
