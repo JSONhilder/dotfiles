@@ -1,10 +1,21 @@
 # System install script
 (Currently tested on Xubuntu 22.04)
 
-initial steps for system install script
+Initial steps for system install script
+
+* update the system
+```
+sudo apt update
+
+sudo apt upgrade -y
+```
+
+* Install git (only needed if selected minimal install)
+```
+sudo apt install git
+```
 
 * Generate ssh key and copy cat output
-
 ```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
@@ -17,14 +28,15 @@ cat ~/.ssh/id_rsa.pub
 
 * log into github and add ssh key
 
-* update the system
+* clone this repository
 ```
-sudo apt update
-
-sudo apt upgrade -y
+git clone git@github.com:jasonhilder/dotfiles.git
 ```
 
-* run the install.sh script
+* run the install.sh script (note: dont use sudo for this.)
+```
+./path/to/system_install.sh
+```
 
 * relog
 
@@ -35,18 +47,17 @@ sudo apt upgrade -y
 cd ~ && source ~/.zshrc && zshalias
 ```
 
-* Install gnome extensions
-  - User themes
-  - Just perfection
-  - Simply Workspaces
-  - Window Is Ready - Notification Remover
-
 ---
 ## Software install list:
+- Git
 - Ripgrep
 - GNU Stow
 - Xclip
-- Gnome Tweaks
+- fzf
+- lxappearance
+- i3
+- dunst
+- picom
 - Zsh && Oh My Zsh
 - Neovim
 - Alacritty
@@ -56,6 +67,7 @@ cd ~ && source ~/.zshrc && zshalias
 - DDEV
 - Volta (nodejs)
 - Rust
+- Flutter
 - Lua
 - Transmission
 - Lazy Git
@@ -65,5 +77,4 @@ cd ~ && source ~/.zshrc && zshalias
 ## Software to be installed manually
 - Android Studio
 - React Native Sdk
-- Flutter Sdk
 - Mega
