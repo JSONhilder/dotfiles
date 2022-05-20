@@ -366,6 +366,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     mv nvim.appimage /home/$USER/.nvim-app/nvim.appimage
     cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
 
+    # Dependencies
+    sudo apt install build-essential
+
     # Setup Packer Quick start here for firs start
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
