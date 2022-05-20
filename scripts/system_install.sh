@@ -228,6 +228,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Installing Flutter Sdk..."
     echo "-------------------------"
     echo
+
+    git clone https://github.com/flutter/flutter.git -b stable
+
 fi
 #####################################################
 # @TODO LUA
