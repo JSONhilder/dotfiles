@@ -51,7 +51,7 @@ fi
 # SYSTEM NICETIES
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install zsh (z-shell) ? [y/n]"
+    echo "Install system niceties ? [y/n]"
     echo "( tree, neofetch, htop )"
     read _proceed
     # lowercase it
@@ -61,7 +61,7 @@ fi
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo ""
     echo "installing system niceties..."
-    echo "-----------------"
+    echo "-----------------------------"
     echo
     sudo apt install -y tree neofetch htop
     echo
@@ -88,8 +88,7 @@ fi
 # Alacritty
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install system essentials? [y/n]"
-    echo "( git, ripgrep, fzf, gnu stow, xclip )"
+    echo "Install Alacritty? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -189,8 +188,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-----------------------"
     echo
 
-    cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
     sudo apt install libnss3-tools -y
+    cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
     sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
     sudo chmod a+x /usr/local/bin/mkcert
     mkcert -install
