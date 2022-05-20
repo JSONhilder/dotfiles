@@ -216,6 +216,19 @@ fi
 #####################################################
 # @TODO FLUTTER
 #####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Flutter Sdk? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing Flutter Sdk..."
+    echo "-------------------------"
+    echo
+fi
 #####################################################
 # @TODO LUA
 #####################################################
@@ -329,7 +342,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
 
-    mkdir /home/$USER/.nvim-app
+    mkdir -p /home/$USER/.nvim-app
     mv nvim.appimage /home/$USER/.nvim-app/nvim.appimage
     cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
 
