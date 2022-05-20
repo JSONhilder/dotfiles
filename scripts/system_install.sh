@@ -323,10 +323,15 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     echo $tag
 
-    FILE="zola_"$tag"-x86_64-unknown-linux-gnu.tar.gz"
+    FILE="zola-"$tag"-x86_64-unknown-linux-gnu.tar.gz"
+    echo $FILE
 
     download="https://github.com/getzola/zola/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
+
+    tar xvf $FILE zola
+    mv zola ~/.zola
+    rm $FILE
 
     echo
     echo "===== COMPLETE ====="
@@ -522,9 +527,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     download="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-    cd ~ && wget -O $download
+    cd ~ && wget -O "vscode.deb" $download
 
-    echo "File Downloaded! Unpredictable file name, install it manually."
+    sudo apt install "./vscode.deb"
+    rm vscode.deb
+
+    echo
     echo
     echo "===== COMPLETE ====="
     echo
