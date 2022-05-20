@@ -214,7 +214,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 #####################################################
-# @TODO FLUTTER
+# FLUTTER
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install Flutter Sdk? [y/n]"
@@ -389,6 +389,50 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 fi
 #####################################################
 # APPLICATIONS
+#####################################################
+#####################################################
+# VS CODE
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Visual Studio Code? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing Visual Studio Code..."
+    echo "---------------------------------"
+    echo
+
+    download="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    cd ~ && wget -O $FILE $download
+fi
+#####################################################
+# MEGA SYNC
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install chromium? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing Mega Sync..."
+    echo "-----------------------"
+    echo
+
+    FILE="megasync-xUbuntu_22.04_amd64.deb"
+
+    download="https://mega.nz/linux/repo/xUbuntu_22.04/amd64/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    sudo apt install $FILE
+    rm $FILE
+fi
 #####################################################
 # CHROMIUM
 #####################################################
