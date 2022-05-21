@@ -9,4 +9,5 @@ vim.cmd([[
     highlight GitSignsChange guifg=#8ec07c
     highlight GitSignsDelete guifg=#cc241d
     highlight Normal ctermbg=NONE guibg=NONE
+    intro
 ]])

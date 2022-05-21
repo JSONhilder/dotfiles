@@ -40,7 +40,7 @@ battery all {
 }
 
 disk "/" {
-    format = "%avail"
+    format = "HDD %percentage_used"
 }
 
 load {
@@ -60,5 +60,5 @@ volume master {
 }
 
 tztime local {
-    format = "%d-%m %H:%M"
+    format = "%d/%m %H:%M"
 }
