@@ -3,10 +3,8 @@ grep -q closed /proc/acpi/button/lid/LID/state
 if [ $? = 0 ]
 then
     echo "closed"
-    xrandr --output eDP --off
-    xrandr --output DisplayPort-0 -s 2560x1440 --primary
+    xrandr --output DisplayPort-0 --mode 2560x1440 --primary --output eDP --off
 else
     echo "open"
-    xrandr --output eDP --auto
-    xrandr --output DisplayPort-0 -s 2560x1440 --primary --above eDP
+    xrandr --output DisplayPort-0 --mode 2560x1440 --primary --above eDP --output eDP --mode 1920x1080
 fi

@@ -56,7 +56,7 @@ fi
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system niceties ? [y/n]"
-    echo "( tree, neofetch, htop )"
+    echo "( tree, neofetch, htop, blueman, pasystray )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -67,7 +67,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing system niceties..."
     echo "-----------------------------"
     echo
-    sudo apt install -y tree neofetch htop
+    sudo apt install -y tree neofetch htop blueman pasystray
     echo
     echo "===== COMPLETE ====="
     echo
@@ -573,34 +573,6 @@ else
     echo
 fi
 #####################################################
-# ANYDESK
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Anydesk? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing anydesk..."
-    echo "---------------------"
-    echo
-
-    download="https://anydesk.com/en/downloads/thank-you?dv=deb_64"
-    cd ~ && wget -O "anydesk.deb" $download
-
-    sudo apt install "./anydesk.deb"
-    rm anydesk.deb
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
 # CHROMIUM
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -621,6 +593,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     unzip chrome-linux.zip
     mv linux-chrome/ ~/.linux-chrome
+    # for dmenu
+    sudo mv ~/.dotfiles/scripts/chrome /bin/
 
     echo
     echo "===== COMPLETE ====="

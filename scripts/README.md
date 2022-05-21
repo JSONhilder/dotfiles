@@ -16,6 +16,13 @@ Reboot
 sudo apt install git
 ```
 
+### Configure git global user
+```
+git config --global user.name "FIRST_NAME LAST_NAME"
+
+git config --global user.email "MY_NAME@example.com"
+```
+
 ### Generate ssh key and copy cat output
 ```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
