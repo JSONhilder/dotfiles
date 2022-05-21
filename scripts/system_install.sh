@@ -44,7 +44,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y make gcc ripgrep xclip fzf stow unzip
+    sudo apt install -y make gcc ripgrep xclip fzf stow unzip build-essential
     echo
     echo "===== COMPLETE ====="
     echo
@@ -439,9 +439,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     mkdir -p /home/$USER/.nvim-app
     mv nvim.appimage /home/$USER/.nvim-app/nvim.appimage
     cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
-
-    # Dependencies
-    sudo apt y install build-essential
 
     # Setup Packer Quick start here for firs start
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
