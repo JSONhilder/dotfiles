@@ -33,14 +33,14 @@ ethernet _first_ {
 
 battery all {
     format = "%status %percentage %remaining"
-    status_chr = "⚡ CHR"
-    status_bat = "B:"
+    status_chr = " "
+    status_bat = " "
     path = "/sys/class/power_supply/BAT%d/uevent"
     low_threshold = 10
 }
 
 disk "/" {
-    format = "HDD %percentage_used"
+    format = " %percentage_free"
 }
 
 load {
@@ -54,11 +54,11 @@ memory {
 }
 
 volume master {
-    format = "V: %volume"
-    format_muted = "V: muted"
+    format = " %volume"
+    format_muted = "MUTED"
     device = "pulse"
 }
 
 tztime local {
-    format = "%d/%m %H:%M"
+    format = "%d/%m %H:%M "
 }
