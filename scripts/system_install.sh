@@ -33,7 +33,7 @@ mkdir -p ~/work ~/github ~/tests
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, make, gcc, ripgrep, fzf, gnu stow, xclip )"
+    echo "( git, make, gcc, ripgrep, fzf, gnu stow, xclip, unzip)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -44,7 +44,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y make gcc ripgrep xclip fzf stow
+    sudo apt install -y make gcc ripgrep xclip fzf stow unzip
     echo
     echo "===== COMPLETE ====="
     echo
@@ -573,6 +573,34 @@ else
     echo
 fi
 #####################################################
+# ANYDESK
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Anydesk? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing anydesk..."
+    echo "---------------------"
+    echo
+
+    download="https://anydesk.com/en/downloads/thank-you?dv=deb_64"
+    cd ~ && wget -O "anydesk.deb" $download
+
+    sudo apt install "./anydesk.deb"
+    rm anydesk.deb
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
 # CHROMIUM
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -588,7 +616,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------------------"
     echo
 
-    sudo apt install -y chromium-browser
+    download="https://download-chromium.appspot.com/dl/Linux_x64?type=snapshots"
+    cd ~ && wget -O "chrome-linux.zip" $download
+
+    unzip chrome-linux.zip
+    mv linux-chrome/ ~/.linux-chrome
 
     echo
     echo "===== COMPLETE ====="
