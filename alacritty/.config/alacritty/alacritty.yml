@@ -1,12 +1,12 @@
 shell:
-  program: /usr/local/bin/tmux
+  program: /usr/bin/tmux
   args:
     - -c
     - "tmux new -A -s main"
 
 window:
-    # title: ""
     startup_mode: Maximized
+    # title: ""
     # decorations: Full
     # opacity: 0.96
 
