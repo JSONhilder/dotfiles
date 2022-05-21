@@ -35,7 +35,7 @@ floating_modifier $mod
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # start a browser
-bindsym $mod+b exec "~/.chrome-linux/chrome"
+bindsym $mod+b exec google-chrome
 
 # start a file browser
 bindsym $mod+f exec nautilus
@@ -183,24 +183,20 @@ bar {
         separator  #454947
 
         #                  border  backgr. text
-        focused_workspace  #d65d0e #353836 #ebdbb2
-        active_workspace   #595B5B #595B5B #ebdbb2
-        inactive_workspace #595B5B #282828 #ebdbb2
-        binding_mode       #689d6a #2C2C2C #ebdbb2
-        urgent_workspace   #16a085 #FDF6E3 #ebdbb2
+        # focused_workspace  #d65d0e #353836 #ebdbb2
+        # active_workspace   #595B5B #595B5B #ebdbb2
+        # inactive_workspace #595B5B #282828 #ebdbb2
+        # binding_mode       #689d6a #2C2C2C #ebdbb2
+        # urgent_workspace   #16a085 #FDF6E3 #ebdbb2
     }
     # Tray settings
     tray_padding 4
 }
-
-# Theme colors
-# Window active color
-# <colorclass> <border> <background> <text> <indicator> <child_border>
+# Window colors
 # class                 border  backgr. text    indic.   child_border
-client.focused 	        #1d2021 #282828 #d5c4a1 #282828
-client.focused_inactive #1d2021 #1d2021 #665c54 #282828
+client.focused 	        #333333 #5f676a #ffffff #484e50   #5f676a
+client.focused_inactive #1d2021 #282828 #d5c4a1 #282828
 client.unfocused        #1d2021 #1d2021 #665c54 #282828
-client.background       #2B2C2B
 
 # run screen setup script
 exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
@@ -213,5 +209,5 @@ exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gruv.jpg
 ########################################################
 for_window [title=".*Emulator.*"] floating enable border pixel 0
 for_window [title=".*Android.*"] floating enable enable border pixel 0
-for_window [class="Nautilus"] move to workspace $ws3
+#for_window [class="Nautilus"] move to workspace $ws3
 #skype ws6?
