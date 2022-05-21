@@ -278,6 +278,28 @@ else
     echo
 fi
 #####################################################
+# REACT NATIVE
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Java Development Kit? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing Java Dev Kit..."
+    echo "--------------------------"
+    echo
+    sudo apt install default-jre default-jdk -y
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
 # FLUTTER
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -562,36 +584,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     sudo apt install "./"$FILE
     rm $FILE
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# CHROMIUM
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install chromium? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing chromium browser..."
-    echo "------------------------------"
-    echo
-
-    download="https://download-chromium.appspot.com/dl/Linux_x64?type=snapshots"
-    cd ~ && wget -O "chrome-linux.zip" $download
-
-    unzip chrome-linux.zip
-    mv linux-chrome/ ~/.linux-chrome
-    # for dmenu
-    sudo mv ~/.dotfiles/scripts/chrome /bin/
 
     echo
     echo "===== COMPLETE ====="
