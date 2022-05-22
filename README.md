@@ -1,7 +1,7 @@
 Dotfiles :)
 --------------------------------
 
-[![Preview Image of system](https://github.com/jasonhilder/dotfiles/blob/main/preview.jpg)
+![Preview Image of system](https://github.com/jasonhilder/dotfiles/blob/main/preview.jpg)
 
 ### Replicate Setup
 

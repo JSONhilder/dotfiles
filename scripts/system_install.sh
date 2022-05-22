@@ -278,7 +278,7 @@ else
     echo
 fi
 #####################################################
-# REACT NATIVE
+# JDK
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install Java Development Kit? [y/n]"
