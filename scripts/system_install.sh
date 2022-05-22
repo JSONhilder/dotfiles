@@ -488,6 +488,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "----------------"
     echo
     sudo apt install -y i3 picom feh nautilus lxappearance
+    # disable xfce notify in place of Dunst
+    sudo mv /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service.disabled
 
     echo
     echo "===== COMPLETE ====="

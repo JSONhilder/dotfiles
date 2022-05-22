@@ -12,11 +12,9 @@ window:
 
 font:
     normal:
-      family: Space Mono Nerd Font
+      family: Droid Sans Mono Nerd Font
 
     size: 11
-    offset:
-      y: -1
 
 cursor:
   style: Beam
