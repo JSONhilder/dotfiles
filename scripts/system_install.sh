@@ -726,7 +726,7 @@ fi
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && rm -rf .config/i3 .config/i3status .config/nvim ~/.tmux.conf .config/picom .config/dunst .config/alacritty .zshrc
 
-    cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/
+    cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/ htop/
 
     cd ~ && /bin/zsh -c 'source ~/.zshrc && zshalias'
 
