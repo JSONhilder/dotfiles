@@ -44,6 +44,15 @@ bindsym $mod+f exec nautilus
 # kill focused window
 bindsym $mod+q kill
 
+# dismiss all noifications dunst
+bindsym $mod+BackSpace exec --no-startup-id dunstctl close-all
+
+# Get last notification dunst
+bindsym $mod+n exec --no-startup-id dunstctl history-pop
+
+# keyboard remaps
+exec --no-startup-id "setxkbmap -option ctrl:nocaps"
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
@@ -178,6 +187,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     status_command i3status
+
     colors {
         background #282828
         statusline #d5c4a1
@@ -203,12 +213,14 @@ client.unfocused        #1d2021 #1d2021 #665c54 #282828
 exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
 exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
 exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
-exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gruv.jpg
+exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gruv-forest.jpg
 
 ########################################################
 # Open specific applications in floating mode
 ########################################################
 for_window [title=".*Emulator.*"] floating enable border pixel 0
+for_window [class="Nautilus"] floating enable border pixel 0
+for_window [title=".*AnyDesk.*"] floating enable border pixel 0
 #for_window [title=".*Android.*"] floating enable enable border pixel 0
 #for_window [class="Nautilus"] move to workspace $ws3
 #skype ws6?
