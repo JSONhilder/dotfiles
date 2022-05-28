@@ -81,7 +81,9 @@ bash /path/to/system_install.sh
 - Zola
 - Lazy Git
 - Lazy Docker
+- ranger
 - Neovim
+- tmux
 - i3
 - dunst
 - picom

@@ -19,7 +19,6 @@ font:
 cursor:
   style: Beam
 
-
 colors:
   primary:
     background: '#1e1e1e'

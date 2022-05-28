@@ -142,6 +142,27 @@ else
     echo
 fi
 #####################################################
+# RANGER
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install ranger? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing ranger..."
+    echo "--------------------"
+    echo
+    sudo apt install -y ranger
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
 # DOCKER ENGINE
 #####################################################
 if [[ $_override = "n" ]]; then
