@@ -215,7 +215,7 @@ client.unfocused        #1d2021 #1e1e1e #909090 #1e1e1e
 exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
 exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
 exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
-exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/nightlife.jpg
+exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gloom.jpg
 
 ########################################################
 # Open specific applications in floating mode
