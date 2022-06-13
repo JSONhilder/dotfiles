@@ -188,23 +188,23 @@ focus_on_window_activation focus
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    status_command i3status
-
-    colors {
-        background #121212
-        statusline #ffffff
-        separator  #ffffff
-        #                  border  backgr. text
-        # focused_workspace  #d65d0e #353836 #ebdbb2
-        # active_workspace   #595B5B #595B5B #ebdbb2
-        # inactive_workspace #595B5B #282828 #ebdbb2
-        # binding_mode       #689d6a #2C2C2C #ebdbb2
-        # urgent_workspace   #16a085 #FDF6E3 #ebdbb2
-    }
-    # Tray settings
-    tray_padding 4
-}
+# bar {
+#     status_command i3status
+#
+#     colors {
+#         background #121212
+#         statusline #ffffff
+#         separator  #ffffff
+#         #                  border  backgr. text
+#         # focused_workspace  #d65d0e #353836 #ebdbb2
+#         # active_workspace   #595B5B #595B5B #ebdbb2
+#         # inactive_workspace #595B5B #282828 #ebdbb2
+#         # binding_mode       #689d6a #2C2C2C #ebdbb2
+#         # urgent_workspace   #16a085 #FDF6E3 #ebdbb2
+#     }
+#     # Tray settings
+#     tray_padding 4
+# }
 # Window colors
 # class                 border  backgr. text    indic.   child_border
 client.focused 	        #333333 #5f676a #ffffff #5f676a   #5f676a
@@ -212,9 +212,9 @@ client.focused_inactive #1d2021 #1e1e1e #909090 #1e1e1e
 client.unfocused        #1d2021 #1e1e1e #909090 #1e1e1e
 
 # run screen setup script
-exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
-exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
-exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
+# exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
+# exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
+# exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
 exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gloom.jpg
 
 ########################################################
