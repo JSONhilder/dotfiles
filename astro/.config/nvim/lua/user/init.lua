@@ -1,5 +1,4 @@
 local config = {
-
   -- Configure AstroNvim updates
   updater = {
     remote = "origin", -- remote to use
@@ -117,10 +116,10 @@ local config = {
       return config -- return final config table
     end,
     treesitter = {
-      ensure_installed = { "lua" },
+      ensure_installed = { "lua", "rust", "javascript", "typescript", "svelte" },
     },
     ["nvim-lsp-installer"] = {
-      ensure_installed = { "sumneko_lua" },
+      ensure_installed = { "sumneko_lua", "rust_analyzer", "svelte", "css", "tsserver"  },
     },
     ["neo-tree"] = {
       filesystem = {

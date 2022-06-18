@@ -33,7 +33,7 @@ mkdir -p ~/work ~/github ~/tests
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, make, gcc, ripgrep, fzf, gnu stow, xclip, unzip)"
+    echo "( git, make, gcc, curl, ripgrep, fzf, gnu stow, xclip, unzip)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -44,7 +44,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y make gcc ripgrep xclip fzf stow unzip build-essential
+    sudo apt install -y make gcc curl ripgrep xclip fzf stow unzip build-essential
     echo
     echo "===== COMPLETE ====="
     echo
@@ -121,7 +121,7 @@ else
     echo
 fi
 #####################################################
-# TMUX
+# TMUX @TODO use appimage and move to bin
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install tmux? [y/n]"
@@ -455,7 +455,7 @@ else
     echo
 fi
 #####################################################
-# NEOVIM
+# NEOVIM @TODO use appimage and move to bin
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install Neovim? [y/n]"
@@ -508,7 +508,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Installing i3..."
     echo "----------------"
     echo
-    sudo apt install -y i3 picom feh nautilus lxappearance
+    sudo apt install -y i3 compton feh lxappearance dunst
     # disable xfce notify in place of Dunst
     sudo mv /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service.disabled
 
@@ -581,39 +581,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
-#####################################################
-# MEGA SYNC
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Mega Sync? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing Mega Sync..."
-    echo "-----------------------"
-    echo
-
-    FILE="megasync-xUbuntu_22.04_amd64.deb"
-
-    download="https://mega.nz/linux/repo/xUbuntu_22.04/amd64/"$FILE
-    cd ~ && wget -O $FILE $download
-
-    # dependencies
-    sudo apt install libc-ares2 libmediainfo0v5 libmms0 libtinyxml2-9 libzen0v5
-
-    sudo apt install "./"$FILE
-    rm $FILE
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
+ echo
 #####################################################
 # TRANSMISSION
 #####################################################
@@ -706,34 +674,11 @@ else
     echo
 fi
 #####################################################
-# GRUVBOX GTK THEMES
+# @TODO cousine font 
 #####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Gruvbox gtk theme? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    if [[ ! -d "${HOME}/.themes/Gruvbox-Material-Dark" ]]; then
-        cd ~ && git clone "git@github.com:TheGreatMcPain/gruvbox-material-gtk.git"
-
-        FILE="gruvbox-material-gtk"
-        cd ~/$FILE && cp -r themes/* ~/.themes
-        cd ~/$FILE && cp -r icons/* ~/.icons
-
-        cd ~ && rm -rf $FILE
-
-        echo
-        echo "===== COMPLETE ====="
-        echo
-    else
-        echo "Theme already installed..."
-    fi
-else
-    echo
-fi
+#####################################################
+# @TODO paparius black icons 
+#####################################################
 #####################################################
 # STOW DOTFILES
 #####################################################

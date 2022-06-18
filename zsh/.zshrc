@@ -33,7 +33,8 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH=$HOME/lua/src:$PATH
 
 #
-path+=('/home/.nvim-app/nvim.appimage')
+path+=('/home/bin/nvim')
+path+=('~/.local/bin')
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -129,7 +130,6 @@ export EDITOR='nvim'
 alias vim="nvim"
 alias v="nvim"
 alias wiki="cd ~ && nvim -c 'VimwikiIndex'"
-alias nvim="~/.nvim-app/nvim.appimage"
 alias ra="ranger ."
 alias vscode="code . && exit"
 alias strongbox="~/.strongbox/strongbox"

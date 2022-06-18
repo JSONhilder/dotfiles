@@ -12,7 +12,7 @@ window:
 
 font:
     normal:
-      family: Droid Sans Mono Nerd Font
+      family: Cousine Nerd Font
 
     size: 11
 
@@ -57,4 +57,3 @@ colors:
   selection:
     text: '#5963a2'
     background: '#f6f6f6'
-

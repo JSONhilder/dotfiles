@@ -155,6 +155,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# shutdown system 
+bindsym $mod+Shift+BackSpace exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut.' -B 'poweroff' 'poweroff'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -188,34 +190,18 @@ focus_on_window_activation focus
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#     status_command i3status
-#
-#     colors {
-#         background #121212
-#         statusline #ffffff
-#         separator  #ffffff
-#         #                  border  backgr. text
-#         # focused_workspace  #d65d0e #353836 #ebdbb2
-#         # active_workspace   #595B5B #595B5B #ebdbb2
-#         # inactive_workspace #595B5B #282828 #ebdbb2
-#         # binding_mode       #689d6a #2C2C2C #ebdbb2
-#         # urgent_workspace   #16a085 #FDF6E3 #ebdbb2
-#     }
-#     # Tray settings
-#     tray_padding 4
-# }
-# Window colors
-# class                 border  backgr. text    indic.   child_border
-client.focused 	        #333333 #5f676a #ffffff #5f676a   #5f676a
-client.focused_inactive #1d2021 #1e1e1e #909090 #1e1e1e
-client.unfocused        #1d2021 #1e1e1e #909090 #1e1e1e
+bar {
+     status_command i3status
+     # Tray settings
+     tray_padding 4
+}
 
 # run screen setup script
-# exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
-# exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
-# exec_always --no-startup-id picom --config=$HOME/.config/picom/picom.conf --experimental-backends --backend glx -b
-exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/gloom.jpg
+exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
+exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
+exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/inosuke.png
+exec_always --no-startup-id pkill picom
+exec_always --no-startup-id picom --experimental-backends --backend glx -b &
 
 ########################################################
 # Open specific applications in floating mode
