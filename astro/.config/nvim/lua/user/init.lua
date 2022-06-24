@@ -71,6 +71,7 @@ local config = {
     init = {
       -- You can disable default plugins as follows:
       ["declancm/cinnamon.nvim"] = { disable = true },
+      ["goolord/alpha-nvim"] = { disable = true },
 
       -- You can also add new plugins here as well:
       {
@@ -89,6 +90,8 @@ local config = {
           }
         end
       },
+      { "mg979/vim-visual-multi" },
+      { "nelsyeung/twig.vim" }
     },
     -- All other entries override the setup() call for default plugins
     ["null-ls"] = function(config)
@@ -184,7 +187,7 @@ local config = {
     vim.keymap.set("n", "<C-s>", ":w!<CR>")
 
     vim.keymap.set("n", "<leader>ff", ":Telescope find_files hidden=true theme=ivy<cr>")
-    vim.keymap.set("n", "<C-j>", ":ToggleTerm size=80 direction=vertical<cr>")
+    -- vim.keymap.set("n", "<C-j>", ":ToggleTerm size=80 direction=vertical<cr>")
 
     -- Set autocommands
     vim.api.nvim_create_augroup("packer_conf", { clear = true })

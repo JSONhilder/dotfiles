@@ -1,9 +1,3 @@
-shell:
-  program: /usr/bin/tmux
-  args:
-    - -c
-    - "tmux new -A -s main"
-
 window:
     startup_mode: Maximized
     # title: ""

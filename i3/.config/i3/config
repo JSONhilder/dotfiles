@@ -45,10 +45,9 @@ bindsym $mod+f exec nautilus
 bindsym $mod+q kill
 
 # dismiss all noifications dunst
-bindsym $mod+BackSpace exec --no-startup-id dunstctl close-all
-
+#bindsym $mod+BackSpace exec --no-startup-id dunstctl close-all
 # Get last notification dunst
-bindsym $mod+n exec --no-startup-id dunstctl history-pop
+#bindsym $mod+n exec --no-startup-id dunstctl history-pop
 
 # keyboard remaps
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
@@ -123,13 +122,13 @@ set $ws5 "5"
 # set $ws10 "10"
 
 workspace_auto_back_and_forth yes
+bindsym $mod+Tab workspace back_and_forth
 # switch to workspace
 bindsym $alt+q workspace number $ws1
 bindsym $alt+w workspace number $ws2
 bindsym $alt+e workspace number $ws3
 bindsym $alt+o workspace number $ws4
 bindsym $alt+p workspace number $ws5
-bindsym $mod+Tab workspace back_and_forth
 # bindsym $mod+6 workspace number $ws6
 # bindsym $mod+7 workspace number $ws7
 # bindsym $mod+8 workspace number $ws8
@@ -156,7 +155,10 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 # shutdown system 
-bindsym $mod+Shift+BackSpace exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut.' -B 'poweroff' 'poweroff'"
+bindsym $mod+Shift+BackSpace exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut.' -B 'Poweroff' 'poweroff'"
+# suspend system 
+bindsym $mod+$alt+BackSpace exec "i3-nagbar -t warning -m 'You pressed the suspend shortcut.' -B 'Suspend' 'suspend'"
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -185,6 +187,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# redshift modes
+bindsym $mod+n mode "$mode_redshift"
+set $mode_redshift Set colour temperature: (a)uto, (r)eset, (2)500K, (3)000K, (4)000K, (5)000K
+set $kill_redshift pkill -9 redshift;
+mode "$mode_redshift" {
+    bindsym a exec --no-startup-id "$kill_redshift redshift -P -t 5000:4000", mode "default"
+    bindsym r exec --no-startup-id "$kill_redshift redshift -x", mode "default"
+    bindsym 2 exec --no-startup-id "$kill_redshift redshift -P -O 2500", mode "default"
+    bindsym 3 exec --no-startup-id "$kill_redshift redshift -P -O 3000", mode "default"
+    bindsym 4 exec --no-startup-id "$kill_redshift redshift -P -O 4000", mode "default"
+    bindsym 5 exec --no-startup-id "$kill_redshift redshift -P -O 5000", mode "default"
+ 
+    # exit mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 hide_edge_borders smart
 focus_on_window_activation focus
 
@@ -201,7 +220,7 @@ exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
 exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
 exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/inosuke.png
 exec_always --no-startup-id pkill picom
-exec_always --no-startup-id picom --experimental-backends --backend glx -b &
+exec_always --no-startup-id picom -b
 
 ########################################################
 # Open specific applications in floating mode
