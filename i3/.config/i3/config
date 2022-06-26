@@ -152,6 +152,8 @@ bindsym $mod+$alt+p move container to workspace number $ws5
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+# rerun screen setup script
+bindsym $mod+Shift+s exec ~/.dotfiles/scripts/screen-manager.sh
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 # shutdown system 

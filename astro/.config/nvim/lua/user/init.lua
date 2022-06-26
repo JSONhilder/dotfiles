@@ -187,7 +187,12 @@ local config = {
     vim.keymap.set("n", "<C-s>", ":w!<CR>")
 
     vim.keymap.set("n", "<leader>ff", ":Telescope find_files hidden=true theme=ivy<cr>")
-    -- vim.keymap.set("n", "<C-j>", ":ToggleTerm size=80 direction=vertical<cr>")
+    vim.keymap.set("n", "<C-j>", ":ToggleTerm size=80 direction=vertical<cr>")
+    vim.keymap.set("n", "Y", "y$")
+    vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+    vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+    vim.keymap.set("v", "<Tab>", ">gv")
+    vim.keymap.set("v", "<S-Tab>", "<gv")
 
     -- Set autocommands
     vim.api.nvim_create_augroup("packer_conf", { clear = true })
@@ -200,6 +205,8 @@ local config = {
 
     vim.cmd([[
       hi rainbowcol1 guifg = #cf6a4c
+      autocmd BufWritePre * %s/\s\+$//e
+      autocmd BufWritePre * %s/\n\+\%$//e
     ]])
  end,
 }
