@@ -156,10 +156,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+s exec ~/.dotfiles/scripts/screen-manager.sh
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-# shutdown system 
+# shutdown system
 bindsym $mod+Shift+BackSpace exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut.' -B 'Poweroff' 'poweroff'"
-# suspend system 
-bindsym $mod+$alt+BackSpace exec "i3-nagbar -t warning -m 'You pressed the suspend shortcut.' -B 'Suspend' 'suspend'"
+# suspend system
+bindsym $mod+$alt+BackSpace exec "i3-nagbar -t warning -m 'You pressed the suspend shortcut.' -B 'Suspend' 'systemctl suspend'"
 
 
 # resize window (you can also use the mouse for that)
@@ -200,7 +200,7 @@ mode "$mode_redshift" {
     bindsym 3 exec --no-startup-id "$kill_redshift redshift -P -O 3000", mode "default"
     bindsym 4 exec --no-startup-id "$kill_redshift redshift -P -O 4000", mode "default"
     bindsym 5 exec --no-startup-id "$kill_redshift redshift -P -O 5000", mode "default"
- 
+
     # exit mode: "Enter" or "Escape"
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -228,8 +228,8 @@ exec_always --no-startup-id picom -b
 # Open specific applications in floating mode
 ########################################################
 for_window [title=".*Emulator.*"] floating enable border pixel 0
-for_window [class="Nautilus"] floating enable border pixel 0
 for_window [title=".*AnyDesk.*"] floating enable border pixel 0
+#for_window [class="Nautilus"] floating enable border pixel 0
 #for_window [title=".*Android.*"] floating enable enable border pixel 0
 #for_window [class="Nautilus"] move to workspace $ws3
 #skype ws6?

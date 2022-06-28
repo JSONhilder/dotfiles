@@ -7,47 +7,41 @@ window:
 font:
     normal:
       family: UbuntuMono Nerd Font
-
-    size: 13
+    size: 12
 
 cursor:
   style: Beam
 
-# Colors (Jellybeans)
+# Jellybeans
 colors:
   # Default colors
   primary:
-    background: '#161616'
-    foreground: '#e4e4e4'
+    background: '0x121212'
+    foreground: '0xdedede'
 
-  # Cursor volors
+  # Cursor colors
   cursor:
-    text: '#161616'
-    cursor: '#e4e4e4'
+    text:   '0xffffff'
+    cursor: '0xffa460'
 
   # Normal colors
   normal:
-    black:   '#a3a3a3'
-    red:     '#e98885'
-    green:   '#a3c38b'
-    yellow:  '#ffc68d'
-    blue:    '#a6cae2'
-    magenta: '#e7cdfb'
-    cyan:    '#00a69f'
-    white:   '#e4e4e4'
+    black:   '0x929292'
+    red:     '0xe27373'
+    green:   '0x94b979'
+    yellow:  '0xffba7b'
+    blue:    '0x97bedc'
+    magenta: '0xe1c0fa'
+    cyan:    '0x00988e'
+    white:   '0xdedede'
 
   # Bright colors
   bright:
-    black:   '#c8c8c8'
-    red:     '#ffb2b0'
-    green:   '#c8e2b9'
-    yellow:  '#ffe1af'
-    blue:    '#bddff7'
-    magenta: '#fce2ff'
-    cyan:    '#0bbdb6'
-    white:   '#feffff'
-
-  # Selection colors
-  selection:
-    text: '#5963a2'
-    background: '#f6f6f6'
+    black:   '0xbdbdbd'
+    red:     '0xffa1a1'
+    green:   '0xbddeab'
+    yellow:  '0xffdca0'
+    blue:    '0xb1d8f6'
+    magenta: '0xfbdaff'
+    cyan:    '0x1ab2a8'
+    white:   '0xffffff'
