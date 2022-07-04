@@ -1,4 +1,3 @@
-
 local config = {
   -- Configure AstroNvim updates
   updater = {
@@ -11,7 +10,7 @@ local config = {
   },
 
   -- Set colorscheme
-  colorscheme = "jellybeans-nvim",
+  colorscheme = "phoenix",
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
@@ -55,7 +54,7 @@ local config = {
       telescope = true,
       vimwiki = true,
       ["which-key"] = true,
-      ["neo-tree"] = true,
+      ["neo-tree"] = false,
       ["nvim-web-devicons"] = true,
     },
   },
@@ -77,8 +76,7 @@ local config = {
 
       -- You can also add new plugins here as well:
       {
-        "metalelf0/jellybeans-nvim",
-        requires = {"rktjmp/lush.nvim"}
+        "widatama/vim-phoenix",
       },
       {
         "vimwiki/vimwiki",
@@ -222,7 +220,6 @@ local config = {
     })
 
     vim.cmd([[
-      hi rainbowcol1 guifg = #cf6a4c
       autocmd BufWritePre * %s/\s\+$//e
       autocmd BufWritePre * %s/\n\+\%$//e
     ]])
@@ -343,7 +340,7 @@ local config = {
          removed,
          "%#GitSignsAdd#",
          git_info.head,
-         "%#Normal#",
+         "%#Normal# |",
       }
     end
 
@@ -376,6 +373,8 @@ local config = {
       au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
       au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
       augroup END
+      PhoenixOrange
+      hi rainbowcol1 guifg = #cf6a4c
     ]], false)
      end,
 }
