@@ -34,13 +34,13 @@ ethernet _first_ {
 battery all {
     format = "%status %percentage %remaining"
     status_chr = " "
-    status_bat = " "
+    status_bat = "B:"
     path = "/sys/class/power_supply/BAT%d/uevent"
     low_threshold = 10
 }
 
 disk "/" {
-    format = " %percentage_free"
+    format = "HDD: %percentage_free"
 }
 
 load {
@@ -54,7 +54,7 @@ memory {
 }
 
 volume master {
-    format = "V:%volume"
+    format = "V: %volume"
     format_muted = "MUTED"
     device = "pulse"
 }

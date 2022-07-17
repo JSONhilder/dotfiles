@@ -6,8 +6,8 @@ window:
 
 font:
     normal:
-      family: UbuntuMono Nerd Font
-    size: 12
+      family: VictorMono Nerd Font
+    size: 11
 
 cursor:
   style: Beam
