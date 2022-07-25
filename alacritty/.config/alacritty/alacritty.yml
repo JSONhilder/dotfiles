@@ -2,11 +2,11 @@ window:
     startup_mode: Maximized
     # title: ""
     # decorations: Full
-    # opacity: 0.96
+    opacity: 0.98
 
 font:
     normal:
-      family: VictorMono Nerd Font
+      family: Cousine Nerd Font
     size: 11
 
 cursor:
