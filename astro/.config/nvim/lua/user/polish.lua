@@ -48,7 +48,7 @@ return function()
       au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
       au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
       augroup END
-      PhoenixPurple
       hi rainbowcol1 guifg = #bf7330
+      highlight Normal guibg=none
     ]], false)
 end

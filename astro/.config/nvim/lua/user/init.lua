@@ -10,6 +10,7 @@ local config = {
           -- which-key registration table for normal mode, leader prefix
           -- ["N"] = { "<cmd>tabnew<cr>", "New Buffer" },
           [";"] = "Previous buffer",
+          ["i"] = "View buffers",
           ["r"] = "Run project",
           ["<leader>"] = "Find Files",
         },
