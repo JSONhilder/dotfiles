@@ -3,8 +3,8 @@ return function()
     -- Set key bindings
     vim.keymap.set("n", "<C-s>", ":w!<CR>")
 
-    vim.keymap.set("n", "<leader><leader>", ":Telescope find_files hidden=true theme=ivy<cr>")
-    vim.keymap.set("n", "<leader>i", ":Telescope buffers theme=ivy<cr>")
+    vim.keymap.set("n", "<leader><leader>", ":Telescope find_files hidden=true<cr>")
+    vim.keymap.set("n", "<leader>i", ":Telescope buffers<cr>")
     -- switch to previous buffer
     vim.keymap.set("n", "<leader>;", ":b#<cr>")
     vim.keymap.set("n", "<C-j>", ":ToggleTerm size=80 direction=vertical<cr>")
@@ -50,5 +50,8 @@ return function()
       augroup END
       hi rainbowcol1 guifg = #bf7330
       highlight Normal guibg=none
+      highlight CursorLine guibg=none
+      highlight LineNr guibg=none
+      highlight clear SignColumn
     ]], false)
 end
