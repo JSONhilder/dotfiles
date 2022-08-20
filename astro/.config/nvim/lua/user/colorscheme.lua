@@ -1,1 +1,1 @@
-return "jellybeans"
+return "catppuccin"

@@ -6,7 +6,7 @@ return {
   ["akinsho/bufferline.nvim"] = { disable = true },
   -- add new plugins:
   {
-    "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim",
+    "catppuccin/nvim", as = "catppuccin"
   },
   {
     "vimwiki/vimwiki",

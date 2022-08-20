@@ -8,5 +8,6 @@ return {
     },
     g = {
         mapleader = " ", -- sets vim.g.mapleader
+        catppuccin_flavour = "mocha"
     },
 }

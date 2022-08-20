@@ -45,10 +45,10 @@ return function()
       augroup Statusline
       au!
       au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-      au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
       au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
       augroup END
       hi rainbowcol1 guifg = #bf7330
+      hi Statusline guibg = none
       highlight Normal guibg=none
       highlight CursorLine guibg=none
       highlight LineNr guibg=none
