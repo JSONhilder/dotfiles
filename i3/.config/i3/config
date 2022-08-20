@@ -220,7 +220,7 @@ bar {
 # run screen setup script
 exec_always --no-startup-id ~/.dotfiles/scripts/screen-manager.sh
 exec_always --no-startup-id ~/.dotfiles/scripts/i3-tray.sh
-exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/japan-1.png
+exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/burned.jpg
 exec_always --no-startup-id pkill picom
 exec_always --no-startup-id picom -b
 
