@@ -19,7 +19,7 @@ export PATH=$PATH:~/go/bin
 export PATH="$PATH:/home/jason/flutter/bin"
 
 #Android Studio
-export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_HOME=$HOME/.Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
@@ -33,7 +33,6 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH=$HOME/lua/src:$PATH
 
 #
-path+=('/home/bin/nvim')
 path+=('~/.local/bin')
 
 # Set list of themes to pick from when loading at random
@@ -127,6 +126,7 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias nvim="~/.nvim-app/nvim.appimage"
 alias vim="nvim"
 alias v="nvim"
 alias wiki="cd ~ && nvim -c 'VimwikiIndex'"
