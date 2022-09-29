@@ -6,7 +6,7 @@ return {
   ["akinsho/bufferline.nvim"] = { disable = true },
   -- add new plugins:
   {
-    "catppuccin/nvim", as = "catppuccin"
+    'NTBBloodbath/doom-one.nvim'
   },
   {
     "vimwiki/vimwiki",
