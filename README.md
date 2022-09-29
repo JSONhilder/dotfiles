@@ -6,7 +6,7 @@ Dotfiles :)
 
 ### Replicate Setup
 
-(Currently tested on Xubuntu 22.04)
+Currently used with the Pop_os desktop environment
 
 Initial steps ***before*** system install script
 
@@ -68,8 +68,6 @@ bash /path/to/system_install.sh
 - tree
 - neofetch
 - htop
-- blueman
-- pasystray
 - zsh && Oh My Zsh
 - Alacritty
 - Docker
@@ -82,21 +80,15 @@ bash /path/to/system_install.sh
 - Zola
 - Lazy Git
 - Lazy Docker
-- ranger
 - Neovim
 - tmux
 - i3
 - dunst
-- picom
-- feh
-- nautilus
-- lxappearance
 - Vscode
 - Mega
 - Transmission
 - vlc
 - fonts
-- Gruvbox system theme
 
 ## Software to be installed manually
 - Android Studio

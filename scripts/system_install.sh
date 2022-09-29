@@ -26,7 +26,7 @@ fi
 #####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
-mkdir -p ~/.dotfiles ~/.themes ~/.fonts ~/.icons
+mkdir -p ~/.themes ~/.fonts ~/.icons
 mkdir -p ~/work ~/github ~/tests
 #####################################################
 # SYSTEM ESSENTIALS
@@ -56,7 +56,7 @@ fi
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system niceties ? [y/n]"
-    echo "( tree, neofetch, htop, blueman, pasystray )"
+    echo "( tree, neofetch, htop )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -67,7 +67,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing system niceties..."
     echo "-----------------------------"
     echo
-    sudo apt install -y tree neofetch htop blueman pasystray
+    sudo apt install -y tree neofetch htop
     echo
     echo "===== COMPLETE ====="
     echo
@@ -111,8 +111,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing alacritty..."
     echo "-----------------------"
     echo
-    sudo add-apt-repository ppa:aslatter/ppa
-    sudo apt update
     sudo apt install -y alacritty
     echo
     echo "===== COMPLETE ====="
@@ -142,27 +140,6 @@ else
     echo
 fi
 #####################################################
-# RANGER
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install ranger? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing ranger..."
-    echo "--------------------"
-    echo
-    sudo apt install -y ranger
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
 # DOCKER ENGINE
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -184,40 +161,19 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     curl \
     gnupg \
     lsb-release
+    
+    sudo mkdir -p /etc/apt/keyrings
 
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
     echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
     sudo apt update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     sudo usermod -aG docker $USER
 
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# DOCKER COMPOSE
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install docker compose? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "Installing docker-compose..."
-    echo "----------------------------"
-    echo
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    sudo chmod a+x /usr/local/bin/docker-compose
     echo
     echo "===== COMPLETE ====="
     echo
