@@ -29,9 +29,12 @@ require('packer').startup(function(use)
 	use 'nvim-treesitter/nvim-treesitter'
 	-- Additional textobjects for treesitter
 	use 'nvim-treesitter/nvim-treesitter-textobjects'
-    -- Twig
-    use 'nelsyeung/twig.vim'
-
+	-- Toggle Term
+	use 'akinsho/toggleterm.nvim'
+	-- Which key
+	use 'folke/which-key.nvim'
+	-- Twig
+	use 'nelsyeung/twig.vim'
 	-- VimWiki
 	use {
 		"vimwiki/vimwiki",
@@ -45,7 +48,6 @@ require('packer').startup(function(use)
 			}
 		end
 	}
-
 	-- LSP Zero
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -54,7 +56,6 @@ require('packer').startup(function(use)
 			{ 'neovim/nvim-lspconfig' },
 			{ 'williamboman/mason.nvim' },
 			{ 'williamboman/mason-lspconfig.nvim' },
-
 			-- Autocompletion
 			{ 'hrsh7th/nvim-cmp' },
 			{ 'hrsh7th/cmp-buffer' },
@@ -62,12 +63,12 @@ require('packer').startup(function(use)
 			{ 'saadparwaiz1/cmp_luasnip' },
 			{ 'hrsh7th/cmp-nvim-lsp' },
 			{ 'hrsh7th/cmp-nvim-lua' },
-
 			-- Snippets
 			{ 'L3MON4D3/LuaSnip' },
 			{ 'rafamadriz/friendly-snippets' },
 		}
 	}
+	use 'j-hui/fidget.nvim'
 end)
 
 ---------------------------------------------
@@ -80,7 +81,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 	group = packer_group,
 	pattern = vim.fn.expand '$MYVIMRC',
 })
-
 
 -- [[ Highlight on yank ]] See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -98,20 +98,20 @@ vim.cmd([[
   autocmd BufWritePre * %s/\n\+\%$//e
 ]])
 
--- Save Folds
--- vim.cmd([[
--- augroup remember_folds
---   autocmd!
---   autocmd BufWinLeave * mkview
---   autocmd BufWinEnter * silent! loadview
--- augroup END
--- ]])
+--Save Folds
+vim.cmd([[
+augroup remember_folds
+  autocmd!
+  au BufWinLeave ?* mkview 1
+  au BufWinEnter ?* silent! loadview 1
+augroup END
+]])
 
 ---------------------------------------------
 -- [[ Setting options ]] See `:help vim.o`
 ---------------------------------------------
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 -- Make line numbers default
 vim.wo.number = true
 -- Enable mouse mode
@@ -126,6 +126,7 @@ vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme kanagawa]]
+vim.cmd [[hi Normal guibg=false]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 -- set relativenumber
@@ -139,9 +140,10 @@ vim.cmd [[set clipboard+=unnamedplus]]
 vim.o.termguicolors = true
 -- Set Swapfile
 vim.o.swapfile = false
+-- cmd height
+vim.o.cmdheight = 0
 -- netrw stuff
 vim.g.netrw_liststyle = 3
-vim.g.netrw_keepdir = 0
 vim.g.netrw_localcopydircmd = 'cp -r'
 
 ---------------------------------------------
@@ -158,43 +160,53 @@ vim.g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>i', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').find_files, { desc = 'Search files' })
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = 'Find recently opened files' })
+vim.keymap.set('n', '<leader>i', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
--- You can pass additional configuration to telescope to change theme, layout, etc.
-require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-	winblend = 10,
-	previewer = false,
-})
-end, { desc = '[/] Fuzzily search in current buffer]' })
+	-- You can pass additional configuration to telescope to change theme, layout, etc.
+	require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+		winblend = 10,
+		previewer = false,
+	})
+end, { desc = 'Fuzzily search in current buffer]' })
 
-vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>gw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>gs', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>ds', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>gh', require('telescope.builtin').help_tags, { desc = 'Search help' })
+vim.keymap.set('n', '<leader>gw', require('telescope.builtin').grep_string, { desc = 'Grep search current word' })
+vim.keymap.set('n', '<leader>gs', require('telescope.builtin').live_grep, { desc = 'Grep search' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- LSP keymaps
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP format code" })
+vim.keymap.set('n', '<leader>li', ":LspInfo<CR>", { desc = "LSP information" })
+vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "LSP rename symbol" })
+vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "LSP list code actions" })
+vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = "LSP get line diagnostic" })
+vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = "LSP set diagnostics to local list" })
+vim.keymap.set('n', '<leader>ld', require('telescope.builtin').diagnostics, { desc = 'Search diagnostics' })
 
 -- Comment keybinds (vim registers _ as /)
-vim.keymap.set("n", "<C-_>", ":CommentToggle<CR>")
-vim.keymap.set("v", "<C-_)>", ":CommentToggle<CR>")
+vim.keymap.set("n", "<C-_>", require("Comment.api").toggle.linewise.current, { desc = "Comment line" })
+vim.keymap.set("v", "<C-_>", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+	{ desc = "Toggle comment line" }
+)
 
 -- quality of life stuff
+vim.keymap.set("n", "<leader>c", ":bd <CR>", { desc="Close current buffer" })
+vim.keymap.set("n", "<leader>;", ":b# <CR>", { desc="Go to previous buffer" })
+vim.keymap.set("v", "<leader>fc", ":fold <CR>", { desc="Fold selection"} )
+vim.keymap.set("n", "<leader>fo", ":foldopen <CR>", { desc="Open fold on current line" })
 vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<Tab>", ">gv")
 vim.keymap.set("v", "<S-Tab>", "<gv")
-vim.keymap.set("n", "<leader>c", ":bd <CR>")
-vim.keymap.set("n", "<leader>;", ":b# <CR>")
 
 -- netrw
-vim.keymap.set("n", "<leader>.", ":e .<CR>")
+vim.keymap.set("n", "<leader>.", ":e .<CR>", { desc="Open netrw" })
 
 ---------------------------------------------
 -- [[ Plugin Configuration ]]
@@ -221,8 +233,11 @@ require('Comment').setup()
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
 require('indent_blankline').setup {
-	char = '┊',
 	show_trailing_blankline_indent = false,
+	use_treesitter = true,
+	char = "▏",
+	context_char = "▏",
+	show_current_context = true
 }
 
 -- Gitsigns See `:help gitsigns.txt`
@@ -246,7 +261,30 @@ require('telescope').setup {
 			},
 		},
 	},
+	pickers = {
+		find_files = {
+			hidden = true
+		}
+	}
 }
+
+require('toggleterm').setup {
+	size = 10,
+	open_mapping = [[<c-\>]],
+	shading_factor = 2,
+	direction = "float",
+	float_opts = {
+		border = "single",
+		highlights = {
+			border = "Normal",
+			background = "Normal",
+		},
+	},
+}
+
+require("which-key").setup {}
+
+require"fidget".setup{}
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
