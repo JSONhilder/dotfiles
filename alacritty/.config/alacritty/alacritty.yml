@@ -2,7 +2,7 @@ window:
     startup_mode: Maximized
     # title: ""
     # decorations: Full
-    # opacity: 0.96
+    opacity: 0.96
 
 font:
     normal:
