@@ -283,7 +283,6 @@ require('toggleterm').setup {
 }
 
 require("which-key").setup {}
-
 require"fidget".setup{}
 
 -- Enable telescope fzf native, if installed
