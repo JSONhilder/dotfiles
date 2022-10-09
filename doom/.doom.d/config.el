@@ -100,7 +100,3 @@
 ;; Documentation:    SPC h d h
 
 Init time: %s." (emacs-init-time)))
-
-;; Laptop battery power
-;;(unless (string-match-p "^Power N/A" (battery))   ; On laptops...
-;;  (display-battery-mode 1))                       ; it's nice to know how much power you have
