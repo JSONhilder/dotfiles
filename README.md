@@ -80,6 +80,7 @@ bash /path/to/system_install.sh
 - Zola
 - Lazy Git
 - Lazy Docker
+- Emacs + Doom Emacs
 - Neovim
 - tmux
 - i3
