@@ -83,6 +83,8 @@ bash /path/to/system_install.sh
 - Emacs + Doom Emacs
 - Neovim
 - tmux
+- i3
+- dunst
 - Vscode
 - Mega
 - Transmission
