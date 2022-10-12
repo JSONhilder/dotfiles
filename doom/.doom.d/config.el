@@ -85,8 +85,13 @@
 ;;; TS LSP workaround
 (advice-add #'add-node-modules-path :override #'ignore)
 
+;;; Git
+(require 'keychain-environment)
+(keychain-refresh-environment)
+
+;;; Start page
 (setq initial-scratch-message
-(format ";; This buffer is for text that is not saved, and for Lisp evaluation.
+";; This buffer is for text that is not saved, and for Lisp evaluation.
 ;; To create a file, visit it with C-x C-f or SPC . and enter text in its buffer.
 ;; -------------------------
 ;; ⛧ DOOM EMACS
@@ -97,6 +102,4 @@
 ;; Open Project:     SPC p p
 ;; Bookmarks:        SPC RET
 ;; Open Config:      SPC f p
-;; Documentation:    SPC h d h
-
-Init time: %s." (emacs-init-time)))
+;; Documentation:    SPC h d h")
