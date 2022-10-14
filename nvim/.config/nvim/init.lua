@@ -12,7 +12,7 @@ require('packer').startup(function(use)
 	-- Package manager
 	use 'wbthomason/packer.nvim'
 	-- Colorscheme
-	use 'overcache/NeoSolarized'
+	use 'ishan9299/nvim-solarized-lua'
 	-- Add indentation guides even on blank lines
 	use 'lukas-reineke/indent-blankline.nvim'
 	-- "gc" to comment visual regions/lines
@@ -125,9 +125,9 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme NeoSolarized]]
+vim.cmd [[colorscheme solarized]]
 vim.cmd [[hi Normal guibg=false]]
-vim.o.background = dark
+vim.g.solarized_diffmode = 'flat'
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 -- set relativenumber
@@ -162,8 +162,8 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').find_files, { desc = 'Search files' })
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = 'Find recently opened files' })
-vim.keymap.set('n', '<leader>i', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Find recently opened files' })
+vim.keymap.set('n', '<leader>bi', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
 	-- You can pass additional configuration to telescope to change theme, layout, etc.
 	require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -196,10 +196,12 @@ vim.keymap.set("v", "<C-_>", "<esc><cmd>lua require('Comment.api').toggle.linewi
 )
 
 -- quality of life stuff
-vim.keymap.set("n", "<leader>c", ":bd <CR>", { desc="Close current buffer" })
-vim.keymap.set("n", "<leader>;", ":b# <CR>", { desc="Go to previous buffer" })
-vim.keymap.set("v", "<leader>fc", ":fold <CR>", { desc="Fold selection"} )
-vim.keymap.set("n", "<leader>fo", ":foldopen <CR>", { desc="Open fold on current line" })
+vim.keymap.set("n", "<leader>bk", ":bd <CR>", { desc = "Close current buffer" })
+vim.keymap.set("n", "<leader>bK", ":%bd|e# <CR>", { desc = "Close current buffer" })
+vim.keymap.set("n", "<leader>bl", ":b# <CR>", { desc = "Go to previous buffer" })
+vim.keymap.set("v", "<leader>fc", ":fold <CR>", { desc = "Fold selection" })
+vim.keymap.set("n", "<leader>fo", ":foldopen <CR>", { desc = "Open fold on current line" })
+-- leader gg to toggle lazygit in terminal
 vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -207,7 +209,7 @@ vim.keymap.set("v", "<Tab>", ">gv")
 vim.keymap.set("v", "<S-Tab>", "<gv")
 
 -- netrw
-vim.keymap.set("n", "<leader>.", ":e .<CR>", { desc="Open netrw" })
+vim.keymap.set("n", "<leader>.", ":e .<CR>", { desc = "Open netrw" })
 
 ---------------------------------------------
 -- [[ Plugin Configuration ]]
@@ -283,9 +285,6 @@ require('toggleterm').setup {
 	},
 }
 
-require("which-key").setup {}
-require"fidget".setup{}
-
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -349,6 +348,10 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
+
+require("which-key").setup {}
+
+require "fidget".setup {}
 
 -- Use customised standard status line
 require("statusline")
