@@ -31,6 +31,8 @@ require('packer').startup(function(use)
 	use 'nvim-treesitter/nvim-treesitter-textobjects'
 	-- Toggle Term
 	use 'akinsho/toggleterm.nvim'
+	-- File Tree
+	use 'nvim-tree/nvim-tree.lua'
 	-- Which key
 	use 'folke/which-key.nvim'
 	-- Twig
@@ -209,7 +211,7 @@ vim.keymap.set("v", "<Tab>", ">gv")
 vim.keymap.set("v", "<S-Tab>", "<gv")
 
 -- netrw
-vim.keymap.set("n", "<leader>.", ":e .<CR>", { desc = "Open netrw" })
+vim.keymap.set("n", "<leader>.", ":NvimTreeToggle <CR>", { desc = "Open netrw" })
 
 ---------------------------------------------
 -- [[ Plugin Configuration ]]
@@ -348,6 +350,9 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
+
+-- empty setup using defaults
+require("nvim-tree").setup()
 
 require("which-key").setup {}
 
