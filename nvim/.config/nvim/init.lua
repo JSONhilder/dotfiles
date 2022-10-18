@@ -1,6 +1,7 @@
----------------------------------------------
--- [[ Plugins ]]
----------------------------------------------
+-- ===========================================
+-- 				[[ Plugins ]]
+-- ===========================================
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -73,9 +74,10 @@ require('packer').startup(function(use)
 	use 'j-hui/fidget.nvim'
 end)
 
----------------------------------------------
--- [[ AutoCmds ]]
----------------------------------------------
+-- ===========================================
+-- 				[[ AutoCmds ]]
+-- ===========================================
+
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -112,6 +114,7 @@ augroup END
 ---------------------------------------------
 -- [[ Setting options ]] See `:help vim.o`
 ---------------------------------------------
+
 -- Set highlight on search
 vim.o.hlsearch = true
 -- Make line numbers default
@@ -149,12 +152,13 @@ vim.o.cmdheight = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_localcopydircmd = 'cp -r'
 
----------------------------------------------
--- [[ Keymaps ]]
----------------------------------------------
+-- ===========================================
+-- 				[[ Keymaps ]]
+-- ===========================================
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -183,7 +187,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
 -- LSP keymaps
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP format code" })
+--vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP format code" })
 vim.keymap.set('n', '<leader>li', ":LspInfo<CR>", { desc = "LSP information" })
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "LSP rename symbol" })
 vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "LSP list code actions" })
@@ -203,7 +207,7 @@ vim.keymap.set("n", "<leader>bK", ":%bd|e# <CR>", { desc = "Close current buffer
 vim.keymap.set("n", "<leader>bl", ":b# <CR>", { desc = "Go to previous buffer" })
 vim.keymap.set("v", "<leader>fc", ":fold <CR>", { desc = "Fold selection" })
 vim.keymap.set("n", "<leader>fo", ":foldopen <CR>", { desc = "Open fold on current line" })
--- leader gg to toggle lazygit in terminal
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -213,9 +217,10 @@ vim.keymap.set("v", "<S-Tab>", "<gv")
 -- netrw
 vim.keymap.set("n", "<leader>.", ":NvimTreeToggle <CR>", { desc = "Open netrw" })
 
----------------------------------------------
--- [[ Plugin Configuration ]]
----------------------------------------------
+-- ===========================================
+-- 		   [[ Plugin Configuration ]]
+-- ===========================================
+
 -- Setup lsp-zero
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
@@ -233,10 +238,11 @@ lsp.configure('sumneko_lua', {
 
 lsp.setup()
 
+-- Comment
 require('Comment').setup()
 
--- Enable `lukas-reineke/indent-blankline.nvim`
--- See `:help indent_blankline.txt`
+
+--- [[ Configure Indent Blankline ]] See `:help indent_blankline.txt`
 require('indent_blankline').setup {
 	show_trailing_blankline_indent = false,
 	use_treesitter = true,
@@ -245,7 +251,7 @@ require('indent_blankline').setup {
 	show_current_context = true
 }
 
--- Gitsigns See `:help gitsigns.txt`
+-- [[ Configure Gitsigns ]]  See `:help gitsigns.txt`
 require('gitsigns').setup {
 	signs = {
 		add = { text = '+' },
@@ -273,6 +279,7 @@ require('telescope').setup {
 	}
 }
 
+-- [[ Configure ToggleTerm ]] See `:help toggleterm`
 require('toggleterm').setup {
 	size = 10,
 	open_mapping = [[<c-\>]],
@@ -287,8 +294,32 @@ require('toggleterm').setup {
 	},
 }
 
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({
+  cmd = "lazygit",
+  dir = "git_dir",
+  direction = "float",
+  float_opts = {
+    border = "single",
+  },
+  -- function to run on opening the terminal
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+  end,
+  -- function to run on closing the terminal
+  on_close = function(term)
+    vim.cmd("startinsert!")
+  end,
+})
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+
 
 -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
@@ -354,7 +385,16 @@ require('nvim-treesitter.configs').setup {
 -- empty setup using defaults
 require("nvim-tree").setup()
 
+-- [[ Configure Which key]] See `:help which-key`
 require("which-key").setup {}
+local wk = require("which-key")
+wk.register({
+	b = "Buffer",
+	f = "Fold",
+	g = "Grep",
+	l = "LSP",
+	w = "Wiki"
+}, { prefix = "<leader>" })
 
 require "fidget".setup {}
 
