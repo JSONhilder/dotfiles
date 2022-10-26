@@ -13,11 +13,13 @@ require('packer').startup(function(use)
 	-- Package manager
 	use 'wbthomason/packer.nvim'
 	-- Colorscheme
-	use 'ishan9299/nvim-solarized-lua'
+	use 'ellisonleao/gruvbox.nvim'
 	-- Add indentation guides even on blank lines
 	use 'lukas-reineke/indent-blankline.nvim'
 	-- "gc" to comment visual regions/lines
 	use 'numToStr/Comment.nvim'
+	-- Colorizer
+	use 'norcalli/nvim-colorizer.lua'
 	-- Multi Cursor
 	use "mg979/vim-visual-multi"
 	-- Add git related info in the signs columns and popups
@@ -111,6 +113,7 @@ augroup remember_folds
 augroup END
 ]])
 
+
 ---------------------------------------------
 -- [[ Setting options ]] See `:help vim.o`
 ---------------------------------------------
@@ -130,9 +133,15 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme solarized]]
-vim.cmd [[hi Normal guibg=false]]
-vim.g.solarized_diffmode = 'flat'
+vim.o.background = "dark"
+vim.cmd [[colorscheme gruvbox]]
+vim.cmd [[
+	hi Normal guibg=#1D2021
+	hi signcolumn guibg=#1D2021
+	hi GitSignsAdd guibg=NONE
+	hi GitSignsChange guibg=NONE
+	hi GitSignsDelete guibg=NONE
+]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 -- set relativenumber
@@ -147,7 +156,7 @@ vim.o.termguicolors = true
 -- Set Swapfile
 vim.o.swapfile = false
 -- cmd height
-vim.o.cmdheight = 0
+vim.o.cmdheight = 1
 -- netrw stuff
 vim.g.netrw_liststyle = 3
 vim.g.netrw_localcopydircmd = 'cp -r'
@@ -384,6 +393,8 @@ require('nvim-treesitter.configs').setup {
 
 -- empty setup using defaults
 require("nvim-tree").setup()
+
+require("colorizer").setup()
 
 -- [[ Configure Which key]] See `:help which-key`
 require("which-key").setup {}
