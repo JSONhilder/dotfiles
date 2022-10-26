@@ -157,9 +157,6 @@ vim.o.termguicolors = true
 vim.o.swapfile = false
 -- cmd height
 vim.o.cmdheight = 1
--- netrw stuff
-vim.g.netrw_liststyle = 3
-vim.g.netrw_localcopydircmd = 'cp -r'
 
 -- ===========================================
 -- 				[[ Keymaps ]]
@@ -392,7 +389,22 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+	renderer = {
+		icons = {
+			webdev_colors = true,
+			git_placement = "before",
+			padding = " ",
+			symlink_arrow = " ➛ ",
+			show = {
+				file = false,
+				folder = false,
+				folder_arrow = true,
+				git = true,
+			}
+		}
+	}
+})
 
 require("colorizer").setup()
 
