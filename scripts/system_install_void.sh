@@ -33,7 +33,7 @@ mkdir -p ~/work ~/github ~/tests
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, make, gcc, curl, ripgrep, fzf, gnu stow, xclip, unzip)"
+    echo "( git, make, gcc, curl, wget, ripgrep, fzf, gnu stow, xclip, unzip)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -44,7 +44,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y make gcc curl ripgrep xclip fzf stow unzip build-essential
+    sudo xbps-install -Sy make gcc wget curl ripgrep xclip fzf stow unzip
     echo
     echo "===== COMPLETE ====="
     echo
@@ -67,7 +67,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing system niceties..."
     echo "-----------------------------"
     echo
-    sudo apt install -y tree neofetch htop
+    sudo xbps-install -Sy tree neofetch htop
     echo
     echo "===== COMPLETE ====="
     echo
@@ -89,7 +89,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing zsh..."
     echo "-----------------"
     echo
-    sudo apt install -y zsh
+    sudo xbps-install -Sy zsh
     echo
     echo "===== COMPLETE ====="
     echo
@@ -97,29 +97,7 @@ else
     echo
 fi
 #####################################################
-# Alacritty
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Alacritty? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing alacritty..."
-    echo "-----------------------"
-    echo
-    sudo apt install -y alacritty
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# TMUX @TODO use appimage and move to bin
+# TMUX
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install tmux? [y/n]"
@@ -132,7 +110,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing tmux..."
     echo "------------------"
     echo
-    sudo apt install -y tmux
+    sudo xbps-install -Sy tmux
     echo
     echo "===== COMPLETE ====="
     echo
@@ -143,7 +121,7 @@ fi
 # DOCKER ENGINE
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install docker? [y/n]"
+    echo "Install docker and lazydocker? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -154,25 +132,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------"
     echo
 
-    sudo apt-get remove docker docker.io containerd runc
-
-    sudo apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-    
-    sudo mkdir -p /etc/apt/keyrings
-
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
-    echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-    sudo apt update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-    sudo usermod -aG docker $USER
+	sudo xbps-install -Sy lazydocker
+	sudo usermod -aG docker $USER
+	#sudo ln -s /etc/sv/docker /var/service
 
     echo
     echo "===== COMPLETE ====="
@@ -196,12 +158,19 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-----------------------"
     echo
 
-    sudo apt install libnss3-tools -y
-    cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
-    sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
-    sudo chmod a+x /usr/local/bin/mkcert
+    # sudo apt install libnss3-tools -y
+    # cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
+    # sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
+    # sudo chmod a+x /usr/local/bin/mkcert
+    # rm install_ddev.sh
+
+	sudo xbps-install -S nss
+	#mkcert binary
+	curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+	chmod +x mkcert-v*-linux-amd64
+	sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
     mkcert -install
-    rm install_ddev.sh
+	#ddev binary
 
     echo
     echo "===== COMPLETE ====="
@@ -258,7 +227,7 @@ fi
 # JDK
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install Java Development Kit? [y/n]"
+    echo "Install Java Development Kit 11? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -269,7 +238,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Installing Java Dev Kit..."
     echo "--------------------------"
     echo
-    sudo apt install default-jre default-jdk -y
+    #sudo apt install default-jre default-jdk -y
+	#https://voidlinux.org/packages/?arch=x86_64&q=openjdk11
+
     echo
     echo "===== COMPLETE ====="
     echo
@@ -300,9 +271,6 @@ else
     echo
 fi
 #####################################################
-# @TODO LUA
-#####################################################
-#####################################################
 # ZOLA STATIC SITE GENERATOR
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -329,6 +297,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE zola
+
+	#TODO move to bin
     mv zola ~/.zola
     rm $FILE
 
@@ -354,19 +324,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "---------------------"
     echo
 
-    tag=$(curl --silent https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-
-    echo $tag
-
-    VERSION=$(echo $tag|cut -c 2-6)
-    FILE="lazygit_"$VERSION"_Linux_x86_64.tar.gz"
-
-    download="https://github.com/jesseduffield/lazygit/releases/download/"$tag"/"$FILE
-    cd ~ && wget -O $FILE $download
-
-    tar xvf $FILE lazygit
-    mv lazygit ~/.lazygit
-    rm $FILE
+	sudo xbps-install -Sy lazygit
 
     echo
     echo "===== COMPLETE ====="
@@ -375,43 +333,7 @@ else
     echo
 fi
 #####################################################
-# LAZYDOCKER
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Lazy Docker? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "Installing lazydocker..."
-    echo "------------------------"
-    echo
-
-    tag=$(curl --silent https://api.github.com/repos/jesseduffield/lazydocker/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-
-    echo $tag
-
-    VERSION=$(echo $tag|cut -c 2-7)
-    FILE="lazydocker_"$VERSION"_Linux_x86_64.tar.gz"
-
-    download="https://github.com/jesseduffield/lazydocker/releases/download/"$tag"/"$FILE
-    cd ~ && wget -O $FILE $download
-
-    tar xvf $FILE lazydocker
-    mv lazydocker ~/.lazydocker
-    rm $FILE
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# NEOVIM @TODO use appimage and move to bin
+# NEOVIM
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install Neovim? [y/n]"
@@ -426,47 +348,11 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------"
     echo
 
-    tag=$(curl --silent https://api.github.com/repos/neovim/neovim/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-    echo $tag
 
-    VERSION=$(echo $tag|cut -c 2-6)
-    FILE="nvim.appimage"
-
-    download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
-    cd ~ && wget -O $FILE $download
-
-    mkdir -p /home/$USER/.nvim-app
-    mv nvim.appimage /home/$USER/.nvim-app/nvim.appimage
-    cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
-
+	sudo xbps-install -Sy make gcc neovim fzf
     # Setup Packer Quick start here for firs start
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# i3
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install i3 window manager? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "Installing i3..."
-    echo "----------------"
-    echo
-    sudo apt install -y i3 compton feh lxappearance dunst
-    # disable xfce notify in place of Dunst
-    sudo mv /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service.disabled
 
     echo
     echo "===== COMPLETE ====="
@@ -524,11 +410,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "---------------------------------"
     echo
 
-    download="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-    cd ~ && wget -O "vscode.deb" $download
-
-    sudo apt install "./vscode.deb"
-    rm vscode.deb
+	# TODO
+	# sudo xbps-install -Sy vscode
 
     echo
     echo
@@ -554,7 +437,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------------"
     echo
 
-    sudo apt install -y transmission
+    sudo xbps-install -Sy transmission
 
     echo
     echo "===== COMPLETE ====="
@@ -578,7 +461,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------------------"
     echo
 
-    sudo apt install -y vlc
+    sudo xbps-install -Sy vlc
 
     echo
     echo "===== COMPLETE ====="
@@ -630,10 +513,7 @@ else
     echo
 fi
 #####################################################
-# @TODO cousine font 
-#####################################################
-#####################################################
-# @TODO paparius black icons 
+# @TODO paparius adwaita
 #####################################################
 #####################################################
 # STOW DOTFILES
@@ -648,7 +528,7 @@ fi
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && rm -rf .config/i3 .config/i3status .config/nvim ~/.tmux.conf .config/picom .config/dunst .config/alacritty .zshrc
 
-    cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/ htop/
+    cd ~/.dotfiles/ && stow  nvim/ tmux/ zsh/
 
     cd ~ && /bin/zsh -c 'source ~/.zshrc && zshalias'
 
