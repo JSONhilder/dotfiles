@@ -191,7 +191,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     tar xvf $FILE ddev
 
-    mv zola /usr/local/bin/ddev
+    sudo mv ddev /usr/local/bin/ddev
     #rm $FILE
 
     echo
@@ -320,7 +320,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE zola
-    mv zola /usr/local/bin/zola
+    sudo mv zola /usr/local/bin/zola
     rm $FILE
 
     echo
@@ -356,7 +356,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE lazygit
-    mv lazygit /usr/local/bin/lazygit
+    sudo mv lazygit /usr/local/bin/lazygit
     rm $FILE
 
     echo
@@ -392,7 +392,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE lazydocker
-    mv lazydocker /usr/local/bin/lazydocker
+    sudo mv lazydocker /usr/local/bin/lazydocker
     rm $FILE
 
     echo
@@ -426,7 +426,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
 
-    mv nvim.appimage /usr/local/bin/nvim
+    sudo mv nvim.appimage /usr/local/bin/nvim
     cd /usr/local/bin && chmod a+x nvim
 
     # Setup Packer Quick start here for firs start
