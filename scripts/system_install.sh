@@ -97,28 +97,6 @@ else
     echo
 fi
 #####################################################
-# Alacritty
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Alacritty? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing alacritty..."
-    echo "-----------------------"
-    echo
-    sudo apt install -y alacritty
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
 # TMUX @TODO use appimage and move to bin
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -161,7 +139,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     curl \
     gnupg \
     lsb-release
-    
+
     sudo mkdir -p /etc/apt/keyrings
 
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -197,11 +175,24 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     sudo apt install libnss3-tools -y
-    cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
     sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
     sudo chmod a+x /usr/local/bin/mkcert
     mkcert -install
-    rm install_ddev.sh
+
+    tag=$(curl --silent https://api.github.com/repos/drud/ddev/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+
+    echo $tag
+
+    FILE="ddev_linux-amd64."$tag".tar.gz"
+    echo $FILE
+
+    download=" https://github.com/drud/ddev/releases/download/"$tag"/"$FILE
+	cd ~ && wget -O $FILE $download
+
+    tar xvf $FILE ddev
+
+    mv zola /usr/local/bin/ddev
+    #rm $FILE
 
     echo
     echo "===== COMPLETE ====="
@@ -329,7 +320,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE zola
-    mv zola ~/.zola
+    mv zola /usr/local/bin/zola
     rm $FILE
 
     echo
@@ -365,7 +356,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE lazygit
-    mv lazygit ~/.lazygit
+    mv lazygit /usr/local/bin/lazygit
     rm $FILE
 
     echo
@@ -401,7 +392,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE lazydocker
-    mv lazydocker ~/.lazydocker
+    mv lazydocker /usr/local/bin/lazydocker
     rm $FILE
 
     echo
@@ -435,38 +426,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
 
-    mkdir -p /home/$USER/.nvim-app
-    mv nvim.appimage /home/$USER/.nvim-app/nvim.appimage
-    cd /home/$USER/.nvim-app && chmod a+x nvim.appimage
+    mv nvim.appimage /usr/local/bin/nvim
+    cd /usr/local/bin && chmod a+x nvim
 
     # Setup Packer Quick start here for firs start
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# i3
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install i3 window manager? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "Installing i3..."
-    echo "----------------"
-    echo
-    sudo apt install -y i3 compton feh lxappearance dunst
-    # disable xfce notify in place of Dunst
-    sudo mv /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service /usr/share/dbus-1/services/org.xfce.xfce4-notifyd.Notifications.service.disabled
 
     echo
     echo "===== COMPLETE ====="
@@ -630,10 +595,10 @@ else
     echo
 fi
 #####################################################
-# @TODO cousine font 
+# @TODO cousine font
 #####################################################
 #####################################################
-# @TODO paparius black icons 
+# @TODO paparius black icons
 #####################################################
 #####################################################
 # STOW DOTFILES
