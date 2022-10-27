@@ -164,13 +164,28 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     # sudo chmod a+x /usr/local/bin/mkcert
     # rm install_ddev.sh
 
-	sudo xbps-install -S nss
+	# sudo xbps-install -S nss
 	#mkcert binary
-	curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
-	chmod +x mkcert-v*-linux-amd64
-	sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
-    mkcert -install
+	# curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+	# chmod +x mkcert-v*-linux-amd64
+	# sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+ 	# mkcert -install
 	#ddev binary
+    tag=$(curl --silent https://api.github.com/repos/drud/ddev/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+
+    echo $tag
+
+    FILE="ddev_linux-amd64."$tag".tar.gz"
+    echo $FILE
+
+    download=" https://github.com/drud/ddev/releases/download/"$tag"/"$FILE
+	cd ~ && wget -O $FILE $download
+
+    tar xvf $FILE ddev
+
+	#TODO move to bin
+    #mv zola ~/.zola
+    #rm $FILE
 
     echo
     echo "===== COMPLETE ====="
@@ -299,7 +314,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     tar xvf $FILE zola
 
 	#TODO move to bin
-    mv zola ~/.zola
+    mv zola /usr/local/bin/mkcert
     rm $FILE
 
     echo
@@ -384,6 +399,28 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
         echo "installing zsh syntax highlighting plugin..."
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     fi
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# VSV
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install vsv? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo vsv
+    echo
+
+	sudo xbps-install -Sy vsv
 
     echo
     echo "===== COMPLETE ====="
