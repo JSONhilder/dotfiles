@@ -13,7 +13,7 @@ require('packer').startup(function(use)
 	-- Package manager
 	use 'wbthomason/packer.nvim'
 	-- Colorscheme
-	use 'ellisonleao/gruvbox.nvim'
+	use 'rebelot/kanagawa.nvim'
 	-- Add indentation guides even on blank lines
 	use 'lukas-reineke/indent-blankline.nvim'
 	-- "gc" to comment visual regions/lines
@@ -134,10 +134,8 @@ vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
-vim.cmd [[colorscheme gruvbox]]
+vim.cmd [[colorscheme kanagawa]]
 vim.cmd [[
-	hi Normal guibg=#1D2021
-	hi signcolumn guibg=#1D2021
 	hi GitSignsAdd guibg=NONE
 	hi GitSignsChange guibg=NONE
 	hi GitSignsDelete guibg=NONE
@@ -401,9 +399,20 @@ require("nvim-tree").setup({
 				folder = false,
 				folder_arrow = true,
 				git = true,
+			},
+			glyphs = {
+				git = {
+					unstaged = "~",
+					staged = "!",
+					unmerged = "#",
+					renamed = "$",
+					untracked = "+",
+					deleted = "-",
+					ignored = "*",
+				}
 			}
-		}
-	}
+		},
+	},
 })
 
 require("colorizer").setup()
