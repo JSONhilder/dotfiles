@@ -140,6 +140,11 @@ vim.cmd [[
 	hi GitSignsChange guibg=NONE
 	hi GitSignsDelete guibg=NONE
 ]]
+-- transparency
+vim.cmd [[
+	hi Normal guibg=NONE ctermbg=NONE
+	hi EndOfBuffer guibg=NONE ctermbg=NONE
+]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 -- set relativenumber
