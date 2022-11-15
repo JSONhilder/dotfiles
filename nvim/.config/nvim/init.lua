@@ -224,7 +224,7 @@ vim.keymap.set("v", "<Tab>", ">gv")
 vim.keymap.set("v", "<S-Tab>", "<gv")
 
 -- netrw
-vim.keymap.set("n", "<leader>.", ":NvimTreeToggle <CR>", { desc = "Open netrw" })
+vim.keymap.set("n", "<leader>.", ":NvimTreeToggle <CR>", { desc = "Open Nvim Tree" })
 
 -- ===========================================
 -- 		   [[ Plugin Configuration ]]
@@ -280,6 +280,10 @@ require('telescope').setup {
 				['<C-d>'] = false,
 			},
 		},
+		file_ignore_patterns = {
+			"node_modules",
+			".git"
+		}
 	},
 	pickers = {
 		find_files = {
