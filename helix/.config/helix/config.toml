@@ -1,0 +1,28 @@
+theme = "kanagawa"
+
+[editor]
+line-number = "relative"
+completion-trigger-len = 1
+bufferline = "multiple"
+cursorline = true
+true-color = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[keys.normal]
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
+X = "extend_line_above"
+# Yank to end of line from cursor
+Y = ["select_mode", "goto_line_end", "yank", "normal_mode"]
+# Delete to end of line from cursor
+D = "kill_to_line_end"
+# Buffer management
+"C-p" = "goto_next_buffer"
+"C-o" = "goto_previous_buffer"
+"space" = { "c" = ":buffer-close" }
