@@ -71,9 +71,10 @@ require('packer').startup(function(use)
 			-- Snippets
 			{ 'L3MON4D3/LuaSnip' },
 			{ 'rafamadriz/friendly-snippets' },
+			-- LSP loading status
+			{ 'j-hui/fidget.nvim' }
 		}
 	}
-	use 'j-hui/fidget.nvim'
 end)
 
 -- ===========================================
