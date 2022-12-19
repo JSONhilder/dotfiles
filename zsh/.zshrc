@@ -40,6 +40,7 @@ export EDITOR='nvim'
 # Aliases
 alias :q="exit"
 alias v="nvim"
+alias h="hx"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias vim="nvim"
@@ -53,3 +54,10 @@ function zshalias()
 {
   grep "^alias" ~/.zshrc > ~/.zshenv
 }
+
+# bun completions
+[ -s "/home/jason/.bun/_bun" ] && source "/home/jason/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
