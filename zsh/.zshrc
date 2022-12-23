@@ -35,7 +35,7 @@ plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlightin
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='nvim'
+export EDITOR='hx'
 
 # Aliases
 alias :q="exit"
