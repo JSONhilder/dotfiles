@@ -1,0 +1,13 @@
+set drawbox
+set hidden
+
+# use a and A to create files and directories
+cmd mkdir %mkdir "$@"
+map A push :mkdir<space>
+cmd mkfile %touch "$@"
+map a push :mkfile<space>
+
+# use x to delete
+map x push :delete<enter>
+
+map . set hidden!
