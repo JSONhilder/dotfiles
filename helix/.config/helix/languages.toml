@@ -1,5 +1,9 @@
 # Language support configuration.
 # See the languages documentation: https://docs.helix-editor.com/master/languages.html
+
+########
+# RUST #
+########
 [[language]]
 name = "rust"
 scope = "source.rust"
@@ -10,7 +14,9 @@ auto-format = true
 comment-token = "//"
 language-server = { command = "rust-analyzer" }
 indent = { tab-width = 4, unit = "    " }
-
+########
+# HTML #
+########
 [[language]]
 name = "html"
 scope = "text.html.basic"
@@ -25,7 +31,9 @@ indent = { tab-width = 2, unit = "  " }
 [[grammar]]
 name = "html"
 source = { git = "https://github.com/tree-sitter/tree-sitter-html", rev = "29f53d8f4f2335e61bf6418ab8958dac3282077a" }
-
+########
+# TWIG #
+########
 [[language]]
 name = "twig"
 scope = "source.twig"
@@ -37,7 +45,9 @@ indent = { tab-width = 4, unit = "  " }
 [[grammar]]
 name = "twig"
 source = { git = "https://github.com/gbprod/tree-sitter-twig", rev = "807b293fec3fead64f54c64fdf6fb05516c032b9" }
-
+########
+# PHP  #
+########
 [[language]]
 name = "php"
 scope = "source.php"
@@ -51,7 +61,9 @@ indent = { tab-width = 4, unit = "    " }
 [[grammar]]
 name = "php"
 source = { git = "https://github.com/tree-sitter/tree-sitter-php", rev = "57f855461aeeca73bd4218754fb26b5ac143f98f" }
-
+##########
+# PYTHON #
+##########
 [[language]]
 name = "python"
 scope = "source.python"
@@ -67,6 +79,19 @@ indent = { tab-width = 4, unit = "    " }
 [[grammar]]
 name = "python"
 source = { git = "https://github.com/tree-sitter/tree-sitter-python", rev = "de221eccf9a221f5b85474a553474a69b4b5784d" }
+############
+# MARKDOWN #
+############
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "markdown"]
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "markdown"
+source = { git = "https://github.com/MDeiml/tree-sitter-markdown", rev = "a7de4be29783a6e25f3240c90afea52f2417faa3", subpath = "tree-sitter-markdown" }
 
 [language.auto-pairs]
 '(' = ')'
