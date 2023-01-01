@@ -44,9 +44,10 @@ alias h="hx"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias vim="nvim"
+alias dots="cd ~/.dotfiles && h"
 alias vscode="code . && exit"
 alias work="cd ~/work/"
-alias wiki="cd ~ && nvim -c 'VimwikiIndex'"
+alias wiki="h ~/Mega/docs"
 alias strongbox="~/.strongbox/strongbox"
 
 # Function to copy alias's to zshenv file (for nvim/vim cmd to use)
