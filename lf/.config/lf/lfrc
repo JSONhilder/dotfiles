@@ -2,7 +2,7 @@ set drawbox
 set hidden
 
 # use a and A to create files and directories
-cmd mkdir %mkdir "$@"
+cmd mkdir %mkdir -p "$@"
 map A push :mkdir<space>
 cmd mkfile %touch "$@"
 map a push :mkfile<space>
