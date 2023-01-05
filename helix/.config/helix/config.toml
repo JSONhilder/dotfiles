@@ -1,4 +1,4 @@
-theme = "base16_transparent"
+theme = "kanagawa_transparent"
 
 [editor]
 completion-trigger-len = 1
@@ -27,6 +27,9 @@ Y = ["select_mode", "goto_line_end", "yank", "normal_mode"]
 # Delete to end of line from cursor
 D = "kill_to_line_end"
 # Buffer management
-"C-p" = "goto_next_buffer"
-"C-o" = "goto_previous_buffer"
+"C-n" = "goto_next_buffer"
+"C-p" = "goto_previous_buffer"
 "space" = { "c" = ":buffer-close" }
+# Move highlighted lines
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
