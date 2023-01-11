@@ -14,6 +14,35 @@ auto-format = false
 comment-token = "//"
 language-server = { command = "rust-analyzer" }
 indent = { tab-width = 4, unit = "    " }
+##############
+# JAVASCRIPT #
+##############
+[[language]]
+name = "javascript"
+scope = "source.js"
+injection-regex = "(js|javascript)"
+file-types = ["js", "mjs", "cjs"]
+shebangs = ["node"]
+roots = []
+comment-token = "//"
+# TODO: highlights-params
+language-server = { command = "typescript-language-server", args = ["--stdio"], language-id = "javascript" }
+indent = { tab-width = 4, unit = "  " }
+
+[[grammar]]
+name = "javascript"
+source = { git = "https://github.com/tree-sitter/tree-sitter-javascript", rev = "4a95461c4761c624f2263725aca79eeaefd36cad" }
+
+[[language]]
+name = "jsx"
+scope = "source.jsx"
+injection-regex = "jsx"
+file-types = ["jsx"]
+roots = []
+comment-token = "//"
+language-server = { command = "typescript-language-server", args = ["--stdio"], language-id = "javascriptreact" }
+indent = { tab-width = 4, unit = "  " }
+grammar = "javascript"
 ########
 # HTML #
 ########
@@ -26,11 +55,28 @@ roots = []
 language-server = { command = "vscode-html-language-server", args = ["--stdio"] }
 auto-format = true
 config = { "provideFormatter" = true }
-indent = { tab-width = 2, unit = "  " }
+indent = { tab-width = 4, unit = "  " }
 
 [[grammar]]
 name = "html"
 source = { git = "https://github.com/tree-sitter/tree-sitter-html", rev = "29f53d8f4f2335e61bf6418ab8958dac3282077a" }
+#######
+# CSS #
+#######
+[[language]]
+name = "css"
+scope = "source.css"
+injection-regex = "css"
+file-types = ["css", "scss"]
+roots = []
+language-server = { command = "vscode-css-language-server", args = ["--stdio"] }
+auto-format = true
+config = { "provideFormatter" = true }
+indent = { tab-width = 4, unit = "  " }
+
+[[grammar]]
+name = "css"
+source = { git = "https://github.com/tree-sitter/tree-sitter-css", rev = "769203d0f9abe1a9a691ac2b9fe4bb4397a73c51" }
 ########
 # TWIG #
 ########
@@ -87,7 +133,7 @@ name = "markdown"
 scope = "source.md"
 injection-regex = "md|markdown"
 file-types = ["md", "markdown"]
-indent = { tab-width = 2, unit = "  " }
+indent = { tab-width = 4, unit = "  " }
 
 [[grammar]]
 name = "markdown"
