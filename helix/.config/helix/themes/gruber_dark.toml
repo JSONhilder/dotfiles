@@ -1,0 +1,107 @@
+# The structure is based on `base16_default_dark` by Ray Gervais.  Most of
+# the colors come from the so called Autumn theme, a color scheme inspired by
+# the colors you can find in the autumn. Originally it was designed as a
+# color scheme for the Komodo IDE and then ported to Vim by Kenneth Love
+# and Chris Jones. Later, Yorick Peterse improved their work. See:
+# <https://github.com/YorickPeterse/Autumn.vim>
+# Jens Getreu ported and optimised the color theme for the Helix editor.
+# Author: Jens Getreu <getreu at web.de>
+
+"ui.background" = { bg = "my_gray0" }
+"ui.menu" = { fg = "my_white", bg = "my_gray2" }
+"ui.menu.selected" = { fg = "my_gray2", bg = "my_gray5" }
+"ui.linenr" = { fg = "my_gray3", bg = "my_gray0" }
+"ui.popup" = { bg = "my_gray2" }
+"ui.window" = { fg = "my_gray3", bg = "my_gray2" }
+"ui.linenr.selected" = { fg = "my_gray6", bg = "my_gray0"}
+"ui.selection" = { bg = "my_gray3" }
+"comment" = { fg = "my_gray4", modifiers = ["italic"] }
+"ui.cursorline" = { bg = "my_gray3" }
+"ui.statusline" = { fg = "my_gray6", bg = "my_gray2" }
+"ui.statusline.inactive" = { fg = 'my_gray4', bg = 'my_gray2' }
+"ui.statusline.insert" = {fg = "my_black", bg = "my_gray5", modifiers = ["bold"]}
+"ui.statusline.normal" = {fg = "my_gray6", bg = "my_gray2"}
+"ui.statusline.select" = {fg = "my_gray6", bg = "my_black", modifiers = ["bold"]}
+"ui.cursor" = { fg = "my_gray5", modifiers = ["reversed"] }
+"ui.cursor.primary" = { fg = "my_white", modifiers = ["reversed"] }
+"ui.cursorline.primary" = { bg = "my_black" }
+"ui.cursorline.secondary" = { bg = "my_black" }
+"ui.text" = "my_white"
+"operator" = "my_white"
+"ui.text.focus" = "my_white"
+"variable" = "my_white3"
+"constant.numeric" = "my_turquoise"
+"constant" = "my_white3"
+"attribute" = "my_turquoise"
+"type" = { fg = "my_turquoise", modifiers = ["italic"] }
+"ui.cursor.match" = { fg = "my_white3", modifiers = ["underlined"] }
+"string"  = "my_green"
+"variable.other.member" = "my_brown"
+"constant.character.escape" = "my_turquoise"
+"function" = "my_yellow1"
+"constructor" = "my_yellow1"
+"special" = "my_yellow1"
+"keyword" = "gruber_yellow"
+"label" = "gruber_yellow"
+"namespace" = "my_white3"
+"ui.help" = { fg = "my_gray6", bg = "my_gray2" }
+"ui.virtual.whitespace" = { fg = "my_gray5" }
+"ui.virtual.ruler" = { bg = "my_gray1" }
+
+"markup.heading" = "my_yellow1"
+"markup.list" = "my_white2"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = {  modifiers = ["italic"] }
+"markup.link.url" = "my_turquoise2"
+"markup.link.text" = "my_white2"
+"markup.quote" = "my_brown"
+"markup.raw" = "my_green"
+
+"diff.plus" = "my_green"
+"diff.delta" = "my_gray3"
+"diff.minus" = "gruber_red_error"
+
+"diagnostic" = { modifiers = ["underlined"] }
+"diagnostic.error" = { underline = { style = "curl", color = "gruber_yellow" } }
+"ui.gutter" = { bg = "my_gray0" }
+"hint" = "my_gray5"
+"debug" = "my_yellow2"
+"info" = "my_turquoise"
+"warning" = "my_yellow2"
+"error" = "gruber_red_error"
+
+[palette]
+my_black      = "#262626" # Cursorline
+my_gray0      = "#1c1c1c" # Default Background
+my_gray1      = "#262626" # Ruler
+my_gray2      = "#262626" # Lighter Background (Used for status bars, line number and folding marks)
+my_gray3      = "#626262" # Selection Background
+my_gray4      = "#cc8c3c" # Comments, Invisibles, Line Highlighting
+my_gray5      = "#626262" # Dark Foreground (Used for status bars)
+my_gray6      = "#ffffff" # Light Foreground (Not often used)
+my_gray7      = "#ffffff" # Light Background (Not often used)
+my_white      = "#ffffff" # Default Foreground, Caret, Delimiters, Operators
+my_white2     = "#ffffff" # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+my_white3     = "#ffffff" # Classes, Markup Bold, Search Text Background
+my_turquoise  = "#95a99f" # Support, Regular Expressions, Escape Characters
+my_turquoise2 = "#afd7af" # URL
+my_green      = "#73c936" # Strings, Inherited Class, Markup Code, Diff Inserted
+my_brown      = "#96a6c8" # Memer variables, Quotes
+my_yellow1    = "#87afd7" # Functions, Methods, Attribute IDs, Headings
+my_yellow2    = "#ff5f5f" # Debug, Info
+gruber_yellow = "#ffd700" # Keywords, Storage, Selector, Diff Changed
+gruber_red_error = "#ff5f5f" # Diagnostic Errors
+
+#GRUBER COLORS
+# black = "#1c1c1c"
+# lightblack = "#262626"
+# darkgray = "#444444"
+# gray = "#626262"
+# white = "#e4e4e4"
+# red = "#ff5f5f"
+# green = "#87d75f"
+# yellow = "#ffd700"
+# blue = "#87afd7"
+# magenta = "#afafd7"
+# cyan = "#afd7af"
+# brown = "#af875f"

@@ -2,48 +2,33 @@ window:
     startup_mode: Maximized
     # title: ""
     decorations: None
-    opacity: 0.96
+    #opacity: 0.96
     padding:
       x: 0
       y: 3
 
 font:
     normal:
-      family: JetBrainsMono nerd Font
+      family: JetBrainsMono Nerd Font
     size: 10
 
 cursor:
   style: Beam
 
-# Kanagawa Alacritty Colors
+# Colors (Base16 Default Dark)
 colors:
+  # Default colors
   primary:
-    foreground: '0xdcd7ba'
+    background: '0x1c1c1c'
+    foreground: '0xffffff'
 
+  # Normal colors
   normal:
-    black:   '0x090618'
-    red:     '0xc34043'
-    green:   '0x76946a'
-    yellow:  '0xc0a36e'
-    blue:    '0x7e9cd8'
-    magenta: '0x957fb8'
-    cyan:    '0x6a9589'
-    white:   '0xc8c093'
-
-  bright:
-    black:   '0x727169'
-    red:     '0xe82424'
-    green:   '0x98bb6c'
-    yellow:  '0xe6c384'
-    blue:    '0x7fb4ca'
-    magenta: '0x938aa9'
-    cyan:    '0x7aa89f'
-    white:   '0xdcd7ba'
-
-  selection:
-    background: '0x2d4f67'
-    foreground: '0xc8c093'
-
-  indexed_colors:
-    - { index: 16, color: '0xffa066' }
-    - { index: 17, color: '0xff5d62' }
+    black:   '0x181818'
+    red:     '0xff5f5f'
+    green:   '0x73c936'
+    yellow:  '0xffd700'
+    blue:    '0x87afd7'
+    magenta: '0x9e95c7'
+    cyan:    '0x95a99f'
+    white:   '0xffffff'

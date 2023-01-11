@@ -1,4 +1,4 @@
-theme = "kanagawa_transparent"
+theme = "gruber_dark"
 
 [editor]
 completion-trigger-len = 1
