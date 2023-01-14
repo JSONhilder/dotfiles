@@ -7,7 +7,7 @@
 # Jens Getreu ported and optimised the color theme for the Helix editor.
 # Author: Jens Getreu <getreu at web.de>
 
-"ui.background" = { bg = "my_gray0" }
+#"ui.background" = { bg = "my_gray0" }
 "ui.menu" = { fg = "my_white", bg = "my_gray2" }
 "ui.menu.selected" = { fg = "my_gray2", bg = "my_gray5" }
 "ui.linenr" = { fg = "my_gray3", bg = "my_gray0" }

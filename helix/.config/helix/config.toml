@@ -35,4 +35,8 @@ D = "kill_to_line_end"
 "space" = { "c" = ":buffer-close" }
 # Move highlighted lines
 C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
-C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]   
+
+[keys.insert]
+j = { j = "normal_mode" } # Maps `jk` to exit insert mode
+C-c = "normal_mode" # Maps `jk` to exit insert mode
