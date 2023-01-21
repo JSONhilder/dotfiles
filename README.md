@@ -60,14 +60,14 @@ bash /path/to/system_install.sh
 - make
 - gcc
 - build-essential
-- Ripgrep (rg)
-- gnu Stow
+- rg (Ripgrep)
+- gnu stow
 - xclip
 - unzip
 - fzf
 - tree
 - neofetch
-- htop
+- btm (bottom)
 - zsh && Oh My Zsh
 - Alacritty
 - Docker
@@ -80,14 +80,16 @@ bash /path/to/system_install.sh
 - Zola
 - Lazy Git
 - Lazy Docker
-- Emacs + Doom Emacs
 - Neovim
+- Helix
 - tmux
 - Vscode
 - Mega
 - Transmission
-- vlc
 - fonts
+- newsboat
+- mpv
+- min browser
 
 ## Software to be installed manually
 - Android Studio

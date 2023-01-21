@@ -60,9 +60,9 @@ require('packer').startup(function(use)
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
     -- Colorizer
-	use 'norcalli/nvim-colorizer.lua'
-	-- Multi Cursor
-	use "mg979/vim-visual-multi"
+    use 'norcalli/nvim-colorizer.lua'
+	  -- Multi Cursor
+	  use "mg979/vim-visual-multi"
     -- Toggle Term
     use 'akinsho/toggleterm.nvim'
     -- Twig
