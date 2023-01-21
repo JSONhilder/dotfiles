@@ -7,90 +7,99 @@
 # Jens Getreu ported and optimised the color theme for the Helix editor.
 # Author: Jens Getreu <getreu at web.de>
 
-#"ui.background" = { bg = "my_gray0" }
-"ui.menu" = { fg = "my_white", bg = "my_gray2" }
-"ui.menu.selected" = { fg = "my_gray2", bg = "my_gray5" }
-"ui.linenr" = { fg = "my_gray3", bg = "my_gray0" }
-"ui.popup" = { bg = "my_gray2" }
-"ui.window" = { fg = "my_gray3", bg = "my_gray2" }
-"ui.linenr.selected" = { fg = "my_gray6", bg = "my_gray0"}
-"ui.selection" = { bg = "my_gray3" }
-"comment" = { fg = "my_gray4", modifiers = ["italic"] }
-"ui.cursorline" = { bg = "my_gray3" }
-"ui.statusline" = { fg = "my_gray6", bg = "my_gray2" }
-"ui.statusline.inactive" = { fg = 'my_gray4', bg = 'my_gray2' }
-"ui.statusline.insert" = {fg = "my_black", bg = "my_gray5", modifiers = ["bold"]}
-"ui.statusline.normal" = {fg = "my_gray6", bg = "my_gray2"}
-"ui.statusline.select" = {fg = "my_gray6", bg = "my_black", modifiers = ["bold"]}
-"ui.cursor" = { fg = "my_gray5", modifiers = ["reversed"] }
-"ui.cursor.primary" = { fg = "my_white", modifiers = ["reversed"] }
-"ui.cursorline.primary" = { bg = "my_black" }
-"ui.cursorline.secondary" = { bg = "my_black" }
-"ui.text" = "my_white"
-"operator" = "my_white"
-"ui.text.focus" = "my_white"
-"variable" = "my_white3"
-"constant.numeric" = "my_turquoise"
-"constant" = "my_white3"
-"attribute" = "my_turquoise"
-"type" = { fg = "my_turquoise", modifiers = ["italic"] }
-"ui.cursor.match" = { fg = "my_white3", modifiers = ["underlined"] }
+#"ui.background" = { bg = "gruber_daker_bg" }
+"ui.menu" = { fg = "gruber_darker_white", bg = "gruber_darker_black" }
+"ui.menu.selected" = { fg = "gruber_darker_black", bg = "gruber_darker_gray" }
+"ui.linenr" = { fg = "gruber_darker_gray", bg = "gruber_daker_bg" }
+"ui.popup" = { bg = "gruber_darker_black" }
+"ui.window" = { fg = "gruber_darker_gray", bg = "gruber_darker_black" }
+"ui.linenr.selected" = { fg = "gruber_darker_white", bg = "gruber_daker_bg"}
+"ui.selection" = { bg = "gruber_darker_gray" }
+"comment" = { fg = "gruber_darker_brown", modifiers = ["italic"] }
+"ui.cursorline" = { bg = "gruber_darker_gray" }
+"ui.statusline" = { fg = "gruber_darker_white", bg = "gruber_darker_black" }
+"ui.statusline.inactive" = { fg = 'gruber_darker_brown', bg = 'gruber_darker_black' }
+"ui.statusline.insert" = {fg = "gruber_darker_black", bg = "gruber_darker_gray", modifiers = ["bold"]}
+"ui.statusline.normal" = {fg = "gruber_darker_white", bg = "gruber_darker_black"}
+"ui.statusline.select" = {fg = "gruber_darker_white", bg = "gruber_darker_black", modifiers = ["bold"]}
+"ui.cursor" = { fg = "gruber_darker_gray", modifiers = ["reversed"] }
+"ui.cursor.primary" = { fg = "gruber_darker_white", modifiers = ["reversed"] }
+"ui.cursorline.primary" = { bg = "gruber_darker_black" }
+"ui.cursorline.secondary" = { bg = "gruber_darker_black" }
+"ui.text" = "gruber_darker_white"
+"operator" = "gruber_darker_white"
+"ui.text.focus" = "gruber_darker_white"
+"variable" = "gruber_darker_white"
+"constant.numeric" = "gruber_darker_quartz"
+"constant" = "gruber_darker_white"
+"attribute" = "gruber_darker_quartz"
+"type" = { fg = "gruber_darker_quartz", modifiers = ["italic"] }
+"ui.cursor.match" = { fg = "gruber_darker_white", modifiers = ["underlined"] }
 "string"  = "my_green"
 "variable.other.member" = "my_brown"
-"constant.character.escape" = "my_turquoise"
+"constant.character.escape" = "gruber_darker_quartz"
 "function" = "my_yellow1"
 "constructor" = "my_yellow1"
 "special" = "my_yellow1"
 "keyword" = "gruber_yellow"
 "label" = "gruber_yellow"
-"namespace" = "my_white3"
-"ui.help" = { fg = "my_gray6", bg = "my_gray2" }
-"ui.virtual.whitespace" = { fg = "my_gray5" }
-"ui.virtual.ruler" = { bg = "my_gray1" }
+"namespace" = "gruber_darker_white"
+"ui.help" = { fg = "gruber_darker_white", bg = "gruber_darker_black" }
+"ui.virtual.whitespace" = { fg = "gruber_darker_gray" }
+"ui.virtual.ruler" = { bg = "gruber_darker_black" }
 
 "markup.heading" = "my_yellow1"
-"markup.list" = "my_white2"
+"markup.list" = "gruber_darker_white"
 "markup.bold" = { modifiers = ["bold"] }
 "markup.italic" = {  modifiers = ["italic"] }
-"markup.link.url" = "my_turquoise2"
-"markup.link.text" = "my_white2"
+"markup.link.url" = "gruber_darker_quartz2"
+"markup.link.text" = "gruber_darker_white"
 "markup.quote" = "my_brown"
 "markup.raw" = "my_green"
 
 "diff.plus" = "my_green"
-"diff.delta" = "my_gray3"
+"diff.delta" = "gruber_darker_gray"
 "diff.minus" = "gruber_red_error"
 
 "diagnostic" = { modifiers = ["underlined"] }
 "diagnostic.error" = { underline = { style = "curl", color = "gruber_yellow" } }
-"ui.gutter" = { bg = "my_gray0" }
-"hint" = "my_gray5"
+"ui.gutter" = { bg = "gruber_daker_bg" }
+"hint" = "gruber_darker_gray"
 "debug" = "my_yellow2"
-"info" = "my_turquoise"
-"warning" = "my_yellow2"
+"info" = "gruber_darker_quartz"
+"warning" = "gruber_darker_quartz2"
 "error" = "gruber_red_error"
 
 [palette]
-my_black      = "#262626" # Cursorline
-my_gray0      = "#1c1c1c" # Default Background
-my_gray1      = "#262626" # Ruler
-my_gray2      = "#262626" # Lighter Background (Used for status bars, line number and folding marks)
-my_gray3      = "#626262" # Selection Background
-my_gray4      = "#cc8c3c" # Comments, Invisibles, Line Highlighting
-my_gray5      = "#626262" # Dark Foreground (Used for status bars)
-my_gray6      = "#ffffff" # Light Foreground (Not often used)
-my_gray7      = "#ffffff" # Light Background (Not often used)
-my_white      = "#ffffff" # Default Foreground, Caret, Delimiters, Operators
-my_white2     = "#ffffff" # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-my_white3     = "#ffffff" # Classes, Markup Bold, Search Text Background
-my_turquoise  = "#95a99f" # Support, Regular Expressions, Escape Characters
-my_turquoise2 = "#afd7af" # URL
-my_green      = "#73c936" # Strings, Inherited Class, Markup Code, Diff Inserted
-my_brown      = "#96a6c8" # Memer variables, Quotes
-my_yellow1    = "#87afd7" # Functions, Methods, Attribute IDs, Headings
-my_yellow2    = "#ff5f5f" # Debug, Info
-gruber_yellow = "#ffd700" # Keywords, Storage, Selector, Diff Changed
-gruber_red_error = "#ff5f5f" # Diagnostic Errors
+# Default Background
+gruber_daker_bg      = "#1c1c1c" 
+# Cursorline, Ruler, Lighter Background (Used for status bars, line number and folding marks)
+gruber_darker_black  = "#262626" 
+# Comments, Invisibles, Line Highlighting
+gruber_darker_brown  = "#cc8c3c"
+# Dark Foreground (Used for status bars,Selection Background)
+gruber_darker_gray   = "#626262"
+# Default Foreground, Caret, Delimiters, Operators
+# Light Foreground,Light Background (Not often used)
+# Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+# Classes, Markup Bold, Search Text Background
+gruber_darker_white  = "#ffffff"
+# Support, Regular Expressions, Escape Characters
+gruber_darker_quartz = "#95a99f"
+# URL
+gruber_darker_quartz2 = "#afd7af"
+# Strings, Inherited Class, Markup Code, Diff Inserted
+my_green      = "#73c936"
+# Memer variables, Quotes
+my_brown      = "#96a6c8"
+# Functions, Methods, Attribute IDs, Headings
+my_yellow1    = "#87afd7"
+# Debug, Info
+my_yellow2    = "#ff5f5f"
+# Keywords, Storage, Selector, Diff Changed
+gruber_yellow = "#ffd700"
+# Diagnostic Errors
+gruber_red_error = "#ff5f5f" 
 
 #GRUBER COLORS
 # black = "#1c1c1c"
