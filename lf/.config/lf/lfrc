@@ -1,12 +1,53 @@
+# Set options
 set drawbox
+set shell sh
+set info size
+set ignorecase true
 
-# use a and A to create files and directories
+# Custom functions
 cmd mkdir %mkdir -p "$@"
-map A push :mkdir<space>
 cmd mkfile %touch "$@"
-map a push :mkfile<space>
 
-# use x to delete
-map x push :delete<enter>
+cmd unzip ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
 
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+
+# Unbind defaults
+map d
+map n
+map m
+
+# Keymaps
 map . set hidden!
+map x cut
+map y copy
+map R reload
+map C clear
+map dd push :delete<enter>
+# use mf and md to create files and directories
+map mf push :mkdir<space>
+map md push :mkfile<space>
+# use ma and oa to make archive and open archive
+map zc zip
+map zo unzip
+
+# Movement shortcuts
+map gh cd ~/
+map gw cd ~/work
+map gc cd ~/.config
+map gd cd ~/Downloads
