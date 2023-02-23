@@ -1,0 +1,105 @@
+{
+    "editor.fontSize": 13.5,
+    "editor.fontFamily": "BlexMono Nerd Font",
+    "workbench.colorTheme": "gruvboxConcoctis dark hard",
+    "window.titleBarStyle": "native",
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.fontLigatures": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "editor.tabSize": 4,
+    "editor.smoothScrolling": true,
+    "extensions.ignoreRecommendations": true,
+    // Rust inlay hints
+    "editor.inlayHints.enabled": "off",
+    "security.workspace.trust.untrustedFiles": "open",
+    "svelte.plugin.svelte.note-new-transformation": false,
+    // Vim extension settings
+     "vim.smartRelativeLine": true,
+     "vim.cursorStylePerMode.normal": "block-outline",
+     "vim.cursorStylePerMode.insert": "block",
+     "vim.cursorStylePerMode.visual": "underline",
+     "vim.hlsearch": true,
+     "vim.sneak": true,
+     "vim.leader": "<space>",
+     "vim.normalModeKeyBindings": [
+        {
+           "before": ["<leader>", "d"],
+           "after": ["d", "d"]
+        }
+     ],
+     "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["U"],
+            "commands": ["redo"]
+        },
+        {
+            "before": ["u"],
+            "commands": ["undo"]
+        },
+        {
+            "before": ["<leader>", "h"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["revealInExplorer"]
+        },
+        {
+            "before": ["<leader>", "e"],
+            "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        {
+            "before": ["<leader>", "b"],
+            "commands": ["workbench.action.toggleActivityBarVisibility"]
+        }
+     ],
+     "vim.visualModeKeyBindings": [
+        // {
+        //     "before": ["y"],
+        //     "after": ["editor.action.clipboardCopyAction"]
+        // },
+        {
+            "before": [">"],
+            "after": [">", "g", "v"]
+        },
+        {
+            "before": ["<"],
+            "after": ["<", "g", "v"]
+        },
+        {
+            "before": ["Tab"],
+            "after": [">", "g", "v"]
+        },
+        {
+            "before": ["<S-Tab>"],
+            "after": ["<", "g", "v"]
+        },
+        {
+            "before": ["J"],
+            "after": ["workbench.action.moveLinesDownAction"]
+        },
+        {
+            "before": ["K"],
+            "after": ["workbench.action.moveLinesUpAction"]
+        }
+     ],
+     "vim.visualModeKeyBindingsNonRecursive": [],
+     "vim.handleKeys": {
+         "<C-b>": false,
+         "<C-a>": false,
+         "<C-f>": false,
+         // Copy
+         "<C-c>": false,
+         // Cut
+         "<C-x>": false,
+         // Paste
+         "<C-v>": false,
+         "<C-z>": false,
+         "<C-y>": false,
+         "<C-j>": false,
+         // VS Code new marker @ next occurence
+         "<C-d>": true,
+    },
+    // Vim extension settings end
+}

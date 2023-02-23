@@ -1,0 +1,31 @@
+[
+    {
+        "key": "ctrl+shift+v",
+        "command": "toggleVim"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "ctrl+backspace",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "editor.action.addSelectionToNextFindMatch"
+    },
+    {   
+        "key": "ctrl+.",   
+        "command": "extension.openScratchpad", 
+        "when": "editorTextFocus" 
+    },
+    {
+        "key": "ctrl+shift+j",
+        "command": "workbench.action.toggleMaximizedPanel"
+    }
+]
