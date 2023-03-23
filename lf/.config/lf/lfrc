@@ -40,8 +40,8 @@ map R reload
 map C clear
 map dd push :delete<enter>
 # use mf and md to create files and directories
-map mf push :mkdir<space>
-map md push :mkfile<space>
+map md push :mkdir<space>
+map mf push :mkfile<space>
 # use ma and oa to make archive and open archive
 map zc zip
 map zo unzip
