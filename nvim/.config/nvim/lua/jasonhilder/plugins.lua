@@ -84,17 +84,47 @@ return {
     -- Telescopic Johnson
     ---------------------------------------------------------------------------------
     {
+        find_files =
+        "",
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         dependencies = "nvim-lua/plenary.nvim",
         keys = {
-            { "<C-t>", "<CMD>Telescope<CR>",             mode = { "n", "i", "v" } },
-            { "<C-p>", "<CMD>Telescope find_files<CR>",  mode = { "n", "i", "v" } },
-            { "<C-l>", "<CMD>Telescope live_grep<CR>",   mode = { "n", "i", "v" } },
-            { "<C-c>", "<CMD>Telescope commands<CR>",    mode = { "n", "i", "v" } },
-            { "<C-k>", "<CMD>Telescope keymaps<CR>",     mode = { "n", "i", "v" } },
-            { "<C-s>", "<CMD>Telescope grep_string<CR>", mode = { "n", "i", "v" } },
-            { "<C-b>", "<CMD>Telescope buffers<CR>",     mode = { "n", "i", "v" } },
+            {
+                "<C-t>",
+                "<CMD>Telescope<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-p>",
+                "<CMD>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-g>",
+                "<CMD>Telescope live_grep<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-c>",
+                "<CMD>Telescope commands<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-m>",
+                "<CMD>Telescope keymaps<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-s>",
+                "<CMD>Telescope grep_string<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-b>",
+                "<CMD>Telescope buffers<CR>",
+                mode = { "n", "i", "v" }
+            },
         },
         config = true
     },
