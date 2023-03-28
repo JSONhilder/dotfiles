@@ -7,6 +7,7 @@ set ignorecase true
 # Custom functions
 cmd mkdir %mkdir -p "$@"
 cmd mkfile %touch "$@"
+cmd getPath %pwd | xclip -selection clipboard
 
 cmd unzip ${{
   case "$f" in
@@ -51,3 +52,6 @@ map gh cd ~/
 map gw cd ~/work
 map gc cd ~/.config
 map gd cd ~/Downloads
+
+# get current directory
+map gp push :getPath<enter>

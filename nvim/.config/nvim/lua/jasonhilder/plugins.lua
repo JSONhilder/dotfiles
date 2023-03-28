@@ -84,8 +84,6 @@ return {
     -- Telescopic Johnson
     ---------------------------------------------------------------------------------
     {
-        find_files =
-        "",
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         dependencies = "nvim-lua/plenary.nvim",
@@ -93,6 +91,11 @@ return {
             {
                 "<C-t>",
                 "<CMD>Telescope<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-o>",
+                "<CMD>Telescope oldfiles<CR>",
                 mode = { "n", "i", "v" }
             },
             {
@@ -113,11 +116,16 @@ return {
             {
                 "<C-m>",
                 "<CMD>Telescope keymaps<CR>",
-                mode = { "n", "i", "v" }
+                mode = { "n" }
             },
             {
                 "<C-s>",
                 "<CMD>Telescope grep_string<CR>",
+                mode = { "n", "i", "v" }
+            },
+            {
+                "<C-f>",
+                "<CMD>Telescope current_buffer_fuzzy_find<CR>",
                 mode = { "n", "i", "v" }
             },
             {
@@ -187,5 +195,7 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin"
-    }
+    },
+    { "blazkowolf/gruber-darker.nvim" },
+    { "ellisonleao/gruvbox.nvim" }
 }

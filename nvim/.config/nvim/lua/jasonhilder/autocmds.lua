@@ -7,8 +7,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
-
-vim.api.nvim_create_autocmd({ "BufWritePre"}, {
+-- Clear white space on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
     command = [[%s/\s\+$//e]],
 })
