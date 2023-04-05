@@ -35,4 +35,4 @@ vim.o.breakindent = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "jellybeans-nvim"

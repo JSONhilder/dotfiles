@@ -1,5 +1,8 @@
 vim.g.mapleader = " ";
 
+vim.keymap.set("i", "<C-l>", "<Esc>")
+vim.keymap.set("i", "jj", "<Esc>")
+
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -14,7 +17,8 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<CR>", { desc = "Resize split dow
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize split left" })
 
 -- Buffer management
-vim.keymap.set("n", "<leader>l", "<cmd>bp<CR>", { desc = "previous buffer" })
+vim.keymap.set("n", "<leader>l", "<cmd>b#<CR>", { desc = "last edited buffer" })
+vim.keymap.set("n", "<leader>c", "<cmd>bd<CR>", { desc = "close buffer" })
 vim.keymap.set("n", "<leader>C", "<cmd>!%bd<CR><cmd>intro<CR>", { desc = "reset buffers" })
 vim.keymap.set("n", "<S-h>", "<cmd>bp<CR>", { desc = "previous buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bn<CR>", { desc = "next buffer" })
@@ -37,3 +41,6 @@ vim.keymap.set("n", "<leader>gg", ":Lazygit <CR>", { desc = "Lazygit" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+
+-- start searching
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

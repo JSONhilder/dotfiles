@@ -15,82 +15,36 @@ font:
 cursor:
   style: Beam
 
-# mocha Alacritty Colors
+# Jellybeans
 colors:
-    primary:
-        background: "#1E1E2E" # base
-        foreground: "#CDD6F4" # text
-        # Bright and dim foreground colors
-        dim_foreground: "#CDD6F4" # text
-        bright_foreground: "#CDD6F4" # text
+  # Default colors
+  primary:
+    background: '0x121212'
+    foreground: '0xdedede'
 
-    # Cursor colors
-    cursor:
-        text: "#1E1E2E" # base
-        cursor: "#F5E0DC" # rosewater
-    vi_mode_cursor:
-        text: "#1E1E2E" # base
-        cursor: "#B4BEFE" # lavender
+  # Cursor colors
+  cursor:
+    text:   '0xffffff'
+    cursor: '0xffa460'
 
-    # Search colors
-    search:
-        matches:
-            foreground: "#1E1E2E" # base
-            background: "#A6ADC8" # subtext0
-        focused_match:
-            foreground: "#1E1E2E" # base
-            background: "#A6E3A1" # green
-        footer_bar:
-            foreground: "#1E1E2E" # base
-            background: "#A6ADC8" # subtext0
+  # Normal colors
+  normal:
+    black:   '0x929292'
+    red:     '0xe27373'
+    green:   '0x94b979'
+    yellow:  '0xffba7b'
+    blue:    '0x97bedc'
+    magenta: '0xe1c0fa'
+    cyan:    '0x00988e'
+    white:   '0xdedede'
 
-    # Keyboard regex hints
-    hints:
-        start:
-            foreground: "#1E1E2E" # base
-            background: "#F9E2AF" # yellow
-        end:
-            foreground: "#1E1E2E" # base
-            background: "#A6ADC8" # subtext0
-
-    # Selection colors
-    selection:
-        text: "#1E1E2E" # base
-        background: "#F5E0DC" # rosewater
-
-    # Normal colors
-    normal:
-        black: "#45475A" # surface1
-        red: "#F38BA8" # red
-        green: "#A6E3A1" # green
-        yellow: "#F9E2AF" # yellow
-        blue: "#89B4FA" # blue
-        magenta: "#F5C2E7" # pink
-        cyan: "#94E2D5" # teal
-        white: "#BAC2DE" # subtext1
-
-    # Bright colors
-    bright:
-        black: "#585B70" # surface2
-        red: "#F38BA8" # red
-        green: "#A6E3A1" # green
-        yellow: "#F9E2AF" # yellow
-        blue: "#89B4FA" # blue
-        magenta: "#F5C2E7" # pink
-        cyan: "#94E2D5" # teal
-        white: "#A6ADC8" # subtext0
-
-    # Dim colors
-    dim:
-        black: "#45475A" # surface1
-        red: "#F38BA8" # red
-        green: "#A6E3A1" # green
-        yellow: "#F9E2AF" # yellow
-        blue: "#89B4FA" # blue
-        magenta: "#F5C2E7" # pink
-        cyan: "#94E2D5" # teal
-        white: "#BAC2DE" # subtext1
-
-    indexed_colors:
-        - { index: 16, color: "#FAB387" }
-        - { index: 17, color: "#F5E0DC" }
+  # Bright colors
+  bright:
+    black:   '0xbdbdbd'
+    red:     '0xffa1a1'
+    green:   '0xbddeab'
+    yellow:  '0xffdca0'
+    blue:    '0xb1d8f6'
+    magenta: '0xfbdaff'
+    cyan:    '0x1ab2a8'
+    white:   '0xffffff'
