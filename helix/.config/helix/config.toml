@@ -1,4 +1,4 @@
-theme = "gruber_dark"
+theme = "jellybeans"
 
 [editor]
 completion-trigger-len = 1
@@ -30,9 +30,9 @@ Y = ["select_mode", "goto_line_end", "yank", "normal_mode"]
 # Delete to end of line from cursor
 D = "kill_to_line_end"
 # Buffer management
-"C-n" = "goto_next_buffer"
-"C-p" = "goto_previous_buffer"
-"space" = { "c" = ":buffer-close" }
+C-l = "goto_next_buffer"
+C-h = "goto_previous_buffer"
+space = {  "c" = ":buffer-close", "l" = ":bp" }
 # Move highlighted lines
 C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]   

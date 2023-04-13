@@ -8,3 +8,8 @@ require("jasonhilder.lazy")
 require("jasonhilder.statusline")
 -- Set options
 require("jasonhilder.set")
+
+-- MOVE TO FUNCTIONS FILE
+function Unwindows_file()
+    vim.cmd [[%s/\r//]]
+end

@@ -37,7 +37,17 @@ return {
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "c", "lua", "rust", "html", "twig", "javascript" },
+                ensure_installed = {
+                    "c",
+                    "vim",
+                    "lua",
+                    "rust",
+                    "html",
+                    "twig",
+                    "javascript",
+                    "typescript",
+                    "python"
+                },
                 highlight = { enable = true, }
             }
         end
@@ -176,7 +186,12 @@ return {
     ---------------------------------------------------------------------------------
     -- Comment code blocks
     ---------------------------------------------------------------------------------
-    { "numToStr/Comment.nvim" },
+    {
+        "numToStr/Comment.nvim",
+        config = function()
+            require('Comment').setup()
+        end
+    },
     ---------------------------------------------------------------------------------
     -- use systems lf in neovim
     ---------------------------------------------------------------------------------
@@ -196,6 +211,7 @@ return {
         "catppuccin/nvim",
         name = "catppuccin"
     },
-    { "blazkowolf/gruber-darker.nvim" },
-    { "ellisonleao/gruvbox.nvim" }
+    { "sainnhe/gruvbox-material" },
+    { 'rktjmp/lush.nvim' },
+    { 'metalelf0/jellybeans-nvim' }
 }

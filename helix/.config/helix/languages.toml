@@ -116,11 +116,12 @@ scope = "source.python"
 injection-regex = "python"
 file-types = ["py"]
 shebangs = ["python"]
-roots = []
+roots = ["pyrightconfig.json", ".git"]
 comment-token = "#"
-language-server = { command = "pylsp" }
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
 # TODO: pyls needs utf-8 offsets
 indent = { tab-width = 4, unit = "    " }
+config = { }
 
 [[grammar]]
 name = "python"

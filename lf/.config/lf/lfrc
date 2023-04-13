@@ -3,6 +3,7 @@ set drawbox
 set shell sh
 set info size
 set ignorecase true
+set hidden true
 
 # Custom functions
 cmd mkdir %mkdir -p "$@"
