@@ -38,6 +38,10 @@ export PATH=$HOME/lua/src:$PATH
 # Nim
 export PATH=/home/jason/.nimble/bin:$PATH
 
+# Tmuxifier
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting)
@@ -58,6 +62,7 @@ alias vscode="code . && exit"
 alias work="cd ~/work/"
 alias wiki="nvim -c ':VimwikiDiaryIndex'"
 alias strongbox="~/.strongbox/strongbox"
+alias tmx="tmuxifier"
 
 # Function to copy alias's to zshenv file (for nvim/vim cmd to use)
 function zshalias()

@@ -1,4 +1,4 @@
-theme = "jellybeans"
+theme = "gruvbox"
 
 [editor]
 completion-trigger-len = 1
@@ -20,6 +20,7 @@ skip-levels = 1
 
 [editor.lsp]
 display-messages = true
+display-inlay-hints = false
 
 [keys.normal]
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
@@ -36,6 +37,8 @@ space = {  "c" = ":buffer-close", "l" = ":bp" }
 # Move highlighted lines
 C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]   
+C-p = ["file_picker"]
+C-b = ["buffer_picker"]
 
 [keys.insert]
 j = { j = "normal_mode" } # Maps `jk` to exit insert mode
