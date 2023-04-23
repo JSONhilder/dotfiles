@@ -35,7 +35,7 @@ vim.o.breakindent = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "jellybeans-nvim"
+vim.cmd.colorscheme "gruvbox-material"
 
 vim.cmd [[
     hi Normal guibg=none ctermbg=none

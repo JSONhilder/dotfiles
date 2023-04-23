@@ -2,7 +2,7 @@ window:
     startup_mode: Maximized
     # title: ""
     decorations: None
-    # opacity: 0.96
+    opacity: 0.96
     padding:
       x: 0
       y: 3
@@ -15,36 +15,20 @@ font:
 cursor:
   style: Beam
 
-# Jellybeans
+# Colors (Doom One)
 colors:
   # Default colors
   primary:
-    background: '0x121212'
-    foreground: '0xdedede'
-
-  # Cursor colors
-  cursor:
-    text:   '0xffffff'
-    cursor: '0xffa460'
+    background: '0x282c34'
+    foreground: '0xbbc2cf'
 
   # Normal colors
   normal:
-    black:   '0x929292'
-    red:     '0xe27373'
-    green:   '0x94b979'
-    yellow:  '0xffba7b'
-    blue:    '0x97bedc'
-    magenta: '0xe1c0fa'
-    cyan:    '0x00988e'
-    white:   '0xdedede'
-
-  # Bright colors
-  bright:
-    black:   '0xbdbdbd'
-    red:     '0xffa1a1'
-    green:   '0xbddeab'
-    yellow:  '0xffdca0'
-    blue:    '0xb1d8f6'
-    magenta: '0xfbdaff'
-    cyan:    '0x1ab2a8'
-    white:   '0xffffff'
+    black:   '0x282c34'
+    red:     '0xff6c6b'
+    green:   '0x98be65'
+    yellow:  '0xecbe7b'
+    blue:    '0x51afef'
+    magenta: '0xc678dd'
+    cyan:    '0x46d9ff'
+    white:   '0xbbc2cf'
