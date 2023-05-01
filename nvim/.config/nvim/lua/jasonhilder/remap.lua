@@ -18,7 +18,7 @@ vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize 
 
 -- Buffer management
 vim.keymap.set("n", "<leader>l", "<cmd>b#<CR>", { desc = "last edited buffer" })
-vim.keymap.set("n", "<leader>c", "<cmd>bd<CR>", { desc = "close buffer" })
+vim.keymap.set("n", "<leader>x", "<cmd>bd<CR>", { desc = "close buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bp<CR>", { desc = "previous buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bn<CR>", { desc = "next buffer" })
 
@@ -44,6 +44,16 @@ vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diag
 -- start searching
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+-- Harpoon
+vim.keymap.set("n", "<leader><leader>", ":lua require('harpoon.ui').toggle_quick_menu() <CR>")
+vim.keymap.set("n", "<leader>ha", ":lua require('harpoon.mark').add_file() <CR>")
+vim.keymap.set("n", "<leader>hh", ":lua require('harpoon.ui').nav_prev() <CR>")
+vim.keymap.set("n", "<leader>hl", ":lua require('harpoon.ui').nav_next() <CR>")
+
+-- LSP binds
+vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action() <CR>")
+vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>")
+vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>")
 
 -- MOVE TO FUNCTIONS FILE
 -- The below lua script keeps track of buffers that have been "touched" (entered insert mode or modified the buffer).
@@ -81,3 +91,8 @@ vim.keymap.set('n', '<Leader>C',
             end
         end
     end, { silent = true, desc = 'Close unused buffers' })
+
+-- MOVE TO FUNCTIONS FILE
+function Unwindows_file()
+    vim.cmd [[%s/\r//]]
+end

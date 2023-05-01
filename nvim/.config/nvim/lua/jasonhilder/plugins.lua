@@ -29,7 +29,7 @@ return {
             vim.diagnostic.config { virtual_text = true }
         end
     },
-    ---------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------
     -- Treesitter
     ---------------------------------------------------------------------------------
     {
@@ -60,9 +60,9 @@ return {
         opts = {
             show_trailing_blankline_indent = false,
             char = "▏",
-            -- use_treesitter = true,
-            --context_char = "▏",
-            --show_current_context = true,
+            use_treesitter = true,
+            context_char = "▏",
+            show_current_context = true,
         }
     },
     ---------------------------------------------------------------------------------
@@ -208,10 +208,13 @@ return {
     -- Color Scheme
     ---------------------------------------------------------------------------------
     {
-        "catppuccin/nvim",
-        name = "catppuccin"
+        'NTBBloodbath/doom-one.nvim',
+        setup = function()
+            vim.g.doom_one_transparent_background = true
+        end
     },
-    { "sainnhe/gruvbox-material" },
-    { 'rktjmp/lush.nvim' },
-    { 'metalelf0/jellybeans-nvim' }
+    ---------------------------------------------------------------------------------
+    -- Harpoon
+    ---------------------------------------------------------------------------------
+    { 'ThePrimeagen/harpoon' }
 }

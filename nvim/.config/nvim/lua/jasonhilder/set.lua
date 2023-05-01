@@ -35,7 +35,7 @@ vim.o.breakindent = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "gruvbox-material"
+vim.cmd.colorscheme "doom-one"
 
 vim.cmd [[
     hi Normal guibg=none ctermbg=none
