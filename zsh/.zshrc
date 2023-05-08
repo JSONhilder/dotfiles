@@ -11,6 +11,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 #GOLANG
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
+export PATH=$PATH:~/go/bin/gopls
 
 #Flutter
 export PATH="$PATH:/home/jason/flutter/bin"
