@@ -31,7 +31,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 
 -- File manager
-vim.keymap.set("n", "<leader>e", ":Lf <CR>", { desc = "LF Filemanager" })
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
 
 -- LazyGit
 vim.keymap.set("n", "<leader>gg", ":Lazygit <CR>", { desc = "Lazygit" })
@@ -42,55 +42,21 @@ vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous 
 vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 
 -- start searching
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search wtf" })
 
 -- Harpoon
-vim.keymap.set("n", "<leader><leader>", ":lua require('harpoon.ui').toggle_quick_menu() <CR>")
-vim.keymap.set("n", "<leader>ha", ":lua require('harpoon.mark').add_file() <CR>")
-vim.keymap.set("n", "<leader>hh", ":lua require('harpoon.ui').nav_prev() <CR>")
-vim.keymap.set("n", "<leader>hl", ":lua require('harpoon.ui').nav_next() <CR>")
+vim.keymap.set("n", "<leader><leader>", ":lua require('harpoon.ui').toggle_quick_menu() <CR>", { desc = "Harpoon List" })
+vim.keymap.set("n", "<leader>ha", ":lua require('harpoon.mark').add_file() <CR>", { desc = "Harpoon add file" })
+vim.keymap.set("n", "<leader>hh", ":lua require('harpoon.ui').nav_prev() <CR>", { desc = "Harpoon previous file" })
+vim.keymap.set("n", "<leader>hl", ":lua require('harpoon.ui').nav_next() <CR>", { desc = "Harpoon next file" })
 
 -- LSP binds
-vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action() <CR>")
-vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>")
-vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>")
+vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action() <CR>", { desc = "Code actions" })
+vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
 
--- MOVE TO FUNCTIONS FILE
--- The below lua script keeps track of buffers that have been "touched" (entered insert mode or modified the buffer).
--- (leader-C) will close all untouched buffers except the one you are currently in.
-local id = vim.api.nvim_create_augroup("startup", {
-    clear = false
-})
-
-local persistbuffer = function(bufnr)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
-    vim.fn.setbufvar(bufnr, 'bufpersist', 1)
-end
-
-vim.api.nvim_create_autocmd({ "BufRead" }, {
-    group = id,
-    pattern = { "*" },
-    callback = function()
-        vim.api.nvim_create_autocmd({ "InsertEnter", "BufModifiedSet" }, {
-            buffer = 0,
-            once = true,
-            callback = function()
-                persistbuffer()
-            end
-        })
-    end
-})
-
-vim.keymap.set('n', '<Leader>C',
-    function()
-        local curbufnr = vim.api.nvim_get_current_buf()
-        local buflist = vim.api.nvim_list_bufs()
-        for _, bufnr in ipairs(buflist) do
-            if vim.bo[bufnr].buflisted and bufnr ~= curbufnr and (vim.fn.getbufvar(bufnr, 'bufpersist') ~= 1) then
-                vim.cmd('bd ' .. tostring(bufnr))
-            end
-        end
-    end, { silent = true, desc = 'Close unused buffers' })
+-- Terminal mode
+vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 
 -- MOVE TO FUNCTIONS FILE
 function Unwindows_file()

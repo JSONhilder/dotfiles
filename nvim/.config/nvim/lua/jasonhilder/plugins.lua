@@ -46,7 +46,8 @@ return {
                     "twig",
                     "javascript",
                     "typescript",
-                    "python"
+                    "python",
+                    "go"
                 },
                 highlight = { enable = true, }
             }
@@ -193,13 +194,32 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- use systems lf in neovim
+    -- nvim tree
     ---------------------------------------------------------------------------------
-    { 'is0n/fm-nvim' },
+    {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            require("nvim-tree").setup {
+                view = {
+                    width = 40
+                }
+            }
+        end,
+    },
     ---------------------------------------------------------------------------------
     -- Colorizer
     ---------------------------------------------------------------------------------
-    { 'norcalli/nvim-colorizer.lua' },
+    {
+        'norcalli/nvim-colorizer.lua',
+        event = "VeryLazy",
+        config = function()
+            require 'colorizer'.setup {
+                'css',
+                'javascript',
+                'json'
+            }
+        end
+    },
     ---------------------------------------------------------------------------------
     -- Multi Cursor
     ---------------------------------------------------------------------------------
@@ -216,5 +236,33 @@ return {
     ---------------------------------------------------------------------------------
     -- Harpoon
     ---------------------------------------------------------------------------------
-    { 'ThePrimeagen/harpoon' }
+    { 'ThePrimeagen/harpoon' },
+    ---------------------------------------------------------------------------------
+    -- Surround
+    ---------------------------------------------------------------------------------
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    },
+    ---------------------------------------------------------------------------------
+    -- Which key
+    ---------------------------------------------------------------------------------
+    {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+        end,
+    },
 }

@@ -12,3 +12,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
     command = [[%s/\s\+$//e]],
 })
+-- auto close nvim tree
+vim.api.nvim_create_autocmd({ "QuitPre" }, {
+    callback = function() vim.cmd("NvimTreeClose") end,
+})
