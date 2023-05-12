@@ -11,6 +11,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.cursorline = true
 
 vim.opt.smartindent = true
 
@@ -40,7 +41,7 @@ vim.o.breakindent = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "doom-one"
+vim.cmd.colorscheme "jellybeans-nvim"
 
 vim.cmd [[
     hi Normal guibg=none ctermbg=none

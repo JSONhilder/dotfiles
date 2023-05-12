@@ -57,8 +57,3 @@ vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Fo
 
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
-
--- MOVE TO FUNCTIONS FILE
-function Unwindows_file()
-    vim.cmd [[%s/\r//]]
-end

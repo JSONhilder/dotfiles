@@ -13,6 +13,9 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:~/go/bin/gopls
 
+#Vlang
+export PATH=$PATH:~/github/v/
+
 #Flutter
 export PATH="$PATH:/home/jason/flutter/bin"
 
@@ -52,12 +55,11 @@ export EDITOR='nvim'
 
 # Aliases
 alias :q="exit"
-alias v="nvim"
 alias h="hx"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias vim="nvim"
-alias dots="cd ~/.dotfiles && v"
+alias dots="cd ~/.dotfiles && vim"
 alias vscode="code . && exit"
 alias work="cd ~/work/"
 alias wiki="nvim -c ':VimwikiDiaryIndex'"
