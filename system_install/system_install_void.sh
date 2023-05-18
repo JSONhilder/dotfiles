@@ -100,6 +100,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------"
     echo
     sudo xbps-install -y tmux
+    git clone https://github.com/jimeh/tmuxifier.git ~/.config/tmuxifier
     echo
     echo "===== COMPLETE ====="
     echo
@@ -173,7 +174,7 @@ fi
 # NVM(nodejs)
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install volta (node) ? [y/n]"
+    echo "Install NVM (node) ? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -181,7 +182,7 @@ fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo ""
-    echo "installing volta..."
+    echo "installing NVM..."
     echo "-------------------"
     echo
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
@@ -230,9 +231,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Installing Java Dev Kit..."
     echo "--------------------------"
     echo
-    #sudo apt install default-jre default-jdk -y
-	#https://voidlinux.org/packages/?arch=x86_64&q=openjdk11
-
+    sudo xbps-install -y openjdk11
     echo
     echo "===== COMPLETE ====="
     echo
@@ -513,5 +512,69 @@ else
     echo
 fi
 
-#set shell to zshell
-#sudo chsh -s /bin/zsh $USER
+#####################################################
+# SET SHELL
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Set default shell to zshell? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Setting zsh as default shell..."
+    echo "------------------------------"
+    echo
+
+    sudo chsh -s $(which zsh)
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+
+#####################################################
+# Symlink dot files
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Stow(symlink) dotfiles? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Symlinking dotfiles..."
+    echo "----------------------"
+    echo
+    sudo rm -rf ~/.zshrc && stow ~/.dotfiles/zsh/
+    sudo rm -rf ~/.config/nvim && stow ~/.dotfiles/nvim
+    sudo rm -rf ~/.tmux.conf && stow ~/.dotfiles/tmux
+    sudo rm -rf ~/.config/lf && stow ~/.dotfiles/lf
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+
+#####################################################
+# REBOOT OPTION
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Reboot system? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    sudo reboot
+else
+    echo
+fi

@@ -50,7 +50,7 @@ export PATH=$HOME/lua/src:$PATH
 export PATH=/home/jason/.nimble/bin:$PATH
 
 # Tmuxifier
-export PATH="$HOME/.tmuxifier/bin:$PATH"
+export PATH="$HOME/.config/tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
 
 # Standard plugins can be found in $ZSH/plugins/
