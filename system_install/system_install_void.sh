@@ -153,26 +153,14 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     # nss depedency
-	sudo xbps-install -y nss
-	#mkcert binary
+	# sudo xbps-install -y nss
+	# mkcert binary
 	curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
 	chmod +x mkcert-v*-linux-amd64
 	sudo mv mkcert-v*-linux-amd64 /usr/local/bin/
 
 	# ddev binary
-    tag=$(curl --silent https://api.github.com/repos/drud/ddev/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-
-    echo $tag
-
-    FILE="ddev_linux-amd64."$tag".tar.gz"
-    echo $FILE
-
-    download=" https://github.com/drud/ddev/releases/download/"$tag"/"$FILE
-	cd ~ && wget -O $FILE $download
-
-    tar xvf $FILE ddev
-    mv ddev /usr/local/bin/
-    rm $FILE
+    curl -LO https://raw.githubusercontent.com/ddev/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh v1.22.0-alpha2
 
     echo
     echo "===== COMPLETE ====="
