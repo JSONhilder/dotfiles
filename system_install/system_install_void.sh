@@ -556,6 +556,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     sudo rm -rf ~/.config/nvim && stow ~/.dotfiles/nvim
     sudo rm -rf ~/.tmux.conf && stow ~/.dotfiles/tmux
     sudo rm -rf ~/.config/lf && stow ~/.dotfiles/lf
+    sudo rm -rf ~/.config/tmuxifier/layouts && stow ~/.dotfiles/tmuxifier
     echo
     echo "===== COMPLETE ====="
     echo
