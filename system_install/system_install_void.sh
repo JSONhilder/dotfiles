@@ -1,4 +1,13 @@
 #!/bin/bash
+echo "Syncing void repositories..."
+echo "------------------------"
+echo
+sudo xbps-install -S
+echo
+echo "===== COMPLETE ====="
+echo ""
+echo ""
+
 echo "Install everything or select options? [y/n]"
 echo ""
 echo "Note: If you type n (no) you will be asked before each install to proceed."
@@ -21,13 +30,14 @@ else
         exit 0
     fi
 fi
+
 #####################################################
 # SYSTEM SOFTWARE
 #####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
-# mkdir -p ~/.themes ~/.fonts ~/.icons
-mkdir -p ~/work ~/github ~/tests
+mkdir -p ~/work ~/github ~/tests ~/.local/bin
+
 #####################################################
 # SYSTEM ESSENTIALS
 #####################################################
@@ -44,7 +54,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo xbps-install -Sy make gcc wget curl ripgrep xclip fzf stow unzip zip
+    sudo xbps-install -y make gcc wget curl ripgrep xclip fzf stow unzip zip
     echo
     echo "===== COMPLETE ====="
     echo
@@ -67,35 +77,14 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing system niceties..."
     echo "-----------------------------"
     echo
-    sudo xbps-install -Sy tree neofetch htop
+    sudo xbps-install -y tree neofetch htop
     echo
     echo "===== COMPLETE ====="
     echo
 else
     echo
-fi
-#####################################################
-# ZSH (Z-SHELL)
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install zsh (z-shell) ? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
 fi
 
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing zsh..."
-    echo "-----------------"
-    echo
-    sudo xbps-install -Sy zsh
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
 #####################################################
 # TMUX
 #####################################################
@@ -110,13 +99,14 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing tmux..."
     echo "------------------"
     echo
-    sudo xbps-install -Sy tmux
+    sudo xbps-install -y tmux
     echo
     echo "===== COMPLETE ====="
     echo
 else
     echo
 fi
+
 #####################################################
 # DOCKER ENGINE
 #####################################################
@@ -132,9 +122,12 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------"
     echo
 
-	sudo xbps-install -Sy lazydocker
+	sudo xbps-install -y docker
+	sudo xbps-install -y lazydocker
+    # add user
 	sudo usermod -aG docker $USER
-	#sudo ln -s /etc/sv/docker /var/service
+    # link service for startup
+	sudo ln -s /etc/sv/docker /var/service
 
     echo
     echo "===== COMPLETE ====="
@@ -142,6 +135,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
 #####################################################
 # DDEV
 #####################################################
@@ -158,19 +152,14 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-----------------------"
     echo
 
-    # sudo apt install libnss3-tools -y
-    # cd ~ && curl -LO https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh && bash install_ddev.sh
-    # sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
-    # sudo chmod a+x /usr/local/bin/mkcert
-    # rm install_ddev.sh
-
-	# sudo xbps-install -S nss
+    # nss depedency
+	sudo xbps-install -y nss
 	#mkcert binary
-	# curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
-	# chmod +x mkcert-v*-linux-amd64
-	# sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
- 	# mkcert -install
-	#ddev binary
+	curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+	chmod +x mkcert-v*-linux-amd64
+	sudo mv mkcert-v*-linux-amd64 /usr/local/bin/
+
+	# ddev binary
     tag=$(curl --silent https://api.github.com/repos/drud/ddev/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
 
     echo $tag
@@ -182,10 +171,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 	cd ~ && wget -O $FILE $download
 
     tar xvf $FILE ddev
-
-	#TODO move to bin
-    #mv zola ~/.zola
-    #rm $FILE
+    mv ddev /usr/local/bin/
+    rm $FILE
 
     echo
     echo "===== COMPLETE ====="
@@ -193,8 +180,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
 #####################################################
-# VOLTA(nodejs)
+# NVM(nodejs)
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install volta (node) ? [y/n]"
@@ -208,7 +196,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing volta..."
     echo "-------------------"
     echo
-    curl https://get.volta.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     echo
     echo "===== COMPLETE ====="
     echo
@@ -238,6 +226,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
 #####################################################
 # JDK
 #####################################################
@@ -262,6 +251,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
 #####################################################
 # FLUTTER
 #####################################################
@@ -278,13 +268,14 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "-------------------------"
     echo
 
-    cd ~ && git clone https://github.com/flutter/flutter.git -b stable
+    cd ~ && git clone https://github.com/flutter/flutter.git -b stable && mv fluter .flutter
     echo
     echo "===== COMPLETE ====="
     echo
 else
     echo
 fi
+
 #####################################################
 # ZOLA STATIC SITE GENERATOR
 #####################################################
@@ -314,7 +305,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     tar xvf $FILE zola
 
 	#TODO move to bin
-    mv zola /usr/local/bin/mkcert
+    mv zola /usr/local/bin
     rm $FILE
 
     echo
@@ -323,30 +314,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
-#####################################################
-# LAZYGIT
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Lazy Git? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
 
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "Installing lazygit..."
-    echo "---------------------"
-    echo
-
-	sudo xbps-install -Sy lazygit
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
 #####################################################
 # NEOVIM
 #####################################################
@@ -363,7 +331,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------"
     echo
 
-	sudo xbps-install -Sy make gcc neovim fzf
+	sudo xbps-install -y make gcc neovim fzf
 
     echo
     echo "===== COMPLETE ====="
@@ -371,6 +339,30 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
+#####################################################
+# ZSH (Z-SHELL)
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install zsh (z-shell) ? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing zsh..."
+    echo "-----------------"
+    echo
+    sudo xbps-install -y zsh
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+
 #####################################################
 # OH MY ZSH
 #####################################################
@@ -402,6 +394,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
 #####################################################
 # VSV
 #####################################################
@@ -416,7 +409,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo vsv
     echo
 
-	sudo xbps-install -Sy vsv
+	sudo xbps-install -y vsv
 
     echo
     echo "===== COMPLETE ====="
@@ -425,12 +418,10 @@ else
     echo
 fi
 #####################################################
-# APPLICATIONS
-#####################################################
-# VS CODE
+# Rofi launcher
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install Visual Studio Code? [y/n]"
+    echo "Install rofi launcher? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -438,21 +429,52 @@ fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo ""
-    echo "installing Visual Studio Code..."
-    echo "---------------------------------"
+    echo "installing Rofi launcher..."
+    echo "--------------------------"
     echo
 
-	# TODO
-	# sudo xbps-install -Sy vscode
+    sudo xbps-install -y rofi
 
-    echo
     echo
     echo "===== COMPLETE ====="
     echo
 else
     echo
 fi
- echo
+
+#####################################################
+# Nix package manager
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Nix Package Manager? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing Nix Package manager..."
+    echo "--------------------------"
+    echo
+
+    sudo xbps-install -y nix
+    sudo ln -s /etc/sv/nix-daemon /var/service
+
+    source /etc/profile
+
+    nix-channel --add http://nixos.org/channels/nixpkgs-unstable
+    nix-channel --update
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+
+#####################################################
+# APPLICATIONS
 #####################################################
 # TRANSMISSION
 #####################################################
@@ -469,7 +491,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------------"
     echo
 
-    sudo xbps-install -Sy transmission
+    sudo xbps-install -y transmission
 
     echo
     echo "===== COMPLETE ====="
@@ -477,6 +499,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
 #####################################################
 # VLC
 #####################################################
@@ -493,7 +516,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------------------"
     echo
 
-    sudo xbps-install -Sy vlc
+    sudo xbps-install -y vlc
 
     echo
     echo "===== COMPLETE ====="
@@ -501,3 +524,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
+#set shell to zshell
+#sudo chsh -s /bin/zsh $USER
