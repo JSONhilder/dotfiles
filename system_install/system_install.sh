@@ -320,7 +320,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE zola
-    sudo mv zola /usr/local/bin/zola
+    sudo rm ~/.local/bin/bin/zola
+    sudo mv zola ~/.local/bin/
     rm $FILE
 
     echo

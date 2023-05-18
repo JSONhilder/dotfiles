@@ -278,12 +278,6 @@ return {
     -- Color Scheme
     ---------------------------------------------------------------------------------
     {
-        'NTBBloodbath/doom-one.nvim',
-        setup = function()
-            vim.g.doom_one_transparent_background = false
-        end
-    },
-    {
         'metalelf0/jellybeans-nvim',
         dependencies = { 'rktjmp/lush.nvim' }
     },

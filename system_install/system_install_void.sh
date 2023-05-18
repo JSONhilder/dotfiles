@@ -26,14 +26,14 @@ fi
 #####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
-mkdir -p ~/.themes ~/.fonts ~/.icons
+# mkdir -p ~/.themes ~/.fonts ~/.icons
 mkdir -p ~/work ~/github ~/tests
 #####################################################
 # SYSTEM ESSENTIALS
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, make, gcc, curl, wget, ripgrep, fzf, gnu stow, xclip, unzip)"
+    echo "( make, gcc, curl, wget, ripgrep, fzf, gnu stow, xclip, unzip, zip)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -44,7 +44,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo xbps-install -Sy make gcc wget curl ripgrep xclip fzf stow unzip
+    sudo xbps-install -Sy make gcc wget curl ripgrep xclip fzf stow unzip zip
     echo
     echo "===== COMPLETE ====="
     echo
@@ -363,11 +363,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "--------------------"
     echo
 
-
 	sudo xbps-install -Sy make gcc neovim fzf
-    # Setup Packer Quick start here for firs start
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
     echo
     echo "===== COMPLETE ====="
@@ -430,7 +426,6 @@ else
 fi
 #####################################################
 # APPLICATIONS
-#####################################################
 #####################################################
 # VS CODE
 #####################################################
@@ -506,72 +501,3 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
-#####################################################
-# THEMES
-#####################################################
-#####################################################
-# FONTS
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install Space Mono Font? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    #SPACE MONO FONT
-    font="Space Mono Nerd Font"
-    fc-list -q "$font"
-    if [ $? -eq 0 ]
-    then
-        echo "Space Mono Nerd Font found on system moving on..."
-    else
-        echo "Adding font to system..."
-
-        echo "Downloading Space Mono Nerd Font..."
-        wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SpaceMono.zip" -q --show-progress
-
-        if [ -d $HOME"/.fonts/" ]; then
-            unzip -q "./SpaceMono.zip" -d $HOME"/.fonts/"
-        else
-           mkdir -p $HOME"/.fonts/"
-           unzip -q "./SpaceMono.zip" -d $HOME"/.fonts/"
-        fi
-
-        echo "Cleaning up download..."
-        rm -rf "./SpaceMono.zip"
-
-        echo
-        echo "===== COMPLETE ====="
-        echo
-    fi
-else
-    echo
-fi
-#####################################################
-# @TODO paparius adwaita
-#####################################################
-#####################################################
-# STOW DOTFILES
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Link dot files with stow? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    cd ~ && rm -rf .config/i3 .config/i3status .config/nvim ~/.tmux.conf .config/picom .config/dunst .config/alacritty .zshrc
-
-    cd ~/.dotfiles/ && stow  nvim/ tmux/ zsh/
-
-    cd ~ && /bin/zsh -c 'source ~/.zshrc && zshalias'
-
-    sudo chsh -s /bin/zsh $USER
-fi
-
-echo
-echo "===== SYSTEM INSTALL COMPLETE ====="
-echo
