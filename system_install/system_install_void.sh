@@ -528,7 +528,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------------------"
     echo
 
-    sudo chsh -s $(which zsh)
+    chsh -s $(which zsh)
 
     echo
     echo "===== COMPLETE ====="
@@ -552,11 +552,36 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Symlinking dotfiles..."
     echo "----------------------"
     echo
+    cd ~/.dotfiles/
     sudo rm -rf ~/.zshrc && stow ~/.dotfiles/zsh/
     sudo rm -rf ~/.config/nvim && stow ~/.dotfiles/nvim
     sudo rm -rf ~/.tmux.conf && stow ~/.dotfiles/tmux
     sudo rm -rf ~/.config/lf && stow ~/.dotfiles/lf
     sudo rm -rf ~/.config/tmuxifier/layouts && stow ~/.dotfiles/tmuxifier
+    cd ~
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+
+#####################################################
+# XFCE UTILITIES
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install xfce utilities(pulse audio applet and thunar extract)? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing xfce utils..."
+    echo "----------------------"
+    echo
+    sudo xbps-install -y thunar-archive-plugin xfce4-pulseaudio-plugin
     echo
     echo "===== COMPLETE ====="
     echo

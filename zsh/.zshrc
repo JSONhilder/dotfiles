@@ -16,11 +16,10 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:~/go/bin/gopls
 
-#Vlang
-export PATH=$PATH:~/github/v/
-
 #Flutter
-export PATH="$PATH:/home/jason/flutter/bin"
+export PATH="$PATH:/home/jason/.flutter/bin"
+export CHROME_EXECUTABLE="/bin/chromium"
+
 
 #Android Studio @TODO move this to /usr/local/Android and chown the folder
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
@@ -31,23 +30,37 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 #JAVA
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/openjdk11
 export PATH=$JAVA_HOME/bin:$PATH
-
-#Volta (node)
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Node version manager
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # this loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# lazy_load_nvm() {
+#   unset -f npm node nvm
+#   export NVM_DIR=~/.nvm
+#   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+#   [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+# }
+#
+# npm() {
+#   lazy_load_nvm
+#   npm $@
+# }
+#
+# node() {
+#   lazy_load_nvm
+#   node $@
+# }
+#
+# nvm() {
+#   lazy_load_nvm
+#   nvm $@
+# }
 
 # Lua
 export PATH=$HOME/lua/src:$PATH
-
-# Nim
-export PATH=/home/jason/.nimble/bin:$PATH
 
 # Tmuxifier
 export PATH="$HOME/.config/tmuxifier/bin:$PATH"
@@ -63,14 +76,13 @@ export EDITOR='nvim'
 
 # Aliases
 alias :q="exit"
-alias h="hx"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias vim="nvim"
 alias dots="cd ~/.dotfiles && vim"
 alias vscode="code . && exit"
 alias work="cd ~/work/"
-alias wiki="nvim -c ':VimwikiDiaryIndex'"
+alias wiki="nvim -c ':VimwikiIndex'"
 alias strongbox="~/.strongbox/strongbox"
 alias tmx="tmuxifier"
 
@@ -79,10 +91,3 @@ function zshalias()
 {
   grep "^alias" ~/.zshrc > ~/.zshenv
 }
-
-# bun completions
-[ -s "/home/jason/.bun/_bun" ] && source "/home/jason/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
