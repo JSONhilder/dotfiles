@@ -1,6 +1,6 @@
 return {
     ---------------------------------------------------------------------------------
-    -- LSP Zero
+    -- LSP Zero ( completion, snippets, lspconfig )
     ---------------------------------------------------------------------------------
     {
         "VonHeikemen/lsp-zero.nvim",
@@ -54,19 +54,6 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- Add indentation guides even on blank lines
-    ---------------------------------------------------------------------------------
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        opts = {
-            show_trailing_blankline_indent = false,
-            char = "▏",
-            use_treesitter = true,
-            context_char = "▏",
-            show_current_context = true,
-        }
-    },
-    ---------------------------------------------------------------------------------
     -- Toggle Term
     ---------------------------------------------------------------------------------
     {
@@ -76,7 +63,7 @@ return {
         }
     },
     ---------------------------------------------------------------------------------
-    -- Git releated signs to the gutter, as well as utilities for managing changes
+    -- Git releated signs to the gutter
     ---------------------------------------------------------------------------------
     {
         'lewis6991/gitsigns.nvim',
@@ -135,11 +122,6 @@ return {
                 mode = { "n", "i", "v" }
             },
             {
-                "<C-f>",
-                "<CMD>Telescope current_buffer_fuzzy_find<CR>",
-                mode = { "n", "i", "v" }
-            },
-            {
                 "<C-b>",
                 "<CMD>Telescope buffers<CR>",
                 mode = { "n", "i", "v" }
@@ -162,28 +144,6 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- Auto pairs
-    ---------------------------------------------------------------------------------
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        opts = {
-            check_ts = true,
-            ts_config = { java = false },
-            fast_wrap = {
-                map = "<M-e>",
-                chars = { "{", "[", "(", '"', "'" },
-                pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-                offset = 0,
-                end_key = "$",
-                keys = "qwertyuiopzxcvbnmasdfghjkl",
-                check_comma = true,
-                highlight = "PmenuSel",
-                highlight_grey = "LineNr",
-            },
-        },
-    },
-    ---------------------------------------------------------------------------------
     -- Vimwiki
     ---------------------------------------------------------------------------------
     {
@@ -199,15 +159,6 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- Comment code blocks
-    ---------------------------------------------------------------------------------
-    {
-        "numToStr/Comment.nvim",
-        config = function()
-            require('Comment').setup()
-        end
-    },
-    ---------------------------------------------------------------------------------
     -- nvim tree
     ---------------------------------------------------------------------------------
     {
@@ -216,6 +167,12 @@ return {
             require("nvim-tree").setup {
                 view = {
                     width = 40
+                },
+                filters = {
+                    dotfiles = false,
+                },
+                git = {
+                    ignore = false,
                 }
             }
         end,
@@ -235,9 +192,18 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- Scuffed postman
+    -- Add indentation guides
     ---------------------------------------------------------------------------------
-    { "rest-nvim/rest.nvim" },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        opts = {
+            show_trailing_blankline_indent = false,
+            char = "▏",
+            use_treesitter = true,
+            context_char = "▏",
+            show_current_context = true,
+        }
+    },
     ---------------------------------------------------------------------------------
     -- Multi Cursor
     ---------------------------------------------------------------------------------
@@ -246,19 +212,6 @@ return {
     -- Harpoon
     ---------------------------------------------------------------------------------
     { 'ThePrimeagen/harpoon' },
-    ---------------------------------------------------------------------------------
-    -- Surround
-    ---------------------------------------------------------------------------------
-    {
-        "kylechui/nvim-surround",
-        version = "*", -- Use for stability; omit to use `main` branch for the latest features
-        event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
-        end
-    },
     ---------------------------------------------------------------------------------
     -- Which key
     ---------------------------------------------------------------------------------
@@ -275,10 +228,63 @@ return {
         end,
     },
     ---------------------------------------------------------------------------------
+    -- spectre
+    ---------------------------------------------------------------------------------
+    { 'nvim-pack/nvim-spectre' },
+    ---------------------------------------------------------------------------------
     -- Color Scheme
     ---------------------------------------------------------------------------------
     {
-        'metalelf0/jellybeans-nvim',
-        dependencies = { 'rktjmp/lush.nvim' }
+        "folke/tokyonight.nvim",
+        config = function()
+            require("tokyonight").setup {
+                transparent = true,
+                styles = {
+                    sidebars = "transparent",
+                    floats = "transparent",
+                },
+                on_colors = function(colors)
+                    colors.bg_statusline = "#121212"
+                    colors.border = "#394b70"
+                    colors.CursorLineNr = "#394b70"
+                end
+            }
+        end,
+        lazy = false,
+        priority = 1000,
+        opts = {},
     },
+    ---------------------------------------------------------------------------------
+    -- Surround
+    ---------------------------------------------------------------------------------
+    {
+        'echasnovski/mini.surround',
+        version = false,
+        event = "VeryLazy",
+        config = function()
+            require("mini.surround").setup()
+        end
+
+    },
+    ---------------------------------------------------------------------------------
+    -- Comment code blocks
+    ---------------------------------------------------------------------------------
+    {
+        'echasnovski/mini.comment',
+        version = false,
+        vent = "VeryLazy",
+        config = function()
+            require('mini.comment').setup()
+        end
+    },
+    ---------------------------------------------------------------------------------
+    -- Auto pairs
+    ---------------------------------------------------------------------------------
+    {
+        'echasnovski/mini.pairs',
+        version = false,
+        config = function()
+            require('mini.pairs').setup()
+        end
+    }
 }

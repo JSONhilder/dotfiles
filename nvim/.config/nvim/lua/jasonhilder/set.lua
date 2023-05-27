@@ -11,7 +11,6 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.cursorline = true
 
 vim.opt.smartindent = true
 
@@ -22,7 +21,7 @@ vim.opt.backup = false
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
@@ -41,15 +40,6 @@ vim.o.breakindent = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "jellybeans-nvim"
+vim.o.cmdheight = 0
 
-vim.cmd [[
-    hi Normal guibg=none ctermbg=none
-    hi LineNr guibg=none ctermbg=none
-    hi Folded guibg=none ctermbg=none
-    hi NonText guibg=none ctermbg=none
-    hi SpecialKey guibg=none ctermbg=none
-    hi VertSplit guibg=none ctermbg=none
-    hi SignColumn guibg=none ctermbg=none
-    hi EndOfBuffer guibg=none ctermbg=none
-]]
+vim.cmd.colorscheme "tokyonight-night"
