@@ -1,3 +1,50 @@
+local modes = {
+    ["n"] = "NOR",
+    ["no"] = "NOR",
+    ["v"] = "VIS",
+    ["V"] = "VIS LINE",
+    [""] = "VIS BLOCK",
+    ["s"] = "SEL",
+    ["S"] = "SEL LINE",
+    [""] = "SEL BLOCK",
+    ["i"] = "INS",
+    ["ic"] = "INS",
+    ["R"] = "REPLACE",
+    ["Rv"] = "VIS REPLACE",
+    ["c"] = "CMD",
+    ["cv"] = "VIM EX",
+    ["ce"] = "EX",
+    ["r"] = "PROMPT",
+    ["rm"] = "MOAR",
+    ["r?"] = "CONFIRM",
+    ["!"] = "SHELL",
+    ["t"] = "TERM",
+}
+
+local function mode()
+    local current_mode = vim.api.nvim_get_mode().mode
+    return string.format(" %s ", modes[current_mode]):upper()
+end
+
+local function update_mode_colors()
+    local current_mode = vim.api.nvim_get_mode().mode
+    local mode_color = "%#StatusLineAccent#"
+    if current_mode == "n" then
+        mode_color = "%#StatuslineAccent#"
+    elseif current_mode == "i" or current_mode == "ic" then
+        mode_color = "%#StatuslineInsertAccent#"
+    elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
+        mode_color = "%#StatuslineVisualAccent#"
+    elseif current_mode == "R" then
+        mode_color = "%#StatuslineReplaceAccent#"
+    elseif current_mode == "c" then
+        mode_color = "%#StatuslineCmdLineAccent#"
+    elseif current_mode == "t" then
+        mode_color = "%#StatuslineTerminalAccent#"
+    end
+    return mode_color
+end
+
 local function filepath()
     local fpath = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.:h")
     if fpath == "" or fpath == "." then
@@ -105,8 +152,12 @@ end
 
 Statusline = {}
 
+---@diagnostic disable-next-line: duplicate-set-field
 Statusline.active = function()
     return table.concat {
+        "%#Statusline#",
+        update_mode_colors(),
+        mode(),
         "[",
         filepath(),
         filename(),
@@ -120,6 +171,7 @@ Statusline.active = function()
     }
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function Statusline.inactive()
     return " %F"
 end

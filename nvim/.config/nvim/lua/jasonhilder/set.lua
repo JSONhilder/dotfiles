@@ -42,4 +42,4 @@ vim.o.termguicolors = true
 
 vim.o.cmdheight = 0
 
-vim.cmd.colorscheme "tokyonight-night"
+vim.cmd.colorscheme "kanagawa"

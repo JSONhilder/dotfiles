@@ -25,3 +25,6 @@ vim.api.nvim_create_autocmd(
 )
 -- Vlang
 vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+-- cmd height 0 recording message
+vim.cmd [[ autocmd RecordingEnter * set cmdheight=1 ]]
+vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
