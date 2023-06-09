@@ -2,14 +2,8 @@
 set $mod Mod4
 set $alt Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-#font pango:Hack Nerd Font 10
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
 font pango:JetbrainsMono Nerd Font 10
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango:DejaVu Sans Mono 8
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -43,9 +37,9 @@ exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id xfce4-popup-whiskermenu
+# bindsym $mod+d exec --no-startup-id xfce4-popup-whiskermenu
 # A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 
 # change focus
 bindsym $mod+h focus left
@@ -86,7 +80,6 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -104,8 +97,8 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
+set $ws6 "6"
 
-# set $ws6 "6"
 # set $ws7 "7"
 # set $ws8 "8"
 # set $ws9 "9"
@@ -117,8 +110,10 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym $alt+q workspace number $ws1
 bindsym $alt+w workspace number $ws2
 bindsym $alt+e workspace number $ws3
-bindsym $alt+o workspace number $ws4
-bindsym $alt+p workspace number $ws5
+bindsym $alt+i workspace number $ws4
+bindsym $alt+o workspace number $ws5
+bindsym $alt+p workspace number $ws6
+
 # bindsym $mod+6 workspace number $ws6
 # bindsym $mod+7 workspace number $ws7
 # bindsym $mod+8 workspace number $ws8
@@ -129,8 +124,9 @@ bindsym $alt+p workspace number $ws5
 bindsym $mod+$alt+q move container to workspace number $ws1
 bindsym $mod+$alt+w move container to workspace number $ws2
 bindsym $mod+$alt+e move container to workspace number $ws3
-bindsym $mod+$alt+o move container to workspace number $ws4
-bindsym $mod+$alt+p move container to workspace number $ws5
+bindsym $mod+$alt+i move container to workspace number $ws4
+bindsym $mod+$alt+o move container to workspace number $ws5
+bindsym $mod+$alt+p move container to workspace number $ws6
 
 # bindsym $mod+Shift+6 move container to workspace number $ws6
 # bindsym $mod+Shift+7 move container to workspace number $ws7
@@ -142,9 +138,9 @@ bindsym $mod+$alt+p move container to workspace number $ws5
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # rerun screen setup script
 # bindsym $mod+Shift+s exec ~/.dotfiles/scripts/screen-manager.sh
-
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -193,10 +189,20 @@ mode "$mode_redshift" {
 hide_edge_borders smart
 focus_on_window_activation focus
 
+bar {
+     status_command i3status
+     # Tray settings
+     tray_padding 4
+}
+
 # Window Gaps
 gaps inner 5
 gaps outer 5
 
+#########################################################
+# NOTE: While using xfce alot of functionality is started
+# through its built in system, nm-applet, volume ctl etc.
+#########################################################
 # picom run through xfce4 session manager
 exec_always --no-startup-id feh --bg-scale ~/wallpapers/ghibli-forest-dark.png
 
@@ -206,4 +212,5 @@ exec_always --no-startup-id feh --bg-scale ~/wallpapers/ghibli-forest-dark.png
 for_window [title=".*Emulator.*"] floating enable border pixel 0
 for_window [title=".*AnyDesk.*"] floating enable border pixel 0
 for_window [title=".*Android.*"] floating enable enable border pixel 0
-for_window [title="Thunar"] floating enable border pixel 0
+for_window [title=".*mpv.*"] floating enable enable border pixel 0
+#for_window [title="Thunar"] floating enable border pixel 0

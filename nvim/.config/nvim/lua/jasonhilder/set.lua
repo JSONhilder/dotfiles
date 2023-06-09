@@ -42,4 +42,7 @@ vim.o.termguicolors = true
 
 vim.o.cmdheight = 0
 
-vim.cmd.colorscheme "kanagawa"
+vim.cmd.colorscheme "mellifluous"
+vim.cmd [[
+    Mellifluous mountain
+]]
