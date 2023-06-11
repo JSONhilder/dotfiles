@@ -21,16 +21,16 @@ if initialize_session "paperwasp"; then
 
   select_pane 1
   run_cmd "cd ~/work/research-admin-svelte && clear"
+  split_h 70
 
-  split_h 55
   select_pane 2
   run_cmd "cd ~/work/research-api && clear"
+  split_h 50
 
-  split_h 33
   select_pane 3
   run_cmd "cd ~/work/research-app-rn && clear"
-
   split_v 70
+
   select_pane 4
   run_cmd "cd ~/work/research-app-rn && clear"
 
