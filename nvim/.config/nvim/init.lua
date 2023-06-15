@@ -43,15 +43,15 @@ vim.api.nvim_create_autocmd(
     { "InsertEnter", "WinLeave" },
     { pattern = "*", command = "set nocursorline", group = cursorGrp }
 )
--- Vlang
-vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
-
 -- cmd height 0 recording message
 vim.cmd [[ autocmd RecordingEnter * set cmdheight=1 ]]
 vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
 
+-- Vlang
+vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+
 ---------------------------------------------------------------------------------
--- OPTIONS
+-- [[ OPTIONS ]]
 ---------------------------------------------------------------------------------
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
@@ -95,30 +95,6 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 vim.o.cmdheight = 0
-
--- Default theme 'habamax' with transparent backgrounds
-vim.cmd.colorscheme "habamax"
-vim.cmd [[
-    hi Normal guibg=none ctermbg=none
-    hi LineNr guibg=none ctermbg=none
-    hi Folded guibg=none ctermbg=none
-    hi NonText guibg=none ctermbg=none
-    hi SpecialKey guibg=none ctermbg=none
-    hi VertSplit guibg=none ctermbg=none
-    hi SignColumn guibg=none ctermbg=none
-    hi EndOfBuffer guibg=none ctermbg=none
-    hi DiffChange guibg=none ctermbg=none guifg=#d7875f
-    hi StatusLine guibg=#5f87af
-    hi StatusLineNC guibg=none guifg=#bcbcbc
-    hi MatchParen guibg=#d7875f guifg=#000000
-]]
-
----------------------------------------------------------------------------------
--- load plugins
----------------------------------------------------------------------------------
-require('lazy').setup({
-    { import = 'plugins' }
-})
 
 ---------------------------------------------------------------------------------
 -- [[ KEYMAPS ]]
@@ -202,6 +178,34 @@ vim.keymap.set("n", "<C-s>", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", {
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 
 ---------------------------------------------------------------------------------
--- custom statusline
+-- [[ PLUGIN CONFIGS ]]
+---------------------------------------------------------------------------------
+require('lazy').setup({
+    { import = 'plugins' }
+})
+
+---------------------------------------------------------------------------------
+-- [[ COLORSCHEME ]]
+---------------------------------------------------------------------------------
+-- Default theme 'habamax' with transparent backgrounds
+-- vim.cmd.colorscheme "habamax"
+-- vim.cmd [[
+--     hi Normal guibg=none ctermbg=none
+--     hi LineNr guibg=none ctermbg=none
+--     hi Folded guibg=none ctermbg=none
+--     hi NonText guibg=none ctermbg=none
+--     hi SpecialKey guibg=none ctermbg=none
+--     hi VertSplit guibg=none ctermbg=none
+--     hi SignColumn guibg=none ctermbg=none
+--     hi EndOfBuffer guibg=none ctermbg=none
+--     hi DiffChange guibg=none ctermbg=none guifg=#d7875f
+--     hi StatusLine guibg=#5f87af
+--     hi StatusLineNC guibg=none guifg=#bcbcbc
+--     hi MatchParen guibg=#d7875f guifg=#000000
+-- ]]
+vim.cmd.colorscheme "tokyonight"
+
+---------------------------------------------------------------------------------
+-- [[ STATUSLINE ]]
 ---------------------------------------------------------------------------------
 require("statusline")

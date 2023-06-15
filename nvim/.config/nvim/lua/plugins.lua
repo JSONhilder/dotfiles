@@ -107,7 +107,15 @@ return {
     ---------------------------------------------------------------------------------
     -- FZF
     ---------------------------------------------------------------------------------
-    { 'ibhagwan/fzf-lua' },
+    {
+        'ibhagwan/fzf-lua',
+        opts = {
+            winopts = {
+                fullscreen = true,
+                preview = { border = 'noborder' }
+            }
+        }
+    },
     ---------------------------------------------------------------------------------
     -- Vimwiki
     ---------------------------------------------------------------------------------
@@ -227,6 +235,27 @@ return {
         version = false,
         config = function()
             require('mini.pairs').setup()
+        end
+    },
+    ---------------------------------------------------------------------------------
+    -- Colorscheme
+    ---------------------------------------------------------------------------------
+    {
+        "folke/tokyonight.nvim",
+        event = "VeryLazy",
+        priority = 1000,
+        config = function()
+            require("tokyonight").setup({
+                transparent = true,
+                styles = {
+                    sidebars = "transparent",
+                    floats = "transparent",
+                },
+                on_colors = function(colors)
+                    colors.border = "#394b70"
+                    colors.CursorLineNr = "#394b70"
+                end
+            })
         end
     },
     ---------------------------------------------------------------------------------
