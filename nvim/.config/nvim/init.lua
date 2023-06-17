@@ -187,22 +187,6 @@ require('lazy').setup({
 ---------------------------------------------------------------------------------
 -- [[ COLORSCHEME ]]
 ---------------------------------------------------------------------------------
--- Default theme 'habamax' with transparent backgrounds
--- vim.cmd.colorscheme "habamax"
--- vim.cmd [[
---     hi Normal guibg=none ctermbg=none
---     hi LineNr guibg=none ctermbg=none
---     hi Folded guibg=none ctermbg=none
---     hi NonText guibg=none ctermbg=none
---     hi SpecialKey guibg=none ctermbg=none
---     hi VertSplit guibg=none ctermbg=none
---     hi SignColumn guibg=none ctermbg=none
---     hi EndOfBuffer guibg=none ctermbg=none
---     hi DiffChange guibg=none ctermbg=none guifg=#d7875f
---     hi StatusLine guibg=#5f87af
---     hi StatusLineNC guibg=none guifg=#bcbcbc
---     hi MatchParen guibg=#d7875f guifg=#000000
--- ]]
 vim.cmd.colorscheme "tokyonight"
 
 ---------------------------------------------------------------------------------
