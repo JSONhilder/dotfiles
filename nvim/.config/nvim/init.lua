@@ -137,7 +137,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 
 -- File manager
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
+vim.keymap.set("n", "<leader>e", ":lua MiniFiles.open() <CR>", { desc = "Nvim Tree" })
 
 -- LazyGit
 vim.keymap.set("n", "<leader>gg", ":Lazygit <CR>", { desc = "Lazygit" })
@@ -189,7 +189,19 @@ require('lazy').setup({
 ---------------------------------------------------------------------------------
 vim.cmd.colorscheme "tokyonight"
 
----------------------------------------------------------------------------------
--- [[ STATUSLINE ]]
----------------------------------------------------------------------------------
-require("statusline")
+-- Default theme 'habamax' with transparent backgrounds
+-- vim.cmd.colorscheme "habamax"
+-- vim.cmd [[
+--     hi Normal guibg=none ctermbg=none
+--     hi LineNr guibg=none ctermbg=none
+--     hi Folded guibg=none ctermbg=none
+--     hi NonText guibg=none ctermbg=none
+--     hi SpecialKey guibg=none ctermbg=none
+--     hi VertSplit guibg=none ctermbg=none
+--     hi SignColumn guibg=none ctermbg=none
+--     hi EndOfBuffer guibg=none ctermbg=none
+--     hi DiffChange guibg=none ctermbg=none guifg=#d7875f
+--     hi StatusLine guibg=#5f87af
+--     hi StatusLineNC guibg=none guifg=#bcbcbc
+--     hi MatchParen guibg=#d7875f guifg=#000000
+-- ]]
