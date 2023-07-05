@@ -137,7 +137,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 
 -- File manager
-vim.keymap.set("n", "<leader>e", ":lua MiniFiles.open() <CR>", { desc = "Nvim Tree" })
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
 
 -- LazyGit
 vim.keymap.set("n", "<leader>gg", ":Lazygit <CR>", { desc = "Lazygit" })
