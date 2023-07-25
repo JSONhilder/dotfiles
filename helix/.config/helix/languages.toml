@@ -1,0 +1,29 @@
+[[language]]
+name = "javascript"
+formatter = { command = "prettier" }
+auto-format = true
+indent = { tab-width = 4, unit = "t" }
+
+[[language]]
+name = "typescript"
+formatter = { command = "prettier" }
+auto-format = true
+indent = { tab-width = 4, unit = "t" }
+
+[[language]]
+name = "tsx"
+formatter = { command = "prettier" }
+auto-format = true
+indent = { tab-width = 4, unit = "t" }
+
+[[language]]
+name = "jsx"
+formatter = { command = "prettier" }
+auto-format = true
+indent = { tab-width = 4, unit = "t" }
+
+[[language]]
+name = "go"
+formatter = { command = "gofmt" }
+auto-format = true
+indent = { tab-width = 4, unit = "t" }
