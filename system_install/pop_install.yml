@@ -1,28 +1,64 @@
 ---
-- name: Update and Upgrade Packages for Pop OS
+- name: Update and upgrade all packages
   hosts: localhost
   become: true
   tasks:
-    - name: Update APT package cache
+    - name: Update package lists
       apt:
         update_cache: yes
-      when: ansible_pkg_mgr == 'apt'
 
     - name: Upgrade all packages
       apt:
-        upgrade: safe
-        autoremove: yes
-      when: ansible_pkg_mgr == 'apt'
+        upgrade: dist
 
+- name: Install required packages on Pop OS
+  hosts: localhost
+  become: true
+  tasks:
     - name: Install required packages
       apt:
         name:
           - make
           - gcc
           - curl
+          - wget
           - ripgrep
           - fzf
           - stow
           - xclip
           - unzip
-      when: ansible_pkg_mgr == 'apt'
+          - tree
+          - btop
+        state: present
+
+    - name: Install Starship
+      shell: curl -sS https://starship.rs/install.sh | sh
+      args:
+        executable: /bin/bash
+
+    - name: Download lazygit
+      get_url:
+        url: https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit-linux-amd64.tar.gz
+        dest: /tmp/lazygit.tar.gz
+
+    - name: Extract lazygit
+      unarchive:
+        src: /tmp/lazygit.tar.gz
+        dest: /usr/local/bin/
+        remote_src: yes
+        creates: /usr/local/bin/lazygit
+
+- name: Install Visual Studio Code (VSCode)
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Download the latest VSCode deb package
+      get_url:
+        url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+        dest: /tmp/code.deb
+        validate_certs: no  # This is only to bypass SSL certificate validation. Remove it if you want to validate certificates.
+
+    - name: Install VSCode deb package
+      apt:
+        deb: /tmp/code.deb
+        state: present
