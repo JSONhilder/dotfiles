@@ -64,26 +64,17 @@ fi
 #####################################################
 # SYSTEM NICETIES
 #####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install system niceties ? [y/n]"
-    echo "( tree, neofetch, htop )"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
 
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo ""
-    echo "installing system niceties..."
-    echo "-----------------------------"
-    echo
-    sudo xbps-install -y tree neofetch htop
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
+read -p "Install system niceties ? (y/n) " yn
+case $yn in
+    y ) echo "installing system niceties...";
+        echo "-----------------------------"
+        sudo xbps-install -y tree neofetch htop;
+        echo "";
+        echo "===== COMPLETE =====";;
+    n ) echo "Skipping skipping system niceties...";;
+    * ) echo "Please use y or n";
+esac
 
 #####################################################
 # TMUX

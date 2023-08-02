@@ -1,0 +1,28 @@
+---
+- name: Update and Upgrade Packages for Pop OS
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: safe
+        autoremove: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install required packages
+      apt:
+        name:
+          - make
+          - gcc
+          - curl
+          - ripgrep
+          - fzf
+          - stow
+          - xclip
+          - unzip
+      when: ansible_pkg_mgr == 'apt'
