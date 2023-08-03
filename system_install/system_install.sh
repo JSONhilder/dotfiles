@@ -303,7 +303,29 @@ fi
 #####################################################
 # GOLANG
 #####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Go lang? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
 
+# if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+#     echo ""
+#     echo "installing golang..."
+#     echo "------------------"
+#     echo
+
+#     $file="go1.20.7"
+#     curl "https://go.dev/dl/"$file".src.tar.gz"
+#     tar xvf $file go
+
+#     echo
+#     echo "===== complete ====="
+#     echo
+# else
+#     echo
+# fi
 #####################################################
 # JDK
 #####################################################
@@ -461,7 +483,38 @@ fi
 #####################################################
 # HELIX
 #####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Helix? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
 
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing helix..."
+    echo "--------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/helix-editor/helix/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+    echo $tag
+
+    VERSION=$(echo $tag|cut -c 2-6)
+    FILE="helix-"$VERSION"-x86_64.AppImage"
+
+
+    download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    sudo mv $FILE /usr/local/bin/hx
+    cd /usr/local/bin && chmod a+x hx
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
 #####################################################
 # NEOVIM
 #####################################################
@@ -489,10 +542,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     sudo mv nvim.appimage /usr/local/bin/nvim
     cd /usr/local/bin && chmod a+x nvim
-
-    # Setup Packer Quick start here for firs start
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
     echo
     echo "===== COMPLETE ====="
