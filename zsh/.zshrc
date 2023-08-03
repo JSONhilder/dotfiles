@@ -37,6 +37,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # lazy_load_nvm() {
 #   unset -f npm node nvm
 #   export NVM_DIR=~/.nvm
@@ -72,7 +73,7 @@ plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlightin
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='nvim'
+export EDITOR='hx'
 
 # Aliases
 alias :q="exit"
@@ -82,7 +83,7 @@ alias vim="nvim"
 alias dots="cd ~/.dotfiles && vim"
 alias vscode="code . && exit"
 alias work="cd ~/work/"
-alias wiki="nvim -c ':VimwikiIndex'"
+alias wiki="cd ~/Mega/vim_wiki && hx"
 alias strongbox="~/.strongbox/strongbox"
 alias tmx="tmuxifier"
 
@@ -91,3 +92,6 @@ function zshalias()
 {
   grep "^alias" ~/.zshrc > ~/.zshenv
 }
+
+# Starship
+eval "$(starship init zsh)"

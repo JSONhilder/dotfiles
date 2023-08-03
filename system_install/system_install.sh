@@ -26,7 +26,7 @@ fi
 #####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
-mkdir -p ~/.themes ~/.fonts ~/.icons
+mkdir -p ~/.themes ~/.fonts
 mkdir -p ~/work ~/github ~/tests
 #####################################################
 # SYSTEM ESSENTIALS
@@ -56,7 +56,7 @@ fi
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system niceties ? [y/n]"
-    echo "( tree, neofetch, htop )"
+    echo "( tree, neofetch, btop, lf)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -67,7 +67,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing system niceties..."
     echo "-----------------------------"
     echo
-    sudo apt install -y tree neofetch htop
+    sudo apt install -y tree neofetch btop lf
     echo
     echo "===== COMPLETE ====="
     echo
@@ -97,7 +97,38 @@ else
     echo
 fi
 #####################################################
-# TMUX @TODO use appimage and move to bin
+# OH MY ZSH
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install oh my zsh? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo installing oh my zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+    #OH MY ZSH PLUGINS
+    if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
+        echo "installing zsh auto suggestion plugin..."
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    fi
+
+    if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
+        echo "installing zsh syntax highlighting plugin..."
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    fi
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# TMUX 
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install tmux? [y/n]"
@@ -111,6 +142,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "------------------"
     echo
     sudo apt install -y tmux
+    git clone https://github.com/jimeh/tmuxifier.git ~/.config/tmuxifier
     echo
     echo "===== COMPLETE ====="
     echo
@@ -201,10 +233,10 @@ else
     echo
 fi
 #####################################################
-# VOLTA(nodejs)
+# NVM(nodejs)
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install volta (node) ? [y/n]"
+    echo "Install NVM (node) ? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -212,10 +244,10 @@ fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo ""
-    echo "installing volta..."
+    echo "installing NVM..."
     echo "-------------------"
     echo
-    curl https://get.volta.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     echo
     echo "===== COMPLETE ====="
     echo
@@ -245,6 +277,10 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+#####################################################
+# GOLANG
+#####################################################
+
 #####################################################
 # JDK
 #####################################################
@@ -290,9 +326,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
-#####################################################
-# @TODO LUA
-#####################################################
 #####################################################
 # ZOLA STATIC SITE GENERATOR
 #####################################################
@@ -403,7 +436,11 @@ else
     echo
 fi
 #####################################################
-# NEOVIM @TODO use appimage and move to bin
+# HELIX
+#####################################################
+
+#####################################################
+# NEOVIM
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install Neovim? [y/n]"
@@ -440,40 +477,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
-#####################################################
-# OH MY ZSH
-#####################################################
-if [[ $_override = "n" ]]; then
-    echo "Install oh my zsh? [y/n]"
-    read _proceed
-    # lowercase it
-    _proceed=${_proceed,,}
-fi
-
-if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    echo installing oh my zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
-    #OH MY ZSH PLUGINS
-    if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
-        echo "installing zsh auto suggestion plugin..."
-        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    fi
-
-    if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
-        echo "installing zsh syntax highlighting plugin..."
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    fi
-
-    echo
-    echo "===== COMPLETE ====="
-    echo
-else
-    echo
-fi
-#####################################################
-# APPLICATIONS
-#####################################################
 #####################################################
 # VS CODE
 #####################################################
@@ -553,74 +556,72 @@ else
     echo
 fi
 #####################################################
-# THEMES
-#####################################################
-#####################################################
-# FONTS
+# SET SHELL
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install Space Mono Font? [y/n]"
+    echo "Set default shell to zshell? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
 fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    #SPACE MONO FONT
-    font="Space Mono Nerd Font"
-    fc-list -q "$font"
-    if [ $? -eq 0 ]
-    then
-        echo "Space Mono Nerd Font found on system moving on..."
-    else
-        echo "Adding font to system..."
+    echo ""
+    echo "Setting zsh as default shell..."
+    echo "------------------------------"
+    echo
 
-        echo "Downloading Space Mono Nerd Font..."
-        wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SpaceMono.zip" -q --show-progress
+    chsh -s $(which zsh)
 
-        if [ -d $HOME"/.fonts/" ]; then
-            unzip -q "./SpaceMono.zip" -d $HOME"/.fonts/"
-        else
-           mkdir -p $HOME"/.fonts/"
-           unzip -q "./SpaceMono.zip" -d $HOME"/.fonts/"
-        fi
-
-        echo "Cleaning up download..."
-        rm -rf "./SpaceMono.zip"
-
-        echo
-        echo "===== COMPLETE ====="
-        echo
-    fi
+    echo
+    echo "===== COMPLETE ====="
+    echo
 else
     echo
 fi
 #####################################################
-# @TODO cousine font
-#####################################################
-#####################################################
-# @TODO paparius black icons
-#####################################################
-#####################################################
-# STOW DOTFILES
+# Symlink dot files
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Link dot files with stow? [y/n]"
+    echo "Stow(symlink) dotfiles? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
 fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-    cd ~ && rm -rf .config/i3 .config/i3status .config/nvim ~/.tmux.conf .config/picom .config/dunst .config/alacritty .zshrc
-
-    cd ~/.dotfiles/ && stow i3/ i3status/ nvim/ tmux/ picom/ dunst/ alacritty/ zsh/ htop/
-
-    cd ~ && /bin/zsh -c 'source ~/.zshrc && zshalias'
-
-    sudo chsh -s /bin/zsh $USER
+    echo ""
+    echo "Symlinking dotfiles..."
+    echo "----------------------"
+    echo
+    cd ~/.dotfiles/
+    sudo rm -rf ~/.zshrc && stow ~/.dotfiles/zsh/
+    sudo rm -rf ~/.tmux.conf && stow ~/.dotfiles/tmux
+    sudo rm -rf ~/.config/lf && stow ~/.dotfiles/lf
+    sudo rm -rf ~/.config/starship.toml && stow ~/.dotfiles/starship
+    sudo rm -rf ~/.config/tmuxifier/layouts && stow ~/.dotfiles/tmuxifier
+    sudo rm -rf ~/.config/helix && stow ~/.dotfiles/helix
+    sudo mkdir -p ~/.local/bin/ && stow ~/.dotfiles/scripts
+    #sudo rm -rf ~/.config/nvim && stow ~/.dotfiles/nvim
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# REBOOT OPTION
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Reboot system? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
 fi
 
-echo
-echo "===== SYSTEM INSTALL COMPLETE ====="
-echo
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    sudo reboot
+else
+    echo
+fi
+
