@@ -128,6 +128,29 @@ else
     echo
 fi
 #####################################################
+# STARSHIP
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Starship? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing starship..."
+    echo "------------------"
+    echo
+
+    curl -sS https://starship.rs/install.sh | sh
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
 # TMUX 
 #####################################################
 if [[ $_override = "n" ]]; then
