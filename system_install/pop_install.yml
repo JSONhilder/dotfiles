@@ -27,26 +27,32 @@
           - stow
           - xclip
           - unzip
-          - tree
+          - zsh
+          - tmux
           - btop
+          - neofetch
+          - tree
+          - transmission
+          - vlc
         state: present
+
+    - name: Switch Shell
+      shell: chsh -s $(which zsh)
 
     - name: Install Starship
       shell: curl -sS https://starship.rs/install.sh | sh
       args:
         executable: /bin/bash
 
-    - name: Download lazygit
-      get_url:
-        url: https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit-linux-amd64.tar.gz
-        dest: /tmp/lazygit.tar.gz
+    - name: Install Node Version Manager
+      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+      args:
+        executable: /bin/bash
 
-    - name: Extract lazygit
-      unarchive:
-        src: /tmp/lazygit.tar.gz
-        dest: /usr/local/bin/
-        remote_src: yes
-        creates: /usr/local/bin/lazygit
+    - name: Install Rust
+      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      args:
+        executable: /bin/bash
 
 - name: Install Visual Studio Code (VSCode)
   hosts: localhost
@@ -62,3 +68,80 @@
       apt:
         deb: /tmp/code.deb
         state: present
+
+- name: Install Docker
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'gnupg', 'lsb-release']
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Docker packages
+      apt:
+        name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose-plugin']
+        state: present
+
+    - name: Start and enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+- name: Install lazydocker
+  hosts: localhost
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Get latest release tag from GitHub API
+      shell: >
+        curl --silent https://api.github.com/repos/jesseduffield/lazydocker/releases/latest |
+        grep -Po '"tag_name": "\K.*?(?=")'
+      register: lazydocker_tag
+
+    - name: Echo the tag
+      debug:
+        var: lazydocker_tag.stdout
+
+    - name: Extract version from the tag
+      shell: "echo {{ lazydocker_tag.stdout }} | cut -c 2-7"
+      register: lazydocker_version
+
+    - name: Set the file name
+      set_fact:
+        lazydocker_file: "lazydocker_{{ lazydocker_version.stdout }}_Linux_x86_64.tar.gz"
+
+    - name: Set the download URL
+      set_fact:
+        lazydocker_download: "https://github.com/jesseduffield/lazydocker/releases/download/{{ lazydocker_tag.stdout }}/{{ lazydocker_file }}"
+
+    - name: Download lazydocker archive
+      get_url:
+        url: "{{ lazydocker_download }}"
+        dest: "~/{{ lazydocker_file }}"
+
+    - name: Extract and install lazydocker
+      shell: |
+        cd ~
+        tar xvf "{{ lazydocker_file }}" lazydocker
+        sudo mv lazydocker /usr/local/bin/lazydocker
+      ignore_errors: yes
+
+    - name: Remove the downloaded archive
+      file:
+        path: "~/{{ lazydocker_file }}"
+        state: absent
