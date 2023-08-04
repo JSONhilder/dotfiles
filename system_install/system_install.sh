@@ -22,8 +22,6 @@ else
     fi
 fi
 #####################################################
-# SYSTEM SOFTWARE
-#####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
 mkdir -p ~/.themes ~/.fonts
@@ -310,22 +308,21 @@ if [[ $_override = "n" ]]; then
     _proceed=${_proceed,,}
 fi
 
-# if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
-#     echo ""
-#     echo "installing golang..."
-#     echo "------------------"
-#     echo
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing golang..."
+    echo "------------------"
+    echo
 
-#     $file="go1.20.7"
-#     curl "https://go.dev/dl/"$file".src.tar.gz"
-#     tar xvf $file go
+    # This is a "random script" not safe but will do for now.
+    curl -fsSLo- https://s.id/golang-linux | bash
 
-#     echo
-#     echo "===== complete ====="
-#     echo
-# else
-#     echo
-# fi
+    echo
+    echo "===== complete ====="
+    echo
+else
+    echo
+fi
 #####################################################
 # JDK
 #####################################################
@@ -363,8 +360,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Installing Flutter Sdk..."
     echo "-------------------------"
     echo
-
-    cd ~ && git clone https://github.com/flutter/flutter.git -b stable
+    cd ~ && git clone https://github.com/flutter/flutter.git -b stable && mv fluter .flutter
     echo
     echo "===== COMPLETE ====="
     echo
@@ -497,13 +493,9 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     tag=$(curl --silent https://api.github.com/repos/helix-editor/helix/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-    echo $tag
+    FILE="helix-"$tag"-x86_64.AppImage"
 
-    VERSION=$(echo $tag|cut -c 2-6)
-    FILE="helix-"$VERSION"-x86_64.AppImage"
-
-
-    download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
+    download="https://github.com/helix-editor/helix/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
 
     sudo mv $FILE /usr/local/bin/hx
