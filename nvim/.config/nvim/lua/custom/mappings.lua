@@ -6,6 +6,10 @@ M.life = {
             ":NvimTreeToggle <CR>",
             "Nvim Tree"
         },
+        ["<leader>b"] = {
+            ":Telescope buffers <CR>",
+            "Buffer list"
+        },
     },
     i = {
         ["jj"] = {

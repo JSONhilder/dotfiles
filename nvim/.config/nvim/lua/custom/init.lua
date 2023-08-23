@@ -55,6 +55,28 @@ vim.keymap.set(
     ":lua require('harpoon.ui').nav_next() <CR>",
     { desc = "Harpoon next file" }
 )
+vim.keymap.set(
+    "n",
+    "<leader>b",
+    ":Telescope buffers <CR>",
+    { desc = "Harpoon next file" }
+)
+vim.keymap.set(
+    "n",
+    "<C-p>",
+    "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
+    { desc = "Find all"}
+)
+vim.keymap.set("n", "<C-b>", ":Telescope buffers<CR>", { silent = true })
+-- Stay in indent mode
+vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "unindent line" })
+vim.keymap.set("v", "<Tab>", ">gv", { desc = "indent line" })
+-- Move selection and format
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
+-- buffers
+vim.keymap.set("n", "<leader>;", "<cmd>b#<CR>", { desc = "last edited buffer" })
+vim.keymap.set("n", "<leader>x", "<cmd>bd<CR>", { desc = "close buffer" })
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 vim.keymap.set('t', '<C-w>j', "<C-\\><C-n><C-w>j", { silent = true })

@@ -3,7 +3,7 @@ local M = {}
 M.mappings = require 'custom.mappings'
 M.plugins = 'custom.plugins'
 M.ui = {
-    theme = 'vscode_dark',
+    theme = 'kanagawa',
     statusline = {
         theme = "vscode_colored"
     },
@@ -11,7 +11,7 @@ M.ui = {
         load_on_startup = true
     },
     tabufline = {
-        enabled = true
+        enabled = false
     },
     telescope = { style = "bordered" }
 }

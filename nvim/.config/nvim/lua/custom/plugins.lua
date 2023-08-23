@@ -7,6 +7,23 @@ local plugins = {
      end,
   },
   {
+    "nvim-telescope/telescope.nvim",
+    config = function()
+        require 'telescope'.setup {
+            defaults = {
+                mappings = {
+                  i = {
+                    ['<C-p>'] = require('telescope.actions.layout').toggle_preview
+                  }
+                },
+                preview = {
+                  hide_on_startup = true -- hide previewer when picker starts
+                }
+            }
+        }
+    end
+  },
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
