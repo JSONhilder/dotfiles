@@ -111,7 +111,7 @@ return {
         'ibhagwan/fzf-lua',
         opts = {
             winopts = {
-                fullscreen = true,
+                fullscreen = false,
                 preview = { border = 'noborder' }
             }
         }
@@ -137,6 +137,12 @@ return {
     {
         'nvim-tree/nvim-tree.lua',
         config = function()
+            vim.g.nvim_tree_show_icons = {
+                git = 0,
+                folders = 0,
+                files = 0,
+                folder_arrows = 0,
+            }
             require("nvim-tree").setup {
                 view = {
                     width = 40
@@ -160,7 +166,8 @@ return {
             require 'colorizer'.setup {
                 'css',
                 'javascript',
-                'json'
+                'json',
+                'lua'
             }
         end
     },
@@ -203,7 +210,12 @@ return {
     ---------------------------------------------------------------------------------
     -- spectre
     ---------------------------------------------------------------------------------
-    { 'nvim-pack/nvim-spectre' },
+    {
+        'nvim-pack/nvim-spectre',
+        dependencies = {
+            'nvim-lua/plenary.nvim'
+        },
+    },
     ---------------------------------------------------------------------------------
     -- Surround
     ---------------------------------------------------------------------------------
@@ -275,14 +287,4 @@ return {
             })
         end
     },
-    ---------------------------------------------------------------------------------
-    -- FLUTTER SPECIFIC
-    ---------------------------------------------------------------------------------
-    {
-        'akinsho/flutter-tools.nvim',
-        lazy = false,
-        dependencies = {
-            'nvim-lua/plenary.nvim'
-        },
-    }
 }

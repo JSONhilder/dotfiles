@@ -14,7 +14,6 @@ if not vim.loop.fs_stat(lazypath) then
     }
 end
 vim.opt.rtp:prepend(lazypath)
-
 ---------------------------------------------------------------------------------
 -- [[ AUTOCMDS ]]
 ---------------------------------------------------------------------------------
@@ -46,10 +45,6 @@ vim.api.nvim_create_autocmd(
 -- cmd height 0 recording message
 vim.cmd [[ autocmd RecordingEnter * set cmdheight=1 ]]
 vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
-
--- Vlang
-vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
-
 ---------------------------------------------------------------------------------
 -- [[ OPTIONS ]]
 ---------------------------------------------------------------------------------
@@ -95,7 +90,6 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 vim.o.cmdheight = 0
-
 ---------------------------------------------------------------------------------
 -- [[ KEYMAPS ]]
 ---------------------------------------------------------------------------------
@@ -176,14 +170,12 @@ vim.keymap.set("n", "<C-s>", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", {
 
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
-
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
 require('lazy').setup({
     { import = 'plugins' }
 })
-
 ---------------------------------------------------------------------------------
 -- [[ COLORSCHEME ]]
 ---------------------------------------------------------------------------------

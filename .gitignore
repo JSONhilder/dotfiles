@@ -1,2 +1,5 @@
 /nvim/.config/nvim/plugin/
 /nvim/.config/nvim/lazy-lock.json
+
+/nvim_old/.config/nvim/plugin/
+/nvim_old/.config/nvim/lazy-lock.json
