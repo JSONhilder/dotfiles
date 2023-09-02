@@ -2,57 +2,42 @@ return {
     ---------------------------------------------------------------------------------
     -- LSP Zero ( completion, snippets, lspconfig )
     ---------------------------------------------------------------------------------
+    --  The configuration is done below. Search for lspconfig to find it below.
     {
-        "VonHeikemen/lsp-zero.nvim",
+        -- LSP Configuration & Plugins
+        'neovim/nvim-lspconfig',
         dependencies = {
-            "neovim/nvim-lspconfig",
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/nvim-cmp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lua",
-            "L3MON4D3/LuaSnip",
-            "rafamadriz/friendly-snippets",
-            { "lukas-reineke/lsp-format.nvim", config = true },
-        },
-        config = function()
-            local lsp = require("lsp-zero")
-            lsp.preset("recommended")
-            lsp.on_attach(function(client, bufnr)
-                require("lsp-format").on_attach(client, bufnr)
-                -- Handle deno and normal ts projects START
-                local active_clients = vim.lsp.get_active_clients()
-                if client.name == 'denols' then
-                    for _, client_ in pairs(active_clients) do
-                        -- stop tsserver if denols is already active
-                        if client_.name == 'tsserver' then
-                            client_.stop()
-                        end
-                    end
-                elseif client.name == 'tsserver' then
-                    for _, client_ in pairs(active_clients) do
-                        -- prevent tsserver from starting if denols is already active
-                        if client_.name == 'denols' then
-                            client.stop()
-                        end
-                    end
-                end
-                -- Handle deno and normal ts projects END
-            end)
-            lsp.nvim_workspace()
-            lsp.setup()
-            vim.diagnostic.config { virtual_text = true }
-            local cmp = require('cmp')
+            -- Automatically install LSPs to stdpath for neovim
+            { 'williamboman/mason.nvim', config = true },
+            'williamboman/mason-lspconfig.nvim',
 
-            cmp.setup({
-                mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
-                }
-            })
-        end
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            {
+                'j-hui/fidget.nvim',
+                tag = 'legacy',
+                opts = {},
+                config = function()
+                    require("fidget").setup {}
+                end,
+            }
+        }
+    },
+
+    {
+        -- Autocompletion
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            -- Snippet Engine & its associated nvim-cmp source
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+
+            -- Adds LSP completion capabilities
+            'hrsh7th/cmp-nvim-lsp',
+
+            -- Adds a number of user-friendly snippets
+            'rafamadriz/friendly-snippets',
+        },
     },
     ------------------------------------------------------------------------------
     -- Treesitter
@@ -61,6 +46,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
+            ---@diagnostic disable-next-line: missing-fields
             require("nvim-treesitter.configs").setup {
                 ensure_installed = {
                     "c",
@@ -259,13 +245,6 @@ return {
             require('mini.statusline').setup()
         end
     },
-    {
-        'j-hui/fidget.nvim',
-        config = function()
-            require("fidget").setup {}
-        end,
-        tag = "legacy"
-    },
     ---------------------------------------------------------------------------------
     -- Colorscheme
     ---------------------------------------------------------------------------------
@@ -278,7 +257,6 @@ return {
                 transparent = true,
                 styles = {
                     sidebars = "transparent",
-                    floats = "transparent",
                 },
                 on_colors = function(colors)
                     colors.border = "#394b70"
