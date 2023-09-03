@@ -21,24 +21,18 @@ capabilities.textDocument.completion.completionItem = {
 }
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local on_attach = function(client, bufnr)
+local on_attach = function(client)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
 
-  utils.load_mappings("lspconfig", { buffer = bufnr })
-
   if client.server_capabilities.signatureHelpProvider then
     require("nvchad.signature").setup(client)
-  end
-
-  if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
-    client.server_capabilities.semanticTokensProvider = nil
   end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
-    callback = function(event)
+    callback = function()
         -- Create your keybindings here...
         local nmap = function(keys, func, desc)
             if desc then
@@ -123,4 +117,3 @@ lspconfig.lua_ls.setup{
         }
     }
 }
-

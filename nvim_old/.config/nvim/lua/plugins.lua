@@ -5,12 +5,11 @@ return {
     --  The configuration is done below. Search for lspconfig to find it below.
     {
         -- LSP Configuration & Plugins
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            { 'williamboman/mason.nvim', config = true },
+            { "williamboman/mason.nvim", config = true },
             'williamboman/mason-lspconfig.nvim',
-
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             {
@@ -23,7 +22,6 @@ return {
             }
         }
     },
-
     {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
@@ -31,10 +29,8 @@ return {
             -- Snippet Engine & its associated nvim-cmp source
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
-
             -- Adds LSP completion capabilities
             'hrsh7th/cmp-nvim-lsp',
-
             -- Adds a number of user-friendly snippets
             'rafamadriz/friendly-snippets',
         },
@@ -206,13 +202,12 @@ return {
     -- Surround
     ---------------------------------------------------------------------------------
     {
-        'echasnovski/mini.surround',
-        version = false,
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
         config = function()
-            require("mini.surround").setup()
+            require("nvim-surround").setup({})
         end
-
     },
     ---------------------------------------------------------------------------------
     -- Comment code blocks
