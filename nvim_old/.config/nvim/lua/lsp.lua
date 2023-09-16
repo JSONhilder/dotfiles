@@ -94,7 +94,7 @@ lspconfig.gopls.setup{
 ------------------------------------------------------------------------------
 -- PHP
 ------------------------------------------------------------------------------
-lspconfig.intelephense.setup{
+lspconfig.phpactor.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
