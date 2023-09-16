@@ -69,7 +69,7 @@ eval "$(tmuxifier init -)"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
