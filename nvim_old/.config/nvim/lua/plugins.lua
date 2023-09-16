@@ -151,6 +151,7 @@ return {
         event = "VeryLazy",
         config = function()
             require 'colorizer'.setup {
+                'scss',
                 'css',
                 'javascript',
                 'json',
@@ -163,6 +164,7 @@ return {
     ---------------------------------------------------------------------------------
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = "VeryLazy",
         opts = {
             show_trailing_blankline_indent = false,
             char = "▏",
@@ -220,7 +222,7 @@ return {
     {
         'echasnovski/mini.comment',
         version = false,
-        vent = "VeryLazy",
+        event = "VeryLazy",
         config = function()
             require('mini.comment').setup()
         end
@@ -248,21 +250,7 @@ return {
     ---------------------------------------------------------------------------------
     -- Colorscheme
     ---------------------------------------------------------------------------------
-    {
-        "folke/tokyonight.nvim",
-        event = "VeryLazy",
-        priority = 1000,
-        config = function()
-            require("tokyonight").setup({
-                transparent = true,
-                styles = {
-                    sidebars = "transparent",
-                },
-                on_colors = function(colors)
-                    colors.border = "#394b70"
-                    colors.CursorLineNr = "#394b70"
-                end
-            })
-        end
-    },
+    { "ellisonleao/gruvbox.nvim" },
+    {"gbprod/nord.nvim" },
+    { 'xiyaowong/transparent.nvim' }
 }
