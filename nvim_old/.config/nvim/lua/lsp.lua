@@ -3,31 +3,31 @@
 ------------------------------------------------------------------------------
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
-  snippetSupport = true,
-  preselectSupport = true,
-  insertReplaceSupport = true,
-  labelDetailsSupport = true,
-  deprecatedSupport = true,
-  commitCharactersSupport = true,
-  tagSupport = { valueSet = { 1 } },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+    documentationFormat = { "markdown", "plaintext" },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+        properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+        },
     },
-  },
 }
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local on_attach = function(client)
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
 
-  if client.server_capabilities.signatureHelpProvider then
-    require("nvchad.signature").setup(client)
-  end
+    if client.server_capabilities.signatureHelpProvider then
+        require("nvchad.signature").setup(client)
+    end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -73,37 +73,36 @@ mason_lspconfig.setup {
 local lspconfig = require "lspconfig"
 
 ------------------------------------------------------------------------------
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
--- SERVERS
+-- SERVERS: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 -- RUST
 ------------------------------------------------------------------------------
 lspconfig.rust_analyzer.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "rust" },
-  root_dir = lspconfig.util.root_pattern("Cargo.toml")
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "rust" },
+    root_dir = lspconfig.util.root_pattern("Cargo.toml")
 }
 ------------------------------------------------------------------------------
 -- Golang
 ------------------------------------------------------------------------------
 lspconfig.gopls.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 ------------------------------------------------------------------------------
 -- PHP
 ------------------------------------------------------------------------------
-lspconfig.phpactor.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
+lspconfig.intelephense.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 ------------------------------------------------------------------------------
 -- Javascript/Typescript
 ------------------------------------------------------------------------------
 lspconfig.tsserver.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 ------------------------------------------------------------------------------
 -- LUA

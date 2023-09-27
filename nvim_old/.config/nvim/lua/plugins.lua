@@ -36,6 +36,7 @@ return {
         },
     },
     {
+        -- Better placed diagnostic messages
         'dgagn/diagflow.nvim',
         event = 'LspAttach',
         opts = {}
@@ -119,31 +120,6 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- nvim tree
-    ---------------------------------------------------------------------------------
-    {
-        'nvim-tree/nvim-tree.lua',
-        config = function()
-            vim.g.nvim_tree_show_icons = {
-                git = 0,
-                folders = 0,
-                files = 0,
-                folder_arrows = 0,
-            }
-            require("nvim-tree").setup {
-                view = {
-                    width = 40
-                },
-                filters = {
-                    dotfiles = false,
-                },
-                git = {
-                    ignore = false,
-                }
-            }
-        end,
-    },
-    ---------------------------------------------------------------------------------
     -- Colorizer
     ---------------------------------------------------------------------------------
     {
@@ -186,14 +162,50 @@ return {
     ---------------------------------------------------------------------------------
     {
         "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            plugins = { spelling = true },
+            defaults = {
+                mode = { "n", "v" },
+                ["<leader>c"] = { name = "+code" },
+                ["<leader>f"] = { name = "+file/find" },
+                ["<leader>h"] = { name = "+harpoon" },
+                ["<leader>g"] = { name = "+git" },
+                ["<leader>n"] = { name = "+highlights" },
+                ["<leader>s"] = { name = "+search" },
+                ["<leader>w"] = { name = "+wiki" },
+            },
+        },
+        config = function(_, opts)
+            local wk = require("which-key")
+            wk.setup(opts)
+            wk.register(opts.defaults)
+        end,
+    },
+
+    ---------------------------------------------------------------------------------
+    -- nvim tree
+    ---------------------------------------------------------------------------------
+    {
+        'nvim-tree/nvim-tree.lua',
         config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            require("which-key").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
+            vim.g.nvim_tree_show_icons = {
+                git = 0,
+                folders = 0,
+                files = 0,
+                folder_arrows = 0,
+            }
+            require("nvim-tree").setup {
+                view = {
+                    width = 40
+                },
+                filters = {
+                    dotfiles = false,
+                },
+                git = {
+                    ignore = false,
+                }
+            }
         end,
     },
     ---------------------------------------------------------------------------------
@@ -238,7 +250,7 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- statusline
+    -- Statusline
     ---------------------------------------------------------------------------------
     {
         'echasnovski/mini.statusline',
@@ -247,10 +259,21 @@ return {
             require('mini.statusline').setup()
         end
     },
+    {
+        'goolord/alpha-nvim',
+        config = function ()
+            local alpha = require("alpha")
+            local dashboard = require("alpha.themes.dashboard")
+            local v = vim.version()
+            local time = os.date " %d-%m-%Y"
+            local platform = vim.fn.has "win32" == 1 and "" or ""
+            dashboard.section.buttons.val = {}
+            dashboard.section.footer.val = string.format(" %s %d.%d.%d  %s ",  platform, v.major, v.minor, v.patch, time)
+            alpha.setup(dashboard.config)
+        end
+    },
     ---------------------------------------------------------------------------------
     -- Colorscheme
     ---------------------------------------------------------------------------------
-    { "ellisonleao/gruvbox.nvim" },
-    {"gbprod/nord.nvim" },
-    { 'xiyaowong/transparent.nvim' }
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 }
