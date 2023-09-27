@@ -1,11 +1,17 @@
-theme = "gruv_custom"
+theme = "catppuccin_mocha"
 
 [editor]
+color-modes = true
 completion-trigger-len = 1
 line-number = "relative"
-bufferline = "multiple"
+bufferline = "never"
 cursorline = true
 true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
 
 [editor.file-picker]
 hidden = false
@@ -19,24 +25,56 @@ skip-levels = 1
 display-messages = true
 display-inlay-hints = false
 
+# command list here: https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
 [keys.normal]
-esc = ["collapse_selection", "keep_primary_selection"]
 X = "extend_line_above"
-Y = ["select_mode", "goto_line_end", "yank_main_selection_to_clipboard", "normal_mode", "collapse_selection"]
 # Delete to end of line from cursor
 D = "kill_to_line_end"
 # Buffer management
 C-l = "goto_next_buffer"
 C-h = "goto_previous_buffer"
-space = {  "c" = ":buffer-close" }
+C-b = "buffer_picker"
+esc = [
+  "collapse_selection", 
+  "keep_primary_selection"
+]
+Y = [
+  "select_mode", 
+  "goto_line_end", 
+  "yank_main_selection_to_clipboard", 
+  "normal_mode", 
+  "collapse_selection"
+]
+C-p = "file_picker"
 # Move highlighted lines
-C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
-C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]   
-C-p = ["file_picker"]
-C-b = ["buffer_picker"]
+C-j = [
+  "extend_to_line_bounds", 
+  "delete_selection", 
+  "paste_after"
+]
+C-k = [
+  "extend_to_line_bounds", 
+  "delete_selection", 
+  "move_line_up", 
+  "paste_before"
+]
+
+[keys.normal.'space']
+#g = ":sh tmux split-window -v -l 70% -c '#{pane_current_path}' lazygit"
+x = ":buffer-close"
+c = ":theme catppuccin_mocha"
+"." = [
+  ":new", 
+  ":insert-output lf-pick", 
+  "split_selection_on_newline", 
+  "goto_file", 
+  "goto_last_modification", 
+  "goto_last_modified_file", 
+  ":buffer-close!", 
+  ":sh helix-redraw",
+  ":theme catppuccin_mocha"
+]
 
 [keys.insert]
 j = { j = "normal_mode" } # Maps `jk` to exit insert mode
 C-c = "normal_mode" # Maps `jk` to exit insert mode
-
-# command list here: https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
