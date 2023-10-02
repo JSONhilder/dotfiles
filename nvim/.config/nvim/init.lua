@@ -25,8 +25,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
     group = highlight_group,
     pattern = '*',
-}
-)
+})
 -- Clear white space on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
@@ -162,6 +161,9 @@ vim.keymap.set("n", "<C-g>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { si
 vim.keymap.set("n", "<C-s>", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { silent = true })
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
+-- Terminals
+vim.keymap.set("n", "<leader>th", ":ToggleTerm size=25 direction=horizontal name=hori-term<CR>", {desc = "term 1"})
+vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float name=float-term<CR>", {desc = "term 1"})
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------

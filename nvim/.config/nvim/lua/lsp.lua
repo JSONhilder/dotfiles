@@ -42,15 +42,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
         end
 
-        nmap('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
-        nmap('<leader>ca', require('fzf-lua').lsp_code_actions, '[C]ode [A]ction')
-        nmap('<leader>cs', require('fzf-lua').lsp_document_symbols, '[D]ocument [S]ymbols')
+        nmap('<leader>cr', vim.lsp.buf.rename, 'Rename Symbol')
+        nmap('<leader>ca', require('fzf-lua').lsp_code_actions, 'Code Actions')
+        nmap('<leader>cs', require('fzf-lua').lsp_document_symbols, 'Document Symbols')
 
-        nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-        nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        nmap('gr', require('fzf-lua').lsp_definitions, '[G]oto [R]eferences')
-        nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-        nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+        nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
+        nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+        nmap('gr', require('fzf-lua').lsp_definitions, 'Goto [R]eferences')
+        nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
+        nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
 
         -- See `:help K` for why this keymap
         nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
