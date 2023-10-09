@@ -41,6 +41,16 @@ return {
         event = 'LspAttach',
         opts = {}
     },
+    {
+        -- virtual text hints
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        opts = {
+            floating_window = false,
+            floating_window_above_cur_line = false,
+        },
+        config = function(_, opts) require'lsp_signature'.setup(opts) end
+    },
     ------------------------------------------------------------------------------
     -- Treesitter
     ---------------------------------------------------------------------------------
@@ -140,13 +150,10 @@ return {
     ---------------------------------------------------------------------------------
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "VeryLazy",
+        main = "ibl",
         opts = {
-            show_trailing_blankline_indent = false,
-            char = "▏",
-            use_treesitter = true,
-            context_char = "▏",
-            show_current_context = true,
+            indent = { highlight = { "LineNr" }, char = "│" },
+            scope = { enabled = true },
         }
     },
     ---------------------------------------------------------------------------------
@@ -275,5 +282,14 @@ return {
     ---------------------------------------------------------------------------------
     -- Colorscheme
     ---------------------------------------------------------------------------------
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    --{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    {
+        "widatama/vim-phoenix",
+        priority = 1000 ,
+    },
+    {
+        "kvrohit/rasmus.nvim",
+        priority = 1000 ,
+    },
 }
+

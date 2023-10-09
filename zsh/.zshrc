@@ -11,81 +11,71 @@ export ZSH=$HOME"/.oh-my-zsh"
 ZSH_THEME="eastwood"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 
+# Better colors for write enabled files
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+
 #GOLANG
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:~/go/bin
-export PATH=$PATH:~/go/bin/gopls
-
-#Flutter
-export PATH="$PATH:/home/jason/.flutter/bin"
-export CHROME_EXECUTABLE="/bin/chromium"
-
-
-#Android Studio @TODO move this to /usr/local/Android and chown the folder
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-#JAVA
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
-export PATH=$JAVA_HOME/bin:$PATH
+#export PATH=$PATH:/usr/local/go/bin
+#export PATH=$PATH:~/go/bin
+#export PATH=$PATH:~/go/bin/gopls
 
 # Node version manager
 export NVM_DIR="$HOME/.nvm"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # lazy_load_nvm() {
-#   unset -f npm node nvm
-#   export NVM_DIR=~/.nvm
-#   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-#   [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+#     unset -f npm node nvm
+#     export NVM_DIR=~/.nvm
+#     [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+#     [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 # }
 #
 # npm() {
-#   lazy_load_nvm
-#   npm $@
+#     lazy_load_nvm
+#     npm $@
 # }
 #
 # node() {
-#   lazy_load_nvm
-#   node $@
+#     lazy_load_nvm
+#     node $@
 # }
 #
 # nvm() {
-#   lazy_load_nvm
-#   nvm $@
+#     lazy_load_nvm
+#     nvm $@
 # }
 
 # Lua
-export PATH=$HOME/lua/src:$PATH
+# export PATH=$HOME/lua/src:$PATH
 
 # Tmuxifier
-export PATH="$HOME/.config/tmuxifier/bin:$PATH"
-eval "$(tmuxifier init -)"
+#export PATH="$HOME/.config/tmuxifier/bin:$PATH"
+#eval "$(tmuxifier init -)"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting zsh-vi-mode)
+# wtf is this ? -> history-substring-search
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='hx'
+export EDITOR='vim'
 
 # Aliases
 alias :q="exit"
 alias lg="lazygit"
 alias ld="lazydocker"
-alias vim="nvim"
-alias dotfiles="cd ~/.dotfiles && vim"
-alias vscode="code . && exit"
-alias work="cd ~/work/"
-alias wiki="cd ~/Mega/vim_wiki && vim"
-alias strongbox="~/.strongbox/strongbox"
+alias nvim="~/.local/bin/nvim/bin/nvim"
+alias vim="~/.local/bin/nvim/bin/nvim"
+alias dotfiles="cd ~/dotfiles && vim"
+alias wiki="cd ~/Mega/vim_wiki && vim index.md"
 alias tmx="tmuxifier"
+
+# Work dir quick aliases
+alias rep="cd /eyona/web/repforce.co/dev.secure"
+alias lms="cd /eyona/web/lms.co/lms"
 
 # Function to copy alias's to zshenv file (for nvim/vim cmd to use)
 function zshalias()

@@ -62,11 +62,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
     ensure_installed = {
-        'rust_analyzer',
-        'tsserver',
         'lua_ls',
         'intelephense',
-        'gopls'
+        'tsserver',
+        -- 'rust_analyzer',
+        -- 'gopls'
     },
 }
 
@@ -96,6 +96,11 @@ lspconfig.gopls.setup{
 lspconfig.intelephense.setup{
     on_attach = on_attach,
     capabilities = capabilities,
+    settings = {
+        files = {
+            maxSize = 2000000;
+        }
+    }
 }
 ------------------------------------------------------------------------------
 -- Javascript/Typescript
