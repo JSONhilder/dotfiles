@@ -102,6 +102,16 @@ return {
             },
         },
     },
+    {
+        "NeogitOrg/neogit",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim",         -- required
+            "sindrets/diffview.nvim",        -- optional
+            "ibhagwan/fzf-lua",              -- optional
+        },
+        config = true
+    },
     ---------------------------------------------------------------------------------
     -- FZF
     ---------------------------------------------------------------------------------
@@ -282,14 +292,21 @@ return {
     ---------------------------------------------------------------------------------
     -- Colorscheme
     ---------------------------------------------------------------------------------
-    --{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     {
-        "widatama/vim-phoenix",
-        priority = 1000 ,
+        "ellisonleao/gruvbox.nvim",
+        config = function ()
+            require("gruvbox").setup({
+                italic = {
+                    strings = false,
+                    emphasis = false,
+                    comments = false,
+                    operators = false,
+                    folds = false,
+                }
+            })
+        end,
+        priority = 1000,
     },
-    {
-        "kvrohit/rasmus.nvim",
-        priority = 1000 ,
-    },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 }
 

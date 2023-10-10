@@ -131,7 +131,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 -- File manager
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
 -- LazyGit
-vim.keymap.set("n", "<leader>gg", ":Lazygit <CR>", { desc = "Lazygit" })
+vim.keymap.set("n", "<leader>gg", ":Neogit <CR>", { desc = "Lazygit" })
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
@@ -173,8 +173,8 @@ require('lazy').setup({
 ---------------------------------------------------------------------------------
 -- [[ COLORSCHEME ]]
 ---------------------------------------------------------------------------------
--- vim.cmd.colorscheme "catppuccin"
-vim.cmd.colorscheme "rasmus"
+--vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "gruvbox"
 ---------------------------------------------------------------------------------
 -- [[ LSP ]]
 ---------------------------------------------------------------------------------
