@@ -24,10 +24,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
-
-    if client.server_capabilities.signatureHelpProvider then
-        require("nvchad.signature").setup(client)
-    end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -66,7 +62,8 @@ mason_lspconfig.setup {
         'intelephense',
         'tsserver',
         -- 'rust_analyzer',
-        -- 'gopls'
+        -- 'gopls',
+        -- 'zig????'
     },
 }
 
@@ -121,3 +118,6 @@ lspconfig.lua_ls.setup{
         }
     }
 }
+------------------------------------------------------------------------------
+-- Zig ???
+------------------------------------------------------------------------------

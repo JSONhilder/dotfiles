@@ -36,12 +36,6 @@ return {
         },
     },
     {
-        -- Better placed diagnostic messages
-        'dgagn/diagflow.nvim',
-        event = 'LspAttach',
-        opts = {}
-    },
-    {
         -- virtual text hints
         "ray-x/lsp_signature.nvim",
         event = "VeryLazy",
@@ -51,6 +45,12 @@ return {
         },
         config = function(_, opts) require'lsp_signature'.setup(opts) end
     },
+    -- {
+    --     -- Better placed diagnostic messages
+    --     'dgagn/diagflow.nvim',
+    --     event = 'LspAttach',
+    --     opts = {}
+    -- },
     ------------------------------------------------------------------------------
     -- Treesitter
     ---------------------------------------------------------------------------------
@@ -106,11 +106,18 @@ return {
         "NeogitOrg/neogit",
         event = "VeryLazy",
         dependencies = {
-            "nvim-lua/plenary.nvim",         -- required
-            "sindrets/diffview.nvim",        -- optional
-            "ibhagwan/fzf-lua",              -- optional
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "ibhagwan/fzf-lua",
         },
-        config = true
+        config = function ()
+            local neogit = require("neogit")
+            neogit.setup {
+                status = {
+                    recent_commit_count = 30
+                }
+            }
+        end
     },
     ---------------------------------------------------------------------------------
     -- FZF
@@ -151,7 +158,8 @@ return {
                 'css',
                 'javascript',
                 'json',
-                'lua'
+                'lua',
+                'php'
             }
         end
     },
@@ -276,6 +284,9 @@ return {
             require('mini.statusline').setup()
         end
     },
+    ---------------------------------------------------------------------------------
+    -- Dashboard
+    ---------------------------------------------------------------------------------
     {
         'goolord/alpha-nvim',
         config = function ()
@@ -306,7 +317,6 @@ return {
             })
         end,
         priority = 1000,
-    },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    }
 }
 
