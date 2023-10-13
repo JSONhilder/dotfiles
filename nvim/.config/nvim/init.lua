@@ -27,10 +27,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 -- Clear white space on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = { "*" },
-    command = [[%s/\s\+$//e]],
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--     pattern = { "*" },
+--     command = [[%s/\s\+$//e]],
+-- })
 -- show cursor line only in active window
 local cursorGrp = vim.api.nvim_create_augroup("CursorLine", { clear = true })
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
