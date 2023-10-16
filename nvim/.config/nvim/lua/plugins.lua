@@ -304,19 +304,25 @@ return {
     -- Colorscheme
     ---------------------------------------------------------------------------------
     {
-        "ellisonleao/gruvbox.nvim",
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
         config = function ()
-            require("gruvbox").setup({
-                italic = {
-                    strings = false,
-                    emphasis = false,
-                    comments = false,
-                    operators = false,
-                    folds = false,
+            require("tokyonight").setup({
+                transparent = true,
+                styles = {
+                    sidebars = "transparent",
+                    floats = "transparent",
+                    comments = { italic = false },
+                    keywords = { italic = false }
                 }
             })
-        end,
-        priority = 1000,
+        end
+    },
+    {
+        "xiyaowong/transparent.nvim",
+        lazy = false,
+        priority = 1000
     }
 }
 
