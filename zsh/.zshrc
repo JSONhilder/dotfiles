@@ -24,13 +24,13 @@ export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init - zsh)"
 
 # Phpenv functions
-load_php7 () {
+lp7 () {
     sudo a2dismod php8.2
     sudo a2enmod php7.4
     sudo update-alternatives --set php /usr/bin/php7.4
     sudo systemctl restart apache2
 }
-load_php8 () {
+lp8 () {
     sudo a2dismod php7.4
     sudo a2enmod php8.2
     sudo update-alternatives --set php /usr/bin/php8.2
@@ -60,6 +60,7 @@ export EDITOR='vim'
 alias :q="exit"
 alias lg="lazygit"
 alias ld="lazydocker"
+alias composer="~/.local/bin/composer.phar"
 alias nvim="~/.local/bin/nvim/bin/nvim"
 alias vim="~/.local/bin/nvim/bin/nvim"
 alias dotfiles="cd ~/dotfiles && vim"
