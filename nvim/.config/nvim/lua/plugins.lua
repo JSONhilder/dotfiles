@@ -102,6 +102,9 @@ return {
             },
         },
     },
+    ---------------------------------------------------------------------------------
+    -- Git Client like magit 
+    ---------------------------------------------------------------------------------
     {
         "NeogitOrg/neogit",
         event = "VeryLazy",
@@ -114,7 +117,7 @@ return {
             local neogit = require("neogit")
             neogit.setup {
                 status = {
-                    recent_commit_count = 30
+                    recent_commit_count = 60
                 }
             }
         end
@@ -246,11 +249,11 @@ return {
     -- Surround
     ---------------------------------------------------------------------------------
     {
-        "kylechui/nvim-surround",
+        'echasnovski/mini.surround',
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
         config = function()
-            require("nvim-surround").setup({})
+            require("mini.surround").setup({})
         end
     },
     ---------------------------------------------------------------------------------
@@ -319,10 +322,5 @@ return {
             })
         end
     },
-    {
-        "xiyaowong/transparent.nvim",
-        lazy = false,
-        priority = 1000
-    }
 }
 
