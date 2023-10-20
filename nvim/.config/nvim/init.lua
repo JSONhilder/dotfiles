@@ -118,8 +118,8 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<CR>", { desc = "Resize split dow
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize split left" })
 vim.keymap.set("n", "<C-Right", "<cmd>vertical resize +2<CR>", { desc = "Resize split left" })
 -- Buffer management
-vim.keymap.set("n", "<leader>l", "<cmd>b#<CR>", { desc = "Last edited buffer" })
-vim.keymap.set("n", "<leader>x", "<cmd>bd<CR>", { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>bl", "<cmd>b#<CR>", { desc = "Last edited buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bp<CR>", { desc = "previous buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bn<CR>", { desc = "next buffer" })
 -- Stay in indent mode
@@ -128,6 +128,8 @@ vim.keymap.set("v", "<Tab>", ">gv", { desc = "indent line" })
 -- Move selection and format
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
+-- Search for highlighted text in visual mode
+vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- File manager
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
 -- LazyGit
@@ -154,11 +156,11 @@ vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Fo
 -- LSP binds WITH FZF
 vim.keymap.set("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { desc = "Code actions" })
 -- FZF picker
-vim.keymap.set("n", "<C-p>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
-vim.keymap.set("n", "<C-o>", "<cmd>lua require('fzf-lua').oldfiles()<CR>", { silent = true })
-vim.keymap.set("n", "<C-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
-vim.keymap.set("n", "<C-g>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
-vim.keymap.set("n", "<C-s>", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fo", "<cmd>lua require('fzf-lua').oldfiles()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fb", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>fs", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { silent = true })
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 -- Terminals
