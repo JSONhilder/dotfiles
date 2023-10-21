@@ -26,12 +26,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
--- Clear white space on save
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---     pattern = { "*" },
---     command = [[%s/\s\+$//e]],
--- })
--- show cursor line only in active window
 local cursorGrp = vim.api.nvim_create_augroup("CursorLine", { clear = true })
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
     pattern = "*",
@@ -49,14 +43,8 @@ vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
 -- [[ OPTIONS ]]
 ---------------------------------------------------------------------------------
 -- disable netrw at the very start of your init.lua (strongly advised)
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
--- netrw
-vim.g.netrw_keepdir = 0
-vim.g.netrw_winsize = 30
-vim.g.netrw_liststyle = 3
-vim.g.netrw_sizestyle = "H"
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 vim.opt.mouse = 'a'
 vim.opt.nu = true
@@ -139,7 +127,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 -- Spectre Searching
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
+vim.keymap.set('n', '<leader>ss', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
 vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', { desc = "Search current word" })
 vim.keymap.set('n', '<leader>sf', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
     { desc = "Search on current file" })
