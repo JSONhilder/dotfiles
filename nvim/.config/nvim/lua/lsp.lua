@@ -68,7 +68,6 @@ mason_lspconfig.setup {
 }
 
 local lspconfig = require "lspconfig"
-
 ------------------------------------------------------------------------------
 -- SERVERS: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
