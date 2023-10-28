@@ -45,6 +45,12 @@ return {
         },
         config = function(_, opts) require'lsp_signature'.setup(opts) end
     },
+    {
+        -- Better placed diagnostic messages
+        'dgagn/diagflow.nvim',
+        event = 'LspAttach',
+        opts = {}
+    },
     ------------------------------------------------------------------------------
     -- Treesitter
     ---------------------------------------------------------------------------------
@@ -97,26 +103,6 @@ return {
         },
     },
     ---------------------------------------------------------------------------------
-    -- Git Client like magit 
-    ---------------------------------------------------------------------------------
-    {
-        "NeogitOrg/neogit",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-            "ibhagwan/fzf-lua",
-        },
-        config = function ()
-            local neogit = require("neogit")
-            neogit.setup {
-                status = {
-                    recent_commit_count = 60
-                }
-            }
-        end
-    },
-    ---------------------------------------------------------------------------------
     -- FZF
     ---------------------------------------------------------------------------------
     {
@@ -151,12 +137,8 @@ return {
         event = "VeryLazy",
         config = function()
             require 'colorizer'.setup {
-                'scss',
-                'css',
-                'javascript',
-                'json',
-                'lua',
-                'php'
+                "css",
+                "scss"
             }
         end
     },
@@ -171,10 +153,6 @@ return {
             scope = { enabled = true },
         }
     },
-    ---------------------------------------------------------------------------------
-    -- Harpoon
-    ---------------------------------------------------------------------------------
-    { 'ThePrimeagen/harpoon' },
     ---------------------------------------------------------------------------------
     -- Which key
     ---------------------------------------------------------------------------------
@@ -200,7 +178,6 @@ return {
             wk.register(opts.defaults)
         end,
     },
-
     ---------------------------------------------------------------------------------
     -- nvim tree
     ---------------------------------------------------------------------------------
@@ -268,49 +245,11 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- Statusline
-    ---------------------------------------------------------------------------------
-    {
-        'echasnovski/mini.statusline',
-        version = false,
-        config = function()
-            require('mini.statusline').setup()
-        end
-    },
-    ---------------------------------------------------------------------------------
-    -- Dashboard
-    ---------------------------------------------------------------------------------
-    {
-        'goolord/alpha-nvim',
-        config = function ()
-            local alpha = require("alpha")
-            local dashboard = require("alpha.themes.dashboard")
-            local v = vim.version()
-            local time = os.date " %d-%m-%Y"
-            local platform = vim.fn.has "win32" == 1 and "" or ""
-            dashboard.section.buttons.val = {}
-            dashboard.section.footer.val = string.format(" %s %d.%d.%d  %s ",  platform, v.major, v.minor, v.patch, time)
-            alpha.setup(dashboard.config)
-        end
-    },
-    ---------------------------------------------------------------------------------
     -- Colorscheme
     ---------------------------------------------------------------------------------
     {
-        "folke/tokyonight.nvim",
+        "Mofiqul/vscode.nvim",
         lazy = false,
-        priority = 1000,
-        config = function ()
-            require("tokyonight").setup({
-                transparent = true,
-                styles = {
-                    sidebars = "transparent",
-                    floats = "transparent",
-                    comments = { italic = false },
-                    keywords = { italic = false }
-                }
-            })
-        end
-    },
+        priority = 1000
+    }
 }
-

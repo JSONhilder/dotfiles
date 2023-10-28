@@ -36,13 +36,9 @@ vim.api.nvim_create_autocmd(
     { "InsertEnter", "WinLeave" },
     { pattern = "*", command = "set nocursorline", group = cursorGrp }
 )
--- cmd height 0 recording message
-vim.cmd [[ autocmd RecordingEnter * set cmdheight=1 ]]
-vim.cmd [[ autocmd RecordingLeave * set cmdheight=0 ]]
 ---------------------------------------------------------------------------------
 -- [[ OPTIONS ]]
 ---------------------------------------------------------------------------------
--- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.mouse = 'a'
@@ -70,7 +66,6 @@ vim.opt.updatetime = 50
 vim.o.breakindent = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
-vim.o.cmdheight = 0
 ---------------------------------------------------------------------------------
 -- [[ KEYMAPS ]]
 ---------------------------------------------------------------------------------
@@ -107,8 +102,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- File manager
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
--- LazyGit
-vim.keymap.set("n", "<leader>gg", ":Neogit <CR>", { desc = "Lazygit" })
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
@@ -116,23 +109,18 @@ vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diag
 -- Spectre Searching
 vim.keymap.set('n', '<leader>ss', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
 vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', { desc = "Search current word" })
-vim.keymap.set('n', '<leader>sf', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
-    { desc = "Search on current file" })
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
-    { desc = "Search current word" })
--- Harpoon
-vim.keymap.set("n", "<leader><leader>", ":lua require('harpoon.ui').toggle_quick_menu() <CR>", { desc = "Harpoon List" })
-vim.keymap.set("n", "<leader>ha", ":lua require('harpoon.mark').add_file() <CR>", { desc = "Harpoon add file" })
-vim.keymap.set("n", "<leader>hh", ":lua require('harpoon.ui').nav_prev() <CR>", { desc = "Harpoon previous file" })
-vim.keymap.set("n", "<leader>hl", ":lua require('harpoon.ui').nav_next() <CR>", { desc = "Harpoon next file" })
+vim.keymap.set('n', '<leader>sf', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', { desc = "Search on current file" })
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word" })
 -- LSP binds
 vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
 -- LSP binds WITH FZF
 vim.keymap.set("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { desc = "Code actions" })
 -- FZF picker
+vim.keymap.set("n", "<C-p>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>fo", "<cmd>lua require('fzf-lua').oldfiles()<CR>", { silent = true })
+vim.keymap.set("n", "<C-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>fb", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>fs", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { silent = true })
@@ -144,9 +132,7 @@ vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float name=float-term<C
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
-require('lazy').setup({
-    { import = 'plugins' }
-})
+require('lazy').setup({{ import = 'plugins' }})
 ---------------------------------------------------------------------------------
 -- [[ LSP ]]
 ---------------------------------------------------------------------------------
@@ -156,6 +142,10 @@ require('lsp')
 ---------------------------------------------------------------------------------
 require('cmpconfig')
 ---------------------------------------------------------------------------------
+-- [[ Status Line ]]
+---------------------------------------------------------------------------------
+require('statusline')
+---------------------------------------------------------------------------------
 -- [[ COLORSCHEME ]]
 ---------------------------------------------------------------------------------
-vim.cmd.colorscheme "tokyonight"
+vim.cmd.colorscheme "vscode"
