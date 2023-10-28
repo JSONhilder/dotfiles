@@ -1,9 +1,9 @@
-theme = "catppuccin_mocha"
+theme = "dark_plus"
 
 [editor]
 color-modes = true
 completion-trigger-len = 1
-line-number = "relative"
+#line-number = "relative"
 bufferline = "never"
 cursorline = true
 true-color = true
@@ -60,20 +60,10 @@ C-k = [
 ]
 
 [keys.normal.'space']
-#g = ":sh tmux split-window -v -l 70% -c '#{pane_current_path}' lazygit"
+# g = ":sh tmux split-window -v -l 70% -c '#{pane_current_path}' lazygit"
 x = ":buffer-close"
 c = ":theme catppuccin_mocha"
-"." = [
-  ":new", 
-  ":insert-output lf-pick", 
-  "split_selection_on_newline", 
-  "goto_file", 
-  "goto_last_modification", 
-  "goto_last_modified_file", 
-  ":buffer-close!", 
-  ":sh helix-redraw",
-  ":theme catppuccin_mocha"
-]
+"." = [":open ", "paste_clipboard_after"]
 
 [keys.insert]
 j = { j = "normal_mode" } # Maps `jk` to exit insert mode

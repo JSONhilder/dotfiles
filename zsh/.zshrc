@@ -21,7 +21,7 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 # Nodenv
 export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init - zsh)"
+#eval "$(nodenv init - zsh)"
 
 # Phpenv functions
 lp7 () {
@@ -59,13 +59,13 @@ export EDITOR='vim'
 # Aliases
 alias :q="exit"
 alias lg="lazygit"
+alias gu="gitui"
 alias ld="lazydocker"
 alias composer="~/.local/bin/composer.phar"
 alias nvim="~/.local/bin/nvim/bin/nvim -u ~/personal/nvim_new/init.lua"
 alias vim="~/.local/bin/nvim/bin/nvim"
 alias dotfiles="cd ~/dotfiles && vim"
 alias wiki="cd ~/Mega/vim_wiki && vim index.md"
-alias tmx="tmuxifier"
 
 # Work directories quick aliases
 alias rep="cd /eyona/web/repforce.co/dev.secure"

@@ -28,6 +28,8 @@ cmd zip ${{
     rm -rf $1
 }}
 
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+map <c-c> :yank-path
 
 # Unbind defaults
 map d

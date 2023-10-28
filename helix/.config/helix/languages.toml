@@ -1,13 +1,7 @@
-[[language]]
-name = "twig"
-indent = { tab-width = 4, unit = "    " }
-
-[[grammar]]
-name = "twig"
-source = { git = "https://github.com/gbprod/tree-sitter-twig", rev = "807b293fec3fead64f54c64fdf6fb05516c032b9" }
 
 [[language]]
 name = "php"
+roots = ["composer.json", "index.php"]
 indent = { tab-width = 4, unit = "    " }
 
 [[grammar]]
@@ -43,7 +37,3 @@ name = "go"
 formatter = { command = "gofmt" }
 auto-format = true
 indent = { tab-width = 4, unit = "t" }
-
-[[language]]
-name = "rust"
-config.check.command = "clippy"
