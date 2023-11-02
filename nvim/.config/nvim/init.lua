@@ -124,6 +124,9 @@ vim.keymap.set("n", "<C-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { sile
 vim.keymap.set("n", "<leader>fb", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>fs", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { silent = true })
+-- Harpoon
+vim.keymap.set("n", "<leader>m", ":lua require('harpoon.mark').add_file() <CR>", { silent = true })
+vim.keymap.set("n", "<leader><leader>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { silent = true })
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 -- Terminals
