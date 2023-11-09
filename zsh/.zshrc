@@ -4,6 +4,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Add .local/bin
 export PATH=$HOME/.local/bin:$PATH
 
+# Add snap/bin
+export PATH=$PATH:/snap/bin
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME"/.oh-my-zsh"
 
