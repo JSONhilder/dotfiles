@@ -53,7 +53,9 @@ export EDITOR='vim'
 
 # Aliases
 alias :q="exit"
-alias lg="lazygit"
+#alias lg="lazygit"
+alias lg="vim +Neogit"
+alias gitc="vim +Neogit"
 alias gu="gitui"
 alias ld="lazydocker"
 alias composer="~/.local/bin/composer.phar"

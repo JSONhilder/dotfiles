@@ -77,16 +77,6 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
-    -- Toggle Term
-    ---------------------------------------------------------------------------------
-    {
-        "akinsho/toggleterm.nvim",
-        event = "VeryLazy",
-        config = {
-            open_mapping = [[<c-j>]], direction = "float"
-        }
-    },
-    ---------------------------------------------------------------------------------
     -- Git releated signs to the gutter
     ---------------------------------------------------------------------------------
     {
@@ -101,6 +91,20 @@ return {
                 changedelete = { text = '~' },
             },
         },
+    },
+    ---------------------------------------------------------------------------------
+    -- Git client  
+    ---------------------------------------------------------------------------------
+    {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",         -- required
+            "ibhagwan/fzf-lua",              -- optional
+        },
+        config = function()
+            local neogit = require('neogit')
+            neogit.setup {}
+        end
     },
     ---------------------------------------------------------------------------------
     -- FZF
@@ -153,8 +157,27 @@ return {
         main = "ibl",
         opts = {
             indent = { highlight = { "LineNr" }, char = "│" },
-            scope = { enabled = true },
+            scope = { enabled = false },
         }
+    },
+    {
+        "echasnovski/mini.indentscope",
+        version = false, -- wait till new 0.7.0 release to put it back on semver
+        event = "VeryLazy",
+        config = function()
+            local ms = require('mini.indentscope')
+            ms.setup({
+                -- symbol = "▏",
+                symbol = "│",
+                options = {
+                    try_as_border = true
+                },
+                draw = {
+                    delay = 10,
+                    animation = ms.gen_animation.none()
+                }
+            })
+        end,
     },
     ---------------------------------------------------------------------------------
     -- Which key
@@ -243,6 +266,49 @@ return {
     {
         "Mofiqul/vscode.nvim",
         lazy = false,
-        priority = 1000
+        priority = 1000,
+        config = function()
+            vim.cmd([[colorscheme vscode]])
+        end,
+    },
+    {
+        "folke/trouble.nvim",
+        cmd = { "TroubleToggle", "Trouble" },
+        opts = { use_diagnostic_signs = true , icons = false },
+        keys = {
+            { "<leader>q", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+            { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+            { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+            { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+            {
+                "[q",
+                function()
+                    if require("trouble").is_open() then
+                        require("trouble").previous({ skip_groups = true, jump = true })
+                    else
+                        local ok, err = pcall(vim.cmd.cprev)
+                        if not ok then
+                            vim.notify(err, vim.log.levels.ERROR)
+                        end
+                    end
+                end,
+                desc = "Previous trouble/quickfix item",
+            },
+            {
+                "]q",
+                function()
+                    if require("trouble").is_open() then
+                        require("trouble").next({ skip_groups = true, jump = true })
+                    else
+                        local ok, err = pcall(vim.cmd.cnext)
+                        if not ok then
+                            vim.notify(err, vim.log.levels.ERROR)
+                        end
+                    end
+                end,
+                desc = "Next trouble/quickfix item",
+            },
+        },
     }
+
 }

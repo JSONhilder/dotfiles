@@ -103,9 +103,9 @@ vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- File manager
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+-- vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+-- vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 -- Spectre Searching
 vim.keymap.set('n', '<leader>ss', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
 vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', { desc = "Search current word" })
@@ -129,9 +129,6 @@ vim.keymap.set("n", "<leader>m", ":lua require('harpoon.mark').add_file() <CR>",
 vim.keymap.set("n", "<leader><leader>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { silent = true })
 -- Terminal mode
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
--- Terminals
-vim.keymap.set("n", "<leader>th", ":ToggleTerm size=25 direction=horizontal name=hori-term<CR>", {desc = "term 1"})
-vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float name=float-term<CR>", {desc = "term 1"})
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
@@ -148,7 +145,3 @@ require('cmpconfig')
 -- [[ Status Line ]]
 ---------------------------------------------------------------------------------
 require('statusline')
----------------------------------------------------------------------------------
--- [[ COLORSCHEME ]]
----------------------------------------------------------------------------------
-vim.cmd.colorscheme "vscode"
