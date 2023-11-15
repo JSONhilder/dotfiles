@@ -3,12 +3,11 @@ set drawbox
 set shell sh
 set info size
 set ignorecase true
-set hidden false
+set hidden true
 
 # Custom functions
 cmd mkdir %mkdir -p "$@"
 cmd mkfile %touch "$@"
-cmd getPath %pwd | xclip -selection clipboard
 
 cmd unzip ${{
   case "$f" in
@@ -30,6 +29,27 @@ cmd zip ${{
 
 cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
 map <c-c> :yank-path
+
+cmd openfilehx ${{
+    printf '%s' "$fx" | xclip -i -selection clipboard
+
+    # Get the current tmux session and pane IDs
+    tmux_info=$(tmux display-message -p '#{session_id} #{pane_id}')
+
+    # Extract session and pane IDs into separate variables
+    tmux_session_id=$(echo "$tmux_info_json" | jq -r '.session_id')
+    tmux_pane_id=$(echo "$tmux_info_json" | jq -r '.pane_id')
+
+    tmux send-keys -t "$tmux_session_id:1" " " "." C-m
+    tmux select-window -t 1
+}}
+map <c-e> :openfilehx
+map <enter> :openfilehx
+
+# function called q so its quick to do :q
+cmd q ${{
+    tmux kill-pane
+}}
 
 # Unbind defaults
 map d
