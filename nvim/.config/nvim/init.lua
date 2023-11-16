@@ -70,8 +70,7 @@ vim.o.termguicolors = true
 -- [[ KEYMAPS ]]
 ---------------------------------------------------------------------------------
 vim.g.mapleader = " ";
-vim.keymap.set("i", "<C-l>", "<Esc>")
-vim.keymap.set("i", "<M-;>", ":")
+vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("i", "jj", "<Esc>")
 -- clear search highlights
 vim.keymap.set("n", "<leader>nh", ":noh<CR>", { desc = "Clear highlights" })
@@ -100,48 +99,175 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 -- Search for highlighted text in visual mode
 vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
--- File manager
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", { desc = "Nvim Tree" })
--- Diagnostic keymaps
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
--- vim.keymap.set('n', '<M-a>', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
--- vim.keymap.set('n', '<M-d>', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
--- Spectre Searching
-vim.keymap.set('n', '<leader>ss', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
-vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', { desc = "Search current word" })
-vim.keymap.set('n', '<leader>sf', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', { desc = "Search on current file" })
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word" })
 -- LSP binds
 vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
--- LSP binds WITH FZF
-vim.keymap.set("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { desc = "Code actions" })
--- FZF picker
-vim.keymap.set("n", "<C-p>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
-vim.keymap.set("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
-vim.keymap.set("n", "<leader>fo", "<cmd>lua require('fzf-lua').oldfiles()<CR>", { silent = true })
-vim.keymap.set("n", "<C-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
-vim.keymap.set("n", "<leader>fb", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
-vim.keymap.set("n", "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
-vim.keymap.set("n", "<leader>fs", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { silent = true })
--- Harpoon
-vim.keymap.set("n", "<leader>m", ":lua require('harpoon.mark').add_file() <CR>", { silent = true })
-vim.keymap.set("n", "<leader><leader>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { silent = true })
--- Terminal mode
-vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
 require('lazy').setup({{ import = 'plugins' }})
 ---------------------------------------------------------------------------------
--- [[ LSP ]]
----------------------------------------------------------------------------------
-require('lsp')
----------------------------------------------------------------------------------
--- [[ CMP ]]
----------------------------------------------------------------------------------
-require('cmpconfig')
----------------------------------------------------------------------------------
 -- [[ Status Line ]]
 ---------------------------------------------------------------------------------
-require('statusline')
+local cmp = {}
+function _G._statusline_component(name)
+  return cmp[name]()
+end
+function cmp.diagnostic_status()
+  local ok = ' λ '
+
+  local ignore = {
+    ['c'] = true, -- command mode
+    ['t'] = true  -- terminal mode
+  }
+
+  local mode = vim.api.nvim_get_mode().mode
+
+  if ignore[mode] then
+    return ok
+  end
+
+  local levels = vim.diagnostic.severity
+  local errors = #vim.diagnostic.get(0, {severity = levels.ERROR})
+  if errors > 0 then
+    return ' ✘ '
+  end
+
+  local warnings = #vim.diagnostic.get(0, {severity = levels.WARN})
+  if warnings > 0 then
+    return ' ▲ '
+  end
+
+  return ok
+end
+local statusline = {
+  ' %{%v:lua._statusline_component("diagnostic_status")%} ',
+  '%r',
+  '%m',
+  "%=",
+  '%<%f',
+  '%=',
+  '%{&filetype} ',
+  ' %2p%% ',
+  '%P '
+}
+vim.o.statusline = table.concat(statusline, '')
+------------------------------------------------------------------------------
+-- LSP CONFIG
+------------------------------------------------------------------------------
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { "markdown", "plaintext" },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+        properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+        },
+    },
+}
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+local on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'LSP actions',
+    callback = function()
+        -- Create your keybindings here...
+        local nmap = function(keys, func, desc)
+            if desc then
+                desc = 'LSP: ' .. desc
+            end
+
+            vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        end
+
+        nmap('<leader>cr', vim.lsp.buf.rename, 'Rename Symbol')
+        nmap('<leader>ca', require('fzf-lua').lsp_code_actions, 'Code Actions')
+        nmap('<leader>cs', require('fzf-lua').lsp_document_symbols, 'Document Symbols')
+
+        nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
+        nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+        nmap('gr', require('fzf-lua').lsp_definitions, 'Goto [R]eferences')
+        nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
+        nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
+
+        -- See `:help K` for why this keymap
+        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    end
+})
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+mason_lspconfig.setup {
+    ensure_installed = {
+        'lua_ls',
+        'intelephense',
+        'tsserver',
+        -- 'rust_analyzer',
+        -- 'gopls',
+        -- 'zig????'
+    },
+}
+
+local lspconfig = require "lspconfig"
+------------------------------------------------------------------------------
+-- SERVERS: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
+-- RUST
+------------------------------------------------------------------------------
+lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "rust" },
+    root_dir = lspconfig.util.root_pattern("Cargo.toml")
+}
+------------------------------------------------------------------------------
+-- Golang
+------------------------------------------------------------------------------
+lspconfig.gopls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+------------------------------------------------------------------------------
+-- PHP
+------------------------------------------------------------------------------
+lspconfig.intelephense.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        files = {
+            maxSize = 2000000;
+        }
+    }
+}
+------------------------------------------------------------------------------
+-- Javascript/Typescript
+------------------------------------------------------------------------------
+lspconfig.tsserver.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+------------------------------------------------------------------------------
+-- LUA
+------------------------------------------------------------------------------
+lspconfig.lua_ls.setup{
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}
