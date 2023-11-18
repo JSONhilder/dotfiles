@@ -9,5 +9,5 @@ return {
         config = function()
             vim.cmd([[colorscheme vscode]])
         end,
-    },
+    }
 }

@@ -18,9 +18,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 # GOLANG
-#export PATH=$PATH:/usr/local/go/bin
-#export PATH=$PATH:~/go/bin
-#export PATH=$PATH:~/go/bin/gopls
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/go/bin
+export PATH=$PATH:~/go/bin/gopls
 
 # Nodenv
 export PATH="$HOME/.nodenv/bin:$PATH"

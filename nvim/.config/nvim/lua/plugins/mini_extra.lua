@@ -1,13 +1,10 @@
 ---------------------------------------------------------------------------------
--- Colorizer
+-- Auto pairs
 ---------------------------------------------------------------------------------
 return {
-    'norcalli/nvim-colorizer.lua',
-    event = "VeryLazy",
+    'echasnovski/mini.extra',
+    version = false,
     config = function()
-        require 'colorizer'.setup {
-            "css",
-            "scss"
-        }
+        require('mini.extra').setup()
     end
 }
