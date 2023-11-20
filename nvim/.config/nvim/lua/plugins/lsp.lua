@@ -10,8 +10,6 @@ return {
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             {
                 'j-hui/fidget.nvim',
-                tag = 'legacy',
-                opts = {},
                 config = function()
                     require("fidget").setup {}
                 end,
@@ -42,12 +40,11 @@ return {
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "saadparwaiz1/cmp_luasnip",
-            -- Snippet Engine & its associated nvim-cmp source
             'L3MON4D3/LuaSnip',
+            -- "hrsh7th/cmp-path",
+            -- "saadparwaiz1/cmp_luasnip",
             -- Adds a number of user-friendly snippets
-            'rafamadriz/friendly-snippets',
+            -- 'rafamadriz/friendly-snippets',
         },
         opts = function()
             local cmp = require 'cmp'

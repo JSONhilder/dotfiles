@@ -102,62 +102,10 @@ vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- LSP binds
 vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
--- Picker binds
-vim.keymap.set("n", "<leader>ff", "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", { noremap = true, silent = true , desc = 'Find File'})
-vim.keymap.set("n", "<leader>fm", "<cmd>lua MiniFiles.open()<cr>", { noremap = true, silent = true , desc = 'Find Manualy'})
-vim.keymap.set("n", "<leader>fb", "<cmd>lua MiniPick.builtin.buffers()<cr>", { noremap = true, silent = true , desc = 'Find Buffer'})
-vim.keymap.set("n", "<leader>fs", "<cmd>lua MiniPick.builtin.grep_live()<cr>", { noremap = true, silent = true , desc = 'Find String'})
-vim.keymap.set("n", "<leader>fh", "<cmd>lua MiniPick.builtin.help()<cr>", { noremap = true, silent = true , desc = 'Find Help'})
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
 require('lazy').setup({{ import = 'plugins' }})
----------------------------------------------------------------------------------
--- [[ Status Line ]]
----------------------------------------------------------------------------------
-local cmp = {}
-function _G._statusline_component(name)
-    return cmp[name]()
-end
-function cmp.diagnostic_status()
-    local ok = ' λ '
-
-    local ignore = {
-        ['c'] = true, -- command mode
-        ['t'] = true  -- terminal mode
-    }
-
-    local mode = vim.api.nvim_get_mode().mode
-
-    if ignore[mode] then
-        return ok
-    end
-
-    local levels = vim.diagnostic.severity
-    local errors = #vim.diagnostic.get(0, {severity = levels.ERROR})
-    if errors > 0 then
-        return ' ✘ '
-    end
-
-    local warnings = #vim.diagnostic.get(0, {severity = levels.WARN})
-    if warnings > 0 then
-        return ' ▲ '
-    end
-
-    return ok
-end
-local statusline = {
-    ' %{%v:lua._statusline_component("diagnostic_status")%} ',
-    '%r',
-    '%m',
-    "%=",
-    '%<%f',
-    '%=',
-    '%{&filetype} ',
-    ' %2p%% ',
-    '%P '
-}
-vim.o.statusline = table.concat(statusline, '')
 ------------------------------------------------------------------------------
 -- LSP CONFIG
 ------------------------------------------------------------------------------
@@ -179,7 +127,7 @@ capabilities.textDocument.completion.completionItem = {
         },
     },
 }
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+--capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
@@ -202,11 +150,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- nmap('<leader>ca', require('fzf-lua').lsp_code_actions, 'Code Actions')
         -- nmap('<leader>cs', require('fzf-lua').lsp_document_symbols, 'Document Symbols')
 
+        -- nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
         -- nmap('gr', require('fzf-lua').lsp_definitions, 'Goto [R]eferences')
         nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
         nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
         nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
-        nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
 
         -- See `:help K` for why this keymap
         nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
