@@ -105,7 +105,7 @@ vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Fo
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
-require('lazy').setup({{ import = 'plugins' }})
+require('lazy').setup({ { import = 'plugins' } })
 ------------------------------------------------------------------------------
 -- LSP CONFIG
 ------------------------------------------------------------------------------
@@ -190,33 +190,33 @@ lspconfig.rust_analyzer.setup {
 ------------------------------------------------------------------------------
 -- Golang
 ------------------------------------------------------------------------------
-lspconfig.gopls.setup{
+lspconfig.gopls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
 ------------------------------------------------------------------------------
 -- PHP
 ------------------------------------------------------------------------------
-lspconfig.intelephense.setup{
+lspconfig.intelephense.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         files = {
-            maxSize = 2000000;
+            maxSize = 2000000,
         }
     }
 }
 ------------------------------------------------------------------------------
 -- Javascript/Typescript
 ------------------------------------------------------------------------------
-lspconfig.tsserver.setup{
+lspconfig.tsserver.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
 ------------------------------------------------------------------------------
 -- LUA
 ------------------------------------------------------------------------------
-lspconfig.lua_ls.setup{
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             diagnostics = {

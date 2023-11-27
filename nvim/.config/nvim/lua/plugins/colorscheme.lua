@@ -3,11 +3,11 @@
 ---------------------------------------------------------------------------------
 return {
     {
-        "Mofiqul/vscode.nvim",
-        lazy = false,
-        priority = 1000,
+        "rockyzhang24/arctic.nvim",
+        branch = "v2",
+        dependencies = { "rktjmp/lush.nvim" },
         config = function()
-            vim.cmd([[colorscheme vscode]])
+            vim.cmd([[colorscheme arctic]])
         end,
-    }
+    },
 }
