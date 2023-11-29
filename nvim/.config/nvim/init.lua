@@ -176,12 +176,31 @@ mason_lspconfig.setup {
 }
 
 local lspconfig = require "lspconfig"
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+local border = {
+      {"┌", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"┐", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"┘", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"└", "FloatBorder"},
+      {"│", "FloatBorder"},
+}
+-- LSP settings (for overriding per client)
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
 ------------------------------------------------------------------------------
 -- SERVERS: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 -- RUST
 ------------------------------------------------------------------------------
 lspconfig.rust_analyzer.setup {
+    handlers = handlers,
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "rust" },
@@ -198,6 +217,7 @@ lspconfig.gopls.setup {
 -- PHP
 ------------------------------------------------------------------------------
 lspconfig.intelephense.setup {
+    handlers = handlers,
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -217,6 +237,7 @@ lspconfig.tsserver.setup {
 -- LUA
 ------------------------------------------------------------------------------
 lspconfig.lua_ls.setup {
+    handlers = handlers,
     settings = {
         Lua = {
             diagnostics = {
