@@ -2,6 +2,7 @@ return {
     {
         -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
+        lazy = true,
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
             { "williamboman/mason.nvim", config = true },
@@ -19,6 +20,7 @@ return {
     {
         -- virtual text hints
         "ray-x/lsp_signature.nvim",
+        lazy = true,
         event = "VeryLazy",
         opts = {
             floating_window = false,
@@ -35,6 +37,7 @@ return {
     -- auto completion
     {
         "hrsh7th/nvim-cmp",
+        lazy = true,
         version = false, -- last release is way too old
         event = "InsertEnter",
         dependencies = {

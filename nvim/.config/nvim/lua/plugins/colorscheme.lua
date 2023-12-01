@@ -2,12 +2,28 @@
 -- Colorscheme
 ---------------------------------------------------------------------------------
 return {
-    {
-        "rockyzhang24/arctic.nvim",
-        branch = "v2",
-        dependencies = { "rktjmp/lush.nvim" },
-        config = function()
-            vim.cmd([[colorscheme arctic]])
-        end,
+    "rebelot/kanagawa.nvim",
+    dependencies = {
+        "xiyaowong/transparent.nvim"
     },
+    config = function()
+        require('kanagawa').setup({
+            commentStyle = { italic = false },
+            transparent = false,
+            colors = {
+                theme = {
+                    all = {
+                        ui = {
+                            bg_gutter = "none"
+                        }
+                    }
+                }
+            }
+        })
+
+        vim.cmd([[
+            colorscheme kanagawa
+            highlight CursorLine guibg=bg guifg=fg
+        ]])
+    end,
 }

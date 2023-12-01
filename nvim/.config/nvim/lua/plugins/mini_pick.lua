@@ -1,11 +1,13 @@
 return {
     {
         'echasnovski/mini.pick',
+        lazy = true,
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
-        event = "VeryLazy",
+        event = "BufEnter",
         keys = {
-            { "<leader>ff", "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
+            { "<leader><leader>", "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
             { "<leader>fb", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
+            { "<leader>fl", "<cmd>lua MiniPick.builtin.resume()<cr>", desc = 'Resume Last Search'},
             { "<leader>fs", "<cmd>lua MiniPick.builtin.grep_live()<cr>", desc = 'Find String'},
             { "<leader>fh", "<cmd>lua MiniPick.builtin.help()<cr>", desc = 'Find Help'},
             { "<leader>bb", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
@@ -22,8 +24,9 @@ return {
     },
     {
         'echasnovski/mini.files',
+        lazy = true,
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
-        event = "VeryLazy",
+        event = "BufEnter",
         keys = {
             { "<leader>fe", "<cmd>lua MiniFiles.open()<cr>", desc = 'Explorer'},
         },

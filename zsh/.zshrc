@@ -39,9 +39,6 @@ lp8 () {
     sudo update-alternatives --set php /usr/bin/php8.2
     sudo systemctl restart apache2
 }
-# aliases
-alias load_php8='load_php8'
-alias load_php7='load_php7'
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -66,6 +63,10 @@ alias wiki="cd ~/Mega/vim_wiki && vim index.md"
 # Work directories quick aliases
 alias rep="cd /eyona/web/repforce.co/dev.secure"
 alias lms="cd /eyona/web/lms.co/lms"
+
+# php aliases
+alias load_php8='load_php8'
+alias load_php7='load_php7'
 
 # Starship
 eval "$(starship init zsh)"
