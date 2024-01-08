@@ -15,7 +15,7 @@ return {
             local neogit = require('neogit')
             neogit.setup {
                 status = {
-                    recent_commit_count = 65,
+                    recent_commit_count = 200,
                 },
             }
         end

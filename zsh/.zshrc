@@ -24,6 +24,7 @@ export PATH=$PATH:~/go/bin/gopls
 
 # Nodenv
 export PATH="$HOME/.nodenv/bin:$PATH"
+export PATH="$HOME/.nodenv/shims:$PATH"
 eval "$(nodenv init - zsh)"
 
 # Phpenv functions

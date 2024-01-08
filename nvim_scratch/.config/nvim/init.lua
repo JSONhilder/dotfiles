@@ -92,6 +92,8 @@ vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- LSP binds
 vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
+-- Notes management
+vim.keymap.set("n", "<leader>nd", ":exe 'r!date \"+\\%A, \\%Y-\\%m-\\%d\"' <CR>", { desc = "Insert Date" })
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
@@ -181,8 +183,8 @@ local border = {
 }
 -- LSP settings (for overriding per client)
 local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+    ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+    ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
 }
 ------------------------------------------------------------------------------
 -- SERVERS: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

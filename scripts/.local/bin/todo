@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd ~/Mega/todo/
+
+# Get the full month name, week number, and year
+month=$(date '+%B')
+week_number=$(date '+%U')
+year=$(date '+%Y')
+
+# Define the filename
+filename="${month}_week_${week_number}_${year}.txt"
+
+# Check if the file exists
+if [ ! -e "$filename" ]; then
+    # File does not exist, create it
+    touch "$filename"
+fi
+
+~/.local/bin/nvim/bin/nvim $filename
