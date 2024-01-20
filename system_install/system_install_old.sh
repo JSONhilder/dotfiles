@@ -24,13 +24,14 @@ fi
 #####################################################
 # CREATE DIRECTORIES IF NOT EXIST
 #####################################################
-mkdir -p ~/.fonts ~/github ~/tests
+mkdir -p ~/.themes ~/.fonts
+mkdir -p ~/work ~/github ~/tests
 #####################################################
 # SYSTEM ESSENTIALS
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( gnome-tweaks, git, make, gcc, curl, ripgrep, gnu stow, xclip, unzip)"
+    echo "( git, make, gcc, curl, ripgrep, fzf, gnu stow, xclip, unzip)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -41,7 +42,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y gnome-tweaks make gcc curl ripgrep xclip stow unzip build-essential
+    sudo apt install -y make gcc curl ripgrep xclip fzf stow unzip build-essential
     echo
     echo "===== COMPLETE ====="
     echo
@@ -53,7 +54,7 @@ fi
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system niceties ? [y/n]"
-    echo "( tree, neofetch, btop )"
+    echo "( tree, neofetch, btop, lf)"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -64,7 +65,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing system niceties..."
     echo "-----------------------------"
     echo
-    sudo apt install -y tree neofetch btop
+    sudo apt install -y tree neofetch btop lf
     echo
     echo "===== COMPLETE ====="
     echo
@@ -148,6 +149,28 @@ else
     echo
 fi
 #####################################################
+# TMUX 
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install tmux? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing tmux..."
+    echo "------------------"
+    echo
+    sudo apt install -y tmux
+    git clone https://github.com/jimeh/tmuxifier.git ~/.config/tmuxifier
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
 # DOCKER ENGINE
 #####################################################
 if [[ $_override = "n" ]]; then
@@ -189,10 +212,10 @@ else
     echo
 fi
 #####################################################
-# VS CODE
+# DDEV
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install Visual Studio Code? [y/n]"
+    echo "Install ddev? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -200,24 +223,150 @@ fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo ""
-    echo "installing Visual Studio Code..."
-    echo "---------------------------------"
+    echo "Installing ddev deps..."
+    echo "-----------------------"
     echo
 
-    download="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-    cd ~ && wget -O "vscode.deb" $download
+    sudo apt install libnss3-tools -y
+    sudo wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert
+    sudo chmod a+x /usr/local/bin/mkcert
+    mkcert -install
 
-    sudo apt install "./vscode.deb"
-    rm vscode.deb
+    tag=$(curl --silent https://api.github.com/repos/drud/ddev/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
 
-    echo
+    echo $tag
+
+    FILE="ddev_linux-amd64."$tag".tar.gz"
+    echo $FILE
+
+    download=" https://github.com/drud/ddev/releases/download/"$tag"/"$FILE
+	cd ~ && wget -O $FILE $download
+
+    tar xvf $FILE ddev
+
+    sudo mv ddev /usr/local/bin/ddev
+    #rm $FILE
+
     echo
     echo "===== COMPLETE ====="
     echo
 else
     echo
 fi
- echo
+#####################################################
+# NVM(nodejs)
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install NVM (node) ? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing NVM..."
+    echo "-------------------"
+    echo
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# RUST LANG
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Rust? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing rust..."
+    echo "------------------"
+    echo
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# GOLANG
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Go lang? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing golang..."
+    echo "------------------"
+    echo
+
+    # This is a "random script" not safe but will do for now.
+    curl -fsSLo- https://s.id/golang-linux | bash
+
+    echo
+    echo "===== complete ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# JDK
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Java Development Kit? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing Java Dev Kit..."
+    echo "--------------------------"
+    echo
+    sudo apt install default-jre default-jdk -y
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# FLUTTER
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Flutter Sdk? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing Flutter Sdk..."
+    echo "-------------------------"
+    echo
+    cd ~ && git clone https://github.com/flutter/flutter.git -b stable && mv fluter .flutter
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
 #####################################################
 # ZOLA STATIC SITE GENERATOR
 #####################################################
@@ -245,7 +394,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     cd ~ && wget -O $FILE $download
 
     tar xvf $FILE zola
-    sudo mv zola /usr/local/bin/
+    sudo rm ~/.local/bin/bin/zola
+    sudo mv zola ~/.local/bin/
     rm $FILE
 
     echo
@@ -274,10 +424,8 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 
     echo $tag
 
-    VERSION=$(echo $tag|cut -c 2-7)
+    VERSION=$(echo $tag|cut -c 2-6)
     FILE="lazygit_"$VERSION"_Linux_x86_64.tar.gz"
-
-    
 
     download="https://github.com/jesseduffield/lazygit/releases/download/"$tag"/"$FILE
     cd ~ && wget -O $FILE $download
@@ -328,6 +476,101 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+#####################################################
+# HELIX
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Helix? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing helix..."
+    echo "--------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/helix-editor/helix/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+    FILE="helix-"$tag"-x86_64.AppImage"
+
+    download="https://github.com/helix-editor/helix/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    sudo mv $FILE /usr/local/bin/hx
+    cd /usr/local/bin && chmod a+x hx
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# NEOVIM
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Neovim? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing neovim..."
+    echo "--------------------"
+    echo
+
+    tag=$(curl --silent https://api.github.com/repos/neovim/neovim/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+    echo $tag
+
+    VERSION=$(echo $tag|cut -c 2-6)
+    FILE="nvim.appimage"
+
+    download="https://github.com/neovim/neovim/releases/download/"$tag"/"$FILE
+    cd ~ && wget -O $FILE $download
+
+    sudo mv nvim.appimage /usr/local/bin/nvim
+    cd /usr/local/bin && chmod a+x nvim
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# VS CODE
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Visual Studio Code? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing Visual Studio Code..."
+    echo "---------------------------------"
+    echo
+
+    download="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    cd ~ && wget -O "vscode.deb" $download
+
+    sudo apt install "./vscode.deb"
+    rm vscode.deb
+
+    echo
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+ echo
 #####################################################
 # TRANSMISSION
 #####################################################
@@ -415,9 +658,15 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "Symlinking dotfiles..."
     echo "----------------------"
     echo
-    cd ~/dotfiles/
-    sudo rm -rf ~/.zshrc && stow zsh
-    sudo rm -rf ~/.config/starship.toml && stow starship
+    cd ~/.dotfiles/
+    sudo rm -rf ~/.zshrc && stow ~/.dotfiles/zsh/
+    sudo rm -rf ~/.tmux.conf && stow ~/.dotfiles/tmux
+    sudo rm -rf ~/.config/lf && stow ~/.dotfiles/lf
+    sudo rm -rf ~/.config/starship.toml && stow ~/.dotfiles/starship
+    sudo rm -rf ~/.config/tmuxifier/layouts && stow ~/.dotfiles/tmuxifier
+    sudo rm -rf ~/.config/helix && stow ~/.dotfiles/helix
+    sudo mkdir -p ~/.local/bin/ && stow ~/.dotfiles/scripts
+    #sudo rm -rf ~/.config/nvim && stow ~/.dotfiles/nvim
     echo
     echo "===== COMPLETE ====="
     echo
@@ -439,3 +688,4 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
 else
     echo
 fi
+
