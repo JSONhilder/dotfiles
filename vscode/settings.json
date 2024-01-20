@@ -55,10 +55,6 @@
         }
      ],
      "vim.visualModeKeyBindings": [
-        // {
-        //     "before": ["y"],
-        //     "after": ["editor.action.clipboardCopyAction"]
-        // },
         {
             "before": [">"],
             "after": [">", "g", "v"]
