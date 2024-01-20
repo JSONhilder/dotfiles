@@ -1,24 +1,13 @@
 {
-    "editor.fontSize": 13.5,
-    "editor.fontFamily": "BlexMono Nerd Font",
-    "workbench.colorTheme": "gruvboxConcoctis dark hard",
-    "window.titleBarStyle": "native",
+    "workbench.startupEditor": "none",
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.fontLigatures": true,
-    "workbench.editor.highlightModifiedTabs": true,
-    "editor.tabSize": 4,
-    "editor.smoothScrolling": true,
-    "extensions.ignoreRecommendations": true,
-    // Rust inlay hints
-    "editor.inlayHints.enabled": "off",
-    "security.workspace.trust.untrustedFiles": "open",
-    "svelte.plugin.svelte.note-new-transformation": false,
+    "files.autoSave": "onWindowChange",
     // Vim extension settings
-     "vim.smartRelativeLine": true,
-     "vim.cursorStylePerMode.normal": "block-outline",
-     "vim.cursorStylePerMode.insert": "block",
-     "vim.cursorStylePerMode.visual": "underline",
+     "vim.smartRelativeLine": false,
      "vim.hlsearch": true,
      "vim.sneak": true,
      "vim.leader": "<space>",
@@ -40,10 +29,6 @@
         {
             "before": ["<leader>", "h"],
             "commands": [":nohl"]
-        },
-        {
-            "before": ["<leader>", "f"],
-            "commands": ["revealInExplorer"]
         },
         {
             "before": ["<leader>", "e"],
@@ -82,9 +67,12 @@
      ],
      "vim.visualModeKeyBindingsNonRecursive": [],
      "vim.handleKeys": {
+         "<C-u": false,
+         "<C-d": false,
          "<C-b>": false,
          "<C-a>": false,
          "<C-f>": false,
+         "<C-p>": false,
          // Copy
          "<C-c>": false,
          // Cut
@@ -94,8 +82,15 @@
          "<C-z>": false,
          "<C-y>": false,
          "<C-j>": false,
-         // VS Code new marker @ next occurence
+         // VS Code new marker @ next occurence changed for scroll down
          "<C-d>": true,
     },
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "editor.lineNumbers": "relative",
+    "json.schemas": [
+        
+    ],
     // Vim extension settings end
 }

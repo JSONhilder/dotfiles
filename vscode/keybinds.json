@@ -1,31 +1,63 @@
+// Place your key bindings in this file to override the defaults
 [
     {
-        "key": "ctrl+shift+v",
+        "key": "ctrl+alt+v",
         "command": "toggleVim"
     },
+    // Buffer/Tab management
     {
-        "key": "ctrl+n",
+        "key": "ctrl+l",
         "command": "workbench.action.nextEditor"
     },
     {
-        "key": "ctrl+backspace",
+        "key": "ctrl+h",
         "command": "workbench.action.previousEditor"
     },
     {
         "key": "ctrl+w",
         "command": "workbench.action.closeActiveEditor"
     },
+    // Vscode find match
     {
         "key": "ctrl+m",
         "command": "editor.action.addSelectionToNextFindMatch"
     },
-    {   
-        "key": "ctrl+.",   
-        "command": "extension.openScratchpad", 
-        "when": "editorTextFocus" 
+    // Open file explorer and focus it 
+    {
+        "key": "ctrl+e",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "!filesExplorerFocus"
     },
     {
-        "key": "ctrl+shift+j",
-        "command": "workbench.action.toggleMaximizedPanel"
-    }
+        "key": "ctrl+e",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "sideBarFocus && editorIsOpen"
+    },
+    // When in side bar and want to view buffer to left
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "sideBarFocus && editorIsOpen"
+    },
+    // File explorer file operations
+    {
+        "key": "a",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "d",
+        "command": "deleteFile",
+        "when": "sideBarFocus && !inputFocus"
+    },
+    {
+        "key": "n",
+        "command": "explorer.newFolder",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
 ]
