@@ -9,11 +9,7 @@ Steps To Reproduce
 
 ### ( !! Note this is intended for a fresh install of Pop_Os !! )
 
-### Copy backed up ssh keys and add ssh key
-
-or
-
-### Generate ssh key and copy cat output
+### Generate ssh key 
 ```
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
@@ -23,6 +19,7 @@ ssh-add ~/.ssh/id_rsa
 
 cat ~/.ssh/id_rsa.pub
 ```
+*Add ssh key to github so you can git clone the repo*
 
 ### Configure git global user
 ```
@@ -40,6 +37,8 @@ git clone git@github.com:jasonhilder/dotfiles.git
 ```
 cd ~ && ./dotfiles/system_install.sh
 ```
+*The script will install the following:*
+
     - Git
     - make
     - gcc
@@ -80,4 +79,4 @@ cd ~ && ./dotfiles/system_install.sh
 
 ## Additional notes on setup
 
-* I try to keep as little programs, tools installed on the actual OS and make use of docker to setup reproducible environments for each projects, specifically using Vscode with the dev containers extension.
+* I try to keep as little programs, tools installed on the actual OS and make use of docker to setup reproducible environments for each project, specifically using Vscode with the dev containers extension.
