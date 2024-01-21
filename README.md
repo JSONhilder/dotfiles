@@ -23,14 +23,14 @@ cat ~/.ssh/id_rsa.pub
 
 ### Configure git global user
 ```
-git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.name "first_name last_name"
 
 git config --global user.email "email@example.com"
 ```
 
 ### Git clone dotfiles
 ```
-git clone git@github.com:jasonhilder/dotfiles.git 
+cd ~ && git clone git@github.com:jasonhilder/dotfiles.git 
 ```
 
 ### Run install script
