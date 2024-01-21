@@ -30,7 +30,7 @@ mkdir -p ~/.fonts ~/github ~/tests
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( gnome-tweaks, git, make, gcc, curl, ripgrep, gnu stow, xclip, unzip)"
+    echo "( gnome-tweaks, git, vim, make, gcc, curl, ripgrep, gnu stow, xclip, unzip )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -41,7 +41,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y gnome-tweaks make gcc curl ripgrep xclip stow unzip build-essential
+    sudo apt install -y gnome-tweaks vim-runtime vim-gui-common make gcc curl ripgrep xclip stow unzip build-essential
     echo
     echo "===== COMPLETE ====="
     echo
@@ -416,6 +416,7 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "----------------------"
     echo
     cd ~/dotfiles/
+    sudo rm -rf ~/.vimrc && stow vim
     sudo rm -rf ~/.zshrc && stow zsh
     sudo rm -rf ~/.config/starship.toml && stow starship
     echo
