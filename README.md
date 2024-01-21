@@ -4,31 +4,14 @@ Dotfiles :)
 ![Preview Image of system1](https://github.com/jasonhilder/dotfiles/blob/main/screenshots/preview-1.png)
 ![Preview Image of system2](https://github.com/jasonhilder/dotfiles/blob/main/screenshots/preview-2.png)
 
-### Replicate Setup
+Steps To Reproduce
+---
 
-Currently used with the Pop_os desktop environment
+### ( !! Note this is intended for a fresh install of Pop_Os !! )
 
-Initial steps ***before*** system install script
+### Copy backed up ssh keys and add ssh key
 
-### Update the system
-```
-sudo apt update
-
-sudo apt upgrade -y
-```
-Reboot
-
-### Install git (only needed if selected minimal install)
-```
-sudo apt install git
-```
-
-### Configure git global user
-```
-git config --global user.name "FIRST_NAME LAST_NAME"
-
-git config --global user.email "MY_NAME@example.com"
-```
+or
 
 ### Generate ssh key and copy cat output
 ```
@@ -41,81 +24,60 @@ ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 ```
 
-### Log into github and add ssh key
+### Configure git global user
+```
+git config --global user.name "FIRST_NAME LAST_NAME"
 
-### Clone this repository
-```
-git clone git@github.com:jasonhilder/dotfiles.git && mv dotfiles ~/.dotfiles
-```
-
-### Run the install.sh script (note: dont use sudo for this.)
-```
-bash /path/to/system_install.sh
+git config --global user.email "email@example.com"
 ```
 
-### Reboot
-
-## Software install list:
-- Git
-- make
-- gcc
-- build-essential
-- rg (Ripgrep)
-- gnu stow
-- xclip
-- unzip
-- fzf
-- tree
-- neofetch
-- btm (bottom)
-- zsh && Oh My Zsh
-- Alacritty
-- Docker
-- Docker Compose
-- DDEV
-- Volta (nodejs)
-- Rust
-- jdk-11
-- Flutter
-- Zola
-- Lazy Git
-- Lazy Docker
-- Neovim
-- Helix
-- tmux
-- Vscode
-- Mega
-- Transmission
-- fonts
-- newsboat
-- mpv
-- min browser
-
-## Software to be installed manually
-- Android Studio
-
----
-
-## Symlinking Dotfiles Manually
-
-install GNU Stow
+### Git clone dotfiles
 ```
-sudo apt install stow
+git clone git@github.com:jasonhilder/dotfiles.git 
 ```
 
-Clean install steps:
-
+### Run install script
 ```
-cd ~
-
-git clone git@github.com:jasonhilder/dotfiles.git && mv dotfiles ~/.dotfiles
-
-cd ~/.dotfiles
-
-stow zsh/ tmux/ alacritty/ nvim/ ...
+cd ~ && ./dotfiles/system_install.sh
 ```
+    - Git
+    - make
+    - gcc
+    - build-essential
+    - rg (Ripgrep)
+    - gnu stow
+    - xclip
+    - unzip
+    - tree
+    - neofetch
+    - btop
+    - zsh && Oh My Zsh
+    - Docker
+    - Docker Compose
+    - Zola
+    - Lazy Git
+    - Lazy Docker
+    - Vscode
+    - Transmission
 
-For vim/nvim to have access to aliases after symlinking the .zshrc file run:
-```
-source ~/.zshrc && zshalias
-```
+### Gnome tweaks 
+    - focus windows on hover
+    - set capslock to control
+    - right alt never selects 3rd level
+
+### Gnome Settings
+    - Set workspaces to 5 
+    - Set specific shortcuts
+    - dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-5 "['<Alt>p']"
+    - dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-5 "['<Shift><Alt>p']"
+    - gsettings set org.gnome.desktop.interface enable-animations false
+
+### Set up browser and add extensions
+    - bitwarden
+    - gnome shell integration 
+    - simply workspaces
+    - disable workspace switcher
+
+## Additional notes on setup
+
+* I try to keep as little programs, tools installed on the actual OS and make use of docker to setup reproducible environments for each projects, specifically using Vscode with the dev containers extension.
