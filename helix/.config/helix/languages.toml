@@ -37,3 +37,7 @@ name = "go"
 formatter = { command = "gofmt" }
 auto-format = true
 indent = { tab-width = 4, unit = "t" }
+
+[[language]]
+name = "c"
+indent = { tab-width = 4, unit = "  " }

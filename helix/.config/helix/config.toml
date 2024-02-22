@@ -1,10 +1,9 @@
-theme = "dark_plus"
+theme = "gruvbox"
 
 [editor]
 color-modes = true
 completion-trigger-len = 1
-#line-number = "relative"
-bufferline = "never"
+bufferline = "multiple"
 cursorline = true
 true-color = true
 
@@ -30,6 +29,8 @@ display-inlay-hints = false
 X = "extend_line_above"
 # Delete to end of line from cursor
 D = "kill_to_line_end"
+C-u = ["half_page_up", "align_view_center"]
+C-d = ["half_page_down", "align_view_center"]
 # Buffer management
 C-l = "goto_next_buffer"
 C-h = "goto_previous_buffer"
@@ -45,7 +46,6 @@ Y = [
   "normal_mode", 
   "collapse_selection"
 ]
-C-p = "file_picker"
 # Move highlighted lines
 C-j = [
   "extend_to_line_bounds", 
@@ -58,15 +58,22 @@ C-k = [
   "move_line_up", 
   "paste_before"
 ]
+C-o = [
+  ":open fs_scratcher",
+  "paste_clipboard_after", 
+  "goto_file", 
+  "goto_last_modification", 
+  "goto_last_modified_file",
+  ":buffer-close!"
+]
 
 [keys.normal.'space']
-g = ":sh tmux split-window -v -l 70% -c '#{pane_current_path}' lazygit"
+g = ":sh tmux split-window -v -l 100% -c '#{pane_current_path}' lazygit"
+e = ":sh tmux split-window -v -l 70% -c '#{pane_current_path}' lf"
 x = ":buffer-close"
-c = ":theme catppuccin_mocha"
-e = ":sh tmux_fs"
 l = "goto_last_accessed_file"
-# This keybind below is used by lf script
-"." = [
+i = ":toggle lsp.display-inlay-hints"
+"o" = [
   ":open fs_scratcher",
   "paste_clipboard_after", 
   "goto_file", 

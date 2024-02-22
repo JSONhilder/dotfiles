@@ -27,9 +27,6 @@ cmd zip ${{
     rm -rf $1
 }}
 
-cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
-map <c-c> :yank-path
-
 cmd openfilehx ${{
     printf '%s' "$fx" | xclip -i -selection clipboard
 
@@ -40,16 +37,24 @@ cmd openfilehx ${{
     tmux_session_id=$(echo "$tmux_info_json" | jq -r '.session_id')
     tmux_pane_id=$(echo "$tmux_info_json" | jq -r '.pane_id')
 
-    tmux send-keys -t "$tmux_session_id:1" " " "." C-m
+    tmux send-keys -t "$tmux_session_id:1" " " "o" C-m
     tmux select-window -t 1
 }}
-map <c-e> :openfilehx
+
+#map <enter> :yank-path
 map <enter> :openfilehx
 
 # function called q so its quick to do :q
 cmd q ${{
     tmux kill-pane
 }}
+
+cmd yank-path ${{
+    printf '%s' "$fx" | xclip -i -selection clipboard
+    tmux send-keys "q" 
+}}
+
+map <c-o> :yank-path
 
 # Unbind defaults
 map d
@@ -67,8 +72,8 @@ map dd push :delete<enter>
 map md push :mkdir<space>
 map mf push :mkfile<space>
 # use ma and oa to make archive and open archive
-map zc zip
-map zo unzip
+map ma zip
+map mo unzip
 
 # Movement shortcuts
 map gh cd ~/
