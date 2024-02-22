@@ -1,19 +1,26 @@
 #!/bin/sh
 
-cd ~/Mega/todo/
+# Get the current date in the format YYYY_MM_DD
+current_date=$(date +"%Y_%m_%d")
 
-# Get the full month name, week number, and year
-month=$(date '+%B')
-week_number=$(date '+%U')
-year=$(date '+%Y')
+# Define the directory where the file will be created
+directory="/home/jason/Mega"
 
-# Define the filename
-filename="${month}_week_${week_number}_${year}.txt"
+# Define the file name using the current date
+file_name="diary_$current_date"
 
-# Check if the file exists
-if [ ! -e "$filename" ]; then
-    # File does not exist, create it
-    touch "$filename"
+# Combine directory and file name to get the full file path
+file_path="$directory/$file_name"
+
+# Check if the directory exists, if not, create it
+if [ ! -d "$directory" ]; then
+    mkdir -p "$directory"
 fi
 
-~/.local/bin/nvim/bin/nvim $filename
+# Check if the file already exists
+if [ ! -e "$file_path" ]; then
+    # Create the file
+    touch "$file_path"
+fi
+
+/home/jason/.local/bin/nvim/bin/nvim $file_path
