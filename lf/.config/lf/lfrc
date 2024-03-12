@@ -27,22 +27,7 @@ cmd zip ${{
     rm -rf $1
 }}
 
-cmd openfilehx ${{
-    printf '%s' "$fx" | xclip -i -selection clipboard
-
-    # Get the current tmux session and pane IDs
-    tmux_info=$(tmux display-message -p '#{session_id} #{pane_id}')
-
-    # Extract session and pane IDs into separate variables
-    tmux_session_id=$(echo "$tmux_info_json" | jq -r '.session_id')
-    tmux_pane_id=$(echo "$tmux_info_json" | jq -r '.pane_id')
-
-    tmux send-keys -t "$tmux_session_id:1" " " "o" C-m
-    tmux select-window -t 1
-}}
-
-#map <enter> :yank-path
-map <enter> :openfilehx
+map <enter> :yank-path
 
 # function called q so its quick to do :q
 cmd q ${{

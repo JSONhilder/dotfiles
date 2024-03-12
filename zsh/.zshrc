@@ -27,6 +27,9 @@ export PATH="$HOME/.nodenv/bin:$PATH"
 export PATH="$HOME/.nodenv/shims:$PATH"
 eval "$(nodenv init - zsh)"
 
+# Zig
+export PATH="$HOME/zig:$PATH"
+
 # Phpenv functions
 lp7 () {
     sudo a2dismod php8.2
@@ -51,15 +54,13 @@ export EDITOR='vim'
 
 # Aliases
 alias :q="exit"
-#alias lg="lazygit"
-alias lg="vim +Neogit"
-alias gitc="vim +Neogit"
+alias lg="lazygit"
 alias gu="gitui"
 alias ld="lazydocker"
 alias composer="~/.local/bin/composer.phar"
 alias vim="~/.local/bin/nvim/bin/nvim"
 alias dotfiles="cd ~/dotfiles && vim"
-alias wiki="cd ~/Mega/vim_wiki && vim index.md"
+alias wiki="cd ~/Mega/vim_wiki && vi index.md"
 
 # Work directories quick aliases
 alias rep="cd /eyona/web/repforce.co/dev.secure"

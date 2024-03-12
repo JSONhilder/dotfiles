@@ -1,7 +1,18 @@
 #!/bin/sh
+#
+# Function to get the previous day's date
+get_previous_date() {
+    date -d "$1 - 1 day" +"%Y_%m_%d"
+}
+
+# Function to check if a file exists
+file_exists() {
+    [ -e "$1" ]
+}
 
 # Get the current date in the format YYYY_MM_DD
 current_date=$(date +"%Y_%m_%d")
+
 
 # Define the directory where the file will be created
 directory="/home/jason/Mega"
@@ -17,10 +28,23 @@ if [ ! -d "$directory" ]; then
     mkdir -p "$directory"
 fi
 
-# Check if the file already exists
-if [ ! -e "$file_path" ]; then
-    # Create the file
-    touch "$file_path"
-fi
+# Check if the -y flag is provided
+if [[ "$1" == "-y" ]]; then
+    previous_date=$(get_previous_date "$current_date")
+    previous_file="$directory/diary_$previous_date"
 
-/home/jason/.local/bin/nvim/bin/nvim $file_path
+    # Check if the previous day's file exists
+    if file_exists "$previous_file"; then
+        /home/jason/.local/bin/nvim/bin/nvim $previous_file
+    else
+        echo "Yesterday's note does not exist."
+    fi
+else
+    # Check if the file already exists
+    if [ ! -e "$file_path" ]; then
+        # Create the file
+        touch "$file_path"
+    fi
+
+    /home/jason/.local/bin/nvim/bin/nvim $file_path
+fi
