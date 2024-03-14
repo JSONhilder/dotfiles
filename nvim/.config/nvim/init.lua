@@ -63,22 +63,13 @@ vim.g.mapleader = " ";
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("i", "jj", "<Esc>")
 -- clear search highlights
-vim.keymap.set("n", "<leader>nh", ":noh<CR>", { desc = "Clear highlights" })
+vim.keymap.set("n", "<leader>h", ":noh<CR>", { desc = "Clear highlights" })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
--- Window management
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below split" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to above split" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
-vim.keymap.set("n", "<C-Up>", "<cmd>resize -2<CR>", { desc = "Resize split up" })
-vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<CR>", { desc = "Resize split down" })
-vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize split left" })
-vim.keymap.set("n", "<C-Right", "<cmd>vertical resize +2<CR>", { desc = "Resize split left" })
 -- Buffer management
-vim.keymap.set("n", "<leader>bl", "<cmd>b#<CR>", { desc = "Last edited buffer" })
-vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>l", "<cmd>b#<CR>", { desc = "Last edited buffer" })
+vim.keymap.set("n", "<leader>d", "<cmd>bd<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bp<CR>", { desc = "previous buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bn<CR>", { desc = "next buffer" })
 -- Stay in indent mode
@@ -94,9 +85,8 @@ vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Re
 vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
 -- Notes management
 vim.keymap.set("n", "<leader>nd", ":exe 'r!date \"+\\%A, \\%Y-\\%m-\\%d\"' <CR>", { desc = "Insert Date" })
--- Terminal mode
-vim.keymap.set('t', '<C-k>', "<C-\\><C-n>", { silent = true })
-vim.keymap.set('t', '<C-w>', "<C-\\><C-n>", { silent = true })
+-- Terminal escape
+vim.keymap.set('t', '<C-k>', "<C-\\><C-n><C-w>h",{silent = true})
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
