@@ -3,18 +3,25 @@
 ---------------------------------------------------------------------------------
 return {
     {
-        "askfiy/visual_studio_code",
-        priority = 100,
+        "rose-pine/neovim",
+        name = "rose-pine",
         config = function()
-            vim.cmd([[colorscheme visual_studio_code]])
+            require('rose-pine').setup({
+                disable_background = true,
+            })
+
+            vim.cmd("colorscheme rose-pine")
+
         end
     },
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
+        "xiyaowong/transparent.nvim",
         config = function()
-            -- vim.cmd.colorscheme('tokyonight-night')
+            require("transparent").setup({
+                extra_groups = {
+                    "NormalFloat"
+                }
+            })
         end
     }
 }
