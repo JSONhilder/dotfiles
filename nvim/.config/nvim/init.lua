@@ -234,4 +234,11 @@ lspconfig.lua_ls.setup {
 ------------------------------------------------------------------------------
 -- ZIG 
 ------------------------------------------------------------------------------
-lspconfig.zls.setup{}
+lspconfig.zls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {
+        "zls",
+        "--enable-debug-log",
+    },
+}

@@ -3,18 +3,6 @@
 ---------------------------------------------------------------------------------
 return {
     {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        config = function()
-            require('rose-pine').setup({
-                disable_background = true,
-            })
-
-            vim.cmd("colorscheme rose-pine")
-
-        end
-    },
-    {
         "xiyaowong/transparent.nvim",
         config = function()
             require("transparent").setup({
@@ -22,6 +10,15 @@ return {
                     "NormalFloat"
                 }
             })
+        end
+    },
+    {
+        "kabouzeid/nvim-jellybeans",
+        dependencies = {
+            "rktjmp/lush.nvim"
+        },
+        config = function()
+            vim.cmd("colorscheme jellybeans")
         end
     }
 }

@@ -60,7 +60,7 @@ alias ld="lazydocker"
 alias composer="~/.local/bin/composer.phar"
 alias vim="~/.local/bin/nvim/bin/nvim"
 alias dotfiles="cd ~/dotfiles && vim"
-alias wiki="cd ~/Mega/vim_wiki && vi index.md"
+alias wiki="cd ~/Mega/vim_wiki && vim index.md"
 
 # Work directories quick aliases
 alias rep="cd /eyona/web/repforce.co/dev.secure"
