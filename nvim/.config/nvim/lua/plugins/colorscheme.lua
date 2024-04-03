@@ -3,22 +3,9 @@
 ---------------------------------------------------------------------------------
 return {
     {
-        "xiyaowong/transparent.nvim",
+        "rebelot/kanagawa.nvim",
         config = function()
-            require("transparent").setup({
-                extra_groups = {
-                    "NormalFloat"
-                }
-            })
-        end
-    },
-    {
-        "kabouzeid/nvim-jellybeans",
-        dependencies = {
-            "rktjmp/lush.nvim"
-        },
-        config = function()
-            vim.cmd("colorscheme jellybeans")
+            vim.cmd("colorscheme kanagawa")
         end
     }
 }
