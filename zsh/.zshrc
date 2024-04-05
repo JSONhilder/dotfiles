@@ -27,7 +27,7 @@ export PATH="/usr/local/zig:$PATH"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-alias vim="~/.local/bin/nvim/bin/nvim"
+alias vim="/usr/local/bin/nvim"
 
 # Aliases
 alias :q="exit"

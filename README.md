@@ -1,8 +1,8 @@
 Dotfiles :)
 --------------------------------
 
-![Preview Image of system1](https://github.com/jasonhilder/dotfiles/blob/main/screenshots/preview-1.png)
-![Preview Image of system2](https://github.com/jasonhilder/dotfiles/blob/main/screenshots/preview-2.png)
+![Preview Image of system1](/screenshots/preview-1.png)
+![Preview Image of system2](/screenshots/preview-2.png)
 
 Steps To Reproduce
 ---
