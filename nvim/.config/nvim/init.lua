@@ -152,10 +152,10 @@ local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
     ensure_installed = {
         'lua_ls',
-        'intelephense',
-        'tsserver',
+        'gopls',
+        -- 'intelephense',
+        -- 'tsserver',
         -- 'rust_analyzer',
-        -- 'gopls',
         -- 'zig????'
     },
 }
@@ -182,42 +182,6 @@ local handlers =  {
 ------------------------------------------------------------------------------
 -- SERVERS: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
--- RUST
-------------------------------------------------------------------------------
-lspconfig.rust_analyzer.setup {
-    handlers = handlers,
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { "rust" },
-    root_dir = lspconfig.util.root_pattern("Cargo.toml")
-}
-------------------------------------------------------------------------------
--- Golang
-------------------------------------------------------------------------------
-lspconfig.gopls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
-------------------------------------------------------------------------------
--- PHP
-------------------------------------------------------------------------------
-lspconfig.intelephense.setup {
-    handlers = handlers,
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        files = {
-            maxSize = 2000000,
-        }
-    }
-}
-------------------------------------------------------------------------------
--- Javascript/Typescript
-------------------------------------------------------------------------------
-lspconfig.tsserver.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
 ------------------------------------------------------------------------------
 -- LUA
 ------------------------------------------------------------------------------
@@ -242,3 +206,40 @@ lspconfig.zls.setup{
         "--enable-debug-log",
     },
 }
+------------------------------------------------------------------------------
+-- Golang
+------------------------------------------------------------------------------
+lspconfig.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+------------------------------------------------------------------------------
+-- RUST
+------------------------------------------------------------------------------
+-- lspconfig.rust_analyzer.setup {
+--     handlers = handlers,
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     filetypes = { "rust" },
+--     root_dir = lspconfig.util.root_pattern("Cargo.toml")
+-- }
+------------------------------------------------------------------------------
+-- PHP
+------------------------------------------------------------------------------
+-- lspconfig.intelephense.setup {
+--     handlers = handlers,
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     settings = {
+--         files = {
+--             maxSize = 2000000,
+--         }
+--     }
+-- }
+------------------------------------------------------------------------------
+-- Javascript/Typescript
+------------------------------------------------------------------------------
+-- lspconfig.tsserver.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+-- }
