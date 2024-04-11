@@ -132,6 +132,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- LSP binds
         vim.keymap.set("n", "<leader>lr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
         vim.keymap.set("n", "<leader>lf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
+        vim.keymap.set("n", "<leader>la", ":lua vim.lsp.buf.code_action() <CR>", { desc = "Code actions" })
         -- See `:help K` for why this keymap
         nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
         nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
