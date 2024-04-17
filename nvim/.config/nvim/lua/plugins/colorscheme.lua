@@ -3,12 +3,12 @@
 ---------------------------------------------------------------------------------
 return {
     {
-        "rebelot/kanagawa.nvim",
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000 ,
         config = function()
-            vim.cmd("colorscheme kanagawa")
+            vim.cmd("colorscheme gruvbox")
         end
     },
-    { "xiyaowong/transparent.nvim" },
     -- Vlang syntax highlighting
     { "ollykel/v-vim" }
 }

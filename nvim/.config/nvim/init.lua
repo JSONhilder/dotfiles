@@ -94,6 +94,8 @@ vim.opt.updatetime = 50                -- Sets the time after which the swap fil
 vim.o.breakindent = true               -- Makes wrapped lines visually indented
 vim.o.termguicolors = true             -- Enables true color support (duplicated setting)
 vim.o.completeopt = 'menuone,noselect' -- Configures how the completion menu works
+vim.o.splitright = true
+vim.o.splitbelow = true
 ---------------------------------------------------------------------------------
 -- [[ KEYMAPS ]]
 ---------------------------------------------------------------------------------
@@ -188,7 +190,7 @@ mason_lspconfig.setup {
         -- 'intelephense',
         -- 'tsserver',
         -- 'rust_analyzer',
-        -- 'zig????'
+        -- 'zls'
     },
 }
 -- Create border for lsp hover windows
