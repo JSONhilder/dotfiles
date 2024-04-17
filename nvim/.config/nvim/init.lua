@@ -26,36 +26,74 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
+vim.cmd([[au BufNewFile,BufRead *.v set filetype=v]])
+---------------------------------------------------------------------------------
+-- [[ FUNCTIONS ]]
+---------------------------------------------------------------------------------
+-- Function to toggle to/from a terminal buffer named "t1"
+local function toggle_terminal()
+    local term_buf_var = 'is_t1_terminal'
+    local bufnr_t1 = nil
+
+    -- Search for the buffer marked as 't1'
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        local success, is_t1 = pcall(vim.api.nvim_buf_get_var, bufnr, term_buf_var)
+        if success and is_t1 then
+            bufnr_t1 = bufnr
+            break
+        end
+    end
+
+    if bufnr_t1 then
+        -- If buffer 't1' exists, check if it's the current buffer
+        if vim.api.nvim_get_current_buf() == bufnr_t1 then
+            -- If current buffer is 't1', switch to the last accessed buffer
+            vim.cmd("b#")
+        else
+            -- If not, switch to 't1'
+            vim.cmd("buffer " .. bufnr_t1)
+        end
+    else
+        -- If no buffer 't1', create it and start a terminal
+        vim.cmd("enew")
+        local new_bufnr = vim.api.nvim_get_current_buf()
+        vim.cmd("terminal")
+        vim.api.nvim_buf_set_var(new_bufnr, term_buf_var, true)  -- Mark this buffer as 't1'
+        vim.cmd("startinsert")
+    end
+end
+-- Register the function globally so it can be called from vim commands
+_G.toggle_terminal = toggle_terminal
 ---------------------------------------------------------------------------------
 -- [[ OPTIONS ]]
 ---------------------------------------------------------------------------------
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.opt.mouse = 'a'
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.wrap = false
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.termguicolors = true
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
-vim.opt.clipboard = "unnamedplus"
-vim.opt.undofile = true
-vim.opt.updatetime = 50
-vim.o.breakindent = true
-vim.o.completeopt = 'menuone,noselect'
-vim.o.termguicolors = true
+vim.g.loaded_netrw = 1                 -- Disables the default Netrw file browser
+vim.g.loaded_netrwPlugin = 1           -- Disables the Netrw plugin
+vim.opt.mouse = 'a'                    -- Enables mouse support in all modes
+vim.opt.nu = true                      -- Enables line numbers
+vim.opt.relativenumber = true          -- Displays relative line numbers in the buffer
+vim.opt.tabstop = 4                    -- Sets the number of spaces that a tab character represents
+vim.opt.softtabstop = 4                -- Sets the number of spaces per tab in the editor's buffer
+vim.opt.shiftwidth = 4                 -- Sets the width for autoindents
+vim.opt.expandtab = true               -- Converts tabs to spaces
+vim.opt.smartindent = true             -- Enables intelligent autoindenting for new lines
+vim.opt.wrap = false                   -- Disables text wrapping
+vim.opt.swapfile = false               -- Disables swap file creation
+vim.opt.backup = false                 -- Disables making a backup before overwriting a file
+vim.opt.ignorecase = true              -- Makes searches case insensitive
+vim.opt.smartcase = true               -- Makes searches case sensitive if there's a capital letter
+vim.opt.hlsearch = true                -- Highlights all matches of the search pattern
+vim.opt.incsearch = true               -- Starts searching before typing is finished
+vim.opt.termguicolors = true           -- Enables true color support
+vim.opt.scrolloff = 8                  -- Keeps 8 lines visible above/below the cursor
+vim.opt.signcolumn = "yes"             -- Always show the sign column
+vim.opt.isfname:append("@-@")          -- Allows '@' in filenames
+vim.opt.clipboard = "unnamedplus"      -- Uses the system clipboard for all yank, delete, change and put operations
+vim.opt.undofile = true                -- Enables persistent undo
+vim.opt.updatetime = 50                -- Sets the time after which the swap file is written (in milliseconds)
+vim.o.breakindent = true               -- Makes wrapped lines visually indented
+vim.o.termguicolors = true             -- Enables true color support (duplicated setting)
+vim.o.completeopt = 'menuone,noselect' -- Configures how the completion menu works
 ---------------------------------------------------------------------------------
 -- [[ KEYMAPS ]]
 ---------------------------------------------------------------------------------
@@ -82,6 +120,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- Notes management
 vim.keymap.set("n", "<leader>nd", ":exe 'r!date \"+\\%A, \\%Y-\\%m-\\%d\"' <CR>", { desc = "Insert Date" })
+-- Terminal
+vim.keymap.set("n", "<leader>j", ":lua toggle_terminal() <CR>", { desc = "Open terminal" })
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
@@ -107,7 +148,7 @@ capabilities.textDocument.completion.completionItem = {
         },
     },
 }
---capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
@@ -138,7 +179,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
     end
 })
-
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
@@ -151,11 +191,10 @@ mason_lspconfig.setup {
         -- 'zig????'
     },
 }
-
+-- Create border for lsp hover windows
 local lspconfig = require "lspconfig"
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-
 local border = {
       {"┌", "FloatBorder"},
       {"─", "FloatBorder"},
@@ -202,6 +241,13 @@ lspconfig.zls.setup{
 -- Golang
 ------------------------------------------------------------------------------
 lspconfig.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+------------------------------------------------------------------------------
+-- V
+------------------------------------------------------------------------------
+lspconfig.v_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }

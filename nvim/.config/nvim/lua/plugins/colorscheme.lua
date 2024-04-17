@@ -8,5 +8,7 @@ return {
             vim.cmd("colorscheme kanagawa")
         end
     },
-    { "xiyaowong/transparent.nvim" }
+    { "xiyaowong/transparent.nvim" },
+    -- Vlang syntax highlighting
+    { "ollykel/v-vim" }
 }
