@@ -7,6 +7,8 @@ export PATH=$HOME/.local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME"/.oh-my-zsh"
 
+export EDITOR="nvim"
+
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="eastwood"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#7a7a7a'
@@ -37,8 +39,6 @@ alias ld="lazydocker"
 alias composer="~/.local/bin/composer.phar"
 alias dotfiles="cd ~/dotfiles && vim"
 alias wiki="cd ~/Mega/vim_wiki && vim index.md"
-
-export EDITOR='vim'
 
 # Starship
 eval "$(starship init zsh)"
