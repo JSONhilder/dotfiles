@@ -68,7 +68,7 @@ vim.keymap.set("n", "<leader>h", ":noh<CR>", { desc = "Clear highlights" })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- Buffer management
-vim.keymap.set("n", "<leader>l", "<cmd>b#<CR>", { desc = "Last edited buffer" })
+vim.keymap.set("n", "<leader>p", "<cmd>b#<CR>", { desc = "Last edited buffer" })
 vim.keymap.set("n", "<leader>d", "<cmd>bd<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bp<CR>", { desc = "previous buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bn<CR>", { desc = "next buffer" })
@@ -81,8 +81,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 -- Search for highlighted text in visual mode
 vim.keymap.set("v", "/", "y/<C-R>\"<CR>N", { desc = "Search highlighted text" })
 -- LSP binds
-vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
-vim.keymap.set("n", "<leader>cf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
+vim.keymap.set("n", "<leader>lr", ":lua vim.lsp.buf.rename() <CR>", { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>lf", ":lua vim.lsp.buf.format() <CR>", { desc = "Format code" })
+vim.keymap.set("n", "<leader>la", ":lua vim.lsp.buf.code_action() <CR>", { desc = "Code Actions" })
 -- Notes management
 vim.keymap.set("n", "<leader>nd", ":exe 'r!date \"+\\%A, \\%Y-\\%m-\\%d\"' <CR>", { desc = "Insert Date" })
 -- Terminal escape
