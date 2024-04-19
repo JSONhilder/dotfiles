@@ -27,6 +27,43 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 ---------------------------------------------------------------------------------
+-- [[ FUNCTIONS ]]
+---------------------------------------------------------------------------------
+-- Function to toggle to/from a terminal buffer named "t1"
+local function toggle_terminal()
+    local term_buf_var = 'is_t1_terminal'
+    local bufnr_t1 = nil
+
+    -- Search for the buffer marked as 't1'
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        local success, is_t1 = pcall(vim.api.nvim_buf_get_var, bufnr, term_buf_var)
+        if success and is_t1 then
+            bufnr_t1 = bufnr
+            break
+        end
+    end
+
+    if bufnr_t1 then
+        -- If buffer 't1' exists, check if it's the current buffer
+        if vim.api.nvim_get_current_buf() == bufnr_t1 then
+            -- If current buffer is 't1', switch to the last accessed buffer
+            vim.cmd("b#")
+        else
+            -- If not, switch to 't1'
+            vim.cmd("buffer " .. bufnr_t1)
+        end
+    else
+        -- If no buffer 't1', create it and start a terminal
+        vim.cmd("enew")
+        local new_bufnr = vim.api.nvim_get_current_buf()
+        vim.cmd("terminal")
+        vim.api.nvim_buf_set_var(new_bufnr, term_buf_var, true)  -- Mark this buffer as 't1'
+        vim.cmd("startinsert")
+    end
+end
+-- Register the function globally so it can be called from vim commands
+_G.toggle_terminal = toggle_terminal
+---------------------------------------------------------------------------------
 -- [[ OPTIONS ]]
 ---------------------------------------------------------------------------------
 vim.g.loaded_netrw = 1
@@ -87,7 +124,9 @@ vim.keymap.set("n", "<leader>la", ":lua vim.lsp.buf.code_action() <CR>", { desc 
 -- Notes management
 vim.keymap.set("n", "<leader>nd", ":exe 'r!date \"+\\%A, \\%Y-\\%m-\\%d\"' <CR>", { desc = "Insert Date" })
 -- Terminal escape
+vim.keymap.set("n", "<leader>j", ":lua toggle_terminal() <CR>", { desc = "Open terminal" })
 vim.keymap.set('t', '<C-k>', "<C-\\><C-n><C-w>h",{silent = true})
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------
