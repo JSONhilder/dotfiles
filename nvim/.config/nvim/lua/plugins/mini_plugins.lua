@@ -1,4 +1,32 @@
 return {
+    ---------------------------------------------------------------------------------
+    -- Mini Pick: File pickers and more 
+    ---------------------------------------------------------------------------------
+    {
+        'echasnovski/mini.pick',
+        lazy = true,
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "BufEnter",
+        keys = {
+            { "<C-p>",  "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
+            { "<leader>.",  "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
+            { "<leader>ff", "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
+            { "<leader>fb", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
+            { "<leader>fl", "<cmd>lua MiniPick.builtin.resume()<cr>", desc = 'Resume Last Search'},
+            { "<leader>fs", "<cmd>lua MiniPick.builtin.grep_live()<cr>", desc = 'Find String'},
+            { "<leader>fh", "<cmd>lua MiniPick.builtin.help()<cr>", desc = 'Find Help'},
+            { "<leader>fm", "<cmd>Pick marks<cr>", desc = 'Find Marks'},
+            { "<leader>q", "<cmd>Pick diagnostic<cr>", desc = 'Diagnostics'},
+            { "<leader>b", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
+        },
+        config = function()
+            require('mini.pick').setup({
+                options = {
+                    use_cache = true
+                }
+            })
+        end
+    },
     {
         'echasnovski/mini.files',
         lazy = true,
