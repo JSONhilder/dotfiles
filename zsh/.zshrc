@@ -4,11 +4,62 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Add .local/bin
 export PATH=$HOME/.local/bin:$PATH
 
-# Add snap/bin
-export PATH=$PATH:/snap/bin
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME"/.oh-my-zsh"
+
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+
+# Load completions
+autoload -Uz compinit && compinit
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# Aliases
+alias ls='ls --color'
+alias c='clear'
+
+
+# ------------------------------------------------------------------------
+# ------------------------------------------------------------------------
+export EDITOR="nvim"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="eastwood"
@@ -22,53 +73,25 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:~/go/bin/gopls
 
-# Nodenv
-export PATH="$HOME/.nodenv/bin:$PATH"
-export PATH="$HOME/.nodenv/shims:$PATH"
-eval "$(nodenv init - zsh)"
-
 # Zig
-export PATH="$HOME/zig:$PATH"
-
-# Phpenv functions
-lp7 () {
-    sudo a2dismod php8.2
-    sudo a2enmod php7.4
-    sudo update-alternatives --set php /usr/bin/php7.4
-    sudo systemctl restart apache2
-}
-lp8 () {
-    sudo a2dismod php7.4
-    sudo a2enmod php8.2
-    sudo update-alternatives --set php /usr/bin/php8.2
-    sudo systemctl restart apache2
-}
+export PATH="/home/jason/.zig:$PATH"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='vim'
+alias vim="/usr/bin/nvim/bin/nvim"
 
 # Aliases
+alias ..="cd .."
 alias :q="exit"
 alias lg="lazygit"
 alias gu="gitui"
 alias ld="lazydocker"
 alias composer="~/.local/bin/composer.phar"
-alias vim="~/.local/bin/nvim/bin/nvim"
 alias dotfiles="cd ~/dotfiles && vim"
 alias wiki="cd ~/Mega/vim_wiki && vim index.md"
-
-# Work directories quick aliases
-alias rep="cd /eyona/web/repforce.co/dev.secure"
-alias lms="cd /eyona/web/lms.co/lms"
-
-# php aliases
-alias load_php8='load_php8'
-alias load_php7='load_php7'
 
 # Starship
 eval "$(starship init zsh)"
