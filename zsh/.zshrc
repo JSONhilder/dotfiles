@@ -81,7 +81,7 @@ export PATH="/home/jason/.zig:$PATH"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-alias vim="/usr/bin/nvim/bin/nvim"
+alias vi="/usr/bin/nvim/bin/nvim"
 
 # Aliases
 alias ..="cd .."
