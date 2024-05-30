@@ -31,9 +31,6 @@ Plug 'yegappan/lsp'
 "Comments"
 Plug 'tpope/vim-commentary'
 
-"Terminal"
-Plug 'hahdookin/miniterm.vim'
-
 call plug#end()
 
 " --------------------------------------------------------------------------
