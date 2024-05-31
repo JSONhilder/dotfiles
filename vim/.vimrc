@@ -18,6 +18,7 @@ Plug 'junegunn/fzf.vim'
 
 "Colorscheme"
 Plug 'eemed/sitruuna.vim'
+Plug 'nanotech/jellybeans.vim'
 
 "File Tree"
 Plug 'preservim/nerdtree'
@@ -89,7 +90,8 @@ let NERDTreeShowHidden=1
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
 " Colorscheme
-colorscheme sitruuna
+" colorscheme sitruuna
+colorscheme jellybeans
 
 " --------------------------------------------------------------------------
 
@@ -98,6 +100,7 @@ colorscheme sitruuna
 let mapleader = " "
 
 " File finder
+nmap <space>p :Files<CR>
 nmap <c-p> :GFiles<CR>
 nmap <c-b> :Buffers<CR>
 nmap <c-o> :History<CR>
@@ -126,6 +129,10 @@ vnoremap <Tab> >gv
 " Swap to last edited buffer
 nnoremap <leader>p <CMD>b#<CR>
 
+" Use shift to select completion options
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
 " --------------------------------------------------------------------------
 
 " -------------------------------- STATUS LINE -----------------------------
@@ -150,5 +157,6 @@ hi Statusline ctermbg=black ctermfg=grey
 " --------------------------------------------------------------------------
 
 " ------------------------------- LOAD CONFIGS -----------------------------
+
 "  LSP specifics
 so ~/.vim/lsp-config.vim

@@ -14,6 +14,14 @@ if status is-interactive
     # Add .local/bin
     set -x PATH $HOME/.local/bin $PATH
 
+    # Zig
+    set -x PATH $HOME/.zig $PATH
+
+    # GOLANG
+    set -x PATH /usr/local/go/bin $PATH
+    set -x PATH $HOME/go/bin $PATH
+    set -x PATH $HOME/go/bin/gopls $PATH
+
     # ------------------------
     # ALIASES
     # ------------------------
