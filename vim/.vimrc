@@ -73,8 +73,9 @@ set smarttab
 set showmatch
 " Clipboard settings, always use clipboard for all delete, yank, change, put
 " operation, see https://stackoverflow.com/q/30691466/6064933
-set clipboard+=unnamed
-set clipboard+=unnamedplus
+set clipboard+=unnamed  " use the clipboards of vim and win
+set paste               " Paste from a windows or from vim
+set go+=a               " Visual selection automatically copied to the clipboard
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
 set noswapfile
 " Completion behaviour
@@ -125,6 +126,8 @@ vnoremap / y/<C-R>"<CR>N
 " Shift indents 
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
+
+vnoremap Y <CMD>'<,'>w !xclip -sel clip<CR><CR>
 
 " Swap to last edited buffer
 nnoremap <leader>p <CMD>b#<CR>
