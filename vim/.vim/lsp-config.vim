@@ -2,6 +2,12 @@ vim9script
 
 var lspServers = [
     {
+        name: 'clangd',
+        filetype: ['c', 'cpp'],
+        path: '/usr/bin/clangd',
+        args: ['--background-index']
+    },
+    {
         name: 'zig',
         filetype: ['zig', 'zon'],
         path: '/usr/local/bin/zls',
