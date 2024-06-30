@@ -130,7 +130,7 @@ vnoremap <Tab> >gv
 vnoremap Y <CMD>'<,'>w !xclip -sel clip<CR><CR>
 
 " Swap to last edited buffer
-nnoremap <leader>p <CMD>b#<CR>
+nnoremap <leader>l <CMD>b#<CR>
 
 " Use shift to select completion options
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
