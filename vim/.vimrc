@@ -101,9 +101,10 @@ colorscheme jellybeans
 let mapleader = " "
 
 " File finder
-nmap <space>p :Files<CR>
+nmap <space>f :Files<CR>
 nmap <c-p> :GFiles<CR>
 nmap <c-b> :Buffers<CR>
+nmap <space>b :Buffers<CR>
 nmap <c-o> :History<CR>
 
 " File Tree 
@@ -130,7 +131,7 @@ vnoremap <Tab> >gv
 vnoremap Y <CMD>'<,'>w !xclip -sel clip<CR><CR>
 
 " Swap to last edited buffer
-nnoremap <leader>l <CMD>b#<CR>
+nnoremap <leader>p <CMD>b#<CR>
 
 " Use shift to select completion options
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -156,6 +157,7 @@ set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
 set laststatus=2
 
 hi Statusline ctermbg=black ctermfg=grey
+
 
 " --------------------------------------------------------------------------
 
