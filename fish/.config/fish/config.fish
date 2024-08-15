@@ -28,7 +28,7 @@ if status is-interactive
     alias .. "cd .."
     alias :q "exit"
     alias lg "lazygit"
-    alias gu "gitui"
+    alias g "gitu"
     alias ld "lazydocker"
     alias composer "~/.local/bin/composer.phar"
     alias dotfiles "cd ~/dotfiles; vim"
