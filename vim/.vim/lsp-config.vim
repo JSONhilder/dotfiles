@@ -7,12 +7,12 @@ var lspServers = [
         path: '/usr/bin/clangd',
         args: ['--background-index']
     },
-    {
-        name: 'zig',
-        filetype: ['zig', 'zon'],
-        path: '/usr/local/bin/zls',
-        syncInit: v:true
-    },
+    # {
+    #     name: 'zig',
+    #     filetype: ['zig', 'zon'],
+    #     path: '/usr/local/bin/zls',
+    #     syncInit: v:true
+    # },
     # {
     #     name: 'golang',
     #     filetype: ['go', 'gomod'],

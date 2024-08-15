@@ -17,8 +17,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "Colorscheme"
-Plug 'eemed/sitruuna.vim'
-Plug 'nanotech/jellybeans.vim'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 "File Tree"
 Plug 'preservim/nerdtree'
@@ -31,6 +30,9 @@ Plug 'yegappan/lsp'
 
 "Comments"
 Plug 'tpope/vim-commentary'
+
+"Status Line"
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -86,13 +88,15 @@ set pumheight=25  " Maximum number of items to show in popup menu
 " Splits direction
 set splitbelow
 set splitright
+set noshowmode 
 " NerdTree Settings
 let NERDTreeShowHidden=1
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
 " Colorscheme
-" colorscheme sitruuna
-colorscheme jellybeans
+set termguicolors
+colorscheme catppuccin_mocha
+hi Normal guibg=NONE ctermbg=NONE
 
 " --------------------------------------------------------------------------
 
@@ -102,9 +106,9 @@ let mapleader = " "
 
 " File finder
 nmap <space>f :Files<CR>
+nmap <space>b :Buffers<CR>
 nmap <c-p> :GFiles<CR>
 nmap <c-b> :Buffers<CR>
-nmap <space>b :Buffers<CR>
 nmap <c-o> :History<CR>
 
 " File Tree 
@@ -141,23 +145,9 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " -------------------------------- STATUS LINE -----------------------------
 
-" Clear status line when vimrc is reloaded.
-set statusline=
-
-" Status line left side.
-set statusline+=\ %F\ %M\ %Y\ %R
-
-" Use a divider to separate the left side from the right side.
-set statusline+=%=
-
-" Status line right side.
-set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
-
-" Show the status on the second to last line.
+" " Show the status on the second to last line.
 set laststatus=2
-
-hi Statusline ctermbg=black ctermfg=grey
-
+let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 
 " --------------------------------------------------------------------------
 
