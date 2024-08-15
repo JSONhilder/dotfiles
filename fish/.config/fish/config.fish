@@ -18,7 +18,7 @@ if status is-interactive
     set -x PATH $HOME/.zig $PATH
 
     # GOLANG
-    set -x PATH /usr/local/go/bin $PATH
+    set -x PATH /usr/bin/go/bin $PATH
     set -x PATH $HOME/go/bin $PATH
     set -x PATH $HOME/go/bin/gopls $PATH
 
