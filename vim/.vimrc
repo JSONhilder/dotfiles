@@ -34,6 +34,9 @@ Plug 'tpope/vim-commentary'
 "Status Line"
 Plug 'itchyny/lightline.vim'
 
+"Go Stuff"
+Plug 'charlespascoe/vim-go-syntax'
+
 call plug#end()
 
 " --------------------------------------------------------------------------

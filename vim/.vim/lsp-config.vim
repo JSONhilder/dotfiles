@@ -7,19 +7,19 @@ var lspServers = [
         path: '/usr/bin/clangd',
         args: ['--background-index']
     },
+    {
+        name: 'golang',
+        filetype: ['go', 'gomod'],
+        path: '/home/jason/go/bin/gopls',
+        args: ['serve'],
+        syncInit: v:true
+    }
     # {
     #     name: 'zig',
     #     filetype: ['zig', 'zon'],
     #     path: '/usr/local/bin/zls',
     #     syncInit: v:true
-    # },
-    # {
-    #     name: 'golang',
-    #     filetype: ['go', 'gomod'],
-    #     path: '/home/jason/go/bin/gopls',
-    #     args: ['serve'],
-    #     syncInit: v:true
-    # },
+    # }
 ]
 autocmd User LspSetup call LspAddServer(lspServers)
 
