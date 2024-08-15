@@ -96,6 +96,7 @@ set noshowmode
 let NERDTreeShowHidden=1
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
+let NERDTreeWinPos = "right"
 " Colorscheme
 set termguicolors
 colorscheme catppuccin_mocha
