@@ -1,3 +1,4 @@
+
 if status is-interactive
     # ------------------------
     # GLOBALS
