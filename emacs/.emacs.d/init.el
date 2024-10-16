@@ -63,6 +63,11 @@
 (setq c-basic-offset 4) 
 (c-set-offset 'comment-intro 0)
 
+;; Minibuffer size
+(setq resize-mini-windows  t)
+(setq resize-mini-frames  t)
+(setq max-mini-window-height 0.85)
+
 ;; The `setq' special form is used for setting variables. Remember
 ;; that you can look up these variables with "C-h v variable-name".
 (setq uniquify-buffer-name-style 'forward
@@ -115,6 +120,12 @@
 ;;   :custom      ; Set these variables
 ;;   :config      ; Run this code after my-package is loaded
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs '("PATH")))
+
 ;; A package with a great selection of themes:
 ;; https://protesilaos.com/emacs/ef-themes
 (use-package ef-themes
@@ -162,17 +173,6 @@
     (corfu-auto-prefix 0)
     (completion-styles '(basic)))
 
-;; Adds LSP support. Note that you must have the respective LSP
-;; server installed on your machine to use it with Eglot. e.g.
-;; rust-analyzer to use Eglot with `rust-mode'.
-(use-package eglot
-    :ensure t
-    :bind (("s-<mouse-1>" . eglot-find-implementation)
-            ("C-c ." . eglot-code-action-quickfix))
-    ;; Add your programming modes here to automatically start Eglot,
-    ;; assuming you have the respective LSP server installed.
-    :hook ((go-mode . eglot-ensure)))
-
 ;; Adds vim emulation. Activate `evil-mode' to swap your default Emacs
 ;; keybindings with the modal editor of great infamy. There's a ton of
 ;; keybindings that Evil needs to modify, so this configuration also
@@ -197,6 +197,23 @@
     :config
     (global-evil-surround-mode 1))
 
+;; @TODO: show dotfiles
+(use-package fzf
+  :ensure t
+  :bind
+    ;; Don't forget to set keybinds!
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 15))
+
 ;; An extremely feature-rich git client. Activate it with "C-c g".
 (use-package magit
     :ensure t)
@@ -208,6 +225,52 @@
     ;; Optional: Customize vterm settings here
     ;; Set maximum scrollback lines
     (setq vterm-max-scrollback 10000))
+
+;; ---------------------------------------
+;; Programming
+;; ---------------------------------------
+
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go" "v0.19.1")
+     (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
+;;(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
+;; Adds LSP support. Note that you must have the respective LSP
+;; server installed on your machine to use it with Eglot. e.g.
+;; rust-analyzer to use Eglot with `rust-mode'.
+(use-package eglot
+    :ensure t
+    ;; Add your programming modes here to automatically start Eglot,
+    ;; assuming you have the respective LSP server installed.
+    ;;:hook ((go-mode . eglot-ensure))
+    :bind (("s-<mouse-1>" . eglot-find-implementation)
+            ("C-c ." . eglot-code-action-quickfix)))
+
+;; In cases where you need to change the language server commands
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(tsx-ts-mode . ("bunx" "--bun" "typescript-language-server" "--stdio"))))
+
+;; Disable ts mode debug logging for performance reason
+;; Comment out if needing to debug
+;;(defun jsonrpc--log-event (connection message &optional type))
 
 ;; ---------------------------------------
 ;; Keybinds
@@ -230,17 +293,23 @@
     (interactive)
     (switch-to-buffer nil))
 
+;; MISC BINDS
+(with-eval-after-load 'dired
+  (evil-define-key 'normal dired-mode-map (kbd "f") 'find-file))
+
+
 ;; EVIL BINDS
 (with-eval-after-load 'evil
     (evil-set-leader nil (kbd "SPC"))
     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
     (define-key evil-normal-state-map (kbd "C-i") 'ibuffer)
     (define-key evil-normal-state-map (kbd "C-p") 'dired-jump)
+    (define-key evil-normal-state-map (kbd "C-f") 'dired)
 
     (define-key evil-normal-state-map (kbd "C-c g") 'magit)
     (define-key evil-normal-state-map (kbd "C-c C-c") 'compile)
 
-    (define-key evil-normal-state-map (kbd "<leader>e") 'find-file)
+    (define-key evil-normal-state-map (kbd "<leader>f") 'fzf)
     (define-key evil-normal-state-map (kbd "<leader>x") 'kill-buffer-and-window)
     (define-key evil-normal-state-map (kbd "<leader>R") 'restart-emacs)
     (define-key evil-normal-state-map (kbd "<leader>l") 'switch-p-buffer)
@@ -263,7 +332,5 @@
 (with-eval-after-load 'vterm
     (evil-define-key 'insert vterm-mode-map (kbd "<tab>") #'vterm-send-tab)
     (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'switch-p-buffer)
-    (evil-define-key 'normal vterm-mode-map (kbd "C-j") 'switch-p-buffer))
-
-;; @TODO
-;; browse url keybind
+    (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'switch-p-buffer)
+    (evil-define-key 'normal vterm-mode-map (kbd "C-c") #'vterm-send-C-c))

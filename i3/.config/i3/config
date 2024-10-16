@@ -1,0 +1,160 @@
+# TODO: nm-applet, volume control.
+
+# Docs: https://i3wm.org/docs/userguide.html
+set $mod Mod4
+set $alt Mod1
+
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
+font pango:Ubuntu Sans Regular 10
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $alt+Return exec --no-startup-id i3-sensible-terminal
+
+bindsym $alt+b exec --no-startup-id dm_urlbrowser 
+bindsym $alt+a exec --no-startup-id dm_audioswitcher 
+
+# start a browser
+# bindsym $alt+b exec chromium
+# start a file browser
+bindsym $alt+f exec thunar
+
+# kill focused window
+bindsym $alt+Ctrl+q kill
+
+# start dmenu (a program launcher)
+bindsym $alt+d exec dmenu_run -fn 'Ubuntu Sans Regular-11'
+
+# change focus
+bindsym $alt+h focus left
+bindsym $alt+j focus down
+bindsym $alt+k focus up
+bindsym $alt+l focus right
+
+# move focused window
+bindsym $alt+Shift+h move left
+bindsym $alt+Shift+j move down
+bindsym $alt+Shift+k move up
+bindsym $alt+Shift+l move right
+
+# split in horizontal orientation
+bindsym $alt+y split h
+# split in vertical orientation
+bindsym $alt+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $alt+m fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+bindsym $alt+t layout tabbed
+bindsym $alt+s layout toggle split
+
+# toggle tiling / floating
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+# set $ws7 "7"
+# set $ws8 "8"
+# set $ws9 "9"
+# set $ws10 "10"
+
+workspace_auto_back_and_forth yes
+bindsym $alt+Tab workspace back_and_forth
+# switch to workspace
+bindsym $alt+q workspace number $ws1
+bindsym $alt+w workspace number $ws2
+bindsym $alt+e workspace number $ws3
+bindsym $alt+i workspace number $ws4
+bindsym $alt+o workspace number $ws5
+bindsym $alt+p workspace number $ws6
+# bindsym $mod+6 workspace number $ws6
+# bindsym $mod+7 workspace number $ws7
+# bindsym $mod+8 workspace number $ws8
+# bindsym $mod+9 workspace number $ws9
+# bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym Shift+$alt+q move container to workspace number $ws1
+bindsym Shift+$alt+w move container to workspace number $ws2
+bindsym Shift+$alt+e move container to workspace number $ws3
+bindsym Shift+$alt+i move container to workspace number $ws4
+bindsym Shift+$alt+o move container to workspace number $ws5
+bindsym Shift+$alt+p move container to workspace number $ws6
+# bindsym $mod+Shift+6 move container to workspace number $ws6
+# bindsym $mod+Shift+7 move container to workspace number $ws7
+# bindsym $mod+Shift+8 move container to workspace number $ws8
+# bindsym $mod+Shift+9 move container to workspace number $ws9
+# bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $alt+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $alt+Shift+r restart
+
+# system menu
+bindsym $alt+Ctrl+r exec xfce4-session-logout
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym l resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym j resize shrink height 10 px or 10 ppt
+    bindsym h resize grow width 10 px or 10 ppt
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $alt+r mode "default"
+}
+bindsym $alt+r mode "resize"
+
+hide_edge_borders smart
+focus_on_window_activation focus
+
+#start of bar section
+bar {
+    position top
+    status_command i3status
+    tray_padding 5
+    colors { background #282828 }
+}
+#end of bar section
+
+bindsym $alt+1 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $alt+2 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $alt+3 exec amixer -D pulse sset Master 0%
+
+
+#########################################################
+# NOTE: While using xfce alot of functionality is started
+# through its built in system, nm-applet, volume ctl etc.
+#########################################################
+# picom run through xfce4 session manager
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/p1.png
+exec --no-startup-id killall xfce4-panel
+exec --no-startup-id xrandr --output HDMI-A-0 --auto --primary
+exec --no-startup-id nm-applet --sm-disable
+exec --no-startup-id pasystray 
+
+########################################################
+# Open specific applications in floating mode
+########################################################
+#for_window [title=".*mpv.*"] floating enable enable border pixel 0
+#for_window [title="Thunar"] floating enable border pixel 0

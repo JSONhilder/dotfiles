@@ -1,40 +1,38 @@
+# ------------------------
+# GLOBALS
+# ------------------------
+set -g fish_greeting
 
-if status is-interactive
-    # ------------------------
-    # GLOBALS
-    # ------------------------
-    set -g fish_greeting
-    
-    set -x EDITOR "emacs"
+set -x EDITOR "emacs"
 
-    # ------------------------
-    # PATHS
-    # ------------------------
-    set -x PATH $HOME/bin /usr/local/bin $PATH
+# ------------------------
+# PATHS
+# ------------------------
+set -x PATH $HOME/bin /usr/local/bin $PATH
 
-    # Add .local/bin
-    set -x PATH $HOME/.local/bin $PATH
+# Add .local/bin
+set -x PATH $HOME/.local/bin $PATH
 
-    # Zig
-    set -x PATH $HOME/.zig $PATH
+# GOLANG
+set -x PATH /usr/bin/go/bin $PATH
+set -x PATH $HOME/go/bin $PATH
+set -x PATH $HOME/go/bin/gopls $PATH
 
-    # GOLANG
-    set -x PATH /usr/bin/go/bin $PATH
-    set -x PATH $HOME/go/bin $PATH
-    set -x PATH $HOME/go/bin/gopls $PATH
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
 
-    # ------------------------
-    # ALIASES
-    # ------------------------
-    alias .. "cd .."
-    alias :q "exit"
-    alias lg "lazygit"
-    alias g "gitu"
-    alias ld "lazydocker"
-    alias composer "~/.local/bin/composer.phar"
-    alias dotfiles "cd ~/dotfiles; vim"
-    alias wiki "cd ~/Mega/vim_wiki; vim index.md"
-end
+# ------------------------
+# ALIASES
+# ------------------------
+alias .. "cd .."
+alias :q "exit"
+alias lg "lazygit"
+alias g "gitu"
+alias ld "lazydocker"
+alias composer "~/.local/bin/composer.phar"
+alias dotfiles "cd ~/dotfiles; vim"
+alias wiki "cd ~/Mega/vim_wiki; vim index.md"
 
 # ------------------------
 # THEME START
@@ -76,3 +74,4 @@ set -g fish_pager_color_selected_background --background=$selection
 # ------------------------
 # THEME END
 # ------------------------
+
