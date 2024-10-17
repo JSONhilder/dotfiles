@@ -12,7 +12,6 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $alt+Return exec --no-startup-id i3-sensible-terminal
-
 bindsym $alt+b exec --no-startup-id dm_urlbrowser 
 bindsym $alt+a exec --no-startup-id dm_audioswitcher 
 
@@ -22,7 +21,7 @@ bindsym $alt+a exec --no-startup-id dm_audioswitcher
 bindsym $alt+f exec thunar
 
 # kill focused window
-bindsym $alt+Ctrl+q kill
+bindsym $alt+g kill
 
 # start dmenu (a program launcher)
 bindsym $alt+d exec dmenu_run -fn 'Ubuntu Sans Regular-11'
