@@ -252,6 +252,37 @@
 ;;(defun jsonrpc--log-event (connection message &optional type))
 
 ;; ---------------------------------------
+;; Functions
+;; ---------------------------------------
+
+(defun google-this ()
+  "Search LibreWolf using the currently highlighted region in Emacs."
+  (interactive)
+  (if (use-region-p)
+      (let ((query (buffer-substring-no-properties (region-beginning) (region-end))))
+        (let ((url (concat "https://www.google.com/search?q=" (url-hexify-string query))))
+          (start-process "librewolf" nil "librewolf" url)))
+    (message "No region selected.")))
+
+(defun open-emacs-config ()
+  "Open the Emacs configuration file."
+  (interactive)
+  (find-file (expand-file-name "~/.emacs.d/init.el")))
+
+(defun xterm ()
+  "Open an XFCE4 terminal in i3 at the current buffer's directory."
+  (interactive)
+  (let ((current-directory (if (buffer-file-name)
+                               (file-name-directory (buffer-file-name))
+                             default-directory)))
+    (start-process "xfce4-terminal" nil "xfce4-terminal" "--working-directory" current-directory)))
+
+(defun switch-p-buffer ()
+    "Switch to the previous buffer."
+    (interactive)
+    (switch-to-buffer nil))
+
+;; ---------------------------------------
 ;; Keybinds
 ;; ---------------------------------------
 
@@ -267,41 +298,28 @@
     (evil-normal-state)
     (evil-visual-restore))
 
-(defun switch-p-buffer ()
-    "Switch to the previous buffer."
-    (interactive)
-    (switch-to-buffer nil))
-
-(defun google-highlighted-region ()
-  "Search LibreWolf using the currently highlighted region in Emacs."
-  (interactive)
-  (if (use-region-p)
-      (let ((query (buffer-substring-no-properties (region-beginning) (region-end))))
-        (let ((url (concat "https://www.google.com/search?q=" (url-hexify-string query))))
-          (start-process "librewolf" nil "librewolf" url)))
-    (message "No region selected.")))
-
 ;; MISC BINDS
 (with-eval-after-load 'dired
-  (evil-define-key 'normal dired-mode-map (kbd "f") 'find-file))
-
-(global-set-key (kbd "C-c s") 'google-highlighted-region)
+    (evil-define-key 'normal dired-mode-map (kbd "<backspace>") 'dired-up-directory)
+    (evil-define-key 'normal dired-mode-map (kbd "f") 'find-file))
 
 ;; EVIL BINDS
 (with-eval-after-load 'evil
     (evil-set-leader nil (kbd "SPC"))
+    (define-key evil-normal-state-map (kbd "<leader>j") 'kill-buffer-and-window)
+
     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-    (define-key evil-normal-state-map (kbd "C-i") 'ibuffer)
-    (define-key evil-normal-state-map (kbd "C-p") 'dired-jump)
-    (define-key evil-normal-state-map (kbd "C-f") 'dired)
+    (define-key evil-normal-state-map (kbd "C-c i") 'ibuffer)
+    (define-key evil-normal-state-map (kbd "C-c p") 'dired-jump)
+    (define-key evil-normal-state-map (kbd "C-c d") 'dired)
 
     (define-key evil-normal-state-map (kbd "C-c g") 'magit)
-    (define-key evil-normal-state-map (kbd "C-c C-c") 'compile)
+    (define-key evil-normal-state-map (kbd "C-c c") 'compile)
+    (define-key evil-normal-state-map (kbd "C-c w") 'open-emacs-config)
 
-    (define-key evil-normal-state-map (kbd "<leader>f") 'find-file)
-    (define-key evil-normal-state-map (kbd "<leader>x") 'kill-buffer-and-window)
-    (define-key evil-normal-state-map (kbd "<leader>R") 'restart-emacs)
-    (define-key evil-normal-state-map (kbd "<leader>l") 'switch-p-buffer)
+    (define-key evil-normal-state-map (kbd "C-c f") 'find-file)
+    (define-key evil-normal-state-map (kbd "C-c r") 'restart-emacs)
+    (define-key evil-normal-state-map (kbd "C-c l") 'switch-p-buffer)
 
     (define-key evil-normal-state-map (kbd "<tab>") 'evil-shift-right)
     (define-key evil-normal-state-map (kbd "<backtab>") 'evil-shift-left)
