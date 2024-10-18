@@ -120,18 +120,18 @@
 ;;   :custom      ; Set these variables
 ;;   :config      ; Run this code after my-package is loaded
 
-(use-package exec-path-from-shell
-  :ensure t
-  :init
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-envs '("PATH")))
-
 ;; A package with a great selection of themes:
 ;; https://protesilaos.com/emacs/ef-themes
 (use-package ef-themes
     :ensure t
     :config
     (ef-themes-select 'ef-autumn))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs '("PATH")))
 
 ;; Minibuffer completion is essential to your Emacs workflow and
 ;; Vertico is currently one of the best out there. There's a lot to
@@ -202,15 +202,8 @@
     :ensure t)
 
 (with-eval-after-load 'magit
-  (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1))
-
-(use-package vterm
-    :ensure t
-    :defer t
-    :config
-    ;; Optional: Customize vterm settings here
-    ;; Set maximum scrollback lines
-    (setq vterm-max-scrollback 10000))
+    (setq magit-log-section-commit-count 100)
+    (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1))
 
 ;; ---------------------------------------
 ;; Programming
@@ -305,7 +298,7 @@
     (define-key evil-normal-state-map (kbd "C-c g") 'magit)
     (define-key evil-normal-state-map (kbd "C-c C-c") 'compile)
 
-    (define-key evil-normal-state-map (kbd "<leader>f") 'fzf)
+    (define-key evil-normal-state-map (kbd "<leader>f") 'find-file)
     (define-key evil-normal-state-map (kbd "<leader>x") 'kill-buffer-and-window)
     (define-key evil-normal-state-map (kbd "<leader>R") 'restart-emacs)
     (define-key evil-normal-state-map (kbd "<leader>l") 'switch-p-buffer)
@@ -324,9 +317,4 @@
 (with-eval-after-load 'magit
     (define-key magit-mode-map (kbd "<tab>") 'magit-section-toggle))
 
-;; VTERM BINDS
-(with-eval-after-load 'vterm
-    (evil-define-key 'insert vterm-mode-map (kbd "<tab>") #'vterm-send-tab)
-    (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'switch-p-buffer)
-    (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'switch-p-buffer)
-    (evil-define-key 'normal vterm-mode-map (kbd "C-c") #'vterm-send-C-c))
+;;@TODO move xfce4 theme to dotfiles

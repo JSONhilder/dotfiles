@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(fzf vterm vertico vc-use-package marginalia magit exec-path-from-shell evil-surround evil-collection ef-themes dirvish corfu avy)))
+   '(ef-themes vertico vc-use-package marginalia magit exec-path-from-shell evil-surround evil-collection corfu)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
