@@ -8,8 +8,6 @@ return {
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "BufEnter",
         keys = {
-            { "<C-p>",  "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
-            { "<leader>.",  "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
             { "<leader>ff", "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
             { "<leader>fb", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
             { "<leader>fl", "<cmd>lua MiniPick.builtin.resume()<cr>", desc = 'Resume Last Search'},
@@ -114,11 +112,9 @@ return {
 
                 clues = {
                     { mode = 'n', keys = '<Leader>f', desc = 'Find' },
-                    { mode = 'n', keys = '<Leader>s', desc = 'Spectre' },
                     { mode = 'n', keys = '<Leader>b', desc = 'Buffer' },
                     { mode = 'n', keys = '<Leader>g', desc = 'Git' },
-                    { mode = 'n', keys = '<Leader>c', desc = 'Code' },
-                    { mode = 'n', keys = '<Leader>n', desc = 'Toggle' },
+                    { mode = 'n', keys = '<Leader>l', desc = 'Code' },
                     -- Enhance this by adding descriptions for <Leader> mapping groups
                     miniclue.gen_clues.builtin_completion(),
                     miniclue.gen_clues.g(),
@@ -131,6 +127,86 @@ return {
                     delay = 200
                 }
             })
+        end
+    },
+    ---------------------------------------------------------------------------------
+    -- Add indentation guides
+    ---------------------------------------------------------------------------------
+    {
+        "echasnovski/mini.indentscope",
+        version = false, -- wait till new 0.7.0 release to put it back on semver
+        config = function()
+            local ms = require('mini.indentscope')
+            ms.setup({
+                -- symbol = "▏",
+                symbol = "│",
+                options = {
+                    try_as_border = true
+                },
+                draw = {
+                    delay = 10,
+                    animation = ms.gen_animation.none()
+                }
+            })
+        end,
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {
+            indent = { highlight = { "LineNr" }, char = "│" },
+            scope = { enabled = false },
+        }
+    },
+    ---------------------------------------------------------------------------------
+    -- Git releated signs to the gutter
+    ---------------------------------------------------------------------------------
+    {
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            -- See `:help gitsigns.txt`
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                delete = { text = '_' },
+                topdelete = { text = '‾' },
+                changedelete = { text = '~' },
+            },
+        },
+    },
+    {
+        "NeogitOrg/neogit",
+        version = "v0.0.1",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            -- "sindrets/diffview.nvim",        -- optional - Diff integration
+            -- "nvim-telescope/telescope.nvim", -- optional
+        },
+        keys = {
+            {'<leader>gg', '<cmd>Neogit<CR>',  desc = "Open Neogit" }
+        },
+        config = true
+    },
+    ---------------------------------------------------------------------------------
+    -- Colorscheme
+    ---------------------------------------------------------------------------------
+    {
+        "kabouzeid/nvim-jellybeans",
+        priority = 1000,
+        dependencies = {
+            "rktjmp/lush.nvim"
+        },
+        config = function()
+            -- Set the colorscheme
+            vim.cmd("colorscheme jellybeans")
+
+            -- Override the background color
+            vim.api.nvim_set_hl(0, "Normal", { bg = "#0f0e06" })
+
+            -- Ensure background is set correctly for other highlight groups
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0f0e06" })
+            vim.api.nvim_set_hl(0, "SignColumn", { bg = "#0f0e06" })
+            vim.api.nvim_set_hl(0, "StatusLine", { bg = "#0f0e06" })
         end
     }
 }

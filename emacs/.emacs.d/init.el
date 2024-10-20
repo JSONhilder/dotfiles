@@ -1,30 +1,5 @@
+
 ;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
-;; ---------------------------------------
-;; UI STUFF
-;; ---------------------------------------
-;; Performance tweaks for modern machines
-(setq gc-cons-threshold 100000000) ; 100 mb
-(setq read-process-output-max (* 1024 1024)) ; 1mb
-
-;; Remove extra UI clutter by hiding the scrollbar, menubar, and toolbar.
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-;; Set the font. Note: height = px * 100
-(set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
-;; Automatically insert closing parens
-(electric-pair-mode t)
-;; Visualize matching parens
-(show-paren-mode 1)
-;; Line numbers
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
-;; Disable Splash screen
-(setq inhibit-splash-screen t)
-;; Open fullscreen
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 ;; ---------------------------------------
 ;; MISC STUFF
 ;; ---------------------------------------
@@ -85,6 +60,8 @@
       ;; customize menu. The following setting instead writes customizations to a
       ;; separate file, custom.el, to keep your init.el clean.
       custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+(setq dired-dwim-target t)
 
 ;; ---------------------------------------
 ;; Packages
@@ -149,6 +126,16 @@
     :init
     (vertico-mode))
 
+(use-package vertico-posframe
+  :ensure t
+  :custom
+  (vertico-posframe-parameters
+   '((left-fringe . 8)
+     (right-fringe . 8)))
+  :init
+  (vertico-posframe-mode))
+
+
 ;; Improve the accessibility of Emacs documentation by placing
 ;; descriptions directly in your minibuffer. Give it a try:
 ;; "M-x find-file".
@@ -205,31 +192,51 @@
     (setq magit-log-section-commit-count 100)
     (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1))
 
+;; better dired
+(use-package dirvish
+  :ensure t
+  :init
+  (dirvish-override-dired-mode))
+
+(with-eval-after-load 'dirvish
+  (setq dirvish-hide-details nil))
+
+(use-package fzf
+    :config
+    (setenv "FZF_DEFAULT_COMMAND" "rg --files --hidden --follow --glob '!.git/*'")
+    (setq fzf/executable "fzf"
+        ;;fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/git-grep-args "-i --line-number %s"
+        fzf/position-bottom nil
+        fzf/window-height 20))
+
 ;; ---------------------------------------
 ;; Programming
 ;; ---------------------------------------
 
 (setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go" "v0.19.1")
-     (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
+    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+        (go "https://github.com/tree-sitter/tree-sitter-go" "v0.19.1")
+        (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+        (html "https://github.com/tree-sitter/tree-sitter-html")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+        (json "https://github.com/tree-sitter/tree-sitter-json")
+        (make "https://github.com/alemuller/tree-sitter-make")
+        (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+        (lua "https://github.com/Azganoth/tree-sitter-lua")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
 ;;(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
-(add-to-list 'auto-mode-alist '("\\.c\\'" . c-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . tsx-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . tsx-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . tsx-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
 ;; Adds LSP support. Note that you must have the respective LSP
 ;; server installed on your machine to use it with Eglot. e.g.
@@ -246,6 +253,9 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("bunx" "--bun" "typescript-language-server" "--stdio"))))
+
+(use-package lua-mode
+  :ensure t)
 
 ;; Disable ts mode debug logging for performance reason
 ;; Comment out if needing to debug
@@ -282,6 +292,18 @@
     (interactive)
     (switch-to-buffer nil))
 
+(defun fzf-smart-find ()
+  "Use `fzf-git` if inside a Git repository; otherwise, use `fzf-find-file`."
+  (interactive)
+  (if (my/git-root)
+      (fzf-git)
+    (fzf-find-file)))
+
+(defun my/git-root ()
+  "Check if the current directory is inside a Git repository."
+  (and (executable-find "git")
+       (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)))
+
 ;; ---------------------------------------
 ;; Keybinds
 ;; ---------------------------------------
@@ -303,36 +325,40 @@
     (evil-define-key 'normal dired-mode-map (kbd "<backspace>") 'dired-up-directory)
     (evil-define-key 'normal dired-mode-map (kbd "f") 'find-file))
 
+(with-eval-after-load 'dirvish
+    (evil-define-key 'normal global-map (kbd "<tab>") 'dirvish-subtree-toggle))
+
 ;; EVIL BINDS
 (with-eval-after-load 'evil
     (evil-set-leader nil (kbd "SPC"))
-    (define-key evil-normal-state-map (kbd "<leader>j") 'kill-buffer-and-window)
+
+    (define-key evil-normal-state-map (kbd "<leader> j") 'kill-buffer-and-window)
+    (define-key evil-normal-state-map (kbd "<leader> l") 'switch-p-buffer)
+    (define-key evil-normal-state-map (kbd "<leader> r r") 'restart-emacs)
 
     (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
     (define-key evil-normal-state-map (kbd "C-c i") 'ibuffer)
     (define-key evil-normal-state-map (kbd "C-c p") 'dired-jump)
-    (define-key evil-normal-state-map (kbd "C-c d") 'dired)
+    (define-key evil-normal-state-map (kbd "C-c f") 'fzf-smart-find)
+    (define-key evil-normal-state-map (kbd "C-c j") 'bookmark-jump)
+    (define-key evil-normal-state-map (kbd "C-c m") 'bookmark-set)
 
+    ;; @note: C-c C-e evals the buffer or the selected region
     (define-key evil-normal-state-map (kbd "C-c g") 'magit)
     (define-key evil-normal-state-map (kbd "C-c c") 'compile)
-    (define-key evil-normal-state-map (kbd "C-c w") 'open-emacs-config)
+    (define-key evil-normal-state-map (kbd "C-c e") 'open-emacs-config)
 
-    (define-key evil-normal-state-map (kbd "C-c f") 'find-file)
-    (define-key evil-normal-state-map (kbd "C-c r") 'restart-emacs)
-    (define-key evil-normal-state-map (kbd "C-c l") 'switch-p-buffer)
-
-    (define-key evil-normal-state-map (kbd "<tab>") 'evil-shift-right)
-    (define-key evil-normal-state-map (kbd "<backtab>") 'evil-shift-left)
     (define-key evil-insert-state-map (kbd "<tab>") 'evil-shift-right)
     (define-key evil-insert-state-map (kbd "<backtab>") 'evil-shift-left)
+    (evil-define-key 'normal global-map (kbd "<tab>") 'evil-shift-right)
+    (evil-define-key 'normal global-map (kbd "<backtab>") 'evil-shift-left)
 
     (evil-define-key 'visual global-map (kbd "<tab>") 'visual-shift-right)
-    (evil-define-key 'visual global-map (kbd "<backtab>") 'visual-shift-left)
-
-    (define-key evil-normal-state-map (kbd "C-j") 'vterm))
+    (evil-define-key 'visual global-map (kbd "<backtab>") 'visual-shift-left))
 
 ;; MAGIT BINGS
 (with-eval-after-load 'magit
     (define-key magit-mode-map (kbd "<tab>") 'magit-section-toggle))
 
-;;@TODO move xfce4 theme to dotfiles
+
+;; TESTING:
