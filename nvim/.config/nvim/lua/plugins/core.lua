@@ -220,8 +220,6 @@ return {
         version = "v0.0.1",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            -- "sindrets/diffview.nvim",        -- optional - Diff integration
-            -- "nvim-telescope/telescope.nvim", -- optional
         },
         keys = {
             {'<leader>gg', '<cmd>Neogit<CR>',  desc = "Open Neogit" }
