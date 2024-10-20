@@ -30,7 +30,7 @@ mkdir -p ~/.fonts ~/github
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, neovim, curl, wget, ripgrep, xclip, unzip, tree, btop, neofetch )"
+    echo "( git, curl, wget, ripgrep, xclip, unzip, tree, btop, neofetch, neovim )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}

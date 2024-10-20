@@ -20,25 +20,30 @@ cd ~ && ./dotfiles/system_install.sh
 ```
 *The script will prompt for install of following:*
 
-    - Git
-    - make
-    - gcc
-    - build-essential
-    - rg (Ripgrep)
-    - gnu stow
+    - git
+    - curl 
+    - wget
+    - ripgrep
     - xclip
     - unzip
     - tree
-    - neofetch
     - btop
-    - zsh && Oh My Zsh
-    - Docker
-    - Docker Compose
-    - Zola
-    - Lazy Git
-    - Lazy Docker
-    - Vscode
-    - Transmission
+    - neofetch
+    - neovim 
+    - gcc
+    - make
+    - cmake 
+    - clangd 
+    - build-essential 
+    - xmake
+    - fish
+    - i3
+    - i3 status
+    - docker
+    - lazy docker
+    - transmission
+    - vlc player
+    - librewolf browser
 
 ### Stow (symlink) the config files
 
@@ -48,4 +53,5 @@ rm -rf ~/.config/fish && stow fish
 rm -rf ~/.config/i3 && stow i3
 rm -rf ~/.config/i3status && stow i3status
 rm -rf ~/.config/nvim && stow nvim
+rm -rf ~/.local/share/xfce/terminal && stow xfce4term
 ```
