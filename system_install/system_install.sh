@@ -30,7 +30,7 @@ mkdir -p ~/.fonts ~/github
 #####################################################
 if [[ $_override = "n" ]]; then
     echo "Install system essentials? [y/n]"
-    echo "( git, vim, make, gcc, curl, wget, ripgrep, xclip, unzip, tree, btop, neofetch )"
+    echo "( git, neovim, curl, wget, ripgrep, xclip, unzip, tree, btop, neofetch )"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -41,7 +41,58 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo "installing essentials..."
     echo "------------------------"
     echo
-    sudo apt install -y git make gcc curl wget ripgrep xclip unzip build-essential tree btop neofetch
+    sudo apt install -y git neovim curl wget ripgrep xclip unzip tree btop neofetch
+
+    git config --global user.name "Jason Hilder"
+    git config --global user.email "jhilder95@gmail.com"
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# C Tools
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install C language tools? [y/n]"
+    echo "( gcc, make, cmake, clangd, build-essential )"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "installing essentials..."
+    echo "------------------------"
+    echo
+    sudo apt install -y gcc make cmake clangd build-essential 
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# Xmake
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Xmake? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing Xmake..."
+    echo "------------------------------"
+    echo
+
+    wget https://xmake.io/shget.text -O - | bash
+
     echo
     echo "===== COMPLETE ====="
     echo
@@ -71,10 +122,10 @@ else
     echo
 fi
 #####################################################
-# LAZYGIT
+# I3 Window manager
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Install Lazy Git? [y/n]"
+    echo "Install i3 window manager? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -82,25 +133,14 @@ fi
 
 if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo ""
-    echo "Installing lazygit..."
-    echo "---------------------"
+    echo "installing i3..."
+    echo "-----------------"
     echo
 
-    tag=$(curl --silent https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-
-    echo $tag
-
-    VERSION=$(echo $tag|cut -c 2-7)
-    FILE="lazygit_"$VERSION"_Linux_x86_64.tar.gz"
-
-    
-
-    download="https://github.com/jesseduffield/lazygit/releases/download/"$tag"/"$FILE
-    cd ~ && wget -O $FILE $download
-
-    tar xvf $FILE lazygit
-    sudo mv lazygit /usr/local/bin/lazygit
-    rm $FILE
+    sudo apt install dmenu
+    sudo apt install i3
+    sudo apt install picom
+    sudo apt install i3status
 
     echo
     echo "===== COMPLETE ====="
@@ -237,7 +277,7 @@ fi
 # SET SHELL
 #####################################################
 if [[ $_override = "n" ]]; then
-    echo "Set default shell to zshell? [y/n]"
+    echo "Set default shell to fish? [y/n]"
     read _proceed
     # lowercase it
     _proceed=${_proceed,,}
@@ -250,6 +290,33 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
 
     chsh -s $(which fish)
+
+    echo
+    echo "===== COMPLETE ====="
+    echo
+else
+    echo
+fi
+#####################################################
+# Librewolf
+#####################################################
+if [[ $_override = "n" ]]; then
+    echo "Install Librewolf browser (removes firefox)? [y/n]"
+    read _proceed
+    # lowercase it
+    _proceed=${_proceed,,}
+fi
+
+if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
+    echo ""
+    echo "Installing Librewolf browser..."
+    echo "-------------------------------"
+    echo
+
+    sudo snap remove --purge firefox
+    sudo apt update && sudo apt install extrepo -y
+    sudo apt upgrade -y
+    sudo apt update && sudo apt install librewolf -y
 
     echo
     echo "===== COMPLETE ====="
