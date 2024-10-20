@@ -1,4 +1,5 @@
 return {
+    -- Config heavily uses mini nvim (https://github.com/echasnovski/mini.nvim)
     ---------------------------------------------------------------------------------
     -- Mini Pick: File pickers and more 
     ---------------------------------------------------------------------------------
@@ -130,6 +131,26 @@ return {
         end
     },
     ---------------------------------------------------------------------------------
+    -- Mini Extra
+    ---------------------------------------------------------------------------------
+    {
+        'echasnovski/mini.extra',
+        version = false,
+        config = function()
+            require('mini.extra').setup()
+        end,
+    },
+    ---------------------------------------------------------------------------------
+    -- Mini StatusLine
+    ---------------------------------------------------------------------------------
+    {
+        'echasnovski/mini.statusline',
+        version = false,
+        config = function()
+            require('mini.statusline').setup()
+        end
+    },
+    ---------------------------------------------------------------------------------
     -- Add indentation guides
     ---------------------------------------------------------------------------------
     {
@@ -157,6 +178,26 @@ return {
             indent = { highlight = { "LineNr" }, char = "│" },
             scope = { enabled = false },
         }
+    },
+    ---------------------------------------------------------------------------------
+    -- Colorscheme
+    ---------------------------------------------------------------------------------
+    {
+        "kabouzeid/nvim-jellybeans",
+        priority = 1000,
+        dependencies = {
+            "rktjmp/lush.nvim"
+        },
+        config = function()
+            -- Set the colorscheme
+            vim.cmd("colorscheme jellybeans")
+
+            -- Override the background color
+            vim.api.nvim_set_hl(0, "Normal", { bg = "#0f0e06" })
+            -- Ensure background is set correctly for other highlight groups
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0f0e06" })
+            vim.api.nvim_set_hl(0, "SignColumn", { bg = "#0f0e06" })
+        end
     },
     ---------------------------------------------------------------------------------
     -- Git releated signs to the gutter
@@ -187,26 +228,4 @@ return {
         },
         config = true
     },
-    ---------------------------------------------------------------------------------
-    -- Colorscheme
-    ---------------------------------------------------------------------------------
-    {
-        "kabouzeid/nvim-jellybeans",
-        priority = 1000,
-        dependencies = {
-            "rktjmp/lush.nvim"
-        },
-        config = function()
-            -- Set the colorscheme
-            vim.cmd("colorscheme jellybeans")
-
-            -- Override the background color
-            vim.api.nvim_set_hl(0, "Normal", { bg = "#0f0e06" })
-
-            -- Ensure background is set correctly for other highlight groups
-            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0f0e06" })
-            vim.api.nvim_set_hl(0, "SignColumn", { bg = "#0f0e06" })
-            vim.api.nvim_set_hl(0, "StatusLine", { bg = "#0f0e06" })
-        end
-    }
 }
