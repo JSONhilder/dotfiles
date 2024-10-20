@@ -43,9 +43,6 @@ if [[ $_proceed = "y" ]] || [[ $_proceed = "yes" ]]; then
     echo
     sudo apt install -y git neovim curl wget ripgrep xclip unzip tree btop neofetch
 
-    git config --global user.name "Jason Hilder"
-    git config --global user.email "jhilder95@gmail.com"
-
     echo
     echo "===== COMPLETE ====="
     echo

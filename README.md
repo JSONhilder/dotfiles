@@ -14,6 +14,12 @@ Steps To Reproduce
 cd ~ && git clone git@github.com:jasonhilder/dotfiles.git 
 ```
 
+### Configure Git
+```
+git config --global user.name "Full Name"
+git config --global user.email "example@email.com"
+```
+
 ### Run install script
 ```
 cd ~ && ./dotfiles/system_install.sh
