@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Options for shutdown, restart, or sleep
+OPTIONS="Shutdown\nSleep\nRestart"
+
+# Use dmenu to select an option
+SELECTED_ACTION=$(echo -e "$OPTIONS" | dmenu -fn 'Ubuntu Sans Regular-11' -i -p "Select Action:")
+
+# Perform the selected action
+case "$SELECTED_ACTION" in
+    "Shutdown")
+        notify-send -h string:bgcolor:#bf616a "System is shutting down..."
+        systemctl poweroff
+        ;;
+    "Sleep")
+        notify-send -h string:bgcolor:#a3be8c "System is going to sleep..."
+        systemctl suspend
+        ;;
+    "Restart")
+        notify-send -h string:bgcolor:#88c0d0 "System is restarting..."
+        systemctl reboot
+        ;;
+    *)
+        notify-send -h string:bgcolor:#d08770 "No valid action selected!"
+        ;;
+esac

@@ -1,0 +1,27 @@
+{
+    // Sublime settings
+    "font_size": 11,
+    "font_face": "JetBrainsMono Nerd Font",
+    "save_on_focus_lost": true,
+    "highlight_line": true,
+    "hot_exit": false,
+    "remember_open_files": false,
+    "line_padding_bottom": 5,
+    "line_padding_top;": 5,
+    "theme": "Adaptive.sublime-theme",
+    "color_scheme": "Packages/Aura Theme Color Scheme/aura-theme.tmTheme",
+    "close_sidebar_if_opened": false,
+    // Vim emulation settings below
+    "vintage_ctrl_keys": true,
+    "ignored_packages": [ "Vintage",
+    ],
+    "neovintageous_build_version": 13200,
+    "vintageous_use_sys_clipboard": true,
+    "vintageous_use_ctrl_keys": true,
+    "index_files": true,
+    "relative_line_numbers": true,
+    "translate_tabs_to_spaces": true,
+    "open_files_in_new_window": false,
+    "create_window_at_startup": false,
+    "wrap_width": 80,
+}

@@ -16,12 +16,18 @@ return {
             { "<leader>fh", "<cmd>lua MiniPick.builtin.help()<cr>", desc = 'Find Help'},
             { "<leader>fm", "<cmd>Pick marks<cr>", desc = 'Find Marks'},
             { "<leader>q", "<cmd>Pick diagnostic<cr>", desc = 'Diagnostics'},
-            { "<leader>b", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
         },
         config = function()
             require('mini.pick').setup({
                 options = {
                     use_cache = true
+                },
+                window = {
+                    config = {
+                        anchor = 'NW',
+                        row = 0,
+                        col = 0
+                    },
                 }
             })
         end
@@ -32,21 +38,10 @@ return {
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "BufEnter",
         keys = {
-            { "<leader>fe", "<cmd>lua MiniFiles.open()<cr>", desc = 'Explorer'},
-            { "<leader>e",  "<cmd>lua MiniFiles.open()<cr>", desc = 'Explorer'},
+            { "<leader>fe", "<cmd>lua MiniFiles.open()<cr>", desc = 'Explorer'}
         },
         config = function()
-            local mf = require('mini.files')
-            mf.setup()
-
-            local toggle_files = function ()
-                if mf.close() == nil then
-                    mf.open()
-                else
-                    mf.close()
-                end
-
-            end
+            require('mini.files').setup()
         end
     },
     ---------------------------------------------------------------------------------
@@ -75,9 +70,11 @@ return {
     ---------------------------------------------------------------------------------
     {
         'echasnovski/mini.clue',
-        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        version = false,
         config = function()
             local miniclue = require('mini.clue')
+            local anchor = 'NE'
+
             miniclue.setup({
                 triggers = {
                     -- Leader triggers
@@ -125,7 +122,8 @@ return {
                     miniclue.gen_clues.z(),
                 },
                 window = {
-                    delay = 200
+                    delay = 200,
+                    config = { anchor = anchor, row = 'auto', col = 'auto' },
                 }
             })
         end

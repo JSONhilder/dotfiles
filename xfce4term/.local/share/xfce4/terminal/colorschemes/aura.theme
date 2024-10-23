@@ -1,0 +1,7 @@
+[Scheme]
+Name=Aura
+ColorCursor=#a277ff
+ColorForeground=#edecee
+ColorBackground=#110f18
+ColorPalette=#110f18;#ff6767;#61ffca;#ffca85;#a277ff;#a277ff;#61ffca;#4d4d4d;#535551;#ffca85;#61ffca;#ffca85;#a277ff;#a97ca4;#32dddd;#edecee
+ColorBoldUseDefault=FALSE

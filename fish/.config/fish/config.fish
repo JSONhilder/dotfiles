@@ -22,6 +22,9 @@ set -x PATH $HOME/go/bin/gopls $PATH
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
+# C3
+set -x PATH $HOME/.local/bin/c3 $PATH
+
 # ------------------------
 # ALIASES
 # ------------------------
@@ -33,6 +36,7 @@ alias ld "lazydocker"
 alias composer "~/.local/bin/composer.phar"
 alias dotfiles "cd ~/dotfiles; vim"
 alias wiki "cd ~/Mega/vim_wiki; vim index.md"
+alias sub "subl ."
 
 # ------------------------
 # THEME START

@@ -1,0 +1,16 @@
+[
+    {
+        "keys": [" ", "e"],
+        "command": "focus_file_on_sidebar"
+    },   
+    {
+        "keys": [" ", "c"],
+        "command": "close",
+        "args": {"force": true}
+    },
+    {
+        "keys": [" ", "s"],
+        "command": "show_panel", 
+        "args": {"panel": "replace", "reverse": false}
+    },
+]

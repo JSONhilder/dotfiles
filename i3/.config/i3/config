@@ -14,6 +14,7 @@ floating_modifier $mod
 bindsym $alt+Return exec --no-startup-id i3-sensible-terminal
 bindsym $alt+b exec --no-startup-id dm_urlbrowser 
 bindsym $alt+a exec --no-startup-id dm_audioswitcher 
+bindsym $alt+z exec dm_power 
 
 # start a browser
 # bindsym $alt+b exec chromium
@@ -102,9 +103,6 @@ bindsym $alt+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $alt+Shift+r restart
 
-# system menu
-bindsym $alt+Ctrl+r exec xfce4-session-logout
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
@@ -151,6 +149,8 @@ exec --no-startup-id killall xfce4-panel
 exec --no-startup-id xrandr --output HDMI-A-0 --auto --primary
 exec --no-startup-id nm-applet --sm-disable
 exec --no-startup-id pasystray 
+exec --no-startup-id killall xfce4-notifyd
+exec --no-startup-id dunst
 
 ########################################################
 # Open specific applications in floating mode
