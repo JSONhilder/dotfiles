@@ -78,7 +78,7 @@ set smarttab
 set showmatch
 " Clipboard settings, always use clipboard for all delete, yank, change, put
 " operation, see https://stackoverflow.com/q/30691466/6064933
-set clipboard+=unnamed  " use the clipboards of vim and win
+set clipboard=unnamedplus  " use the clipboards of vim and win
 set paste               " Paste from a windows or from vim
 set go+=a               " Visual selection automatically copied to the clipboard
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
@@ -158,4 +158,5 @@ let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 " ------------------------------- LOAD CONFIGS -----------------------------
 
 "  LSP specifics
-" so ~/.vim/lsp-config.vim
+so ~/.vim/lsp-config.vim
+

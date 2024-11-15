@@ -1,0 +1,19 @@
+[general]
+
+import = ["/home/jason/.cache/wal/colors-alacritty.toml"]
+
+[window]
+
+opacity = 0.97
+
+padding.x = 10
+padding.y = 10
+
+[font]
+
+normal.family = "UbuntuMono Nerd Font"
+bold.family = "UbuntuMono Nerd Font"
+italic.family = "UbuntuMono Nerd Font"
+bold_italic.family = "UbuntuMono Nerd Font"
+
+size = 14.0
