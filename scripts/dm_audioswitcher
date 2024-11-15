@@ -5,7 +5,7 @@ HEADPHONES=$(pactl list short sinks | grep -i 'analog' | awk '{print $1}')
 SPEAKERS=$(pactl list short sinks | grep -i 'hdmi' | awk '{print $1}')
 
 # Use dmenu to select between headphones and speakers
-SELECTED_OUTPUT=$(echo -e "Headphones\nSpeakers" | dmenu -fn 'Ubuntu Sans Regular-11' -i -p "Select Audio Output:")
+SELECTED_OUTPUT=$(echo -e "Headphones\nSpeakers" | dmenu -fn 'Ubuntu Sans Regular-13' -i -p "Select Audio Output:")
 
 # Set the selected output
 if [ "$SELECTED_OUTPUT" == "Headphones" ]; then

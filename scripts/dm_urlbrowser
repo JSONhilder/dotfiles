@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Prompt for search query using dmenu
-QUERY=$(echo "" | dmenu -fn 'Ubuntu Sans Regular-11' -i -p "Google:")
+QUERY=$(echo "" | dmenu -fn 'Ubuntu Sans Regular-13' -i -p "Google:")
 
 # If the query is not empty, open LibreWolf with the search URL
 if [ -n "$QUERY" ]; then
-    librewolf "https://www.google.com/search?q=$(echo "$QUERY" | sed 's/ /+/g')"
+    chromium "https://www.google.com/search?q=$(echo "$QUERY" | sed 's/ /+/g')"
 fi

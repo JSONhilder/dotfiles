@@ -3,7 +3,7 @@
 # ------------------------
 set -g fish_greeting
 
-set -x EDITOR "emacs"
+set -x EDITOR "vim"
 
 # ------------------------
 # PATHS
