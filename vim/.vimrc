@@ -17,7 +17,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "Colorscheme"
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'nanotech/jellybeans.vim' 
 
 "File Tree"
 Plug 'preservim/nerdtree'
@@ -37,6 +37,9 @@ Plug 'itchyny/lightline.vim'
 "Go Stuff"
 Plug 'charlespascoe/vim-go-syntax'
 
+"C3 Stuff"
+Plug 'Airbus5717/c3.vim'
+
 call plug#end()
 
 " --------------------------------------------------------------------------
@@ -46,27 +49,15 @@ call plug#end()
 syntax on
 filetype on
 set nocompatible 
-" enable mouse support
 set mouse=a
-" enable wildmenu
 set wildmenu
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
-" enable line numbers 
 set number
 set relativenumber
-" enable search highlight
 set hlsearch
 set incsearch
-" enable smartcase search
 set ignorecase
 set smartcase
-" Indentation using spaces
-" tabstop:	width of tab character
-" softtabstop:	fine tunes the amount of whitespace to be added
-" shiftwidth:	determines the amount of whitespace to add in normal mode
-" expandtab:	when on use space instead of tab
-" textwidth:	text wrap width
-" autoindent:	autoindent in new line
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -76,14 +67,10 @@ set autoindent
 set smarttab
 " show the matching part of pairs [] {} and () 
 set showmatch
-" Clipboard settings, always use clipboard for all delete, yank, change, put
-" operation, see https://stackoverflow.com/q/30691466/6064933
-set clipboard=unnamedplus  " use the clipboards of vim and win
-set paste               " Paste from a windows or from vim
-set go+=a               " Visual selection automatically copied to the clipboard
-" Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
+set clipboard=unnamedplus 
+set paste
+set go+=a
 set noswapfile
-" Completion behaviour
 set completeopt+=menuone  " Show menu even if there is only one item
 set completeopt-=preview  " Disable the preview window
 " Settings for popup menu
@@ -97,10 +84,15 @@ let NERDTreeShowHidden=1
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
 let NERDTreeWinPos = "right"
+
 " Colorscheme
 set termguicolors
-colorscheme catppuccin_mocha
+colorscheme jellybeans
 hi Normal guibg=NONE ctermbg=NONE
+highlight SignColumn guibg=NONE ctermbg=NONE
+highlight LineNr guibg=NONE ctermbg=NONE
+highlight CursorLineNr guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
 
 " --------------------------------------------------------------------------
 
@@ -151,7 +143,7 @@ inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " " Show the status on the second to last line.
 set laststatus=2
-let g:lightline = {'colorscheme': 'catppuccin_mocha'}
+let g:lightline = {'colorscheme': 'jellybeans'}
 
 " --------------------------------------------------------------------------
 

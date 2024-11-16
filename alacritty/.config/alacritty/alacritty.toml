@@ -1,6 +1,4 @@
-[general]
-
-import = ["/home/jason/.cache/wal/colors-alacritty.toml"]
+#general.import = [ "~/.config/alacritty/catppuccin-mocha.toml" ]
 
 [window]
 
@@ -11,9 +9,9 @@ padding.y = 10
 
 [font]
 
-normal.family = "UbuntuMono Nerd Font"
-bold.family = "UbuntuMono Nerd Font"
-italic.family = "UbuntuMono Nerd Font"
-bold_italic.family = "UbuntuMono Nerd Font"
+normal.family = "RobotoMono Nerd Font"
+bold.family = "RobotoMono Nerd Font"
+italic.family = "RobotoMono Nerd Font"
+bold_italic.family = "RobotoMono Nerd Font"
 
-size = 14.0
+size = 12

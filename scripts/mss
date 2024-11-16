@@ -1,0 +1,22 @@
+#!/bin/bash
+
+OPTIONS="Region\nFull Screen"
+# Prompt the user to select an area for the screenshot using maim
+
+# Use dmenu to select an option
+SELECTED_ACTION=$(echo -e "$OPTIONS" | dmenu -fn 'Ubuntu Sans Regular-13' -i -p "Select Action:")
+
+echo "Select the area for the screenshot. Press Enter when done."
+
+
+# Perform the selected action
+case "$SELECTED_ACTION" in
+    "Region")
+		maim -s ~/Pictures/screenshots/$(date +%s).png
+        notify-send -h string:bgcolor:#bf616a "Screenshot complete..."
+        ;;
+    "Full Screen")
+		maim ~/Pictures/screenshots/$(date +%s).png
+        notify-send -h string:bgcolor:#bf616a "Screenshot complete..."
+        ;;
+esac

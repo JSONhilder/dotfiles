@@ -5,7 +5,7 @@ set $mod Mod4
 set $alt Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
-font pango:Ubuntu Sans Regular 11.4
+font pango:Ubuntu Sans Regular 11.5
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -24,7 +24,6 @@ bindsym $alt+f exec thunar
 
 # kill focused window
 bindsym $alt+g kill
-
 
 # change focus
 bindsym $alt+h focus left
@@ -108,65 +107,9 @@ mode "resize" {
 }
 bindsym $alt+r mode "resize"
 
-hide_edge_borders smart
-focus_on_window_activation focus
-
 # start dmenu (a program launcher)
 bindsym $alt+d exec dmenu_run -fn 'Ubuntu Sans Regular-13'
-#bindsym $alt+d exec dmenu_run -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg"
 
-#tray_padding 5
-#######
-#THEME#
-#######
-
-# set primary gruvbox colorscheme colors
-set $bg #282828
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
-
-#start of bar section
-bar {
-    position top
-    status_command i3status
-    colors {
-        # bar background color
-        background $bg
-        # text color used for blocks that do not have a color specified.
-        statusline $yellow
-        # workspaces section            
-        #                    border  backgr. text
-        focused_workspace    $aqua $aqua $darkgray
-        inactive_workspace   $darkgray $darkgray $yellow
-        active_workspace     $darkgray $darkgray $yellow
-        urgent_workspace     $red $red $bg
-    }
-}
-#end of bar section
-
-#start of window title bars & borders section
-
-# green gruvbox
-# class                 border|backgr|text|indicator|child_border
-#client.focused          $green $green $darkgray $purple $darkgray
-#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-#client.urgent           $red $red $white $red $red
-
-# blue gruvbox
-# class                 border|backgr|text|indicator|child_border
-client.focused          $blue $blue $darkgray $purple $darkgray
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-client.urgent           $red $red $white $red $red
-
-#end of window title bars & borders section
 
 # gaps settings
 gaps inner 5px
@@ -174,8 +117,8 @@ gaps outer 5px
 smart_gaps inverse_outer
 
 # Hide title bars unless in tab mode
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 3
+default_floating_border pixel 3
 
 # Audio bindings
 bindsym $alt+1 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -185,18 +128,69 @@ bindsym $alt+3 exec amixer -D pulse sset Master 0%
 # Startup things...
 exec --no-startup-id xrandr --output HDMI-A-0 --auto --primary
 exec --no-startup-id killall xfce4-panel
-exec --no-startup-id nm-applet --sm-disable
 
 # Compositor
 exec --no-startup-id killall picom
 exec_always --no-startup-id compton --config ~/.config/picom/picom.conf &
 
 # Wallpaper
-exec --no-startup-id wal -R
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/ghibli_one.png
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/ghibli_one.jpg
 
 ########################################################
 # Open specific applications in floating mode
 ########################################################
 #for_window [title=".*mpv.*"] floating enable enable border pixel 0
 #for_window [title="Thunar"] floating enable border pixel 0
+
+######################################
+# color settings for bar and windows #
+######################################
+
+focus_on_window_activation focus
+
+# Define colors variables:
+set $urgentred      #e53935
+set $white	        #bfc4e0
+set $black          #000000
+set $darkgrey       #383c4a
+set $grey           #b0b5bd
+set $mediumgrey	    #8b8b8b
+set $yellowbrown    #e1b700
+set $blacktrans     #000000b2
+set $lavender       #9192bb
+set $darklavender   #3d3973
+
+# define colors for windows:
+#class		        	   border		bground		text		indicator	child_border
+client.focused		    	$lavender	    $lavender	    $black		$mediumgrey	$mediumgrey
+client.unfocused	    	$darklavender	$darklavender	$grey		$darkgrey	$darkgrey
+client.focused_inactive		$darklavender	$darklavender	$grey		$black		$black
+client.urgent		    	$urgentred	    $urgentred	    $white		$yellowbrown	$yellowbrown
+
+############################################
+# bar settings (input comes from i3blocks) #
+############################################
+
+# Start i3bar to display a workspace bar
+# (plus the system information i3status finds out, if available)
+bar {
+    #status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	position top
+	status_command i3status
+	i3bar_command i3bar --transparency
+	separator_symbol " | "
+	workspace_min_width 36
+	tray_padding 0
+
+	colors {
+		separator          $white
+		background         $blacktrans
+		statusline         $white
+
+		# border bg txt indicator
+		focused_workspace	$mediumgrey  $mediumgrey  $black  $blacktrans
+		active_workspace	$blacktrans  $blacktrans  $white  $blacktrans
+		inactive_workspace	$blacktrans  $blacktrans  $white  $blacktrans
+		urgent_workspace	$urgentred   $urgentred   $whit   $blacktrans
+	}
+}
