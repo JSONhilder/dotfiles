@@ -11,11 +11,11 @@ font pango:Ubuntu Sans Regular 11.5
 floating_modifier $mod
 
 # start a terminal
-#bindsym $alt+Return exec --no-startup-id i3-sensible-terminal
 bindsym $alt+Return exec --no-startup-id alacritty
 bindsym $alt+b exec --no-startup-id dm_urlbrowser 
 bindsym $alt+a exec --no-startup-id dm_audioswitcher 
 bindsym $alt+z exec dm_power 
+bindsym $alt+c exec dm_screenshot 
 
 # start a browser
 # bindsym $alt+b exec chromium
