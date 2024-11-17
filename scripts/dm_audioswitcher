@@ -10,10 +10,8 @@ SELECTED_OUTPUT=$(echo -e "Headphones\nSpeakers" | dmenu -fn 'Ubuntu Sans Regula
 # Set the selected output
 if [ "$SELECTED_OUTPUT" == "Headphones" ]; then
     pactl set-default-sink "$HEADPHONES"
-    notify-send -h string:bgcolor:#bf616a "Audio switched to headphones!"
+	notify-send -i audio-headphones "Headphones selected."
 elif [ "$SELECTED_OUTPUT" == "Speakers" ]; then
     pactl set-default-sink "$SPEAKERS"
-    notify-send -h string:bgcolor:#a3be8c "Audio switched to speakers!"
-else
-    notify-send -h string:bgcolor:#d08770 "No valid output selected!"
+	notify-send -i audio-speakers "Headphones selected."
 fi

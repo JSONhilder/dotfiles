@@ -1,14 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Prompt the user to select an area for the screenshot using maim
-echo "Select the area for the screenshot. Press Enter when done."
-maim -s /tmp/screenshot.png
+# dmenu theming
+lines="-l 20"
+font="-fn Ubuntu Sans Regular-13"
+colors=" "
 
-# Check if the screenshot was taken
-if [ $? -eq 0 ]; then
-    # Copy the screenshot to the clipboard using xclip
-    xclip -selection clipboard -t image/png < /tmp/screenshot.png
-    echo "Screenshot taken and copied to clipboard."
-else
-    echo "Screenshot was not taken."
+selected="$(ps -a -u $USER | \
+            dmenu -i -p "Type to search and select process to kill" -l 5 -fn 'Ubuntu Sans Regular-13'
+            awk '{print $1" "$4}')"; 
+
+if [[ ! -z $selected ]]; then
+
+    answer="$(echo -e "Yes\nNo" | \
+            dmenu -i -p "$selected will be killed, are you sure?" -l 5 -fn 'Ubuntu Sans Regular-13'
+            )"
+
+    if [[ $answer == "Yes" ]]; then
+        selpid="$(awk '{print $1}' <<< $selected)"; 
+        kill -9 $selpid
+    fi
 fi
+
+exit 0

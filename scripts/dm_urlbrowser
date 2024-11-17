@@ -1,9 +1,26 @@
 #!/bin/bash
 
-# Prompt for search query using dmenu
-QUERY=$(echo "" | dmenu -fn 'Ubuntu Sans Regular-13' -i -p "Google:")
+# Define available options
+OPTIONS="Chrome\nYouTube\nChatGpt"
 
-# If the query is not empty, open LibreWolf with the search URL
-if [ -n "$QUERY" ]; then
-    chromium "https://www.google.com/search?q=$(echo "$QUERY" | sed 's/ /+/g')"
-fi
+# Prompt for search query or select from options using dmenu
+SELECTED=$(echo -e "$OPTIONS" | dmenu -i -p "Query:" -fn 'Ubuntu Sans Regular-13' -l 3)
+
+# If a selection is made, handle it
+case "$SELECTED" in
+    "Chrome")
+        chromium 
+        ;;
+    "YouTube")
+        chromium "https://www.youtube.com"
+        ;;
+    "ChatGpt")
+        chromium "https://chatgpt.com/"
+        ;;
+    *)
+	# If not a valid option, perform a Google search with the entered query
+	if [ -n "$SELECTED" ]; then
+		chromium "https://www.google.com/search?q=$(echo "$SELECTED" | sed 's/ /+/g')"
+	fi
+	;;
+esac
