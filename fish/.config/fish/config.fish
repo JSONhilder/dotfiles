@@ -36,7 +36,8 @@ alias ld "lazydocker"
 alias composer "~/.local/bin/composer.phar"
 alias dotfiles "cd ~/dotfiles; vim"
 alias wiki "cd ~/Mega/vim_wiki; vim index.md"
-alias sub "subl ."
+alias voidpackages "cd ~/.local/share/pkgs/void-packages"
+alias vp "cd ~/.local/share/pkgs/void-packages"
 
 # ------------------------
 # THEME START
