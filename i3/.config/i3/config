@@ -1,5 +1,3 @@
-# TODO: nm-applet, volume control.
-
 # Docs: https://i3wm.org/docs/userguide.html
 set $mod Mod4
 set $alt Mod1
@@ -12,15 +10,19 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $alt+Return exec --no-startup-id alacritty
-bindsym $alt+b exec --no-startup-id dm_urlbrowser 
-bindsym $alt+a exec --no-startup-id dm_audioswitcher 
+
+# start dmenu (a program launcher)
+bindsym $alt+d exec dmenu_run -fn 'Ubuntu Sans Regular-13' -l 3	-g 5
 bindsym $alt+z exec dm_power 
 bindsym $alt+c exec dm_screenshot 
-
-# start a browser
-# bindsym $alt+b exec chromium
-# start a file browser
+bindsym $alt+b exec --no-startup-id dm_urlbrowser 
+bindsym $alt+a exec --no-startup-id dm_audioswitcher 
 bindsym $alt+f exec thunar
+
+# Audio bindings
+bindsym $alt+1 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $alt+2 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $alt+3 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # kill focused window
 bindsym $alt+g kill
@@ -51,9 +53,9 @@ bindsym $alt+t layout tabbed
 bindsym $alt+s layout toggle split
 
 # toggle tiling / floating
-
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+bindsym $mod+f focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -107,10 +109,6 @@ mode "resize" {
 }
 bindsym $alt+r mode "resize"
 
-# start dmenu (a program launcher)
-bindsym $alt+d exec dmenu_run -fn 'Ubuntu Sans Regular-13'
-
-
 # gaps settings
 gaps inner 5px
 gaps outer 5px
@@ -120,27 +118,26 @@ smart_gaps inverse_outer
 default_border pixel 3
 default_floating_border pixel 3
 
-# Audio bindings
-bindsym $alt+1 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym $alt+2 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $alt+3 exec amixer -D pulse sset Master 0%
-
-# Startup things...
+########################################################
+# Startup Commands
+########################################################
+# Xrandr settings
 exec --no-startup-id xrandr --output HDMI-A-0 --auto --primary
+# Kill some things before exec_always
 exec --no-startup-id killall xfce4-panel
-
-# Compositor
+exec --no-startup-id killall nm-applet
 exec --no-startup-id killall picom
-exec_always --no-startup-id compton --config ~/.config/picom/picom.conf &
-
+# Compositor
+exec --no-startup-id compton --config ~/.config/picom/picom.conf &
 # Wallpaper
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/ghibli_one.jpg
 
 ########################################################
 # Open specific applications in floating mode
 ########################################################
+for_window[class="steam"] floating enable
+for_window[class="steam" title="^Steam$"] floating enable
 #for_window [title=".*mpv.*"] floating enable enable border pixel 0
-#for_window [title="Thunar"] floating enable border pixel 0
 
 ######################################
 # color settings for bar and windows #

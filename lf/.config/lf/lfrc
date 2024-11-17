@@ -1,0 +1,67 @@
+######################## Settings
+set shell /bin/bash
+set drawbox
+set hidden false
+set cursorpreviewfmt "\033[7m"
+set edit vim
+set ignorecase true
+set incsearch
+set incfilter
+
+######################## Commands
+
+cmd open &{{
+	case $(file --mime-type -Lb $f) in
+		text/*) lf -remote "send $id \$vim \$fx";;
+		*) xdg-open "$f"
+	esac
+}}
+
+# Archive bindings
+cmd extract ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.rar) unrar x "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *.7z) 7z e "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd touch %IFS=" "; touch -- "$*"
+
+cmd mkdir %IFS=" "; mkdir -p -- "$*"
+
+cmd yank-file $printf '%s' "$f" | xclip -i -selection clipboard
+cmd yank-paths $printf '%s' "$fx" | xclip -i -selection clipboard
+
+cmd trash $gio trash $fx
+
+########################## Bindings
+map c
+map d
+map m
+
+# Basic Functions
+map . set hidden!
+map p :paste; clear
+map x cut
+map y copy
+map <enter> open
+map l open
+map R reload
+map dd trash
+map mf :mkdir<space>
+map md :touch<space>
+map bg setwallpaper
+map C clear
+
+# Movement
+map gh cd ~/
+map gc cd ~/.config
+map gD cd ~/documents
+map gd cd ~/Downloads
+map gp cd ~/Pictures
+map gt cd ~/.local/share/Trash/files
