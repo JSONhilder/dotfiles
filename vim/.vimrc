@@ -150,5 +150,5 @@ let g:lightline = {'colorscheme': 'jellybeans'}
 " ------------------------------- LOAD CONFIGS -----------------------------
 
 "  LSP specifics
-so ~/.vim/lsp-config.vim
+" so ~/.vim/lsp-config.vim
 
