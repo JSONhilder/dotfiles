@@ -12,11 +12,11 @@ echo "Select the area for the screenshot. Press Enter when done."
 # Perform the selected action
 case "$SELECTED_ACTION" in
     "Region")
-		maim -s ~/Pictures/screenshots/$(date +%s).png
+		sleep 0.7 && maim -s ~/Pictures/screenshots/$(date +%s).png
         notify-send -i system-screen "Screenshot complete..."
         ;;
     "Full Screen")
-		maim ~/Pictures/screenshots/$(date +%s).png
+		sleep 0.7 && maim ~/Pictures/screenshots/$(date +%s).png
         notify-send -i system-screen "Screenshot complete..."
         ;;
 esac
