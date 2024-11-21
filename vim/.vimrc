@@ -101,11 +101,13 @@ highlight NonText guibg=NONE ctermbg=NONE
 let mapleader = " "
 
 " File finder
+nnoremap <Leader>o :TermHere<CR>
 nmap <space>f :Files<CR>
 nmap <space>b :Buffers<CR>
 nmap <c-p> :GFiles<CR>
 nmap <c-b> :Buffers<CR>
 nmap <c-o> :History<CR>
+
 
 " File Tree 
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -150,5 +152,25 @@ let g:lightline = {'colorscheme': 'jellybeans'}
 " ------------------------------- LOAD CONFIGS -----------------------------
 
 "  LSP specifics
-" so ~/.vim/lsp-config.vim
+so ~/.vim/lsp-config.vim
+
+" Handle c3i files highlighting
+augroup c3i_filetype
+    autocmd!
+    autocmd BufNewFile,BufRead *.c3i set filetype=c3
+augroup END
+
+" --------------------------------------------------------------------------
+
+" ------------------------------- CUSTOM FUNCS -----------------------------
+function! TermHere()
+    " Get the current working directory in Vim
+    let l:current_dir = getcwd()
+    
+    " Launch Alacritty in the current directory in the background
+    silent execute '!alacritty --working-directory ' . shellescape(l:current_dir) . ' &'
+endfunction
+
+" Create a command to call the function
+command! TermHere call TermHere()
 

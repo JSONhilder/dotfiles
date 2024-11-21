@@ -78,12 +78,12 @@ bindsym $alt+o workspace number $ws5
 bindsym $alt+p workspace number $ws6
 
 # move focused container to workspace
-bindsym Shift+$alt+q move container to workspace number $ws1
-bindsym Shift+$alt+w move container to workspace number $ws2
-bindsym Shift+$alt+e move container to workspace number $ws3
-bindsym Shift+$alt+i move container to workspace number $ws4
-bindsym Shift+$alt+o move container to workspace number $ws5
-bindsym Shift+$alt+p move container to workspace number $ws6
+bindsym Shift+$alt+q move container to workspace number $ws1, workspace number $ws1
+bindsym Shift+$alt+w move container to workspace number $ws2, workspace number $ws2
+bindsym Shift+$alt+e move container to workspace number $ws3, workspace number $ws3
+bindsym Shift+$alt+i move container to workspace number $ws4, workspace number $ws4
+bindsym Shift+$alt+o move container to workspace number $ws5, workspace number $ws5
+bindsym Shift+$alt+p move container to workspace number $ws6, workspace number $ws6
 
 # reload the configuration file
 bindsym $alt+Shift+c reload
@@ -127,10 +127,10 @@ exec --no-startup-id xrandr --output HDMI-A-0 --auto --primary
 exec --no-startup-id killall xfce4-panel
 exec --no-startup-id killall nm-applet
 exec --no-startup-id killall picom
-# Compositor
-exec --no-startup-id compton --config ~/.config/picom/picom.conf &
 # Wallpaper
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/ghibli_one.jpg
+# Compositor
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf &
 
 ########################################################
 # Open specific applications in floating mode
@@ -173,11 +173,11 @@ client.urgent		    	$urgentred	    $urgentred	    $white		$yellowbrown	$yellowbr
 bar {
     #status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	position top
-	status_command i3status
-	i3bar_command i3bar --transparency
-	 separator_symbol "  "
+	status_command i3blocks
+    separator_symbol " "
 	workspace_min_width 36
 	tray_padding 0
+	i3bar_command i3bar --transparency
 
 	colors {
 		separator          $white
