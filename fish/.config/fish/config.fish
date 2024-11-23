@@ -39,20 +39,19 @@ alias wiki "cd ~/github/reimagined_barnacle; vim"
 alias voidpackages "cd ~/.local/share/pkgs/void-packages"
 alias vp "cd ~/.local/share/pkgs/void-packages"
 
-# ------------------------
-# THEME START
-# ------------------------
-# TokyoNight Color Palette
-set -l foreground c0caf5
-set -l selection 283457
-set -l comment 565f89
-set -l red f7768e
-set -l orange ff9e64
-set -l yellow e0af68
-set -l green 9ece6a
-set -l purple 9d7cd8
-set -l cyan 7dcfff
-set -l pink bb9af7
+# Kanagawa Fish shell theme
+# A template was taken and modified from Tokyonight:
+# https://github.com/folke/tokyonight.nvim/blob/main/extras/fish_tokyonight_night.fish
+set -l foreground DCD7BA normal
+set -l selection 2D4F67 brcyan
+set -l comment 727169 brblack
+set -l red C34043 red
+set -l orange FF9E64 brred
+set -l yellow C0A36E yellow
+set -l green 76946A green
+set -l purple 957FB8 magenta
+set -l cyan 7AA89F cyan
+set -l pink D27E99 brmagenta
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -75,8 +74,3 @@ set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
-set -g fish_pager_color_selected_background --background=$selection
-# ------------------------
-# THEME END
-# ------------------------
-

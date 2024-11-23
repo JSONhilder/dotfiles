@@ -1,7 +1,5 @@
 [window]
-
 opacity = 0.9
-
 padding.x = 10
 padding.y = 10
 
@@ -13,26 +11,4 @@ italic.family = "RobotoMono Nerd Font"
 bold_italic.family = "RobotoMono Nerd Font"
 
 size = 12
-
-# Jellybeans
-[colors.primary]
-background = '#121212'
-foreground = '#dedede'
-
-# Cursor colors
-[colors.cursor]
-text =   '#ffffff'
-cursor = '#ffa460'
-
-# Normal colors
-[colors.normal]
-black =   '#929292'
-red =     '#e27373'
-green =   '#799d6a'
-yellow =  '#ffba7b'
-blue =    '#97bedc'
-magenta = '#e1c0fa'
-cyan =    '#00988e'
-white =   '#dedede'
-
 

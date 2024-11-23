@@ -130,7 +130,7 @@ exec --no-startup-id killall picom
 # Wallpaper
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/ghibli_one.jpg
 # Compositor
-# exec --no-startup-id picom --config ~/.config/picom/picom.conf &
+exec --no-startup-id picom --config ~/.config/picom/picom.conf &
 
 ########################################################
 # Open specific applications in floating mode
@@ -159,8 +159,8 @@ set $darklavender   #3d3973
 
 # define colors for windows:
 #class		        	   border		bground		text		indicator	child_border
-client.focused		    	$lavender	    $lavender	    $black		$mediumgrey	$mediumgrey
-client.unfocused	    	$darklavender	$darklavender	$grey		$darkgrey	$darkgrey
+client.focused		    	$mediumgrey	    $mediumgrey	    $black		$mediumgrey	$mediumgrey
+client.unfocused	    	$darkgrey	    $darkgrey	    $grey		$darkgrey	$darkgrey
 client.focused_inactive		$darklavender	$darklavender	$grey		$black		$black
 client.urgent		    	$urgentred	    $urgentred	    $white		$yellowbrown	$yellowbrown
 

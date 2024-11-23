@@ -3,7 +3,7 @@ command=./scripts/iface
 LABEL=Connected
 #IFACE=wlan0
 #ADDRESS_FAMILY=inet6?
-color=#99ad6a
+color=#98bb6c
 interval=10
 # set this to 1 to display the name of the connected WIFI interface instead of the IP address.
 display_wifi_name=0
@@ -12,7 +12,6 @@ display_wifi_name=0
 command=./scripts/volume-pipewire -f
 interval=once
 signal=1
-SHORT_FORMAT="${SYMB} ${VOL}%"
 
 [time]
 label=   
