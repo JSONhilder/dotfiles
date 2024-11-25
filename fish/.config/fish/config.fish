@@ -3,7 +3,8 @@
 # ------------------------
 set -g fish_greeting
 
-set -x EDITOR "vim"
+set -x EDITOR "nvim"
+set -x MANPAGER "nvim +Man!"
 
 # ------------------------
 # PATHS
@@ -40,8 +41,6 @@ alias voidpackages "cd ~/.local/share/pkgs/void-packages"
 alias vp "cd ~/.local/share/pkgs/void-packages"
 
 # Kanagawa Fish shell theme
-# A template was taken and modified from Tokyonight:
-# https://github.com/folke/tokyonight.nvim/blob/main/extras/fish_tokyonight_night.fish
 set -l foreground DCD7BA normal
 set -l selection 2D4F67 brcyan
 set -l comment 727169 brblack

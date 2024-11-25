@@ -87,6 +87,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 -- Code management
 vim.keymap.set("n", "<leader>c", "<cmd>!make<CR>", { desc = "Run makefile" })
 vim.keymap.set("n", "<leader>d", ":vsplit | lua vim.lsp.buf.definition()<CR>", { desc = "split def" })
+vim.keymap.set("n", "<leader>d", ":vsplit | lua vim.lsp.buf.definition()<CR>", { desc = "split def" })
 ---------------------------------------------------------------------------------
 -- [[ PLUGIN CONFIGS ]]
 ---------------------------------------------------------------------------------

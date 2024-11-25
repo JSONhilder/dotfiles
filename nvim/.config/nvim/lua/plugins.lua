@@ -28,7 +28,7 @@ require("lazy").setup({
             version = "*", -- Use for stability; omit to use `main` branch for the latest features
             event = "BufEnter",
             keys = {
-                { "<leader>ff", "<cmd>lua MiniPick.builtin.files({ tool = 'git' })<cr>", desc = 'Find File'},
+                { "<leader>ff", "<cmd>lua MiniPick.builtin.files()<cr>", desc = 'Find File'},
                 { "<leader>fb", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
                 { "<leader>fl", "<cmd>lua MiniPick.builtin.resume()<cr>", desc = 'Resume Last Search'},
                 { "<leader>fs", "<cmd>lua MiniPick.builtin.grep_live()<cr>", desc = 'Find String'},
@@ -233,15 +233,24 @@ require("lazy").setup({
             },
         },
         {
-            "NeogitOrg/neogit",
-            version = "v0.0.1",
+            "kdheepak/lazygit.nvim",
+            lazy = true,
+            cmd = {
+                "LazyGit",
+                "LazyGitConfig",
+                "LazyGitCurrentFile",
+                "LazyGitFilter",
+                "LazyGitFilterCurrentFile",
+            },
+            -- optional for floating window border decoration
             dependencies = {
                 "nvim-lua/plenary.nvim",
             },
+            -- setting the keybinding for LazyGit with 'keys' is recommended in
+            -- order to load the plugin when the command is run for the first time
             keys = {
-                {'<leader>gg', '<cmd>Neogit<CR>',  desc = "Open Neogit" }
-            },
-            config = true
+                { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+            }
         },
         ---------------------------------------------------------------------------------
         -- LSP CONFIG SECTION
