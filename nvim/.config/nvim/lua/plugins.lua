@@ -38,8 +38,11 @@ require("lazy").setup({
                 require('telescope').setup{
                     defaults = {
                         file_ignore_patterns = {
-                            "node_modules/*",
-                            ".git/*"
+                            ".git/*",
+                            -- xmake specific directories
+                            ".cache/*",
+                            ".xmake/*",
+                            "build/*",
                         },
                     }
                 }

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Check if xmake.lua exists in the current directory
+if [ -f "xmake.lua" ]; then
+    echo "xmake.lua found, proceeding to delete directories..."
+
+    # List of directories to delete
+    directories=("build" ".cache" ".xmake")
+
+    # Loop through each directory and remove it if it exists
+    for dir in "${directories[@]}"; do
+        if [ -d "$dir" ]; then
+            echo "Deleting directory: $dir"
+            rm -rf "$dir"
+        else
+            echo "Directory $dir not found, skipping."
+        fi
+    done
+else
+    echo "xmake.lua not found, nothing to delete."
+fi
