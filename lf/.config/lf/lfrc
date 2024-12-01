@@ -49,7 +49,6 @@ map . set hidden!
 map p :paste; clear
 map x cut
 map y copy
-map <enter> open
 map l open
 map R reload
 map dd trash
@@ -65,3 +64,6 @@ map gD cd ~/documents
 map gd cd ~/Downloads
 map gp cd ~/Pictures
 map gt cd ~/.local/share/Trash/files
+
+# Map the Enter key to close lf and open Alacritty in the current directory
+map <enter> !{ exit; alacritty --working-directory={dir} & }

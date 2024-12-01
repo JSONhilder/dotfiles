@@ -23,32 +23,26 @@ require("lazy").setup({
         -- Mini Pick: File pickers and more 
         ---------------------------------------------------------------------------------
         {
-            'echasnovski/mini.pick',
-            lazy = true,
-            version = "*", -- Use for stability; omit to use `main` branch for the latest features
-            event = "BufEnter",
+            'nvim-telescope/telescope.nvim', tag = '0.1.8',
+            dependencies = { 'nvim-lua/plenary.nvim' },
             keys = {
-                { "<leader>ff", "<cmd>lua MiniPick.builtin.files()<cr>", desc = 'Find File'},
-                { "<leader>fb", "<cmd>lua MiniPick.builtin.buffers()<cr>", desc = 'Find Buffer'},
-                { "<leader>fl", "<cmd>lua MiniPick.builtin.resume()<cr>", desc = 'Resume Last Search'},
-                { "<leader>fs", "<cmd>lua MiniPick.builtin.grep_live()<cr>", desc = 'Find String'},
-                { "<leader>fh", "<cmd>lua MiniPick.builtin.help()<cr>", desc = 'Find Help'},
-                { "<leader>fm", "<cmd>Pick marks<cr>", desc = 'Find Marks'},
-                { "<leader>q", "<cmd>Pick diagnostic<cr>", desc = 'Diagnostics'},
+                { "<leader><leader>", "<cmd>Telescope find_files hidden=true<cr>", desc = 'Find File'},
+                { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = 'Find Buffer'},
+                { "<leader>fl", "", desc = 'Resume Last Search'},
+                { "<leader>fs", "", desc = 'Find String'},
+                { "<leader>fh", "", desc = 'Find Help'},
+                { "<leader>fm", "", desc = 'Find Marks'},
+                { "<leader>q", "", desc = 'Diagnostics'},
             },
-            config = function()
-                require('mini.pick').setup({
-                    options = {
-                        use_cache = true
-                    },
-                    window = {
-                        config = {
-                            anchor = 'NW',
-                            row = 0,
-                            col = 0
+            config = function ()
+                require('telescope').setup{
+                    defaults = {
+                        file_ignore_patterns = {
+                            "node_modules/*",
+                            ".git/*"
                         },
                     }
-                })
+                }
             end
         },
         {
@@ -57,7 +51,7 @@ require("lazy").setup({
             version = "*", -- Use for stability; omit to use `main` branch for the latest features
             event = "BufEnter",
             keys = {
-                { "<leader>fe", "<cmd>lua MiniFiles.open()<cr>", desc = 'Explorer'}
+                { "<leader>ff", "<cmd>lua MiniFiles.open()<cr>", desc = 'Explorer'}
             },
             config = function()
                 require('mini.files').setup()
@@ -354,8 +348,5 @@ require("lazy").setup({
             end
         }
     },
-    -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { "habamax" } },
-    -- automatically check for plugin updates
-    -- checker = { enabled = true },
 })

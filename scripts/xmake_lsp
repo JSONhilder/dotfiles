@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Store the current directory
+current_dir=$(pwd)
+
+# Change to the current directory (this is mostly redundant, but ensures correctness)
+cd "$current_dir" || exit 1  # Exit if cd fails
+
+# Run the xmake command
+xmake project -k compile_commands --lsp=clangd

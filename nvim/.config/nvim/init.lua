@@ -96,3 +96,26 @@ require("plugins")
 -- [[ LSP CONFIG ]]
 ---------------------------------------------------------------------------------
 require("lsp_config")
+---------------------------------------------------------------------------------
+-- [[ Xmake run function ]]
+---------------------------------------------------------------------------------
+function Runxmake(opts)
+    local args = opts.args
+    vim.cmd('!' .. 'xmake ' .. args)
+end
+-- '*' allows any number of arguments
+vim.api.nvim_create_user_command('Make', Runxmake, {nargs = '*'})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "xmake.lua",  -- This will match files named 'xmake.lua'
+    callback = function()
+        -- Run the command asynchronously
+        vim.fn.jobstart("xmake_lsp", {
+            on_exit = function(_, code)
+                if code ~= 0 then
+                    print("Error running xmake_lsp: " .. code)
+                end
+            end
+        })
+    end
+})

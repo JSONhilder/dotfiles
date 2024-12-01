@@ -9,7 +9,7 @@ font pango:Ubuntu Sans Regular 11.5
 floating_modifier $mod
 
 # start a terminal
-bindsym $alt+Return exec --no-startup-id alacritty
+bindsym $alt+Return exec --no-startup-id st
 
 # start dmenu (a program launcher)
 bindsym $alt+d exec dmenu_run -fn 'Ubuntu Sans Regular-13' -l 3	-g 5
