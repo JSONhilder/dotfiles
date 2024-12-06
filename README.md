@@ -13,17 +13,15 @@ Software List
 - ripgrep 
 - xclip 
 - stow 
-- unzip 
-- zip 
 - 7zip 
 - tree 
 - fastfetch 
 - btop 
 - vim 
-- alacritty 
 - fish-shell
-- i3
-- i3 status
+- st
+- dwm
+- slstatus
 - dmenu
 - picom
 - feh
@@ -32,8 +30,8 @@ Software List
 - ncspot
 - chromium
 - git
-- lazygit
 - docker
+- lazygit
 - lazydocker
 
 (Void linux specific *)
@@ -41,3 +39,9 @@ Software List
 - base-devel * 
 - xtools *
 - vsv *
+
+(Random)
+---
+- RaylibVoid linux specific *
+- Sdl2
+- fastfetch
