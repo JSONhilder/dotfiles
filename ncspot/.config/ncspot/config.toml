@@ -1,5 +1,5 @@
-notify=true
-library_tabs = [ "tracks", "podcasts", "browse" ]
+notify=false
+library_tabs = [ "tracks", "podcasts", "playlists", "browse" ]
 
 [theme]
 background = "default"
