@@ -15,6 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+---------------------------------------------------------------------------------
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {
@@ -23,16 +24,16 @@ require("lazy").setup({
         -- Mini Pick: File pickers and more 
         ---------------------------------------------------------------------------------
         {
-            'nvim-telescope/telescope.nvim', tag = '0.1.8',
+            'nvim-telescope/telescope.nvim',
+            tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim' },
             keys = {
                 { "<leader><leader>", "<cmd>Telescope find_files hidden=true<cr>", desc = 'Find File'},
                 { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = 'Find Buffer'},
-                { "<leader>fl", "", desc = 'Resume Last Search'},
-                { "<leader>fs", "", desc = 'Find String'},
-                { "<leader>fh", "", desc = 'Find Help'},
-                { "<leader>fm", "", desc = 'Find Marks'},
-                { "<leader>q", "", desc = 'Diagnostics'},
+                { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = 'Find (Grep) String'},
+                { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = 'Find (Grep) String'},
+                { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = 'Find Help'},
+                { "<leader>q", "<cmd>Telescope diagnostics<cr>", desc = 'Diagnostics'},
             },
             config = function ()
                 require('telescope').setup{
@@ -249,6 +250,23 @@ require("lazy").setup({
                 { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
             }
         },
+        ---------------------------------------------------------------------------------
+        -- Treesitter setup
+        ---------------------------------------------------------------------------------
+        {
+            "nvim-treesitter/nvim-treesitter",
+            config = function ()
+                require'nvim-treesitter.configs'.setup {
+                    -- A list of parser names, or "all" (the listed parsers MUST always be installed)
+                    ensure_installed = { "c", "lua", "go" },
+                    highlight = {
+                        enable = true
+                    }
+                }
+            end
+        },
+        ---------------------------------------------------------------------------------
+        -- *************************************************************************** --
         ---------------------------------------------------------------------------------
         -- LSP CONFIG SECTION
         ---------------------------------------------------------------------------------

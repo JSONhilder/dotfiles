@@ -24,6 +24,3 @@ search_match = '#8197bf'
 "q" = "noop"
 "Shift+q" = "quit"
 
-[notification_format]
-cover_max_scale = 2
-
