@@ -1,22 +1,23 @@
 #!/bin/bash
 
 OPTIONS="Region\nFull Screen"
-# Prompt the user to select an area for the screenshot using maim
+# Prompt the user to select an area for the screenshot using dmenu
 
 # Use dmenu to select an option
 SELECTED_ACTION=$(echo -e "$OPTIONS" | dmenu -fn 'Ubuntu Sans Regular-13' -i -p "Select Action:")
 
 echo "Select the area for the screenshot. Press Enter when done."
 
-
 # Perform the selected action
 case "$SELECTED_ACTION" in
     "Region")
-		sleep 0.7 && maim -s ~/Pictures/screenshots/$(date +%s).png
-        notify-send -i system-screen "Screenshot complete..."
+        FILE_PATH=~/Pictures/screenshots/$(date +%s).png
+        sleep 0.7 && maim -s "$FILE_PATH" && xclip -selection clipboard -target image/png -i $FILE_PATH
+        notify-send -i system-screen "Screenshot saved to $FILE_PATH and copied to clipboard..."
         ;;
     "Full Screen")
-		sleep 0.7 && maim ~/Pictures/screenshots/$(date +%s).png
-        notify-send -i system-screen "Screenshot complete..."
+        FILE_PATH=~/Pictures/screenshots/$(date +%s).png
+        sleep 0.7 && maim -s "$FILE_PATH" && xclip -selection clipboard -t image/png -i $FILE_PATH
+        notify-send -i system-screen "Screenshot saved to $FILE_PATH and copied to clipboard..."
         ;;
 esac

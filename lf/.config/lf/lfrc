@@ -13,7 +13,8 @@ set incfilter
 cmd open &{{
 	case $(file --mime-type -Lb $f) in
 		text/*) lf -remote "send $id \$vim \$fx";;
-		*) xdg-open "$f"
+		image/png|image/jpeg|image/jpg) feh "$f";;
+		*) xdg-open "$f";;
 	esac
 }}
 

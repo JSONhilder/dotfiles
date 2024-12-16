@@ -1,31 +1,23 @@
 --------------------------------------------------------------------------------
--- Bootstrap Package Manager
--- https://github.com/folke/lazy.nvim `:help lazy.nvim.txt` for more info
----------------------------------------------------------------------------------
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system {
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
-        lazypath,
-    }
-end
-vim.opt.rtp:prepend(lazypath)
----------------------------------------------------------------------------------
 -- [[ AUTOCMDS ]]
 ---------------------------------------------------------------------------------
 -- Highlight on Yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
+    group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
     callback = function()
         vim.highlight.on_yank()
     end,
-    group = highlight_group,
     pattern = '*',
 })
+-- Terminal settings
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom-term-open', {clear = true}),
+    callback = function ()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})
+-- C3 files
 vim.cmd([[au BufNewFile,BufRead *.c3i set filetype=c3]])
 ---------------------------------------------------------------------------------
 -- [[ OPTIONS ]]
@@ -57,8 +49,8 @@ vim.opt.updatetime = 50                -- Sets the time after which the swap fil
 vim.o.breakindent = true               -- Makes wrapped lines visually indented
 vim.o.termguicolors = true             -- Enables true color support (duplicated setting)
 vim.o.completeopt = 'menuone,noselect' -- Configures how the completion menu works
-vim.o.splitright = true
-vim.o.splitbelow = true
+vim.o.splitright = true                -- Set horizontal splits to the right as default
+vim.o.splitbelow = true                -- Set vertical splits to the bottom as default 
 ---------------------------------------------------------------------------------
 -- [[ KEYMAPS ]]
 ---------------------------------------------------------------------------------
@@ -87,44 +79,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selection up" })
 -- Code management
 vim.keymap.set("n", "<leader>c", "<cmd>!make<CR>", { desc = "Run makefile" })
 vim.keymap.set("n", "<leader>d", ":vsplit | lua vim.lsp.buf.definition()<CR>", { desc = "split def" })
-vim.keymap.set("n", "<leader>d", ":vsplit | lua vim.lsp.buf.definition()<CR>", { desc = "split def" })
 ---------------------------------------------------------------------------------
--- [[ PLUGIN CONFIGS ]]
+-- [[ CONFIGS ]]
 ---------------------------------------------------------------------------------
 require("plugins")
----------------------------------------------------------------------------------
--- [[ LSP CONFIG ]]
----------------------------------------------------------------------------------
 require("lsp_config")
----------------------------------------------------------------------------------
--- [[ Xmake run function ]]
----------------------------------------------------------------------------------
-function Runxmake(opts)
-    local args = opts.args
-
-    if #args == 0 then
-        vim.cmd('!echo "building: " && xmake && echo "running: " && xmake r')  -- Run without arguments
-    else
-        if type(args) == "string" then
-            args = vim.split(args, "%s+")  -- Split the string into a table based on spaces
-        end
-
-        vim.cmd('!xmake ' .. table.concat(args, ' '))  -- Run with arguments
-    end
-end
--- '*' allows any number of arguments
-vim.api.nvim_create_user_command('Make', Runxmake, {nargs = '*'})
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = "xmake.lua",  -- This will match files named 'xmake.lua'
-    callback = function()
-        -- Run the command asynchronously
-        vim.fn.jobstart("xmake_lsp", {
-            on_exit = function(_, code)
-                if code ~= 0 then
-                    print("Error running xmake_lsp: " .. code)
-                end
-            end
-        })
-    end
-})
+require("xmake_config")

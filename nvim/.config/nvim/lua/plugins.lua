@@ -14,18 +14,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     end
 end
 vim.opt.rtp:prepend(lazypath)
-
 ---------------------------------------------------------------------------------
--- Setup lazy.nvim
 require("lazy").setup({
     spec = {
-        -- Config heavily uses mini nvim (https://github.com/echasnovski/mini.nvim)
-        ---------------------------------------------------------------------------------
-        -- Mini Pick: File pickers and more 
-        ---------------------------------------------------------------------------------
         {
             'nvim-telescope/telescope.nvim',
-            tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim' },
             keys = {
                 { "<leader><leader>", "<cmd>Telescope find_files hidden=true<cr>", desc = 'Find File'},
@@ -49,6 +42,9 @@ require("lazy").setup({
                 }
             end
         },
+        ---------------------------------------------------------------------------------
+        -- Config heavily uses mini nvim (https://github.com/echasnovski/mini.nvim)
+        ---------------------------------------------------------------------------------
         {
             'echasnovski/mini.files',
             lazy = true,
@@ -198,14 +194,14 @@ require("lazy").setup({
         -- Colorscheme
         ---------------------------------------------------------------------------------
         {
-            "rebelot/kanagawa.nvim",
-            priority = 1000,
+            "ellisonleao/gruvbox.nvim",
+            priority = 1000 ,
             config = function()
-                require('kanagawa').setup({
-                    transparent = true
+                require('gruvbox').setup({
+                    transparent_mode = true
                 })
 
-                vim.cmd("colorscheme kanagawa")
+                vim.cmd("colorscheme gruvbox")
                 vim.cmd [[ 
                 hi SignColumn guibg=NONE ctermbg=NONE 
                 hi LineNr guibg=NONE ctermbg=NONE
@@ -213,7 +209,6 @@ require("lazy").setup({
                 ]]
             end
         },
-        { "Airbus5717/c3.vim" },
         ---------------------------------------------------------------------------------
         -- Git releated signs to the gutter
         ---------------------------------------------------------------------------------
@@ -240,15 +235,8 @@ require("lazy").setup({
                 "LazyGitFilter",
                 "LazyGitFilterCurrentFile",
             },
-            -- optional for floating window border decoration
-            dependencies = {
-                "nvim-lua/plenary.nvim",
-            },
-            -- setting the keybinding for LazyGit with 'keys' is recommended in
-            -- order to load the plugin when the command is run for the first time
-            keys = {
-                { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-            }
+            dependencies = { "nvim-lua/plenary.nvim", },
+            keys = { { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" } }
         },
         ---------------------------------------------------------------------------------
         -- Treesitter setup
