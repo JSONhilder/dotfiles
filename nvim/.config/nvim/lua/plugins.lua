@@ -194,14 +194,14 @@ require("lazy").setup({
         -- Colorscheme
         ---------------------------------------------------------------------------------
         {
-            "ellisonleao/gruvbox.nvim",
+            "rebelot/kanagawa.nvim",
             priority = 1000 ,
             config = function()
-                require('gruvbox').setup({
-                    transparent_mode = true
+                require('kanagawa').setup({
+                    transparent = true
                 })
 
-                vim.cmd("colorscheme gruvbox")
+                vim.cmd("colorscheme kanagawa")
                 vim.cmd [[ 
                 hi SignColumn guibg=NONE ctermbg=NONE 
                 hi LineNr guibg=NONE ctermbg=NONE
