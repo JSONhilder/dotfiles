@@ -15,37 +15,16 @@ static const char *fonts[]          = { "Ubuntu Sans Regular:size=12" };
 static const char dmenufont[]       = "Ubuntu Sans Regular:size=12";
 
 /* Theme */
-static const char col_gray1[]       = "#141b1e";
-static const char col_gray3[]       = "#fff7d0";
-static const char col_gray4[]       = "#94ade4";
-static const char col_gray2[]       = "#2a4756";
-static const char col_cyan[]        = "#141b1e";
+static const char col_bg[]          = "#181818"; /* Background */
+static const char col_fg[]          = "#dcd7ba"; /* Foreground */
+static const char col_highlight[]   = "#7e9cd8"; /* Highlight Text */
+static const char col_inactive[]    = "#3c3836"; /* Inactive Window Borders */
+static const char col_active[]      = "#7e9cd8"; /* Active Window Border */
 
-static const char tag1[]            = "#bf8427";
-static const char tag2[]            = "#5865F2";
-static const char tag3[]            = "#FF5500";
-static const char tag4[]            = "#FF609A";
-static const char tag5[]            = "#842291";
-static const char tag6[]            = "#900C3F";
-static const char tag7[]            = "#67AFA5";
-static const char tag8[]            = "#1DB954";
-static const char tag9[]            = "#FFFFFF";
 static const char *colors[][3]      = {
     /*                 fg         bg         border   */
-    [SchemeNorm]   = { col_gray3, col_gray1, col_cyan },
-    [SchemeSel]    = { col_gray4, col_cyan,  col_gray2  },
-};
-
-static const char *tagsel[][2] = {
-	{   tag1, col_gray1   },
-	{   tag2, col_gray1   },
-	{   tag3, col_gray1   },
-	{   tag4, col_gray1   },
-	{   tag5, col_gray1   },
-	{   tag6, col_gray1   },
-	{   tag7, col_gray1   },
-	{   tag8, col_gray1   },
-	{   tag9, col_gray1   },
+    [SchemeNorm]   = { col_fg, col_bg, col_inactive },
+    [SchemeSel]    = { col_highlight, col_bg, col_active  },
 };
 
 /* tagging */
@@ -88,7 +67,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg, "-nf", col_fg, "-sb", col_bg, "-sf", col_highlight, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsecmd[]  = { "dm_urlbrowser", NULL };
 static const char *powercmd[]  = { "dm_power", NULL };
