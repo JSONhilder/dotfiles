@@ -1,5 +1,17 @@
 ---------------------------------------------------------------------------------
--- [[ Xmake run function ]]
+-- [[ Terminal functions ]]
+---------------------------------------------------------------------------------
+function OpenTerminalNewProcess()
+  local cwd = vim.fn.getcwd()
+  local terminal_cmd = "st -e fish -c 'cd " .. cwd .. "; fish' &"
+
+  os.execute(terminal_cmd)
+end
+
+vim.api.nvim_set_keymap('n', '<leader>t', ':lua OpenTerminalNewProcess()<CR>', { noremap = true, silent = true })
+
+---------------------------------------------------------------------------------
+-- [[ Xmake run functions ]]
 ---------------------------------------------------------------------------------
 function Runxmake(opts)
     local args = opts.args

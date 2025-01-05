@@ -84,4 +84,4 @@ vim.keymap.set("n", "<leader>d", ":vsplit | lua vim.lsp.buf.definition()<CR>", {
 ---------------------------------------------------------------------------------
 require("plugins")
 require("lsp_config")
-require("xmake_config")
+require("custom_funcs")
