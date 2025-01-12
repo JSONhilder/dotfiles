@@ -86,7 +86,7 @@ require("lazy").setup({
             version = false,
             config = function()
                 local miniclue = require('mini.clue')
-                local anchor = 'NE'
+                local anchor = 'NW'
 
                 miniclue.setup({
                     triggers = {

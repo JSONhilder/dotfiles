@@ -19,12 +19,11 @@ set -x PATH /usr/bin/go/bin $PATH
 set -x PATH $HOME/go/bin $PATH
 set -x PATH $HOME/go/bin/gopls $PATH
 
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
 # C3
 set -x PATH $HOME/.local/bin/c3 $PATH
+
+# Odin
+set -x PATH $HOME/.local/share/Odin $PATH
 
 # ------------------------
 # ALIASES
