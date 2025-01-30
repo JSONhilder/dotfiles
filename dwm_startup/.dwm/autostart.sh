@@ -3,7 +3,7 @@
 # DWM Status
 slstatus &
 # Wallpaper
-feh --bg-scale ~/Pictures/wallpapers/ghibli_one.jpg
+feh --bg-scale ~/Pictures/wallpapers/kanagawa-wave.jpg
 # Compositor
 picom --config ~/.config/picom/picom.conf &
 

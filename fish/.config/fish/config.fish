@@ -3,8 +3,8 @@
 # ------------------------
 set -g fish_greeting
 
-set -x EDITOR "nvim"
-set -x MANPAGER "nvim +Man!"
+set -x EDITOR hx
+set -x MANPAGER "vim +Man!"
 
 # ------------------------
 # PATHS
@@ -29,10 +29,10 @@ set -x PATH $HOME/.local/share/Odin $PATH
 # ALIASES
 # ------------------------
 alias .. "cd .."
-alias :q "exit"
-alias lg "lazygit"
-alias g "gitu"
-alias ld "lazydocker"
+alias :q exit
+alias lg lazygit
+alias g gitu
+alias ld lazydocker
 alias composer "~/.local/bin/composer.phar"
 alias dotfiles "cd ~/dotfiles; vim"
 alias wiki "cd ~/github/reimagined_barnacle; vim"

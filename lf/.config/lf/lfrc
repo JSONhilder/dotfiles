@@ -1,5 +1,5 @@
 ######################## Settings
-set shell /bin/bash
+set shell /bin/fish
 set drawbox
 set hidden false
 set cursorpreviewfmt "\033[7m"

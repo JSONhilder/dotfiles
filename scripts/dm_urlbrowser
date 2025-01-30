@@ -1,26 +1,29 @@
 #!/bin/bash
 
 # Define available options
-OPTIONS="Chrome\nYouTube\nChatGpt"
+OPTIONS="Chrome\nYouTube\nSpotify\nChatGpt"
 
 # Prompt for search query or select from options using dmenu
-SELECTED=$(echo -e "$OPTIONS" | dmenu -i -p "Query:" -fn 'Ubuntu Sans Regular-13' -l 3)
+SELECTED=$(echo -e "$OPTIONS" | dmenu -i -p "Query:" -fn 'Ubuntu Sans Regular-13' -l 5)
 
 # If a selection is made, handle it
 case "$SELECTED" in
-    "Chrome")
-        chromium 
+    "Browser")
+        vivaldi-stable 
         ;;
     "YouTube")
-        chromium "https://www.youtube.com"
+        vivaldi-stable "https://www.youtube.com"
+        ;;
+    "Spotify")
+        vivaldi-stable "https://www.spotify.com"
         ;;
     "ChatGpt")
-        chromium "https://chatgpt.com/"
+        vivaldi-stable "https://chatgpt.com/"
         ;;
     *)
 	# If not a valid option, perform a Google search with the entered query
 	if [ -n "$SELECTED" ]; then
-		chromium "https://www.google.com/search?q=$(echo "$SELECTED" | sed 's/ /+/g')"
+		vivaldi-stable "https://www.google.com/search?q=$(echo "$SELECTED" | sed 's/ /+/g')"
 	fi
 	;;
 esac
