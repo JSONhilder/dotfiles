@@ -33,6 +33,9 @@ Plug 'habamax/vim-dir'
 " Syntax Highlighting"
 Plug 'sheerun/vim-polyglot'
 
+" Highlight Yank
+Plug 'ubaldot/vim-highlight-yanked'
+
 "Comments"
 Plug 'tpope/vim-commentary'
 
@@ -159,10 +162,4 @@ let g:lightline = { 'colorscheme': 'Tomorrow_Night' }
 
 "  LSP specifics
 so ~/.vim/lsp-config.vim
-
-" --------------------------------------------------------------------------
-
-" ------------------------------- AUTOCMDS --------------------------------
-
-autocmd BufWritePost xmake.lua !sh ~/.local/bin/xmake_lsp
 
