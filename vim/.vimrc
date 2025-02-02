@@ -27,7 +27,10 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-"Syntax Highlighting"
+" File Directory "
+Plug 'habamax/vim-dir'
+
+" Syntax Highlighting"
 Plug 'sheerun/vim-polyglot'
 
 "Comments"
@@ -36,17 +39,13 @@ Plug 'tpope/vim-commentary'
 "Status Line"
 Plug 'itchyny/lightline.vim'
 
-"Colorscheme"
-Plug 'nanotech/jellybeans.vim' 
+"Go"
+Plug 'charlespascoe/vim-go-syntax'
 
 "LSP"
 Plug 'yegappan/lsp'
 
-"Odin"
-Plug 'habamax/vim-odin'
-
-"Go"
-Plug 'charlespascoe/vim-go-syntax'
+Plug 'luzhlon/xmake.vim'
 
 call plug#end()
 
@@ -73,6 +72,7 @@ set textwidth=80
 set expandtab
 set autoindent
 set smarttab
+set hidden
 " show the matching part of pairs [] {} and () 
 set showmatch
 set clipboard=unnamedplus 
@@ -89,13 +89,13 @@ set splitright
 set noshowmode 
 
 " Colorscheme
-set termguicolors
-colorscheme jellybeans
+colorscheme habamax
 hi Normal guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight LineNr guibg=NONE ctermbg=NONE
 highlight CursorLineNr guibg=NONE ctermbg=NONE
 highlight NonText guibg=NONE ctermbg=NONE
+set termguicolors
 
 " --------------------------------------------------------------------------
 
@@ -113,16 +113,10 @@ nmap <space>o :History<CR>
 "nmap <space>. :GFiles<CR>
 
 " File Tree 
-nnoremap <leader>e :LF<CR>
+nnoremap <leader>e :Dir<CR>
 
 " Yank from cursor to the end of line.
 nnoremap Y y$
-
-" Navigate the split view easier 
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
 
 " Clear highlighting
 nnoremap <leader>h :noh<CR>
@@ -141,7 +135,15 @@ nnoremap <leader>p <CMD>b#<CR>
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
-nnoremap <Leader>t :TermHere<CR>
+" Terminal stuff
+nnoremap <Leader>t :vert term<CR>
+tnoremap <esc> <C-\><C-n>
+
+" Resize windows
+nnoremap <c-H> <c-w><
+nnoremap <c-L> <c-w>>
+nnoremap <c-J> <c-w>-
+nnoremap <c-K> <c-w>+
 
 " --------------------------------------------------------------------------
 
@@ -149,7 +151,7 @@ nnoremap <Leader>t :TermHere<CR>
 
 " " Show the status on the second to last line.
 set laststatus=2
-let g:lightline = {'colorscheme': 'jellybeans'}
+let g:lightline = { 'colorscheme': 'Tomorrow_Night' }
 
 " --------------------------------------------------------------------------
 
@@ -160,34 +162,7 @@ so ~/.vim/lsp-config.vim
 
 " --------------------------------------------------------------------------
 
-" ------------------------------- CUSTOM FUNCS -----------------------------
-function! TermHere()
-    " Get the current working directory in Vim
-    let l:current_dir = getcwd()
-    
-    " Launch Alacritty in the current directory in the background
-    silent execute '!st -e fish -c "cd ' . shellescape(l:current_dir) . '; fish" &'
-endfunction
+" ------------------------------- AUTOCMDS --------------------------------
 
-" Create a command to call the function
-command! TermHere call TermHere()
+autocmd BufWritePost xmake.lua !sh ~/.local/bin/xmake_lsp
 
-function! LF()
-    let temp = tempname()
-    exec 'silent !lf -selection-path=' . shellescape(temp)
-    if !filereadable(temp)
-        redraw!
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        return
-    endif
-    exec 'edit ' . fnameescape(names[0])
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-    redraw!
-endfunction
-command! -bar LF call LF()

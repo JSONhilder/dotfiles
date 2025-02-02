@@ -3,8 +3,9 @@
 # ------------------------
 set -g fish_greeting
 
-set -x EDITOR hx
+set -x EDITOR vim
 set -x MANPAGER "vim +Man!"
+set -x TERM xterm-256color
 
 # ------------------------
 # PATHS
