@@ -48,8 +48,6 @@ Plug 'charlespascoe/vim-go-syntax'
 "LSP"
 Plug 'yegappan/lsp'
 
-Plug 'luzhlon/xmake.vim'
-
 call plug#end()
 
 " --------------------------------------------------------------------------
@@ -147,6 +145,9 @@ nnoremap <c-H> <c-w><
 nnoremap <c-L> <c-w>>
 nnoremap <c-J> <c-w>-
 nnoremap <c-K> <c-w>+
+
+" Close fzf with escape
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 " --------------------------------------------------------------------------
 
