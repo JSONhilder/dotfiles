@@ -26,7 +26,7 @@ set -x PATH $HOME/.local/bin/c3 $PATH
 # Odin
 set -x PATH $HOME/.local/share/Odin $PATH
 
-set -x FZF_DEFAULT_COMMAND "fdfind --exclude={.git,.idea,.vscode,.sass-cache,.xmake,node_modules,build,tmp} --type f -H"
+set -x FZF_DEFAULT_COMMAND "fdfind --exclude={.git,.cache,.xmake,node_modules,build,tmp} --type f -H"
 
 # ------------------------
 # ALIASES

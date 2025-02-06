@@ -42,8 +42,8 @@ Plug 'tpope/vim-commentary'
 "Status Line"
 Plug 'itchyny/lightline.vim'
 
-"Go"
-Plug 'charlespascoe/vim-go-syntax'
+"Git"
+Plug 'tpope/vim-fugitive'
 
 "LSP"
 Plug 'yegappan/lsp'
