@@ -27,8 +27,11 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Tmux" 
+Plug 'christoomey/vim-tmux-navigator'
+
 " File Directory "
-Plug 'habamax/vim-dir'
+Plug 'chriszarate/yazi.vim'
 
 " Syntax Highlighting"
 Plug 'sheerun/vim-polyglot'
@@ -73,6 +76,8 @@ set textwidth=80
 set expandtab
 set autoindent
 set smarttab
+set listchars=tab:\|\ 
+set list
 set hidden
 " show the matching part of pairs [] {} and () 
 set showmatch
@@ -111,10 +116,16 @@ let mapleader = " "
 nmap <space><space> :Files<CR>
 nmap <space>b :Buffers<CR>
 nmap <space>o :History<CR>
-"nmap <space>. :GFiles<CR>
+nmap <space>m :Maps<CR>
+nmap <space>s :Rg<CR>
+
+" Git 
+nmap <space>gg :Git<CR>
+nmap <space>gc :Git commit<CR>
+nmap <space>gp :Git push<CR>
 
 " File Tree 
-nnoremap <leader>e :Dir<CR>
+nnoremap <leader>e :YaziWorkingDirectory<CR>
 
 " Yank from cursor to the end of line.
 nnoremap Y y$
