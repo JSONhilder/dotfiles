@@ -3,17 +3,17 @@ vim9script
 var lspServers = [
     {
         name: 'clang',
-        filetype: ['c', 'h'],
+        filetype: ['c', 'h', 'cpp'],
         path: '/usr/bin/clangd',
         syncInit: v:true
+    },
+    {
+        name: 'golang',
+        filetype: ['go', 'gomod'],
+        path: '/home/jason/go/bin/gopls',
+        args: ['serve'],
+        syncInit: v:true
     }
-    # {
-    #     name: 'golang',
-    #     filetype: ['go', 'gomod'],
-    #     path: '/home/jason/go/bin/gopls',
-    #     args: ['serve'],
-    #     syncInit: v:true
-    # },
     # {
     #     name: 'odin',
     #     filetype: ['odin'],
