@@ -42,11 +42,9 @@ Plug 'ubaldot/vim-highlight-yanked'
 "Comments"
 Plug 'tpope/vim-commentary'
 
-"Status Line"
-Plug 'itchyny/lightline.vim'
-
 "Git"
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 "LSP"
 Plug 'yegappan/lsp'
@@ -162,16 +160,34 @@ tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 " --------------------------------------------------------------------------
 
-" -------------------------------- STATUS LINE -----------------------------
-
-" " Show the status on the second to last line.
-set laststatus=2
-let g:lightline = { 'colorscheme': 'Tomorrow_Night' }
-
-" --------------------------------------------------------------------------
-
 " ------------------------------- LOAD CONFIGS -----------------------------
 
 "  LSP specifics
 so ~/.vim/lsp-config.vim
 
+" --------------------------------------------------------------------------
+
+" ------------------------------- STATUS LINE ------------------------------
+
+" " Show the status on the second to last line.
+set laststatus=2
+set statusline=
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=%#Visual#         " colour
+set statusline+=%#CursorIM#       " colour
+set statusline+=%R                " readonly flag
+set statusline+=%M                " modified [+] flag
+set statusline+=%#Cursor#         " colour
+set statusline+=%#CursorLine#     " colour
+set statusline+=%#CursorLine#     " colour
+set statusline+=\ %t\             " short file name
+set statusline+=%=                " right align
+set statusline+=%#CursorLine#     " colour
+set statusline+=\ %Y\             " file type
+set statusline+=%#CursorIM#       " colour
+set statusline+=\ %3l:%-2c\       " line + column
+set statusline+=%#Cursor#         " colour
+set statusline+=\ %3p%%\          " percentage
