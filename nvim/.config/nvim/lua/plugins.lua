@@ -108,6 +108,9 @@ require("lazy").setup({
             event = 'BufEnter',
             config = function()
                 require('nvim-highlight-colors').setup({})
+                vim.cmd [[ 
+                    HighlightColors Toggle
+                ]]
             end,
 			keys = {
 				{
